@@ -8,7 +8,8 @@ from pipeline.claims import load
 from pipeline.ingest import Raw
 from pipeline.refs import normalise, one_apart, swapped
 from pipeline import rules
-from pipeline.rules import RULES, list_rules, run_rules, show, to_base
+from pipeline.rules import RULES, list_rules, run_rules, show
+from pipeline.units import to_base_by_list as to_base
 
 # Measured by .experiments/40_reconciliation_workload.py, except near_key: the probe's pattern needed three
 # digits and missed FB-76, a two-digit reference mistyped in a note, which the rule's pattern finds.

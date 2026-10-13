@@ -18,81 +18,19 @@ Run:
 import argparse
 import itertools
 from collections import Counter, defaultdict
-from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 from pipeline.claims import ClaimLog, identity, load
 from pipeline.ingest import Raw, read_raw
-from pipeline.refs import loose, normalise, one_apart, swapped
+from pipeline.refs import RefIndex, loose, normalise
+from pipeline.units import BASE_UNITS, UNIT_LIST, to_base_by_list
 
-BASE_UNITS = ("pcs", "m", "kg")
-# A written unit, lower case -> (base unit, how many base units one of it is).
-UNIT_LIST = {"u": ("pcs", "1"), "pce": ("pcs", "1"), "ea": ("pcs", "1"), "mm": ("m", "0.001"), "g": ("kg", "0.001")}
 FILLERS = {"", "N/A", "NA", "UNKNOWN", "TBD", "?", "-"}
-
-
-class RefIndex:
-    """The written references grouped by normalised key, with one spelling chosen to stand for each key."""
-
-    def __init__(self, raw: Raw):
-        self.spellings: dict[str, set[str]] = defaultdict(set)
-        self.first_row: dict[str, str] = {}  # spelling -> the first raw row that writes it
-        uses = Counter()  # spelling -> times written in the BOM
-        for row in raw.bom:
-            for column in ("child_ref", "parent_ref"):
-                if column == "parent_ref" and row["level"] == "2":
-                    continue
-                uses[row[column]] += 1
-                self.first_row.setdefault(row[column], f"bom:{row['row_no']}")
-        for row in raw.erp:
-            self.first_row.setdefault(row["item_ref"], f"erp:{row['row_no']}")
-        for note in raw.notes:
-            for ref in sorted(raw.written_refs()["note"]):
-                if ref == note["reference"] or ref in note["text"]:
-                    self.first_row.setdefault(ref, f"note:{note['note_id']}")
-        for refs in raw.written_refs().values():
-            for ref in refs:
-                self.spellings[normalise(ref)].add(ref)
-        # The spelling that stands for a key: the one the BOM uses most, then alphabetical order.
-        self.canonical = {key: min(group, key=lambda ref: (-uses[ref], ref)) for key, group in self.spellings.items()}
-        self.siblings: set[frozenset[str]] = set()  # pairs of keys that are children of one parent in one variant
-        children = defaultdict(set)
-        for row in raw.bom:
-            children[(row["variant_id"], normalise(row["parent_ref"]))].add(normalise(row["child_ref"]))
-        for kids in children.values():
-            self.siblings.update(frozenset(pair) for pair in itertools.combinations(sorted(kids), 2))
-
-    def near_pairs(self) -> list[tuple[str, str, str]]:
-        """Pairs of keys that are nearly the same, with how: (key, key, "one character apart" or "... swapped")."""
-        pairs = []
-        for a, b in itertools.combinations(sorted(self.spellings), 2):
-            if one_apart(a, b):
-                pairs.append((a, b, "one character apart"))
-            elif swapped(a, b):
-                pairs.append((a, b, "two neighbouring characters swapped"))
-        return pairs
-
-    def evidence(self, *refs: str) -> list[str]:
-        return [self.first_row[ref] for ref in refs if ref in self.first_row]
 
 
 def claim(rule, type, subject, object="", value="", standing="asserted", evidence=(), reason=""):
     return {"type": type, "subject": subject, "object": object, "value": value, "standing": standing,
             "made_by": "rule", "maker": rule, "evidence": list(evidence), "reason": reason}
-
-
-def to_base(quantity: str, unit: str) -> tuple[Decimal, str] | None:
-    """A written quantity in its base unit, by the fixed list. None if the number or the unit is not understood."""
-    try:
-        number = Decimal(quantity.replace(",", "."))
-    except InvalidOperation:
-        return None
-    if unit in BASE_UNITS:
-        return number.normalize(), unit
-    if unit.lower() in UNIT_LIST:
-        base, factor = UNIT_LIST[unit.lower()]
-        return (number * Decimal(factor)).normalize(), base
-    return None
 
 
 # ---------------------------------------------------------------- the rules
@@ -149,8 +87,8 @@ def same_row(raw: Raw) -> list[dict]:
     for rows in lines.values():
         first = rows[0]
         for row in rows[1:]:
-            quantity = to_base(row["quantity"], row["unit"])
-            if quantity is not None and quantity == to_base(first["quantity"], first["unit"]):
+            quantity = to_base_by_list(row["quantity"], row["unit"])
+            if quantity is not None and quantity == to_base_by_list(first["quantity"], first["unit"]):
                 claims.append(claim("same_row", "duplicate_of", f"bom:{row['row_no']}", f"bom:{first['row_no']}",
                                     evidence=[f"bom:{row['row_no']}", f"bom:{first['row_no']}"],
                                     reason="same variant, parent, child and quantity"))

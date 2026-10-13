@@ -14,8 +14,7 @@ from llm import tool
 from pipeline.build import Summary, build
 from pipeline.claims import OPPOSITES, ClaimLog, ClaimRefused, pair_key, rests_on_note, split, statuses
 from pipeline.ingest import read_raw
-from pipeline.refs import normalise
-from pipeline.rules import RefIndex
+from pipeline.refs import RefIndex, normalise
 
 MAX_ROWS = 200       # rows a query returns
 MAX_CELL = 300       # characters of one value shown
