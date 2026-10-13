@@ -5,8 +5,10 @@ from decimal import Decimal
 
 import pytest
 
-from pipeline.build import build, compute, group, queue
+from pipeline.build import build, compute
 from pipeline.claims import ClaimLog
+from pipeline.reports import queue
+from pipeline.resolve import group
 
 RULE = {"made_by": "rule", "maker": "test"}
 AGENT = {"made_by": "agent", "maker": "test-model"}

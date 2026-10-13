@@ -1,7 +1,7 @@
 """Comparison of sub-assemblies by content: designs, near pairs, functional pairs and their differing lines.
 
 Everything here works on parts that are already resolved (one id per real part) and quantities already in a base
-unit. `build.py` prepares those and writes the results.
+unit. `resolve.py` prepares those and `tables.py` writes the results.
 """
 
 import hashlib
@@ -25,6 +25,7 @@ class Occurrence:
     raw_rows: list[int]
     design: "Design | None" = None
     verdict: "object | None" = None  # its Verdict: the design's, or blocked when its own reference is dead
+    verdict_bom_only: str = ""       # the verdict of the same replay without any claim that rests on a note
 
 
 @dataclass
@@ -117,6 +118,10 @@ class Relations:
     def dead(self, part: str) -> tuple[int, str | None] | None:
         """(claim id, replacement or None) when the part is obsolete or superseded."""
         return self._dead.get(part)
+
+    def dead_parts(self) -> list[tuple[str, int]]:
+        """Every obsolete or superseded part with the claim that says so, in order of part."""
+        return [(part, claim_id) for part, (claim_id, _) in sorted(self._dead.items())]
 
 
 def content_hash(lines: dict[str, Decimal | None]) -> str:

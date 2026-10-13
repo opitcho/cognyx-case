@@ -10,7 +10,7 @@
 from dataclasses import dataclass, field
 from typing import Callable
 
-from pipeline.compare import Design, Pair, Relations
+from pipeline.compare import Design, Occurrence, Pair, Relations
 
 VERDICTS = ("blocked", "reused", "reusable", "specific")
 
@@ -34,6 +34,23 @@ def decide(design: Design, pairs: list[Pair], relations: Relations, name: Callab
                             for part, _, new in dead)
             return Verdict("blocked", f"{why} (otherwise {verdict.verdict}: {verdict.reason})", verdict.counterpart,
                            [claim_id for _, claim_id, _ in dead] + verdict.claim_ids, verdict.pair)
+    return verdict
+
+
+def occurrence_verdict(occurrence: Occurrence, verdict: Verdict, relations: Relations, name: Callable[[str], str]) -> Verdict:
+    """The verdict of one sub-assembly in one variant, from the verdict of the design it carries.
+
+    The verdict of a design holds for each sub-assembly that carries it, with one exception: a sub-assembly
+    whose own reference is obsolete or superseded is blocked, even when its content is shared and sound.
+    """
+    dead = relations.dead(occurrence.part)
+    if dead and verdict.verdict in ("reused", "reusable"):
+        claim_id, new = dead
+        others = [name(p) for p in occurrence.design.parts if p != occurrence.part]
+        why = (f"the reference {name(occurrence.part)} is " + (f"superseded by {name(new)}" if new else "obsolete")
+               + (f"; the same content is carried by {', '.join(others)}" if others else ""))
+        return Verdict("blocked", f"{why} (otherwise {verdict.verdict}: {verdict.reason})", verdict.counterpart,
+                       [claim_id, *verdict.claim_ids], verdict.pair)
     return verdict
 
 
