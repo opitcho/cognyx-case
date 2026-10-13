@@ -91,15 +91,9 @@ SECTIONS = [
     ),
     Section(
         "Reuse verdicts",
-        "{rows} rows. One row is one sub-assembly in one variant, with its verdict: {reused} reused (the same "
-        "content is in two or more variants), {reusable} reusable (it differs from another design by 1 to 3 lines "
-        "that no option requires, or a note says another design does the same job), {specific} specific (an option "
-        "requires the difference, or there is no counterpart). {obsolete} of them are, or hold, an obsolete or "
-        "superseded part, named in `obsolete_parts`. `shared_with` lists the other variants that hold the same "
-        "content, `counterpart_variants` the variants that hold the design in `counterpart_ref`. `corrections` counts "
-        "what was corrected in the BOM rows the verdict rests on: a reference in another spelling, a repeated row "
-        "left out, a cell replaced or emptied, a unit converted. Select a row to see those corrections with the "
-        "other facts behind its verdict, and what each other variant has in its place.",
+        "{rows} rows. One row is one sub-assembly in one variant: whether its content is reused, reusable or "
+        "specific ({reused}, {reusable}, {specific}), in which other variants, and how many corrections to the BOM "
+        "rows the verdict rests on. Select a row to see those corrections and what each other variant has in its place.",
         "all three files", "v_verdict, v_subassembly_cost, v_evidence, v_reuse_between",
         """SELECT v.variant_id, v.system_ref, v.subassembly_ref, v.description, v.verdict, v.reason, v.corrections,
                   v.obsolete_parts,
@@ -108,8 +102,7 @@ SECTIONS = [
            FROM v_verdict v LEFT JOIN v_subassembly_cost c
                 ON c.variant_id = v.variant_id AND c.subassembly_ref = v.subassembly_ref""",
         {"rows": "SELECT COUNT(*) FROM v_verdict",
-         **{v: f"SELECT COUNT(*) FROM v_verdict WHERE verdict = '{v}'" for v in ("reused", "reusable", "specific")},
-         "obsolete": "SELECT COUNT(*) FROM v_verdict WHERE obsolete_parts <> ''"},
+         **{v: f"SELECT COUNT(*) FROM v_verdict WHERE verdict = '{v}'" for v in ("reused", "reusable", "specific")}},
         details=(
             ("The facts behind the verdict of {subassembly_ref} in {variant_id}",
              """SELECT kind, detail, claim_id, source_file, source_row FROM v_evidence

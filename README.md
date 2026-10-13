@@ -14,6 +14,8 @@ This repo explores how AI can help recover that margin.
 
 Three noisy files describe a family of six train variants, `V1` to `V6`: an engineering BOM, a purchasing item list and free-text technical notes. Rules reconcile what can be settled mechanically, and an agent settles the rest by reading the notes, asking a person when the data does not decide.
 
+![The app's Agent page: the chat on the left, the agent's reasoning and queries on the right](docs/images/app-agent-page.png)
+
 ### Run it
 
 The agent needs an OpenRouter key: copy `.env.example` to `.env` and fill in `OPENROUTER_API_KEY`.
