@@ -242,10 +242,11 @@ def check_noise(clean, raw, changes, findings, verdicts, settings):
                        and not prices.get(erp_form(r["child_ref"]))})
     results.append(result("7c every V1 component has a price in the raw ERP file", "none without", unpriced or "none without", not unpriced))
 
-    # 10. the notes change verdicts
-    changed = [v["subassembly"] for v in verdicts if v["verdict_bom_only"] != v["verdict_with_notes"]]
+    # 10. the notes change the answer: the verdict, or whether the design holds an obsolete part
+    changed = [v["subassembly"] for v in verdicts
+               if v["verdict_bom_only"] != v["verdict_with_notes"] or v["holds_obsolete_part"] == "yes"]
     minimum = settings["minimum_verdicts_changed_by_notes"]
-    results.append(result("10a designs whose verdict differs with and without the notes", f"at least {minimum}", f"{len(changed)}: {changed}", len(changed) >= minimum))
+    results.append(result("10a designs whose verdict differs with the notes, or that hold an obsolete or superseded part", f"at least {minimum}", f"{len(changed)}: {changed}", len(changed) >= minimum))
     return results
 
 
@@ -280,13 +281,13 @@ def check_notes(raw, clean_bom, relations, verdicts):
                           [len(notes), len(relations), mistyped, sum(1 for r in relations if r["ref_a_in_field"] == "no")],
                           70 <= len(notes) <= 90 and 24 <= len(relations) <= 36))
 
-    # 10b. the verdicts agree with the notes: a design is blocked exactly when it is,
-    # or contains, a part that a note (not overridden) calls obsolete or superseded
+    # 10b. the answer key agrees with the notes: holds_obsolete_part is yes exactly when the design
+    # is, or contains, a part that a note (not overridden) calls obsolete or superseded
     dead = {r["ref_a_true"] for r in relations if r["relation"] in ("obsolete", "superseded_by") and not r["overridden_by"]}
     content = contents(clean_bom)
     should = {ref for ref in content if ref in dead or set(content[ref]) & dead}
-    blocked = {v["subassembly"] for v in verdicts if v["verdict_with_notes"] == "blocked"}
-    results.append(result("10b blocked designs = designs that are or contain an obsolete or superseded part", sorted(should), sorted(blocked), should == blocked))
+    marked = {v["subassembly"] for v in verdicts if v["holds_obsolete_part"] == "yes"}
+    results.append(result("10b designs marked holds_obsolete_part = designs that are or contain an obsolete or superseded part", sorted(should), sorted(marked), should == marked))
     return results
 
 
@@ -296,7 +297,8 @@ def check_repeatable(root):
                              for p in sorted(folder.rglob("*")) if p.is_file() and p.name != "check_report.txt"}
     with tempfile.TemporaryDirectory() as again:
         generate.main(again)
-        same = digest(Path(again) / "data") == {k: v for k, v in digest(root / "data").items() if not k.startswith("example_sources")}
+        written = ("clean", "raw", "truth")  # the folders the generator writes; data/ also holds the claim logs
+        same = digest(Path(again) / "data") == {k: v for k, v in digest(root / "data").items() if Path(k).parts[0] in written}
     return [result("12 a second run gives identical files", "identical", "identical" if same else "different", same)]
 
 

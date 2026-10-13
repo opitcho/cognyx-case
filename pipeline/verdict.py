@@ -1,9 +1,9 @@
-"""One rule function gives every design its verdict: blocked, reused, reusable or specific.
+"""One rule function gives every design its verdict: reused, reusable or specific. The verdict says only whether
+the content is shared. The obsolete or superseded parts a sub-assembly holds are listed apart.
 
 - reused: the same content is in two or more variants, under one reference or several.
 - reusable: not shared today, but it differs from another design by 1 to 3 lines that no option requires, or a
   claim says another design does the same job.
-- blocked: reused or reusable on content, but it contains an obsolete or superseded part.
 - specific: a difference is required by an option, or there is no counterpart.
 """
 
@@ -12,7 +12,7 @@ from typing import Callable
 
 from pipeline.compare import Design, Occurrence, Pair, Relations
 
-VERDICTS = ("blocked", "reused", "reusable", "specific")
+VERDICTS = ("reused", "reusable", "specific")
 
 
 @dataclass
@@ -24,37 +24,36 @@ class Verdict:
     pair: Pair | None = None
 
 
-def decide(design: Design, pairs: list[Pair], relations: Relations, name: Callable[[str], str]) -> Verdict:
-    """The verdict for one design. `pairs` are the pairs this design is in; `name` gives a part's reference."""
-    verdict = _on_content(design, pairs, name)
-    if verdict.verdict in ("reused", "reusable"):
-        dead = [(part, *relations.dead(part)) for part in sorted(design.lines) if relations.dead(part)]
-        if dead:
-            why = "; ".join(f"contains {name(part)}, " + (f"superseded by {name(new)}" if new else "obsolete")
-                            for part, _, new in dead)
-            return Verdict("blocked", f"{why} (otherwise {verdict.verdict}: {verdict.reason})", verdict.counterpart,
-                           [claim_id for _, claim_id, _ in dead] + verdict.claim_ids, verdict.pair)
-    return verdict
+def obsolete_components(design: Design, relations: Relations) -> list[tuple[str, int, str | None]]:
+    """(part, claim id, replacement or None) for each component of the design that is obsolete or superseded.
 
-
-def occurrence_verdict(occurrence: Occurrence, verdict: Verdict, relations: Relations, name: Callable[[str], str]) -> Verdict:
-    """The verdict of one sub-assembly in one variant, from the verdict of the design it carries.
-
-    The verdict of a design holds for each sub-assembly that carries it, with one exception: a sub-assembly
-    whose own reference is obsolete or superseded is blocked, even when its content is shared and sound.
+    The same for every sub-assembly that carries the design.
     """
-    dead = relations.dead(occurrence.part)
-    if dead and verdict.verdict in ("reused", "reusable"):
-        claim_id, new = dead
-        others = [name(p) for p in occurrence.design.parts if p != occurrence.part]
-        why = (f"the reference {name(occurrence.part)} is " + (f"superseded by {name(new)}" if new else "obsolete")
-               + (f"; the same content is carried by {', '.join(others)}" if others else ""))
-        return Verdict("blocked", f"{why} (otherwise {verdict.verdict}: {verdict.reason})", verdict.counterpart,
-                       [claim_id, *verdict.claim_ids], verdict.pair)
-    return verdict
+    return [(part, *relations.dead(part)) for part in sorted(design.lines) if relations.dead(part)]
 
 
-def _on_content(design: Design, pairs: list[Pair], name: Callable[[str], str]) -> Verdict:
+def describe_obsolete(occurrence: Occurrence, relations: Relations, name: Callable[[str], str]) -> str:
+    """The obsolete or superseded parts one sub-assembly holds, in words: its own reference first, then its
+    components. Empty when there is none.
+
+    The two are told apart because they ask for different things: a component means the content has to change;
+    an own reference means the content is sound, and "(same content under ...)" names where else it is available.
+    """
+    def state(new: str | None) -> str:
+        return f"superseded by {name(new)}" if new else "obsolete"
+
+    found = []
+    own = relations.dead(occurrence.part)
+    if own:
+        others = [name(part) for part in occurrence.design.parts if part != occurrence.part]
+        found.append(f"own reference {name(occurrence.part)}, {state(own[1])}"
+                     + (f" (same content under {', '.join(others)})" if others else ""))
+    found += [f"{name(part)}, {state(new)}" for part, _, new in obsolete_components(occurrence.design, relations)]
+    return "; ".join(found)
+
+
+def decide(design: Design, pairs: list[Pair], name: Callable[[str], str]) -> Verdict:
+    """The verdict for one design. `pairs` are the pairs this design is in; `name` gives a part's reference."""
     variants = design.variants
     if len(variants) >= 2:
         refs = [name(part) for part in design.parts]

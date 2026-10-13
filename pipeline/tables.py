@@ -4,6 +4,8 @@
 its columns, and the function that takes the rows from the model. The raw tables are written by `ingest()` and the
 views are in `views.sql`; their descriptions are in `RAW_ABOUT` and `VIEW_ABOUT`. The `about` table of the database
 is made from all three.
+
+A name starting with `v_` is made for reading, whether it is a view or a stored table.
 """
 
 import json
@@ -18,7 +20,7 @@ from typing import Callable
 from pipeline.claims import FIELDS
 from pipeline.ingest import ingest
 from pipeline.model import Model
-from pipeline.reports import claim_effect, evidence, readiness, reuse_between
+from pipeline.reports import evidence, readiness, reuse_between
 
 VIEWS = Path(__file__).with_name("views.sql")
 
@@ -26,7 +28,7 @@ VIEWS = Path(__file__).with_name("views.sql")
 @dataclass
 class Table:
     name: str
-    one_row_is: str  # empty: the table is read through its view, which has the description
+    one_row_is: str  # empty for `evidence`: it is read through its view, which has the description
     columns: str
     rows: Callable[[Model], list[tuple]]
 
@@ -82,9 +84,9 @@ TABLES = [
           lambda m: [(d.id, d.hash, d.system, len(d.lines), int(d.comparable), joined(m.name(p) for p in d.parts),
                       " ".join(d.variants)) for d in m.designs]),
     Table("occurrence", "one sub-assembly in one variant",
-          "variant_id, part_id, system_part_id, design_id, per_train REAL, raw_rows, verdict, reason, verdict_bom_only",
-          lambda m: [(o.variant, o.part, o.system, o.design.id, fl(o.per_train), joined(o.raw_rows), o.verdict.verdict,
-                      o.verdict.reason, o.verdict_bom_only) for o in m.occurrences]),
+          "variant_id, part_id, system_part_id, design_id, per_train REAL, raw_rows, obsolete_parts, verdict_bom_only",
+          lambda m: [(o.variant, o.part, o.system, o.design.id, fl(o.per_train), joined(o.raw_rows), o.obsolete_parts,
+                      o.verdict_bom_only) for o in m.occurrences]),
     Table("pair", "two designs that are near or functionally equivalent",
           "pair_id INTEGER, design_a, design_b, kind, n_shared INTEGER, n_differing INTEGER, separating_options, "
           "cost_gap_eur REAL, claim_id INTEGER",
@@ -94,24 +96,21 @@ TABLES = [
           "pair_id INTEGER, part_a, part_b, qty_a REAL, qty_b REAL, explanation, claim_id INTEGER, cost_gap_eur REAL",
           lambda m: [(p.id, l.part_a, l.part_b, fl(l.qty_a), fl(l.qty_b), l.explanation, l.claim_id, fl(l.cost_gap))
                      for p in m.pairs for l in p.lines]),
-    Table("verdict", "the verdict a design gets from its content (v_verdict has the final one per sub-assembly)",
+    Table("verdict", "the verdict of one design: whether its content is shared",
           "design_id, verdict, reason, counterpart_design_id, claim_ids",
           lambda m: [(i, v.verdict, v.reason, v.counterpart.id if v.counterpart else None, joined(v.claim_ids))
                      for i, v in m.verdicts.items()]),
-    Table("issue", "one inconsistency, or one thing left undecided", "type, detail, source_file, source_rows",
+    Table("v_issue", "one inconsistency, or one thing left undecided", "type, detail, source_file, source_rows",
           lambda m: [(i["type"], i["detail"], i["source_file"], i["source_rows"]) for i in m.issues]),
-    Table("queue", "", "kind, detail, claim_id INTEGER, source_rows",
+    Table("v_queue", "one open item waiting for a decision", "kind, detail, claim_id INTEGER, source_rows",
           lambda m: [(i["kind"], i["detail"], i["claim_id"], i["source_rows"]) for i in m.open_items]),
-    Table("readiness", "", "what, n INTEGER, of INTEGER",
+    Table("v_readiness", "one count of how much of the data can be relied on", "what, n INTEGER, of INTEGER",
           lambda m: [(r["what"], r["n"], r["of"]) for r in readiness(m, m.open_items)]),
-    Table("claim_effect", "",
-          "claim_id INTEGER, type, made_by, spellings_merged INTEGER, lines_affected INTEGER, verdicts_involved INTEGER",
-          lambda m: [tuple(r.values()) for r in claim_effect(m)]),
-    Table("reuse_between", "",
+    Table("v_reuse_between", "one sub-assembly of one variant, seen from another variant",
           "variant_from, variant_to, subassembly_ref, status, counterpart_ref, differing_lines INTEGER, "
-          "cost_gap_eur REAL, blocked_by",
+          "cost_gap_eur REAL, obsolete_parts",
           lambda m: [tuple(r.values()) for r in reuse_between(m)]),
-    Table("evidence", "", "design_id, kind, detail, claim_id INTEGER, source_file, source_row",
+    Table("evidence", "", "design_id, variant_id, part_id, kind, detail, claim_id INTEGER, source_file, source_row",
           lambda m: [tuple(r.values()) for r in evidence(m)]),
 ]
 
@@ -122,19 +121,14 @@ RAW_ABOUT = {
 }
 
 VIEW_ABOUT = {
-    "v_verdict": "one sub-assembly in one variant, with its verdict and the reason",
-    "v_evidence": "one fact behind a verdict",
+    "v_verdict": "one sub-assembly in one variant: the verdict of its content with the reason, and the obsolete or superseded parts it holds",
+    "v_evidence": "one fact behind a verdict: a BOM row, a correction the rows were read with, a pair or a claim; or one claim that a part of the sub-assembly is obsolete or superseded",
     "v_pair_diff": "one differing line between two sub-assemblies",
     "v_reuse_map": "one design, with the reference each variant uses for it",
     "v_tender_start": "one sub-assembly of V1: reuse, adapt, replace or keep, with its cost",
     "v_purchasing": "one bought part: its references, suppliers and prices",
-    "v_issue": "one inconsistency, or one thing left undecided",
-    "v_queue": "one open item waiting for a decision",
-    "v_readiness": "one count of how much of the data can be relied on",
-    "v_claim_effect": "one claim in force and what it touches",
     "v_content": "one line of one sub-assembly in one variant, with the component's unit cost",
     "v_subassembly_cost": "one sub-assembly in one variant: its unit cost, empty while any line has no agreed price, and the components that block it",
-    "v_reuse_between": "one sub-assembly of one variant, seen from another variant",
 }
 
 ABOUT = RAW_ABOUT | {table.name: table.one_row_is for table in TABLES if table.one_row_is} | VIEW_ABOUT

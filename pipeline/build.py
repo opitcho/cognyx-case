@@ -28,13 +28,12 @@ from pipeline.model import Model
 from pipeline.reports import queue
 from pipeline.resolve import resolve
 from pipeline.tables import write
-from pipeline.verdict import decide, occurrence_verdict
+from pipeline.verdict import VERDICTS, decide, describe_obsolete
 
 
-def compute(raw: Raw, all_claims: list[dict], without_notes: bool = False, made_by: set[str] | None = None,
-            up_to: int | None = None) -> Model:
+def compute(raw: Raw, all_claims: list[dict], without_notes: bool = False) -> Model:
     """Steps 2 to 6 without the write: the model in memory."""
-    chosen = select(all_claims, without_notes, made_by, up_to)
+    chosen = select(all_claims, without_notes)
     m = Model(raw, chosen, statuses(chosen))
     resolve(m)
     compare_and_decide(m)
@@ -43,7 +42,7 @@ def compute(raw: Raw, all_claims: list[dict], without_notes: bool = False, made_
 
 
 def compare_and_decide(m: Model) -> None:
-    """Step 5: designs, pairs, verdicts."""
+    """Step 5: designs, pairs, verdicts, and the obsolete parts each sub-assembly holds."""
     relations = m.relation_index
     content: dict[tuple[str, str], dict] = defaultdict(dict)
     for line in m.lines:
@@ -60,9 +59,9 @@ def compare_and_decide(m: Model) -> None:
     m.pairs = find_pairs(m.designs, relations, m.cost, m.variants)
     for design in m.designs:
         mine = [pair for pair in m.pairs if design is pair.a or design is pair.b]
-        m.verdicts[design.id] = decide(design, mine, relations, m.name)
+        m.verdicts[design.id] = decide(design, mine, m.name)
     for occurrence in m.occurrences:
-        occurrence.verdict = occurrence_verdict(occurrence, m.verdicts[occurrence.design.id], relations, m.name)
+        occurrence.obsolete_parts = describe_obsolete(occurrence, relations, m.name)
 
 
 @dataclass
@@ -71,7 +70,8 @@ class Summary:
 
     parts: int
     designs: int
-    verdicts: dict[tuple[str, str], str]  # (variant, sub-assembly reference) -> verdict
+    verdicts: dict[tuple[str, str], str]  # (variant, sub-assembly reference) -> verdict of its design
+    obsolete: dict[tuple[str, str], str]  # (variant, sub-assembly reference) -> obsolete_parts, where it is filled
     issues: dict[str, int]
     open_items: dict[str, int]
     seconds: float
@@ -79,24 +79,23 @@ class Summary:
     def line(self) -> str:
         counts = Counter(self.verdicts.values())
         return (f"{self.parts} parts, {self.designs} designs; verdicts: "
-                + ", ".join(f"{counts[v]} {v}" for v in ("reused", "reusable", "blocked", "specific"))
+                + ", ".join(f"{counts[v]} {v}" for v in VERDICTS)
+                + f"; {len(self.obsolete)} sub-assemblies with an obsolete or superseded part"
                 + f"; {sum(self.open_items.values())} open items; {sum(self.issues.values())} issues")
 
 
 def build(raw_dir: str | Path = "data/raw", log_path: str | Path = "data/claims.jsonl",
-          out_db: str | Path = "out/pilot.db", without_notes: bool = False, made_by: set[str] | None = None,
-          up_to: int | None = None) -> Summary:
+          out_db: str | Path = "out/pilot.db", without_notes: bool = False) -> Summary:
     """Rebuild the database from the raw files and the claim log.
 
-    The three filters replay the log with claims left out: `without_notes` drops every claim that rests on a note
-    (it quotes one), `made_by` keeps only some makers' claims, `up_to` keeps the first N claims.
+    `without_notes` replays the log with every claim that rests on a note (it quotes one) left out.
     """
     started = time.perf_counter()
     raw, claims = read_raw(raw_dir), load(log_path)
-    model = compute(raw, claims, without_notes, made_by, up_to)
+    model = compute(raw, claims, without_notes)
     # The verdict from the BOM alone: the same replay without any claim that rests on a note.
-    plain = model if without_notes else compute(raw, claims, True, made_by, up_to)
-    bom_only = {(o.variant, min(o.raw_rows)): o.verdict.verdict for o in plain.occurrences}
+    plain = model if without_notes else compute(raw, claims, True)
+    bom_only = {(o.variant, min(o.raw_rows)): plain.verdicts[o.design.id].verdict for o in plain.occurrences}
     for occurrence in model.occurrences:
         occurrence.verdict_bom_only = bom_only.get((occurrence.variant, min(occurrence.raw_rows)), "")
     out_db = Path(out_db)
@@ -104,7 +103,8 @@ def build(raw_dir: str | Path = "data/raw", log_path: str | Path = "data/claims.
     write(model, out_db)
     return Summary(
         parts=sum(1 for p in model.parts.values() if p["known"]), designs=len(model.designs),
-        verdicts={(o.variant, model.name(o.part)): o.verdict.verdict for o in model.occurrences},
+        verdicts={(o.variant, model.name(o.part)): model.verdicts[o.design.id].verdict for o in model.occurrences},
+        obsolete={(o.variant, model.name(o.part)): o.obsolete_parts for o in model.occurrences if o.obsolete_parts},
         issues=dict(Counter(i["type"] for i in model.issues)),
         open_items=dict(Counter(i["kind"] for i in model.open_items)), seconds=time.perf_counter() - started)
 
@@ -115,10 +115,8 @@ if __name__ == "__main__":
     parser.add_argument("--log", default="data/claims.jsonl")
     parser.add_argument("--out", default="out/pilot.db")
     parser.add_argument("--without-notes", action="store_true", help="leave out every claim that rests on a note")
-    parser.add_argument("--made-by", nargs="+", choices=("rule", "agent", "person"), help="keep only these makers' claims")
-    parser.add_argument("--up-to", type=int, help="keep only the first N claims")
     args = parser.parse_args()
-    summary = build(args.raw, args.log, args.out, args.without_notes, set(args.made_by) if args.made_by else None, args.up_to)
+    summary = build(args.raw, args.log, args.out, args.without_notes)
     print(f"{args.out} built in {summary.seconds:.2f} s: {summary.line()}")
     print("issues:", summary.issues)
     print("open items:", summary.open_items)

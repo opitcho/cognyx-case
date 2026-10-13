@@ -228,14 +228,9 @@ class Status:
         return self.state if self.by is None else f"{self.state} by claim {self.by}"
 
 
-def select(claims: list[dict], without_notes: bool = False, made_by: set[str] | None = None,
-           up_to: int | None = None) -> list[dict]:
-    """The claims a replay looks at: optionally without those that rest on a note, only those of some makers,
-    or only the first `up_to`."""
-    return [c for c in claims
-            if not (without_notes and rests_on_note(c))
-            and (made_by is None or c["made_by"] in made_by)
-            and (up_to is None or c["id"] <= up_to)]
+def select(claims: list[dict], without_notes: bool = False) -> list[dict]:
+    """The claims a replay looks at: all of them, or all but those that rest on a note."""
+    return [c for c in claims if not (without_notes and rests_on_note(c))]
 
 
 def statuses(claims: list[dict]) -> dict[int, Status]:
@@ -285,9 +280,8 @@ def statuses(claims: list[dict]) -> dict[int, Status]:
     return result
 
 
-def in_force(claims: list[dict], without_notes: bool = False, made_by: set[str] | None = None,
-             up_to: int | None = None) -> list[dict]:
+def in_force(claims: list[dict], without_notes: bool = False) -> list[dict]:
     """The claims a build applies, in log order."""
-    chosen = select(claims, without_notes, made_by, up_to)
+    chosen = select(claims, without_notes)
     status = statuses(chosen)
     return [c for c in chosen if status[c["id"]].in_force]

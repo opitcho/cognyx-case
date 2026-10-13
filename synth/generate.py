@@ -15,7 +15,7 @@ from . import noise
 from .clean import BOM_COLUMNS, ERP_COLUMNS, NOTE_FIELDS, build_bom, build_erp, build_model, build_note_facts, note_rows
 
 INPUTS = Path(__file__).parent / "inputs"  # the hand-written files the generator reads
-VERDICT_ORDER = ["specific", "reusable", "reused", "blocked"]   # the last one that applies wins
+VERDICT_ORDER = ["specific", "reusable", "reused"]   # the last one that applies wins
 
 
 def load(name):
@@ -84,12 +84,15 @@ def findings_from(findings, model, facts):
     return rows
 
 
-def verdicts_from(findings, model):
+def verdicts_from(findings, model, relations):
     """One row per sub-assembly design.
 
     Default: reused if it is in two variants or more, specific otherwise. Then the
-    verdicts written in findings.json apply, the strongest one winning.
+    verdicts written in findings.json apply, the strongest one winning. The verdict says
+    whether the content is shared. holds_obsolete_part says apart whether the reference is,
+    or its content contains, a part that a note not overridden calls obsolete or superseded.
     """
+    dead = {r["ref_a_true"] for r in relations if r["relation"] in ("obsolete", "superseded_by") and not r["overridden_by"]}
     rows = []
     for ref in model["designs"]:
         variants = sorted(v for (v, _, _), used in model["use"].items() if used == ref)
@@ -97,7 +100,9 @@ def verdicts_from(findings, model):
         entries = [f for f in findings["findings"] if ref in f.get("verdicts", {})]
         strongest = lambda i: max([default] + [f["verdicts"][ref][i] for f in entries], key=VERDICT_ORDER.index)
         rows.append({"subassembly": ref, "variants": " ".join(variants), "verdict_bom_only": strongest(0),
-                     "verdict_with_notes": strongest(1), "finding_ids": " ".join(f["id"] for f in entries)})
+                     "verdict_with_notes": strongest(1),
+                     "holds_obsolete_part": "yes" if ref in dead or set(model["designs"][ref]["components"]) & dead else "no",
+                     "finding_ids": " ".join(f["id"] for f in entries)})
     return rows
 
 
@@ -139,12 +144,13 @@ def main(root="."):
         change["raw_row"] = line[change["file"]][change["row_id"]]
     truth = root / "data/truth"
     write_csv(truth / "changes.csv", changes, ["file", "row_id", "raw_row", "field", "clean_value", "written_value", "kind"])
-    write_csv(truth / "relations.csv", relations_from(facts), ["note_id", "relation", "ref_a_true", "ref_b_true",
+    relations = relations_from(facts)
+    write_csv(truth / "relations.csv", relations, ["note_id", "relation", "ref_a_true", "ref_b_true",
               "ref_a_written", "ref_b_written", "ref_a_in_field", "option", "overridden_by"])
     write_csv(truth / "findings.csv", findings_from(findings, model, facts), ["finding_id", "kind", "ref_a", "variants_a",
               "ref_b", "variants_b", "differing_lines", "note_ids", "cost_gap_eur", "expect"])
-    write_csv(truth / "verdicts.csv", verdicts_from(findings, model), ["subassembly", "variants", "verdict_bom_only",
-              "verdict_with_notes", "finding_ids"])
+    write_csv(truth / "verdicts.csv", verdicts_from(findings, model, relations), ["subassembly", "variants",
+              "verdict_bom_only", "verdict_with_notes", "holds_obsolete_part", "finding_ids"])
     print(f"BOM {len(bom)} rows, ERP {len(erp)} rows, {len(facts)} notes, {len(changes)} changes -> {root / 'data'}")
 
 

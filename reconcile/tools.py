@@ -15,6 +15,7 @@ from pipeline.build import Summary, build
 from pipeline.claims import OPPOSITES, ClaimLog, ClaimRefused, pair_key, rests_on_note, split, statuses
 from pipeline.ingest import read_raw
 from pipeline.refs import RefIndex, normalise
+from pipeline.verdict import VERDICTS
 
 MAX_ROWS = 200       # rows a query returns
 MAX_CELL = 300       # characters of one value shown
@@ -59,11 +60,12 @@ class Workbench:
     @tool
     def describe_tables(self) -> str:
         """List every table and view of the database: what one row is, its columns, and how many rows it has.
-        Views (names starting with v_) are the ones to query first."""
+        Names starting with v_ are the ones to query first."""
         conn = self.connect()
         about = dict(conn.execute("SELECT name, one_row_is FROM about"))
-        names = [name for (name,) in conn.execute(
-            "SELECT name FROM sqlite_master WHERE type IN ('table', 'view') ORDER BY type DESC, name") if name in about]
+        names = [name for (name,) in conn.execute("SELECT name FROM sqlite_master WHERE type IN ('table', 'view')")
+                 if name in about]
+        names.sort(key=lambda name: (not name.startswith("v_"), name))  # the names to query first, then the others
         lines = []
         for name in names:
             columns = ", ".join(row[1] for row in conn.execute(f"PRAGMA table_info({name})"))
@@ -116,7 +118,9 @@ class Workbench:
             evidence: Pointers to the raw rows the claim rests on: bom:619, erp:236, note:TN-0132.
             quote: The words of the note that state the claim, copied character for character. The note must be
                 in evidence.
-            reason: One sentence saying why.
+            reason: Two or three short sentences for a person who has never seen the database: what the claim says
+                about the parts, then the facts that show it, citing BOM rows, purchasing rows and notes. No design
+                number, claim number, claim type or table name.
         """
         claim = dict(type=type, subject=subject, object=object, value=value, standing=standing,
                      evidence=evidence or [], quote=quote, reason=reason, made_by="agent", maker=self.agent_name)
@@ -189,7 +193,7 @@ class Workbench:
 
 
 def changes(before: Summary, after: Summary) -> str:
-    """What one claim changed, in words: parts, designs, verdicts and open items."""
+    """What one claim changed, in words: parts, designs, verdicts, obsolete parts and open items."""
     parts = []
     if after.parts != before.parts:
         parts.append(f"Parts: {before.parts} to {after.parts}.")
@@ -200,15 +204,22 @@ def changes(before: Summary, after: Summary) -> str:
     if moved:
         shown = "; ".join(f"{ref} in {variant}, {old or 'new'} to {new}" for (variant, ref), old, new in moved[:8])
         parts.append(f"Verdicts changed ({len(moved)}): {shown}" + ("; ..." if len(moved) > 8 else "") + ".")
+    held = [(key, before.obsolete.get(key, ""), after.obsolete.get(key, ""))
+            for key in sorted(set(before.obsolete) | set(after.obsolete))
+            if before.obsolete.get(key, "") != after.obsolete.get(key, "")]
+    if held:
+        shown = "; ".join(f"{ref} in {variant}, {old or 'none'} to {new or 'none'}" for (variant, ref), old, new in held[:8])
+        parts.append(f"Obsolete parts changed ({len(held)}): {shown}" + ("; ..." if len(held) > 8 else "") + ".")
     open_before, open_after = sum(before.open_items.values()), sum(after.open_items.values())
     if open_after != open_before:
         parts.append(f"Open items: {open_before} to {open_after}.")
     for kind in sorted(set(before.issues) | set(after.issues)):
         if before.issues.get(kind, 0) != after.issues.get(kind, 0):
             parts.append(f"Issues of type {kind}: {before.issues.get(kind, 0)} to {after.issues.get(kind, 0)}.")
-    return " ".join(parts) or "No change to parts, designs, verdicts or open items."
+    return " ".join(parts) or "No change to parts, designs, verdicts, obsolete parts or open items."
 
 
 def verdict_counts(summary: Summary) -> str:
     counts = Counter(summary.verdicts.values())
-    return ", ".join(f"{counts[v]} {v}" for v in ("reused", "reusable", "blocked", "specific"))
+    return (", ".join(f"{counts[v]} {v}" for v in VERDICTS)
+            + f"; {len(summary.obsolete)} sub-assemblies with an obsolete or superseded part")

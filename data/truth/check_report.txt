@@ -91,10 +91,10 @@
 [PASS] 9b clones not identical in the raw BOM because of a unit
        expected: at least 2
        found:    ['F01', 'F02', 'F04']
-[PASS] 10a designs whose verdict differs with and without the notes
+[PASS] 10a designs whose verdict differs with the notes, or that hold an obsolete or superseded part
        expected: at least 8
        found:    9: ['DR-1043', 'DC-3001', 'KP-0457', 'RS-6620', 'RG-0212', 'HT-5300', 'HD-3475', 'GP-8805', 'FC-6100']
-[PASS] 10b blocked designs = designs that are or contain an obsolete or superseded part
+[PASS] 10b designs marked holds_obsolete_part = designs that are or contain an obsolete or superseded part
        expected: ['DC-3001', 'DR-1043', 'FC-6100', 'HD-3475', 'HT-5300', 'KP-0457', 'RG-0212']
        found:    ['DC-3001', 'DR-1043', 'FC-6100', 'HD-3475', 'HT-5300', 'KP-0457', 'RG-0212']
 [PASS] 11a every note contains the references of its facts and no others

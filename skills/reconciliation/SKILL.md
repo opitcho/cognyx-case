@@ -13,13 +13,12 @@ You work on the data of a family of six train variants (`V1` to `V6`). Three raw
 - **The claim log** (table `claim`) is a list of statements about the raw data, such as "these two spellings are one part". It is only ever appended to.
 - **Everything else** is computed from the raw tables and the claims in force, and rebuilt after every claim. You cannot edit it. To change it, append a claim.
 
-Call `describe_tables` when you need column names. Query the views (`v_...`) first:
+Call `describe_tables` when you need column names. Query the `v_...` names first:
 
 | To find | Query |
 |---|---|
 | What is still open | `v_queue`, `v_readiness`, `v_issue` |
 | Whether a claim is applied: in force, proposed, confirmed, retracted or overridden, and by which claim | `claim_status` joined to `claim` |
-| What one claim touches | `v_claim_effect` |
 | The verdict of a sub-assembly and why | `v_verdict`, `v_evidence` |
 | For each sub-assembly of `V1`: reuse, adapt, replace or keep, with its cost | `v_tender_start` |
 | The content of a sub-assembly in a variant | `v_content` |
@@ -33,14 +32,18 @@ Call `describe_tables` when you need column names. Query the views (`v_...`) fir
 
 The BOM writes references with a hyphen (`DR-1042`), the ERP without (`DR1042`). `resolution` lists every spelling of a part.
 
-## The four verdicts
+## The three verdicts, and obsolete parts
 
-Every sub-assembly in every variant has one verdict in `v_verdict`, and `reason` says what it rests on. Questions about reuse are answered from them. These four words are the database's: to a person, use the wording of "Writing to a person".
+Every sub-assembly in every variant has one verdict in `v_verdict`, and `reason` says what it rests on. The verdict says only whether the content is shared. Questions about reuse are answered from the verdict and from `obsolete_parts`, read together. These words are the database's: to a person, use the wording of "Writing to a person".
 
-- `reused`: the same content (the same components in the same quantities) is in two or more variants, under one reference or under several.
-- `reusable`: not shared today, but it differs from another design by 1 to 3 lines that no option requires, or a claim says another design does the same job. `counterpart_ref` names that other design, `v_pair_diff` lists the differing lines.
-- `blocked`: it would be reused or reusable, but it holds a part that a claim says is obsolete or superseded. The reason names the part.
+- `reused`: the same content (the same components in the same quantities) is in two or more variants, under one reference or under several. `shared_with` lists the other variants.
+- `reusable`: not shared today, but it differs from another design by 1 to 3 lines that no option requires, or a claim says another design does the same job. `counterpart_ref` names that other design and `counterpart_variants` the variants it is in, `v_pair_diff` lists the differing lines.
 - `specific`: a difference is required by an option, or there is no counterpart in another variant.
+
+`obsolete_parts` lists the parts of the sub-assembly that a claim says are obsolete or superseded, whatever its verdict. It is empty (`''`) when there is none. A sub-assembly with `obsolete_parts` filled cannot be reused as is, even when its verdict is `reused`. The text has two cases, which ask for different things:
+
+- a component, "SN-573, superseded by SN-598" or "AC-477, obsolete": the content has to change.
+- its own reference, "own reference RG-0212, obsolete (same content under TC-8100)": the content is sound, and the part in brackets names the reference that carries the same content.
 
 `verdict_bom_only` is the verdict the BOM alone gives, before any claim that rests on a note. When the two differ, a note changed the verdict.
 
@@ -78,8 +81,29 @@ Rules for every claim:
 2. Copy references and quotes character for character. A reference that looks mistyped is still copied as written.
 3. Give the evidence: the rows you looked at, as `bom:`, `erp:` or `note:` pointers. A quote needs its note in `evidence`.
 4. Nothing is deleted. To undo a claim, append a `retract`.
+5. Write the `reason` for a person, as described in "The reason of a claim".
 
 When two claims in force say opposite things about the same pair (`same_as` against `not_same_as`), or give two values to one cell, one is applied and the other is marked overridden in `claim_status`. If each quotes a note, the later note wins. Otherwise a person's claim wins over yours, and yours over a rule's. That is why you cannot retract a person's claim, and why the tool refuses a claim of your own judgement against one that rests on a note.
+
+### The reason of a claim
+
+A person reads the `reason` later on the Claims page, with the raw rows and notes of the `evidence` printed under it, to decide whether the claim is right. That person is the engineer or buyer of "Writing to a person": they know the parts and the three files, and have never seen the database.
+
+- **Start with what the claim says about the parts**, in one short sentence: "QX-0102 is a misspelling of QX-0120." The facts that show it come after.
+- **Two or three short sentences**, one fact each. Not one long sentence joined with "and" and semicolons. A `reviewed` takes one or two: what the note is (an inspection, a torque check, a drawing revision) or what was recorded from it, and that it says nothing more about how parts relate. Do not retell the note.
+- **Say the fact, not the test you applied.** "No variant lists both", not "never children of the same parent in the same variant". "Both have the same six components in the same quantities", not "the same design, 0 differing lines".
+- **Point to what the person can open**, and say which file a row is in: "BOM row 24", "purchasing row 9", "note TN-0400". Never a bare "row 24".
+- **Nothing from the database**: no design number (`D011`), no claim number, no claim type, no table or column name. Use the wording of the table in "Writing to a person". For something recorded earlier, say what it states and where it comes from: "note TN-0400 says the two are one part", not "recorded as claim 57".
+- **Do not repeat the quote.** It is shown beside the reason, so do not restate what the note says in other words either. Add what the note does not say: where the BOM or the purchasing file shows it.
+- **A proposed claim** says what speaks for it, what speaks against it, and what would decide.
+
+| Claim | Not this | This |
+|---|---|---|
+| `confirm` on a near pair | "QX-0102 and QX-0120 are never children of the same parent in one variant and are the same design (D011, 0 differing lines), so the two spellings denote one part." | "QX-0102 is a misspelling of QX-0120. Both are the door seal under DOOR-SYS-01 (BOM rows 31 and 412), with the same five components in the same quantities. No variant lists both." |
+| `not_same_as` | "Siblings under the same parent, not_same_as." | "QX-0301 and QX-0302 are two parts. V2 lists both under YY-0040 (BOM rows 210 and 211), as the left and the right bracket." |
+| `value_is` | "V1 rows 52/53 give 4 and 6; other variants agree on 4, so row 53 is wrong." | "The quantity of WV-0021 in YY-0040 is 4 pcs. BOM rows 52 and 53 both give it for V1, as 4 and as 6. V2, V3 and V5 say 4 (BOM rows 315, 566, 1079)." |
+| `reviewed` | "The note's relation (superseded_by) has been recorded as claim 57; nothing else to record." | "The note says QX-0009 is replaced by QX-0010, which is recorded. The rest is a stock instruction." |
+| `same_as`, proposed | "Mixed evidence, proposed." | "WV-0005 and WV-0006 may be one part. For: same description and same parent (BOM rows 88 and 640). Against: two suppliers and two prices (purchasing rows 14 and 15). A note or the buyer would decide." |
 
 ## Settling an open item
 
@@ -164,7 +188,7 @@ What they can open is the raw data, so cite that: "BOM row 803", "purchasing row
 | `required_for`, `required_by_option` | "required for" the option, named: "required for 200 km/h" |
 | `reused` | "shared today", with the variants |
 | `reusable` | "could be shared", with what differs |
-| `blocked` | "cannot be reused as is", with the part that prevents it |
+| `obsolete_parts` filled | "cannot be reused as is", with the part that prevents it; for its own reference, "the same content is available under ..." |
 | `specific` | "particular to this variant", with the reason |
 | near pair, `near` | "almost identical: N lines differ", with the lines |
 | a design, `D011` | "the same content", with the references that carry it |
@@ -172,10 +196,10 @@ What they can open is the raw data, so cite that: "BOM row 803", "purchasing row
 | `no counterpart` | "nothing equivalent in the other variant" |
 | proposed, in force or confirmed, retracted, overridden | "waiting for your decision", "applied", "withdrawn", "replaced by a later decision" |
 | `disputed`, `missing` | "two different prices", "no price" |
-| any table, view or column (`v_pair_diff`, `blocked_by`, `known_cost_eur`) | not named: say what it holds |
+| any table, view or column (`v_pair_diff`, `obsolete_parts`, `blocked_by`, `known_cost_eur`) | not named: say what it holds |
 
 The reasons the database gives are written for you too. "differs from PW-4700 by 1 line(s): unexplained" becomes "it differs from PW-4700 by one line, and no note explains the difference", followed by the line itself.
 
 When you ask a person to decide, ask about the parts: "RL-205 has two prices, 87,53 in purchasing row 235 and 82,30 in row 236. Which one holds?" After recording, say what now holds and what it changed: "Recorded: 87,53 holds for RL-205. The door leaf DR-1043 now has a total."
 
-This section is about what a person reads. In a turn that settles an open item with nobody there, the claim's `reason` is read later by a person on the Claims page: write it in plain words too, with the references and the rows.
+This section is about what a person reads. That includes the `reason` of every claim, read later on the Claims page even when nobody is there in the turn that writes it: see "The reason of a claim".

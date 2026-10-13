@@ -54,8 +54,8 @@ These five come from the technical notes. The code calls them relations. 17 are 
 | Type in the code | Links | Meaning | Applied | Example | Effect |
 |---|---|---|---|---|---|
 | `interchangeable_with` | two components | Either can be fitted in place of the other. Both stay usable | 4 | `FB-791` and `FB-764`, note `TN-0506` | A difference between two sub-assemblies that is only this swap is explained |
-| `superseded_by` | an old part and its replacement | The old part must no longer be used | 5 | `TH-415`, replaced by `TH-450` | Every sub-assembly that holds the old part is blocked |
-| `obsolete` | one part | Not to be used on new designs. No replacement is named | 4 | `AC-477`, note `TN-0471` | Every sub-assembly that holds the part is blocked |
+| `superseded_by` | an old part and its replacement | The old part must no longer be used | 5 | `TH-415`, replaced by `TH-450` | Every sub-assembly that holds the old part names it in `obsolete_parts` |
+| `obsolete` | one part | Not to be used on new designs. No replacement is named | 4 | `AC-477`, note `TN-0471` | Every sub-assembly that holds the part names it in `obsolete_parts` |
 | `required_for` | a part and a variant option | The part is needed because of the option | 2 | `JT-305` is required for the 200 km/h speed class, note `TN-0393` | A difference between two sub-assemblies that is this part is justified by the option |
 | `functionally_equivalent_to` | two sub-assemblies | Two different designs that do the same job | 2 | `RS-6620` and `ST-4100`, note `TN-0361` | The two are compared, whatever the number of differing lines |
 
@@ -104,14 +104,20 @@ A differing line is one component that the two designs do not have in common, or
 
 ## Verdict of a sub-assembly
 
-Each sub-assembly in each variant gets one of four verdicts, with a sentence that says why.
+Each sub-assembly in each variant gets one of three verdicts, with a sentence that says why. The verdict says only whether the content is shared.
 
 | Verdict | Meaning | Number | Example |
 |---|---|---|---|
-| `reused` | The same content is in two or more variants | 197 | `AD-7300`: same content in `V1`, `V2`, `V3`, `V5` |
+| `reused` | The same content is in two or more variants | 222 | `AD-7300`: same content in `V1`, `V2`, `V3`, `V5` |
 | `reusable` | Not shared today. It differs from another design by 1 to 3 lines that no option requires, or a note says another design does the same job | 15 | `DD-2037` differs from `DD-2010` by one line, an interchangeable component |
-| `blocked` | It would be reused or reusable, but it holds a part that is obsolete or superseded, or its own reference is | 25 | `HT-5300` contains `TH-415`, superseded by `TH-450` |
 | `specific` | Its difference from the nearest design is required by an option, or nothing in another variant resembles it | 3 | `ER-321` in `V6` |
+
+Whether a sub-assembly holds an obsolete or superseded part is kept apart from the verdict, in the column `obsolete_parts`. It is filled for 25 sub-assemblies, all `reused` on content, and empty for the others.
+
+| Case | Text of `obsolete_parts` | What it asks for |
+|---|---|---|
+| A component is obsolete or superseded | `HT-5300`: "TH-415, superseded by TH-450" | The content has to change |
+| The sub-assembly's own reference is | `RG-0212` in `V1`: "own reference RG-0212, obsolete (same content under TC-8100)" | The content is sound and is available under another reference |
 
 A second verdict is kept beside the first: the verdict from the BOM alone, computed without any statement that rests on a note. `GP-8805` is `specific` from the BOM alone and `reusable` once note `TN-0183` is read.
 
@@ -154,7 +160,8 @@ The left column is what the agent writes today. The right column is a proposed w
 | design, `D011` | "the same content", with the references that carry it |
 | `unexplained` | "no note explains this difference" |
 | `required_by_option` | "required for" the option, named |
-| `reused`, `reusable`, `blocked`, `specific` | "shared today", "could be shared", "cannot be reused as is", "particular to this variant", each followed by the reason |
+| `reused`, `reusable`, `specific` | "shared today", "could be shared", "particular to this variant", each followed by the reason |
+| `obsolete_parts` filled | "cannot be reused as is", with the part that prevents it |
 | `no counterpart` | "nothing equivalent in the other variant" |
 | proposed, in force, retracted, overridden | "waiting for your decision", "applied", "withdrawn", "replaced by a later decision" |
 | `disputed`, `missing` | "two different prices", "no price" |

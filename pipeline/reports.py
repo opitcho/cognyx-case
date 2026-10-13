@@ -1,17 +1,18 @@
 """Tables worked out from the finished model, for the agent and the app: nothing in the build depends on them.
 
-- queue: the open items waiting for a decision
-- readiness: counts of how much of the data can be relied on
-- reuse_between: every sub-assembly of every variant, seen from each other variant
-- evidence: the facts behind each verdict
-- claim_effect: what each claim in force touches
+- queue: the open items waiting for a decision (table v_queue)
+- readiness: counts of how much of the data can be relied on (table v_readiness)
+- reuse_between: every sub-assembly of every variant, seen from each other variant (table v_reuse_between)
+- evidence: the facts behind each verdict (table evidence, read through v_evidence)
 """
 
-from collections import Counter, defaultdict
+from collections import defaultdict
 
 from pipeline.claims import split
 from pipeline.ingest import BOM_FILE, NOTE_FILE
 from pipeline.model import Model
+from pipeline.units import number
+from pipeline.verdict import obsolete_components
 
 
 def queue(m: Model) -> list[dict]:
@@ -82,7 +83,6 @@ def readiness(m: Model, open_items: list[dict]) -> list[dict]:
 
 def reuse_between(m: Model) -> list[dict]:
     """Every sub-assembly of every variant, seen from each other variant: is the same thing there?"""
-    relations = m.relation_index
     in_variant = defaultdict(list)
     for occurrence in m.occurrences:
         in_variant[occurrence.variant].append(occurrence)
@@ -94,10 +94,9 @@ def reuse_between(m: Model) -> list[dict]:
             there = {o.design.id: o for o in in_variant[target]}
             for occurrence in sorted(in_variant[source], key=lambda o: m.name(o.part)):
                 design = occurrence.design
-                dead = [p for p in (occurrence.part, *sorted(design.lines)) if relations.dead(p)]
                 row = {"variant_from": source, "variant_to": target, "subassembly_ref": m.name(occurrence.part),
                        "status": "no counterpart", "counterpart_ref": "", "differing_lines": None, "cost_gap_eur": None,
-                       "blocked_by": ", ".join(m.name(p) for p in dead)}
+                       "obsolete_parts": occurrence.obsolete_parts}
                 if design.id in there:
                     other = there[design.id]
                     same = other.part == occurrence.part
@@ -113,60 +112,107 @@ def reuse_between(m: Model) -> list[dict]:
                             gap = -gap  # the gap is counted from this sub-assembly to its counterpart
                         row.update(status="near" if pair.kind == "near" else "functionally equivalent",
                                    counterpart_ref=m.name(there[pair.other(design).id].part),
-                                   differing_lines=pair.n_differing, cost_gap_eur=None if gap is None else float(gap))
+                                   differing_lines=pair.n_differing, cost_gap_eur=None if gap is None else round(float(gap), 2))
                 rows.append(row)
     return rows
 
 
+def corrections(m: Model) -> dict[int, list[tuple[str, int | None]]]:
+    """BOM row number -> what the claims in force changed in how that row is read, each with its claim.
+
+    Four things are corrections: a reference written in another spelling than the part's own, a row left out as
+    a repeat, a cell replaced or emptied, and a quantity converted from another unit.
+    """
+    linked = defaultdict(list)  # written reference -> (the reference a same_as claim links it to, the claim)
+    for claim in sorted(m.by_type["same_as"], key=lambda c: c["id"]):
+        a, b = split(claim["subject"])[1], split(claim["object"])[1]
+        linked[a].append((b, claim["id"]))
+        linked[b].append((a, claim["id"]))
+
+    def path(written: str, target: str) -> list[int]:
+        """The same_as claims that lead from one spelling to another, by the shortest way."""
+        reached, todo = {written: []}, [written]
+        for ref in todo:
+            for other, claim_id in linked[ref]:
+                if other not in reached:
+                    reached[other] = reached[ref] + [claim_id]
+                    todo.append(other)
+        return reached.get(target, [])
+
+    repeats = {int(split(c["subject"])[1]): c for c in m.by_type["duplicate_of"]}
+    cells = {tuple(split(c["subject"])[1].split(":", 2)): c for c in m.by_type["no_value"] + m.by_type["value_is"]}
+    units = {split(c["subject"])[1]: c for c in m.by_type["converts_to"]}
+    found = defaultdict(list)
+    for row in m.raw.bom:
+        row_no = row["row_no"]
+        for column in ("parent_ref", "child_ref") if int(row["level"]) > 2 else ("child_ref",):  # a system's parent is the variant
+            written = row[column]
+            own = m.name(m.part_of[written])
+            if written != own:
+                claim_ids = path(written, own)
+                via = f" (claims {', '.join(map(str, claim_ids))})" if len(claim_ids) > 1 else ""
+                found[row_no].append((f"{written} read as {own}{via}", claim_ids[0] if claim_ids else None))
+        if row_no in repeats:
+            claim = repeats[row_no]
+            found[row_no].append((f"row {row_no} repeats row {split(claim['object'])[1]} and is left out", claim["id"]))
+            continue
+        for column in ("quantity", "unit"):
+            claim = cells.get(("bom", str(row_no), column))
+            if claim:
+                now = f"replaced by {claim['value']}" if claim["type"] == "value_is" else "holds no value"
+                found[row_no].append((f"{row['child_ref']}: {column} {row[column]!r} {now}", claim["id"]))
+        unit = m.cell("bom", row, "unit")
+        value = m.to_base(number(m.cell("bom", row, "quantity")), unit)
+        if value and unit != value[1]:
+            found[row_no].append((f"{row['child_ref']}: {m.cell('bom', row, 'quantity')} {unit} read as {value[0]:f} {value[1]}",
+                                  units[unit]["id"] if unit in units else None))
+    return found
+
+
 def evidence(m: Model) -> list[dict]:
-    """The facts behind each design's verdict: where it occurs, the pair it was compared with, the claims used."""
+    """The facts behind each design's verdict: where it occurs, the corrections its BOM rows were read with, the
+    pair it was compared with, the claims used, and the claims that call one of its parts obsolete or superseded.
+
+    `variant_id` and `part_id` are filled only on a claim about a sub-assembly's own reference: it concerns that
+    sub-assembly, not the others that carry the same design.
+    """
+    relations = m.relation_index
     claims = {c["id"]: c for c in m.claims}
+
+    def row(design, kind, detail, claim_id=None, source_file="", source_row="", occurrence=None):
+        return {"design_id": design.id, "variant_id": occurrence.variant if occurrence else "",
+                "part_id": occurrence.part if occurrence else "", "kind": kind, "detail": detail,
+                "claim_id": claim_id, "source_file": source_file, "source_row": source_row}
+
+    def claim_row(design, claim_id, occurrence=None):
+        claim = claims[claim_id]
+        about = split(claim["subject"])[1] + (f", {split(claim['object'])[1]}" if claim["object"] else "")
+        note_id = next((split(item)[1] for item in claim["evidence"] if split(item)[0] == "note"), "")
+        return row(design, "claim", f"{claim['type']}({about})" + (f": {claim['quote']}" if claim["quote"] else ""),
+                   claim_id, NOTE_FILE if note_id else "", note_id, occurrence)
+
+    content_rows = defaultdict(list)  # (variant, sub-assembly) -> the raw rows of its lines
+    for line in m.lines:
+        if line["level"] == 4:
+            content_rows[(line["variant"], line["parent"])] += line["rows"]
+    fixes = corrections(m)
     rows = []
     for design in m.designs:
         verdict = m.verdicts[design.id]
         for occurrence in design.occurrences:
-            for claim_id in occurrence.verdict.claim_ids:
-                if claim_id not in verdict.claim_ids:  # the claim that blocks this reference alone
-                    claim = claims[claim_id]
-                    rows.append({"design_id": design.id, "kind": "claim",
-                                 "detail": f"{claim['type']}({split(claim['subject'])[1]}): {claim['quote']}",
-                                 "claim_id": claim_id, "source_file": NOTE_FILE, "source_row": ""})
-            rows.append({"design_id": design.id, "kind": "bom row",
-                         "detail": f"{occurrence.variant}: {m.name(occurrence.part)}, {len(design.lines)} lines",
-                         "claim_id": None, "source_file": BOM_FILE, "source_row": str(min(occurrence.raw_rows))})
+            own = relations.dead(occurrence.part)
+            if own:
+                rows.append(claim_row(design, own[0], occurrence))
+            rows.append(row(design, "bom row", f"{occurrence.variant}: {m.name(occurrence.part)}, {len(design.lines)} lines",
+                            source_file=BOM_FILE, source_row=str(min(occurrence.raw_rows))))
+        for occurrence in design.occurrences:
+            raw_rows = sorted(set(occurrence.raw_rows + content_rows[(occurrence.variant, occurrence.part)]))
+            rows += [row(design, "correction", f"{occurrence.variant}: {detail}", claim_id, BOM_FILE, str(row_no))
+                     for row_no in raw_rows for detail, claim_id in fixes[row_no]]
         if verdict.pair:
             pair = verdict.pair
-            rows.append({"design_id": design.id, "kind": "pair",
-                         "detail": f"{pair.kind} pair with {', '.join(m.name(p) for p in pair.other(design).parts)}: "
-                                   f"{pair.n_differing} differing lines, {pair.n_shared} shared",
-                         "claim_id": None, "source_file": "", "source_row": ""})
-        for claim_id in dict.fromkeys(verdict.claim_ids):
-            claim = claims[claim_id]
-            about = split(claim["subject"])[1] + (f", {split(claim['object'])[1]}" if claim["object"] else "")
-            note_id = next((split(item)[1] for item in claim["evidence"] if split(item)[0] == "note"), "")
-            rows.append({"design_id": design.id, "kind": "claim",
-                         "detail": f"{claim['type']}({about})" + (f": {claim['quote']}" if claim["quote"] else ""),
-                         "claim_id": claim_id, "source_file": NOTE_FILE if note_id else "", "source_row": note_id})
-    return rows
-
-
-def claim_effect(m: Model) -> list[dict]:
-    """For each claim in force, a rough measure of what it touches."""
-    lines_of = Counter()
-    for line in m.lines:
-        lines_of[line["child"]] += 1
-        if line["parent"]:
-            lines_of[line["parent"]] += 1
-    in_verdicts = Counter()
-    for design in m.designs:
-        for claim_id in set(m.verdicts[design.id].claim_ids):
-            in_verdicts[claim_id] += len(design.occurrences)
-    rows = []
-    for claim in m.force:
-        kind, rest = split(claim["subject"])
-        part = m.part_of.get(rest) if kind == "ref" else None
-        merged = len(m.parts[part]["spellings"]) if part and claim["type"] == "same_as" else 0
-        touched = lines_of[part] if part else (1 if kind in ("bom", "cell") else 0)
-        rows.append({"claim_id": claim["id"], "type": claim["type"], "made_by": claim["made_by"],
-                     "spellings_merged": merged, "lines_affected": touched, "verdicts_involved": in_verdicts[claim["id"]]})
+            rows.append(row(design, "pair", f"{pair.kind} pair with {', '.join(m.name(p) for p in pair.other(design).parts)}: "
+                                            f"{pair.n_differing} differing lines, {pair.n_shared} shared"))
+        obsolete = [claim_id for _, claim_id, _ in obsolete_components(design, relations)]
+        rows += [claim_row(design, claim_id) for claim_id in dict.fromkeys(obsolete + verdict.claim_ids)]
     return rows

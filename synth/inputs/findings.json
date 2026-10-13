@@ -191,11 +191,11 @@
 
     {"id": "F06", "kind": "clone_dead_reference", "a": "DC-3001", "b": "KP-0457",
      "notes": [{"relation": "superseded_by", "refs": ["KP-0457", "DC-3001"]}],
-     "verdicts": {"DC-3001": ["reused", "reused"], "KP-0457": ["reused", "blocked"]},
+     "verdicts": {"DC-3001": ["reused", "reused"], "KP-0457": ["reused", "reused"]},
      "expect": "Same door control unit under two references. KP-0457 is the dead one: keep DC-3001."},
     {"id": "F07", "kind": "clone_dead_reference", "a": "TC-8100", "b": "RG-0212",
      "notes": [{"relation": "obsolete", "refs": ["RG-0212"]}],
-     "verdicts": {"TC-8100": ["reused", "reused"], "RG-0212": ["reused", "blocked"]},
+     "verdicts": {"TC-8100": ["reused", "reused"], "RG-0212": ["reused", "reused"]},
      "expect": "Same HVAC control unit under two references. RG-0212 is obsolete: keep TC-8100."},
 
     {"id": "F08", "kind": "near_pair_unexplained", "a": "DD-2200", "b": "DD-2268",
@@ -233,11 +233,11 @@
 
     {"id": "F17", "kind": "near_pair_replaced", "a": "DC-3001", "b": "DC-3020",
      "notes": [{"relation": "superseded_by", "refs": ["SN-573", "SN-598"]}],
-     "verdicts": {"DC-3001": ["reusable", "blocked"], "KP-0457": ["reusable", "blocked"], "DC-3020": ["reusable", "reusable"]},
+     "verdicts": {"DC-3001": ["reusable", "reusable"], "KP-0457": ["reusable", "reusable"], "DC-3020": ["reusable", "reusable"]},
      "expect": "Door control units differing only by the sensor, and a note says SN-573 was superseded by SN-598: keep DC-3020."},
     {"id": "F18", "kind": "near_pair_replaced", "a": "HD-3475", "b": "HD-3462",
      "notes": [{"relation": "superseded_by", "refs": ["BK-517", "BK-594"]}],
-     "verdicts": {"HD-3475": ["reusable", "blocked"], "HD-3462": ["reusable", "reusable"]},
+     "verdicts": {"HD-3475": ["reusable", "reusable"], "HD-3462": ["reusable", "reusable"]},
      "expect": "Handrail assemblies differing only by the clamp, and a note says BK-517 was superseded by BK-594: keep HD-3462."},
 
     {"id": "F19", "kind": "near_pair_required_by_option", "a": "DR-1042", "b": "DR-1090",
@@ -263,15 +263,15 @@
 
     {"id": "F24", "kind": "blocked", "a": "DR-1043", "part": "AC-477",
      "notes": [{"relation": "obsolete", "refs": ["AC-477"]}],
-     "verdicts": {"DR-1043": ["reused", "blocked"]},
+     "verdicts": {"DR-1043": ["reused", "reused"]},
      "expect": "The right door leaf is in all six variants but contains an obsolete actuator with no replacement named."},
     {"id": "F25", "kind": "blocked", "a": "HT-5300", "part": "TH-415",
      "notes": [{"relation": "superseded_by", "refs": ["TH-415", "TH-450"]}],
-     "verdicts": {"HT-5300": ["reused", "blocked"]},
+     "verdicts": {"HT-5300": ["reused", "reused"]},
      "expect": "The heater unit is in all six variants but its thermostat was superseded by TH-450, which the newer HVAC control unit TC-8437 already uses."},
     {"id": "F26", "kind": "blocked", "a": "FC-6100", "part": "GU-077",
      "notes": [{"relation": "obsolete", "refs": ["GU-077"]}],
-     "verdicts": {"FC-6100": ["reused", "blocked"]},
+     "verdicts": {"FC-6100": ["reused", "reused"]},
      "expect": "The floor covering assembly is in all six variants but uses an obsolete adhesive."},
 
     {"id": "F27", "kind": "lookalike_subassemblies", "a": "DD-2010", "b": "DD-2200",

@@ -24,8 +24,8 @@ class Occurrence:
     per_train: Decimal | None
     raw_rows: list[int]
     design: "Design | None" = None
-    verdict: "object | None" = None  # its Verdict: the design's, or blocked when its own reference is dead
-    verdict_bom_only: str = ""       # the verdict of the same replay without any claim that rests on a note
+    obsolete_parts: str = ""    # the obsolete or superseded parts it holds, in words; empty when there is none
+    verdict_bom_only: str = ""  # its design's verdict in the same replay without any claim that rests on a note
 
 
 @dataclass

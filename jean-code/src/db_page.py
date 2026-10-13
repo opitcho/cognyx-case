@@ -35,8 +35,8 @@ class Section:
         reads: The tables and views of the database the query reads, named so the agent's queries can be followed.
         query: The rows of the table.
         counts: Queries that each return one number, for `says`.
-        detail: A query for the rows behind a selected row, with `:column` for a value of that row.
-        detail_title: What those rows are.
+        details: For a selected row, the tables shown under it. Each is a title and a query, with `{column}` in
+            the title and `:column` in the query for a value of that row.
     """
 
     title: str
@@ -45,8 +45,7 @@ class Section:
     reads: str
     query: str
     counts: dict[str, str]
-    detail: str = ""
-    detail_title: str = ""
+    details: tuple[tuple[str, str], ...] = ()
 
 
 SECTIONS = [
@@ -94,19 +93,32 @@ SECTIONS = [
         "Reuse verdicts",
         "{rows} rows. One row is one sub-assembly in one variant, with its verdict: {reused} reused (the same "
         "content is in two or more variants), {reusable} reusable (it differs from another design by 1 to 3 lines "
-        "that no option requires, or a note says another design does the same job), {blocked} blocked (it "
-        "contains an obsolete or superseded part), {specific} specific (an option requires the difference, or "
-        "there is no counterpart). Select a row to see the facts behind its verdict.",
-        "all three files", "v_verdict, v_subassembly_cost, v_evidence",
-        """SELECT v.variant_id, v.system_ref, v.subassembly_ref, v.description, v.verdict, v.reason,
-                  v.counterpart_ref, c.unit_cost_eur, c.train_cost_eur, c.blocked_by AS cost_blocked_by
+        "that no option requires, or a note says another design does the same job), {specific} specific (an option "
+        "requires the difference, or there is no counterpart). {obsolete} of them are, or hold, an obsolete or "
+        "superseded part, named in `obsolete_parts`. `shared_with` lists the other variants that hold the same "
+        "content, `counterpart_variants` the variants that hold the design in `counterpart_ref`. `corrections` counts "
+        "what was corrected in the BOM rows the verdict rests on: a reference in another spelling, a repeated row "
+        "left out, a cell replaced or emptied, a unit converted. Select a row to see those corrections with the "
+        "other facts behind its verdict, and what each other variant has in its place.",
+        "all three files", "v_verdict, v_subassembly_cost, v_evidence, v_reuse_between",
+        """SELECT v.variant_id, v.system_ref, v.subassembly_ref, v.description, v.verdict, v.reason, v.corrections,
+                  v.obsolete_parts,
+                  v.shared_with, v.counterpart_ref, v.counterpart_variants, c.unit_cost_eur, c.train_cost_eur,
+                  c.blocked_by AS cost_blocked_by
            FROM v_verdict v LEFT JOIN v_subassembly_cost c
                 ON c.variant_id = v.variant_id AND c.subassembly_ref = v.subassembly_ref""",
         {"rows": "SELECT COUNT(*) FROM v_verdict",
-         **{v: f"SELECT COUNT(*) FROM v_verdict WHERE verdict = '{v}'" for v in ("reused", "reusable", "blocked", "specific")}},
-        detail="""SELECT kind, detail, claim_id, source_file, source_row FROM v_evidence
-                  WHERE variant_id = :variant_id AND subassembly_ref = :subassembly_ref""",
-        detail_title="The facts behind the verdict of {subassembly_ref} in {variant_id}",
+         **{v: f"SELECT COUNT(*) FROM v_verdict WHERE verdict = '{v}'" for v in ("reused", "reusable", "specific")},
+         "obsolete": "SELECT COUNT(*) FROM v_verdict WHERE obsolete_parts <> ''"},
+        details=(
+            ("The facts behind the verdict of {subassembly_ref} in {variant_id}",
+             """SELECT kind, detail, claim_id, source_file, source_row FROM v_evidence
+                WHERE variant_id = :variant_id AND subassembly_ref = :subassembly_ref"""),
+            ("What each other variant has in place of {subassembly_ref}. `cost_gap_eur` is the cost of one unit of "
+             "the counterpart minus the cost of one unit of {subassembly_ref}",
+             """SELECT variant_to AS variant, status, counterpart_ref, differing_lines, cost_gap_eur FROM v_reuse_between
+                WHERE variant_from = :variant_id AND subassembly_ref = :subassembly_ref"""),
+        ),
     ),
     Section(
         "Open items",
@@ -160,7 +172,7 @@ def claims_in_force() -> int | None:
     """How many claims the database applies, for the page header. None when there is no database."""
     if not DB_PATH.exists():
         return None
-    return int(read("SELECT COUNT(*) FROM v_claim_effect", DB_PATH.stat().st_mtime).iloc[0, 0])
+    return int(read("SELECT COUNT(*) FROM claim_status WHERE in_force = 1", DB_PATH.stat().st_mtime).iloc[0, 0])
 
 
 def render_section(section: Section, mtime: float) -> None:
@@ -179,7 +191,7 @@ def render_section(section: Section, mtime: float) -> None:
             shown = shown[shown[FILTER_COLUMN].isin(picked)]
     st.caption(f"{len(shown):,} of {len(df):,} rows")
     height = min(TABLE_HEIGHT, 38 * (len(shown) + 1) + 3)  # a short table takes only the room it needs
-    if not section.detail:
+    if not section.details:
         st.dataframe(shown, hide_index=True, height=height, key=f"db-table-{key}")
         return
     event = st.dataframe(shown, hide_index=True, height=height, key=f"db-table-{key}", on_select="rerun",
@@ -187,10 +199,11 @@ def render_section(section: Section, mtime: float) -> None:
     for pos in event.selection.rows:
         if pos < len(shown):
             row = shown.iloc[pos].to_dict()
-            wanted = tuple((name, str(row[name])) for name in row if f":{name}" in section.detail)
             with st.container(border=True):
-                st.markdown(section.detail_title.format(**row))
-                st.dataframe(read(section.detail, mtime, wanted), hide_index=True)
+                for title, detail in section.details:
+                    wanted = tuple((name, str(row[name])) for name in row if f":{name}" in detail)
+                    st.markdown(title.format(**row))
+                    st.dataframe(read(detail, mtime, wanted), hide_index=True)
 
 
 @st.fragment(run_every=REFRESH_SECONDS)

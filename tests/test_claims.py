@@ -115,11 +115,9 @@ def test_two_values_for_one_cell_the_stronger_claim_is_applied():
     assert [c["id"] for c in in_force(claims)] == [2]
 
 
-def test_replay_filters_leave_out_note_claims_makers_and_later_claims():
+def test_a_replay_without_notes_leaves_out_the_claims_that_quote_one():
     claims = [claim(1, "same_as", "ref:A", "ref:B", evidence=["bom:1", "note:TN-1"]),  # a note listed, not quoted
               claim(2, "obsolete", "ref:C", made_by="agent", evidence=["note:TN-1"], quote="C is obsolete"),
               claim(3, "retract", "claim:1", made_by="person")]
     assert [c["id"] for c in in_force(claims, without_notes=True)] == [3]  # 1 stays in the replay, and is retracted
     assert [c["id"] for c in in_force(claims[:2], without_notes=True)] == [1]
-    assert [c["id"] for c in in_force(claims, made_by={"rule"})] == [1]  # the person's retract is left out too
-    assert [c["id"] for c in in_force(claims, up_to=2)] == [1, 2]

@@ -63,7 +63,7 @@ The BOM comparison alone gives an incomplete or wrong result.
 | Two sub-assemblies with no component in common do the same job | Sliding steps `ST-4100` and `RS-6620`; a note says they are functionally equivalent | 2 pairs |
 | A 1-to-3-line difference is explained by a note | Parts interchangeable (3 pairs), one part replaced the other (2 pairs), part required at 200 km/h (2 pairs) | 7 of the 14 pairs |
 
-For 9 sub-assemblies the final answer changes once the notes are read: 7 go from reused to blocked, 2 from specific to reusable.
+For 9 sub-assemblies the final answer changes once the notes are read: 7 stay reused on content but are, or hold, an obsolete or superseded part, and 2 go from specific to reusable.
 
 ## 6. Not resolvable from the data
 

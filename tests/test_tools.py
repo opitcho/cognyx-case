@@ -5,7 +5,7 @@ import shutil
 import pytest
 
 from pipeline.claims import load
-from reconcile.tools import Workbench
+from reconcile.tools import Workbench, verdict_counts
 
 
 @pytest.fixture
@@ -18,6 +18,7 @@ def test_describe_tables_lists_the_views_with_their_columns(bench):
     text = bench.describe_tables()
     assert "v_reuse_between" in text and "variant_from, variant_to, subassembly_ref" in text
     assert "about" not in text.split()  # the table of descriptions is not itself listed
+    assert text.index("v_queue (") < text.index("bom_line (")  # the v_ names first, stored tables among them
 
 
 def test_run_sql_returns_rows_and_cannot_write(bench):
@@ -49,6 +50,16 @@ def test_append_claim_is_written_as_the_agent_and_reports_what_changed(bench):
     assert reply.startswith(f"claim {before + 1} recorded and in force.")
     assert f"Open items: {open_before} to {open_before - 1}." in reply
     assert (claim["made_by"], claim["maker"], claim["standing"]) == ("agent", "test-model", "asserted")
+
+
+def test_a_claim_that_makes_a_part_obsolete_is_reported_though_no_verdict_moves(bench):
+    before = bench.summary
+    reply = bench.append_claim("obsolete", "ref:AC-477", evidence=["note:TN-0471"],
+                               quote="AC-477 door actuator now obsolete, do not use on new designs.")
+    assert before.verdicts == bench.summary.verdicts and not before.obsolete
+    assert "Obsolete parts changed (6): DR-1043 in V1, none to AC-477, obsolete; " in reply
+    assert verdict_counts(bench.summary).endswith("; 6 sub-assemblies with an obsolete or superseded part")
+    assert verdict_counts(before).endswith(" specific; 0 sub-assemblies with an obsolete or superseded part")
 
 
 def test_a_refused_claim_says_why_and_writes_nothing(bench):

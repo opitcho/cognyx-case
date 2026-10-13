@@ -1,4 +1,5 @@
--- Every view of the resolved model. The agent, the app and any report read these.
+-- Every view of the resolved model. The agent, the app and any report read these, and the stored tables
+-- whose name starts with v_ (v_issue, v_queue, v_readiness, v_reuse_between), which tables.py writes.
 -- References shown are each part's canonical reference: the spelling the BOM uses most.
 
 -- One line of one sub-assembly in one variant.
@@ -36,28 +37,41 @@ SELECT variant_id, system_ref, subassembly_ref, per_train,
 FROM v_content
 GROUP BY variant_id, system_ref, subassembly_ref, per_train;
 
--- One sub-assembly in one variant, with its verdict.
+-- One sub-assembly in one variant, with its verdict: whether its content is shared.
+-- obsolete_parts lists the obsolete or superseded parts it holds, its own reference first; '' when there is none.
+-- shared_with lists the other variants that hold the same content; '' when there is none.
+-- counterpart_variants lists the variants that hold the design named in counterpart_ref.
+-- corrections counts what the claims changed in how its BOM rows, and those of the variants it shares its content
+-- with, are read: the verdict holds only with them. v_evidence lists them, kind 'correction'.
 CREATE VIEW v_verdict AS
 SELECT o.variant_id,
        sys.canonical_ref AS system_ref,
        sub.canonical_ref AS subassembly_ref,
        sub.description,
-       o.verdict,
+       v.verdict,
        o.verdict_bom_only,
-       o.reason,
+       v.reason,
+       o.obsolete_parts,
+       TRIM(REPLACE(' ' || own.variants || ' ', ' ' || o.variant_id || ' ', ' ')) AS shared_with,
        other.refs        AS counterpart_ref,
+       other.variants    AS counterpart_variants,
+       (SELECT COUNT(*) FROM evidence e WHERE e.design_id = o.design_id AND e.kind = 'correction') AS corrections,
        o.design_id
 FROM occurrence o
 JOIN verdict v ON v.design_id = o.design_id
+JOIN design own ON own.design_id = o.design_id
 JOIN part sub  ON sub.part_id = o.part_id
 JOIN part sys  ON sys.part_id = o.system_part_id
 LEFT JOIN design other ON other.design_id = v.counterpart_design_id;
 
--- One fact behind a verdict.
+-- One fact behind a verdict: a BOM row it occurs in, a correction its rows were read with (a reference in another
+-- spelling, a repeated row left out, a cell replaced or emptied, a unit converted), the pair it was compared with,
+-- or a claim. A claim about a sub-assembly's own reference is shown for that sub-assembly only.
 CREATE VIEW v_evidence AS
 SELECT o.variant_id, sub.canonical_ref AS subassembly_ref, e.kind, e.detail, e.claim_id, e.source_file, e.source_row
 FROM evidence e
 JOIN occurrence o ON o.design_id = e.design_id
+                 AND (e.variant_id = '' OR (e.variant_id = o.variant_id AND e.part_id = o.part_id))
 JOIN part sub ON sub.part_id = o.part_id;
 
 -- One differing line between two sub-assemblies that are near or functionally equivalent.
@@ -98,8 +112,10 @@ GROUP BY d.design_id;
 -- The sub-assemblies of V1, the oldest variant, as a starting point for a tender.
 CREATE VIEW v_tender_start AS
 SELECT v.subassembly_ref,
-       CASE v.verdict WHEN 'reused' THEN 'reuse' WHEN 'reusable' THEN 'adapt' WHEN 'blocked' THEN 'replace' ELSE 'keep' END AS action,
+       CASE WHEN v.obsolete_parts <> '' THEN 'replace'
+            WHEN v.verdict = 'reused' THEN 'reuse' WHEN v.verdict = 'reusable' THEN 'adapt' ELSE 'keep' END AS action,
        v.reason,
+       v.obsolete_parts,
        c.train_cost_eur AS cost_eur,
        c.priced_lines, c.total_lines, c.blocked_by AS cost_blocked_by
 FROM v_verdict v
@@ -121,11 +137,3 @@ SELECT part.canonical_ref,
          WHERE l.child_part_id = part.part_id AND l.level = 4) AS total_quantity
 FROM part
 WHERE part.part_id IN (SELECT part_id FROM price);
-
-CREATE VIEW v_issue AS SELECT type, detail, source_file, source_rows FROM issue;
-CREATE VIEW v_queue AS SELECT kind, detail, claim_id, source_rows FROM queue;
-CREATE VIEW v_readiness AS SELECT what, n, of FROM readiness;
-CREATE VIEW v_claim_effect AS SELECT claim_id, type, made_by, spellings_merged, lines_affected, verdicts_involved FROM claim_effect;
-CREATE VIEW v_reuse_between AS
-SELECT variant_from, variant_to, subassembly_ref, status, counterpart_ref, differing_lines, ROUND(cost_gap_eur, 2) AS cost_gap_eur, blocked_by
-FROM reuse_between;

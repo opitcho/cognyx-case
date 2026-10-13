@@ -3,12 +3,11 @@
 import sqlite3
 from decimal import Decimal
 
-import pytest
-
 from pipeline.build import build, compute
 from pipeline.claims import ClaimLog
 from pipeline.reports import queue
 from pipeline.resolve import group
+from pipeline.tables import write
 
 RULE = {"made_by": "rule", "maker": "test"}
 AGENT = {"made_by": "agent", "maker": "test-model"}
@@ -34,7 +33,11 @@ SUPERSEDED = {"type": "superseded_by", "subject": "ref:AC-501", "object": "ref:A
 
 
 def verdicts(m):
-    return {(o.variant, m.name(o.part)): o.verdict.verdict for o in m.occurrences}
+    return {(o.variant, m.name(o.part)): m.verdicts[o.design.id].verdict for o in m.occurrences}
+
+
+def obsolete(m):
+    return {(o.variant, m.name(o.part)): o.obsolete_parts for o in m.occurrences}
 
 
 def test_with_no_claims_every_spelling_is_its_own_part_and_nothing_is_shared(tiny, tmp_path):
@@ -59,12 +62,13 @@ def test_a_same_as_claim_on_the_sub_assemblies_makes_them_one_part(tiny, tmp_pat
     assert m.parts[m.part_of["PT-7731"]]["spellings"] == ["DR-1042", "PT-7731"]
 
 
-def test_a_superseded_component_blocks_what_would_be_reused_and_bom_only_shows_the_difference(tiny, tmp_path):
+def test_a_superseded_component_is_named_apart_from_the_verdict_and_not_at_all_without_the_notes(tiny, tmp_path):
     m = model(tiny, tmp_path, SEAL, MM, SUPERSEDED)
-    assert set(verdicts(m).values()) == {"blocked"}
-    assert "contains AC-501, superseded by AC-560" in next(iter(m.verdicts.values())).reason
+    assert set(verdicts(m).values()) == {"reused"}
+    assert next(iter(m.verdicts.values())).reason == "same content in V1, V2 under references DR-1042, PT-7731"
+    assert set(obsolete(m).values()) == {"AC-501, superseded by AC-560"}
     plain = model(tiny, tmp_path, without_notes=True)  # same log, replayed without the claims that cite a note
-    assert set(verdicts(plain).values()) == {"reused"}
+    assert set(verdicts(plain).values()) == {"reused"} and set(obsolete(plain).values()) == {""}
     assert [i["type"] for i in m.issues].count("unresolved_reference") == 1  # AC-560 is in no BOM or ERP row
 
 
@@ -116,9 +120,21 @@ def test_build_writes_every_table_and_view_and_each_view_can_be_read(tmp_path, r
     assert conn.execute("SELECT COUNT(*) FROM v_reuse_between").fetchone()[0] == 6 * 5 * 40
 
 
-@pytest.mark.parametrize("filters", [{"without_notes": True}, {"made_by": {"rule"}}, {"up_to": 5}])
-def test_build_replays_with_claims_left_out(tmp_path, rules_log, filters):
-    assert build("data/raw", rules_log, tmp_path / "pilot.db", **filters).designs > 0
+def test_the_evidence_of_a_verdict_lists_the_corrections_its_bom_rows_were_read_with(tmp_path, rules_log):
+    db = tmp_path / "pilot.db"
+    build("data/raw", rules_log, db)
+    conn = sqlite3.connect(db)
+    fixes = conn.execute("SELECT detail, claim_id, source_row FROM evidence WHERE kind = 'correction'").fetchall()
+    assert all(claim_id for _, claim_id, _ in fixes)
+    details = {(detail, source_row) for detail, _, source_row in fixes}
+    assert ("V1: row 138 repeats row 137 and is left out", "138") in details  # a repeated row
+    assert ("V5: BE-6281: 11000 mm read as 11 m", "1087") in details           # a unit converted
+    counted = conn.execute("SELECT SUM(corrections > 0), SUM(corrections) FROM v_verdict").fetchone()
+    assert counted[0] > 0 and counted[1] >= len(fixes)
+
+
+def test_build_replays_without_the_claims_that_rest_on_a_note(tmp_path, rules_log):
+    assert build("data/raw", rules_log, tmp_path / "pilot.db", without_notes=True).designs > 0
 
 
 def test_a_part_with_two_prices_has_no_cost_and_waits_for_a_person(tiny, tmp_path):
@@ -149,9 +165,16 @@ def test_a_cost_total_is_empty_while_a_line_has_no_agreed_price(tmp_path, rules_
     assert kinds["two prices"] == 2 and kinds["missing price"] == 7
 
 
-def test_a_sub_assembly_whose_own_reference_is_obsolete_is_blocked_while_its_twin_design_stays_reused(tiny, tmp_path):
+def test_an_obsolete_own_reference_is_named_for_that_sub_assembly_only_and_both_stay_reused(tiny, tmp_path):
     # PT-7731 and DR-1042 carry the same content. A note retires the reference PT-7731, not the content.
-    m = model(tiny, tmp_path, SEAL, MM, OBSOLETE_REF)
-    assert verdicts(m) == {("V1", "DR-1042"): "reused", ("V2", "PT-7731"): "blocked"}
-    blocked = next(o for o in m.occurrences if m.name(o.part) == "PT-7731")
-    assert "the reference PT-7731 is obsolete; the same content is carried by DR-1042" in blocked.verdict.reason
+    log = ClaimLog(tmp_path / "claims.jsonl", tiny)
+    for claim in (SEAL, MM, OBSOLETE_REF):
+        log.append(claim)
+    m = compute(tiny, log.claims)
+    assert verdicts(m) == {("V1", "DR-1042"): "reused", ("V2", "PT-7731"): "reused"}
+    assert obsolete(m) == {("V1", "DR-1042"): "", ("V2", "PT-7731"): "own reference PT-7731, obsolete (same content under DR-1042)"}
+    db = tmp_path / "pilot.db"
+    write(m, db)
+    shown = sqlite3.connect(db).execute(
+        "SELECT subassembly_ref, detail, source_row FROM v_evidence WHERE kind = 'claim' AND detail LIKE 'obsolete(%'").fetchall()
+    assert shown == [("PT-7731", "obsolete(PT-7731): PT-7731 = ex DR-1042", "TN-0001")]
