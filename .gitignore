@@ -9,8 +9,10 @@ __pycache__/
 .ruff_cache/
 .mypy_cache/
 
-# Computed from data/raw/ and data/claims.jsonl, rebuilt by pipeline.build
-out/
+# Run logs and backups. out/pilot.db is committed so a clone runs without a build; pipeline.build recomputes it
+# from data/raw/ and data/claims.jsonl
+out/*
+!out/pilot.db
 
 # Public datasets downloaded for illustration (300 MB), see data/example_sources/README.md
 data/example_sources/

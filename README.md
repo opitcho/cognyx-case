@@ -22,10 +22,10 @@ The agent needs an OpenRouter key: copy `.env.example` to `.env` and fill in `OP
 git clone git@github.com:opitcho/cognyx-case.git
 cd cognyx-case
 uv sync
-uv run python -m pipeline.rules                              # reconcile
-uv run python -m pipeline.build
-uv run --env-file .env streamlit run jean-code/src/app.py    # the app
+uv run --env-file .env streamlit run jean-code/src/app.py
 ```
+
+The reconciled database `out/pilot.db` comes with the repo, so there is nothing to build first.
 
 ## Example questions
 
@@ -36,3 +36,11 @@ uv run --env-file .env streamlit run jean-code/src/app.py    # the app
 | `TH-415` is superseded. What is affected, and is the replacement already in use? | It is in `HT-5300` on all six variants. Its replacement `TH-450` is already used in `TC-8437` on `V4` and `V6`. The unit cost goes from 59.43 to 78.88 EUR. |
 | What does the door system cost in each variant? | `V1` 229,555.56 EUR, `V2` 267,814.82, `V3` 331,683.36, `V4` 356,572.22, `V5` 439,188.24, `V6` 515,070.20. Every line has a price. |
 | What would `V5` save by using seat frame `SF-9020` in place of `SF-9064`? | 11.48 EUR per unit, at 200 per train: 2,296.00 EUR per train. |
+
+## Appendix: rebuild the database
+
+`out/pilot.db` is computed from the raw files in `data/raw/` and the claims in `data/claims.jsonl`. The app rebuilds it after every claim. To rebuild it by hand, for example after changing the code in `pipeline/`:
+
+```
+uv run python -m pipeline.build
+```
