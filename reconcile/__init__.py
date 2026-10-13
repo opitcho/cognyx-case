@@ -1,6 +1,6 @@
 """The agent layer: the tools, the agent, its entry points and the Claims page of the app.
 
-The agent and the app come from the jean-code submodule, whose modules (`agent`, `llm`, `usage`, ...) are plain
+The agent and the app come from `jean-code/`, whose modules (`agent`, `llm`, `usage`, ...) are plain
 files under `jean-code/src`, with no package around them. Importing this package puts that folder on the path.
 """
 

@@ -5,7 +5,8 @@ from pathlib import Path
 from streamlit.testing.v1 import AppTest
 
 ROOT = Path(__file__).resolve().parent.parent
-APP = str(Path(__file__).with_name("claims_page_app.py"))
+APPS = Path(__file__).parent / "apps"  # one-page apps the tests start
+APP = str(APPS / "claims_page_app.py")
 
 
 def test_no_log_yet_says_how_to_make_one(tmp_path, monkeypatch):
@@ -53,7 +54,7 @@ def test_the_detail_of_a_claim_shows_its_evidence_as_the_raw_rows_and_the_quoted
                 "quote": quote, **agent})
     log.append({"type": "value_is", "subject": "cell:bom:53:quantity", "value": "4.3", "evidence": ["bom:52"], **agent})
     monkeypatch.chdir(tmp_path)
-    page = AppTest.from_file(str(Path(__file__).with_name("claim_detail_app.py"))).run()
+    page = AppTest.from_file(str(APPS / "claim_detail_app.py")).run()
     assert not page.exception
     text = " ".join(str(element.value) for element in [*page.markdown, *page.caption])
     assert "confirmed by claim 2" in text                       # the proposal's status, and the claim that confirmed it

@@ -1,7 +1,7 @@
 """Run by hand, once:  python -m synth.write_note_texts
 
 Asks an LLM (through OpenRouter) to write the text of each note from its facts,
-checks each text, and saves them to synth/notes_text.jsonl. Normal generation
+checks each text, and saves them to synth/inputs/notes_text.jsonl. Normal generation
 only reads that file, so it needs no API key and gives the same notes every time.
 
 Needs OPENROUTER_API_KEY in the environment or in a .env file at the repo root.
@@ -13,7 +13,7 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from .generate import HERE, build_clean, load, load_texts
+from .generate import INPUTS, build_clean, load, load_texts
 
 # anything shaped like a part reference: two capitals, an optional separator, then digits
 # (the letters O and I are allowed among the digits because typos put them there)
@@ -76,7 +76,7 @@ def api_key():
 def main():
     train, findings, settings = load("train.json"), load("findings.json"), load("settings.json")
     facts = build_clean(train, findings, settings)[3]
-    prompt = (HERE / "notes_prompt.md").read_text(encoding="utf-8")
+    prompt = (INPUTS / "notes_prompt.md").read_text(encoding="utf-8")
 
     # keep the texts already written that still match their facts
     texts = {f["note_id"]: load_texts().get(f["note_id"], "") for f in facts}
@@ -89,9 +89,9 @@ def main():
                 texts[fact["note_id"]] = text
 
     lines = [json.dumps({"note_id": f["note_id"], "text": texts[f["note_id"]]}, ensure_ascii=False) for f in facts]
-    (HERE / "notes_text.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    (HERE / "notes_facts.json").write_text(json.dumps(facts, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print("written: synth/notes_text.jsonl, and the facts they were written from: synth/notes_facts.json")
+    (INPUTS / "notes_text.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (INPUTS / "notes_facts.json").write_text(json.dumps(facts, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print("written: synth/inputs/notes_text.jsonl, and the facts they were written from: synth/inputs/notes_facts.json")
 
 
 if __name__ == "__main__":

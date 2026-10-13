@@ -14,16 +14,16 @@ from pathlib import Path
 from . import noise
 from .clean import BOM_COLUMNS, ERP_COLUMNS, NOTE_FIELDS, build_bom, build_erp, build_model, build_note_facts, note_rows
 
-HERE = Path(__file__).parent
+INPUTS = Path(__file__).parent / "inputs"  # the hand-written files the generator reads
 VERDICT_ORDER = ["specific", "reusable", "reused", "blocked"]   # the last one that applies wins
 
 
 def load(name):
-    return json.loads((HERE / name).read_text(encoding="utf-8"))
+    return json.loads((INPUTS / name).read_text(encoding="utf-8"))
 
 
 def load_texts():
-    path = HERE / "notes_text.jsonl"
+    path = INPUTS / "notes_text.jsonl"
     lines = path.read_text(encoding="utf-8").splitlines() if path.exists() else []
     return {note["note_id"]: note["text"] for note in map(json.loads, lines)}
 
