@@ -1,13 +1,15 @@
-"""Streamlit UI for the agent: a live, clickable timeline of turns plus an inspector.
+"""Streamlit UI for the agent: the chat, and beside it a live trace of the agent's work.
 
 Run from the project that holds the data: uv run --env-file .env streamlit run jean-code/src/app.py
 
 The agent stays UI-agnostic: `run_turn` runs in a background thread and this UI polls
-`agent.messages`. The timeline is the UI's own history of every message it has seen,
-matched by object identity, so it survives the context window being rewritten
-(e.g. compaction): turns that leave `agent.messages` are dimmed, not lost.
+`agent.messages`. The chat shows the user's messages and the agent's answers; the trace shows, under
+each question, the reasoning and tool calls that led to its answer, each call unfolding to its
+arguments and result. Both read the UI's own history of every message it has seen, matched by object
+identity, so it survives the context window being rewritten (e.g. compaction): turns that leave
+`agent.messages` stay on the page.
 
-The sidebar picks which agent the timeline and inspector show: the main agent, or any subagent run in its tree.
+The sidebar picks which agent the chat and trace show: the main agent, or any subagent run in its tree.
 Every agent's history is kept, whichever one is shown, so switching back loses nothing.
 """
 
@@ -33,7 +35,7 @@ from db_page import DB_PATH, claims_in_force, render_db_page
 from prompts import HEAD_MARKER_TAG, SUMMARY_TAG
 from repl import compaction_line
 from subagents import Run
-from usage import COST_UNKNOWN, human, record, usage_line
+from usage import COST_UNKNOWN, human, usage_line
 
 MODEL = DEFAULT_MODEL
 REASONING_LEVELS = ("off", "low", "medium", "high")  # "off" sends no reasoning setting (agent.reasoning = None)
@@ -47,18 +49,13 @@ PAGES = ("Agent", "Raw data", "Reconciled data", "Claims")
 LOGO_PATH = Path(__file__).parent.parent / "assets" / "alstom-logo.svg"  # gitignored: absent on a fresh clone
 
 # kind -> (label, icon, accent color)
+# the two cards the page draws: kind -> (label, icon, accent color)
 KINDS = {
-    "system": ("SYSTEM", "⚙", "#7D8794"),
-    "user": ("USER", "◉", "#2B4CEE"),
     "thinking": ("THINKING", "✦", "#9647DE"),
-    "tool_call": ("TOOL CALL", "⚒", "#6A7685"),
-    "tool_result": ("TOOL RESULT", "↳", "#048158"),
-    "agent": ("AGENT", "◆", "#142846"),
     "approval": ("APPROVAL", "⚠", "#B54708"),
-    "marker": ("HEAD END", "┄", "#7D8794"),
-    "summary": ("SUMMARY", "≡", "#6A7685"),
 }
-MONO_KINDS = {"tool_call", "tool_result"}
+CHAT_KINDS = {"user": "YOU", "agent": "AGENT"}  # kind -> label in the chat
+STEP_KINDS = {"tool_call", "thinking"}  # what the trace draws under each question: the agent's work towards its answer
 # status -> (color in the agent picker, dot and pill classes in the header)
 STATUSES = {
     "running": ("green", "run", "status-run"),
@@ -70,21 +67,7 @@ STATUSES = {
 }
 ERROR_PREFIXES = ("Error", "Denied by user", "Not run")  # results the agent writes when a call didn't succeed
 EXIT_CODE = re.compile(r"exit code: (\d+)[^\n]*\n?")  # first line of a bash result, see shell.format_result
-LONG_ARG = 80  # string arguments longer than this get their own code block in the inspector
-STATE_CONFIG = ("model", "reasoning", "max_tool_rounds", "max_cost")
-CONTEXT_CONFIG = ("compact_at", "keep_first", "keep_last", "context_window", "head_end")
-STATE_HIDDEN = {"client", "messages", "last_request", "last_response", "usage", "compactions",  # shown elsewhere
-                "needs_approval", "loaded_skills", *STATE_CONFIG, *CONTEXT_CONFIG,
-                "budget", "subagents"}  # the sidebar; their trees link back up (child.parent), so vars() would recurse
-USAGE_COLUMNS = {
-    "time": st.column_config.TextColumn("time"),
-    "provider": st.column_config.TextColumn("provider"),
-    "prompt_tokens": st.column_config.NumberColumn("in"),
-    "cached_tokens": st.column_config.NumberColumn("cached"),
-    "completion_tokens": st.column_config.NumberColumn("out"),
-    "reasoning_tokens": st.column_config.NumberColumn("reasoning"),
-    "cost": st.column_config.NumberColumn("cost", format="$%.5f"),
-}
+LONG_ARG = 80  # string arguments longer than this get their own code block
 
 
 @dataclass
@@ -118,23 +101,6 @@ def agent_views(agent) -> dict[str, View]:
 
     walk(agent)
     return views
-
-
-def to_jsonable(value):
-    """Best-effort conversion of arbitrary agent state into something st.json can render."""
-    if isinstance(value, dict):
-        return {k: to_jsonable(v) for k, v in value.items()}
-    if isinstance(value, (list, tuple, set)):
-        return [to_jsonable(v) for v in value]
-    if isinstance(value, (str, int, float, bool)) or value is None:
-        return value
-    if hasattr(value, "model_dump"):
-        return to_jsonable(value.model_dump())
-    if callable(value):
-        return f"{getattr(value, '__name__', type(value).__name__)}()"
-    if hasattr(value, "__dict__"):
-        return to_jsonable(vars(value))
-    return str(value)
 
 
 def mget(msg, key, default=None):
@@ -195,32 +161,6 @@ def call_summary(call) -> str:
     return f"{call['function']['name']} · {first if isinstance(first, str) else json.dumps(first)}"
 
 
-def result_summary(msg, name: str) -> str:
-    """`name → first line of output`, with the exit code when a command failed."""
-    content = str(mget(msg, "content") or "")
-    exit_code = EXIT_CODE.match(content)
-    if exit_code:
-        content = content[exit_code.end():]
-    first = next((line for line in content.splitlines() if line.strip()), "(no output)")
-    failed = f"exit {exit_code.group(1)} · " if exit_code and exit_code.group(1) != "0" else ""
-    return f"{name} → {failed}{first}"
-
-
-def preview(msg, kind: str, names: dict, limit: int = 90) -> str:
-    """One-line summary of a message for its timeline block."""
-    if kind == "tool_call":
-        text = "; ".join(call_summary(c) for c in mget(msg, "tool_calls"))
-    elif kind == "tool_result":
-        text = result_summary(msg, names.get(mget(msg, "tool_call_id"), "tool"))
-    elif kind == "thinking":
-        text = mget(msg, "reasoning")
-    else:
-        text = mget(msg, "content") or "(no content)"
-    if kind in ("agent", "user"):
-        text = re.sub(r"[*_`#>]+", "", str(text))  # drop markdown markers from the one-liner
-    return clip(text, limit)
-
-
 def sync_history(entries: list[Entry], ctx: list) -> None:
     """Mark which seen messages are still in the context, and add unseen ones after the message before them.
 
@@ -257,36 +197,9 @@ def results_of(entries: list[Entry], pos: int) -> list[Entry]:
     return results
 
 
-def call_of(entries: list[Entry], pos: int) -> Entry | None:
-    """The tool call a result at `pos` belongs to: the nearest call before its run of results."""
-    for e in reversed(entries[:pos]):
-        kind = turn_kind(e.msg)
-        if kind == "tool_call":
-            return e
-        if kind != "tool_result":
-            return None
-    return None
-
-
-def call_names(entries: list[Entry]) -> dict[str, str]:
-    """Tool name of every call seen, by call id, so a result can be matched to its tool by `tool_call_id`."""
-    return {call.get("id"): call["function"]["name"] for e in entries for call in mget(e.msg, "tool_calls") or []}
-
-
 def compaction_of(agent, msg) -> dict | None:
     """The compaction record whose summary is `msg`, if any."""
     return next((c for c in agent.compactions if c.get("summary") is msg), None)
-
-
-def compaction_cost(rec: dict) -> str:
-    cost = ((rec.get("response") or {}).get("usage") or {}).get("cost")
-    return "—" if cost is None else f"${cost:.5f}"
-
-
-def context_size(agent) -> str:
-    """`~24.0k / 256.0k`: the context's size against the compaction threshold."""
-    size = f"~{human(agent.context_tokens)}"
-    return f"{size} / {human(agent.compact_at)}" if agent.compact_at else size
 
 
 # ---------------------------------------------------------------- background run
@@ -333,7 +246,6 @@ def start_run(fn, *args) -> None:
     run["thread"] = threading.Thread(target=target, daemon=True)
     run["thread"].start()
     st.session_state.was_running = True
-    st.session_state.selected[st.session_state.agent.budget.path] = None  # follow the live turn
 
 
 def compact_now(agent, run: dict) -> None:
@@ -362,7 +274,6 @@ def new_chat() -> None:
     st.session_state.agent = load_named(AGENT_FACTORY)(MODEL, reasoning=reasoning_effort())
     st.session_state.agent.budget.log_path = USAGE_LOG  # every call in its tree, subagents' between turns included
     st.session_state.histories = {}  # budget path -> that agent's list[Entry]
-    st.session_state.selected = {}  # budget path -> selected uid; None or missing follows the latest
     st.session_state.view = st.session_state.agent.budget.path  # the agent picker's value
     st.session_state.run = {"thread": None, "error": None, "notice": None}
     st.session_state.compactions_seen = 0
@@ -379,11 +290,6 @@ def set_reasoning() -> None:
     st.session_state.agent.reasoning = reasoning_effort()
 
 
-def select(uid: int | None) -> None:
-    """Select a block in the timeline of the agent on view; None follows the latest."""
-    st.session_state.selected[st.session_state.view] = uid
-
-
 def show(path: str) -> None:
     """Show another agent. A button callback: the picker's value can only change before the picker is drawn."""
     st.session_state.view = path
@@ -393,9 +299,9 @@ def show(path: str) -> None:
 
 
 def kind_css() -> str:
-    """Each kind's accent as `--c`, on its timeline block and on anything tagged `k-<kind>`; errors override it."""
+    """Each card kind's accent as `--c`, on its block and on anything tagged `k-<kind>`."""
     rules = "".join(f'[class*="st-key-blk-{k}-"], .k-{k} {{ --c:{c}; }}\n' for k, (_, _, c) in KINDS.items())
-    return f'<style>{rules}[class*="st-key-blk-"][class*="-err-"], .err {{ --c:var(--err); }}</style>'
+    return f"<style>{rules}</style>"
 
 
 def pill(text, *, bold=None, cls: str = "", dot: str | None = None) -> str:
@@ -412,13 +318,12 @@ def chips(items, *, on=(), empty_text: str = "none") -> str:
     return '<div class="row">' + "".join(pill(i, cls="mono on" if i in on else "mono") for i in items) + "</div>"
 
 
-def card(kind: str, text: str, *, num: int | None = None, classes: str = "", mono: bool = False) -> str:
-    """A timeline card: kind label and icon, optional #number, and a one-line preview."""
+def card(kind: str, text: str, *, classes: str = "", mono: bool = False) -> str:
+    """A card: kind label and icon over one line of text."""
     label, icon, _ = KINDS[kind]
-    num_html = f'<span class="tl-num">#{num}</span>' if num is not None else ""
     return (
         f'<div class="tl-card k-{kind} {classes}"><div class="tl-head"><span>{icon}</span><span>{label}</span>'
-        f'{num_html}</div><div class="tl-prev{" mono" if mono else ""}">{html.escape(text)}</div></div>'
+        f'</div><div class="tl-prev{" mono" if mono else ""}">{html.escape(text)}</div></div>'
     )
 
 
@@ -452,9 +357,9 @@ def empty(icon: str, text: str) -> None:
     st.html(f'<div class="empty"><div class="big">{icon}</div>{text}</div>')
 
 
-def show_reasoning(text: str) -> None:
-    st.html(eyebrow("REASONING"))
-    with st.container(key="thought"):
+def show_reasoning(text: str, key: str) -> None:
+    """An answer's reasoning, folded away so the answer comes first. `key` tells apart the reasoning blocks."""
+    with st.expander("Reasoning", icon=":material/psychology:"), st.container(key=f"thought-{key}"):
         st.markdown(text)
 
 
@@ -529,18 +434,12 @@ def render_agents(agent) -> None:
                 f"{'them' if pending > 1 else 'it'}.", icon=":material/inbox:")
 
 
-def render_header(view: View, entries: list[Entry], ctx: list, running: bool) -> None:
+def render_header(view: View, running: bool) -> None:
     agent = view.agent
-    tool_calls = sum(turn_kind(e.msg) == "tool_call" for e in entries)
-    compacted = sum(not e.in_context for e in entries)
     status, _ = status_of(view)
     _, dot, cls = STATUSES[status]
     pills = [pill(view.path, bold=f"#{view.id} {view.profile}", cls="on")] if view.run else []
     pills += [pill(agent.model, cls="model"), pill(status, dot=dot, cls=cls)]
-    pills += [pill(label, bold=n) for n, label in
-              ((len(entries), "turns"), (tool_calls, "tool calls"), (len(ctx), "in context"), (compacted, "compacted"))
-              if n]
-    pills.append(pill("context", bold=context_size(agent), cls="mono"))
     if agent.usage:
         pills.append(pill(usage_line(agent.usage), cls="mono"))
 
@@ -573,34 +472,77 @@ def render_header(view: View, entries: list[Entry], ctx: list, running: bool) ->
         st.warning(agent.stop_reason, icon=":material/warning:")
 
 
-def render_timeline(entries: list[Entry], selected: Entry | None, running: bool, pending: bool, agent) -> None:
-    names = call_names(entries)
-    with st.container(height=640, autoscroll=True, border=False, key="timeline"):
-        if not entries and not running:
-            empty("✦", "Ask something below — every thought, tool call and answer<br>shows up here as a block.")
-        with st.container(key="rail"):
-            compacted_run = 0
-            for e in entries:
-                if e.in_context and compacted_run:
-                    text = f"⟲ {compacted_run} messages compacted"
-                    if rec := compaction_of(agent, e.msg):
-                        text += f" · ~{human(rec['tokens_before'])} → ~{human(rec['tokens_after'])} tokens"
-                    st.html(f'<div class="divider">{text}</div>')
-                compacted_run = 0 if e.in_context else compacted_run + 1
+def render_chat(entries: list[Entry], running: bool, pending: bool, agent) -> None:
+    """The conversation: the user's messages and the agent's answers, each answer's reasoning folded above it."""
+    shown = [(e, kind) for e in entries if (kind := turn_kind(e.msg)) in CHAT_KINDS]
+    with st.container(height=640, autoscroll=True, border=False, key="chat"):
+        if not shown and not running:
+            empty("✦", "Ask something below.")
+        for e, kind in shown:
+            with st.container(key=f"msg-{kind}-{e.uid}"):
+                st.html(eyebrow(CHAT_KINDS[kind]))
+                if mget(e.msg, "reasoning"):
+                    show_reasoning(mget(e.msg, "reasoning"), f"chat-{e.uid}")
+                st.markdown(mget(e.msg, "content"))
+        if running:
+            with st.container(key="blk-thinking-chat-live"):
+                st.html(card("thinking", "working…", classes="ghost"))
+        elif pending:
+            render_approval(agent)
 
-                kind = turn_kind(e.msg)
-                err = kind == "tool_result" and is_error(e.msg)
-                classes = " ".join(c for c, on in (("sel", selected is e), ("out", not e.in_context), ("err", err)) if on)
-                with st.container(key=f"blk-{kind}-{'err-' if err else ''}{e.uid}"):
-                    st.html(card(kind, preview(e.msg, kind, names), num=e.uid, classes=classes,
-                                 mono=kind in MONO_KINDS))
-                    st.button(" ", key=f"hit-{e.uid}", on_click=select, args=(e.uid,), width="stretch")
 
-            if running:
-                with st.container(key="blk-thinking-live"):
-                    st.html(card("thinking", "waiting for model…", classes="ghost"))
-            elif pending:
-                render_approval(agent)
+def render_trace(entries: list[Entry], running: bool, pending: bool, agent) -> None:
+    """The agent's work in order: under each question, the reasoning and tool calls that led to its answer."""
+    with st.container(height=640, autoscroll=True, border=False, key="trace"):
+        if not running and not any(turn_kind(e.msg) in STEP_KINDS for e in entries):
+            empty("⚒", "The agent's reasoning and tool calls show up here.")
+            return
+        compacted_run = 0
+        for pos, e in enumerate(entries):
+            if e.in_context and compacted_run:
+                text = f"⟲ {compacted_run} messages compacted"
+                if rec := compaction_of(agent, e.msg):
+                    text += f" · ~{human(rec['tokens_before'])} → ~{human(rec['tokens_after'])} tokens"
+                st.html(f'<div class="divider">{text}</div>')
+            compacted_run = 0 if e.in_context else compacted_run + 1
+
+            kind = turn_kind(e.msg)
+            if kind == "user":
+                st.html(f'<div class="question">{html.escape(clip(mget(e.msg, "content"), 120))}</div>')
+            elif kind in STEP_KINDS:
+                render_step(entries, pos, running, pending)
+        if running:
+            with st.container(key="blk-thinking-live"):
+                st.html(card("thinking", "waiting for model…", classes="ghost"))
+
+
+def render_step(entries: list[Entry], pos: int, running: bool, pending: bool) -> None:
+    """One step of the agent: its reasoning, any text it wrote, then each tool call, unfolding to its arguments
+    and result."""
+    step = entries[pos]
+    if mget(step.msg, "reasoning"):
+        with st.container(key=f"thought-step-{step.uid}"):
+            st.markdown(mget(step.msg, "reasoning"))
+    if mget(step.msg, "content"):
+        st.markdown(mget(step.msg, "content"))
+    results = {mget(e.msg, "tool_call_id"): e for e in results_of(entries, pos)}
+    is_last = pos + len(results) == len(entries) - 1
+    for i, call in enumerate(mget(step.msg, "tool_calls") or []):
+        result = results.get(call.get("id"))
+        failed = result is not None and is_error(result.msg)
+        label = "`" + clip(call_summary(call), 90).replace("`", "'") + "`" + (" :red[failed]" if failed else "")
+        # keyed, so it stays unfolded while the page polls and its result arrives
+        with st.expander(label, key=f"call-{step.uid}-{i}", icon=":material/error:" if failed else ":material/build:"):
+            render_args(parse_args(call))
+            st.html(eyebrow("↳ RESULT"))
+            if result is not None:
+                render_output(result)
+            elif running and is_last:
+                st.caption("running…")
+            elif pending and is_last:
+                st.caption("waiting for approval")
+            else:
+                st.caption("no result")
 
 
 def render_approval(agent) -> None:
@@ -647,178 +589,6 @@ def render_output(result: Entry) -> None:
     height = 420 if content.count("\n") > 20 else "content"
     with st.container(key=f"errout-{result.uid}") if is_error(result.msg) else nullcontext():
         st.code(content, language=language, wrap_lines=True, height=height)
-
-
-def render_tool_call(entries: list[Entry], pos: int, running: bool, pending: bool) -> None:
-    msg = entries[pos].msg
-    if mget(msg, "reasoning"):
-        show_reasoning(mget(msg, "reasoning"))
-    if mget(msg, "content"):
-        st.markdown(mget(msg, "content"))
-    results = {mget(e.msg, "tool_call_id"): e for e in results_of(entries, pos)}
-    is_last = pos + len(results) == len(entries) - 1
-    for call in mget(msg, "tool_calls"):
-        st.html(f'<div class="fn-name">{html.escape(call["function"]["name"])}()</div>')
-        render_args(parse_args(call))
-        result = results.get(call.get("id"))
-        with st.container(horizontal=True, vertical_alignment="center"):
-            st.html(eyebrow("↳ RESULT"))
-            if result is not None:
-                st.button("Jump to result", icon=":material/arrow_downward:", on_click=select, args=(result.uid,),
-                          key=f"jump-result-{result.uid}", type="tertiary")
-        if result is not None:
-            render_output(result)
-        elif running and is_last:
-            st.caption("running…")
-        elif pending and is_last:
-            st.caption("waiting for approval")
-        else:
-            st.caption("no result")
-
-
-def render_tool_result(entries: list[Entry], pos: int) -> None:
-    result = entries[pos]
-    name = call_names(entries).get(mget(result.msg, "tool_call_id"), "tool")
-    err = " err" if is_error(result.msg) else ""
-    with st.container(horizontal=True, vertical_alignment="center"):
-        st.html(f'{eyebrow("FROM")}<div class="fn-name{err}">{html.escape(name)}()</div>')
-        if call := call_of(entries, pos):
-            st.button("Jump to call", icon=":material/arrow_upward:", on_click=select, args=(call.uid,),
-                      type="tertiary")
-    render_output(result)
-
-
-def render_text(msg, kind: str) -> None:
-    """User, system, agent and thinking messages: the reasoning, then the markdown content."""
-    if mget(msg, "reasoning"):
-        show_reasoning(mget(msg, "reasoning"))
-    if kind != "thinking":
-        st.markdown(mget(msg, "content") or "*(no content)*")
-
-
-def render_turn(agent, entries: list[Entry], selected: Entry | None, ctx: list, running: bool, pending: bool) -> None:
-    if selected is None:
-        empty("◇", "Click a block in the timeline to inspect it.")
-        return
-
-    pos = entries.index(selected)
-    msg, kind = selected.msg, turn_kind(selected.msg)
-    label, icon, _ = KINDS[kind]
-    err = " err" if kind == "tool_result" and is_error(msg) else ""
-    if selected.in_context:
-        where = next(i for i, m in enumerate(ctx) if m is msg)
-        meta = f'<span class="insp-meta">context message {where + 1} of {len(ctx)}</span>'
-    else:
-        meta = '<span class="insp-meta out">⟲ compacted — no longer in context</span>'
-
-    with st.container(horizontal=True, vertical_alignment="center"):
-        st.html(f'<div class="insp-head k-{kind}{err}"><span class="badge">{icon} {label} #{selected.uid}</span>{meta}</div>')
-        if st.session_state.selected.get(st.session_state.view) is None:
-            st.html(pill("⤓ following latest"), width="content")
-        else:
-            st.button("Follow latest", icon=":material/vertical_align_bottom:", on_click=select, args=(None,),
-                      type="tertiary")
-
-    if kind == "tool_call":
-        render_tool_call(entries, pos, running, pending)
-    elif kind == "tool_result":
-        render_tool_result(entries, pos)
-    else:
-        if kind == "summary" and (rec := compaction_of(agent, msg)):
-            st.html(eyebrow("COMPACTION") + kv_grid({
-                "messages removed": rec["removed"],
-                "tokens": f"~{human(rec['tokens_before'])} → ~{human(rec['tokens_after'])}",
-                "summary call": compaction_cost(rec),
-            }, fmt=str))
-        render_text(msg, kind)
-
-    with st.expander("Raw message", icon=":material/data_object:"):
-        st.json(to_jsonable(msg))
-
-
-def render_request(agent) -> None:
-    req = agent.last_request
-    if not req:
-        empty("⇅", "No request sent yet.")
-        return
-    tools = [
-        (t.get("function") or {}).get("name", "?") if isinstance(t, dict) else getattr(t, "__name__", str(t))
-        for t in req.get("tools", [])
-    ]
-    reasoning = req.get("reasoning")
-    effort = reasoning.get("effort") if isinstance(reasoning, dict) else reasoning
-    st.html(
-        '<div class="hdr">' + pill(req.get("model"), cls="model") + pill("reasoning", bold=effort or "none")
-        + pill("messages", bold=len(req.get("messages", []))) + "</div>"
-    )
-    st.html(eyebrow(f"TOOLS · {len(tools)}") + chips(tools))
-
-    if agent.usage:
-        records = [record(raw) for raw in agent.usage]
-        last = records[-1]
-        cost = "—" if last["cost"] is None else f"${last['cost']:.5f}"
-        st.html(eyebrow("LAST CALL") + kv_grid({
-            "provider": last["provider"] or "—",
-            "tokens in": f"{human(last['prompt_tokens'])} ({human(last['cached_tokens'])} cached)",
-            "tokens out": f"{human(last['completion_tokens'])} ({human(last['reasoning_tokens'])} reasoning)",
-            "cost": cost,
-        }, fmt=str))
-        st.html(eyebrow(f"USAGE · {len(agent.usage)} CALLS · {usage_line(agent.usage)}"))
-        rows = [{**r, "time": (r["time"] or "")[11:19]} for r in reversed(records)]  # ISO time -> HH:MM:SS
-        st.dataframe(rows, hide_index=True, column_order=list(USAGE_COLUMNS),
-                     column_config=USAGE_COLUMNS, height=min(38 + 35 * len(agent.usage), 280))
-
-    st.html(eyebrow("PAYLOAD"))
-    with st.expander("Messages sent", icon=":material/forum:"):
-        st.json(to_jsonable(req.get("messages", [])), expanded=1)
-    with st.expander("Full request", icon=":material/data_object:"):
-        st.json(to_jsonable(req), expanded=1)
-
-
-def render_context(agent) -> None:
-    """The context's size against the compaction threshold, the settings, and every compaction attempt."""
-    if agent.compact_at:
-        st.progress(min(agent.context_tokens / agent.compact_at, 1.0),
-                    text=f"context {context_size(agent)} tokens (compacts after a turn ending over the threshold)")
-    else:
-        st.html(pill("context", bold=context_size(agent), cls="mono") + pill("automatic compaction off"))
-    st.html(eyebrow("SETTINGS") + kv_grid({k: getattr(agent, k) for k in CONTEXT_CONFIG}))
-
-    st.html(eyebrow(f"COMPACTIONS · {len(agent.compactions)}"))
-    if not agent.compactions:
-        st.caption("None yet. Type /compact to compact now.")
-        return
-    rows = [{
-        "#": i + 1,
-        "status": rec["status"] or "running…",
-        "removed": rec["removed"],
-        "before": human(rec["tokens_before"]),
-        "after": human(rec["tokens_after"]) if "tokens_after" in rec else "—",
-        "cost": compaction_cost(rec),
-    } for i, rec in enumerate(agent.compactions)]
-    st.dataframe(rows, hide_index=True)
-    for i, rec in enumerate(agent.compactions):
-        if rec.get("summary"):
-            with st.expander(f"Summary #{i + 1}", icon=":material/summarize:"):
-                st.markdown(rec["summary"]["content"])
-
-
-def render_state(agent) -> None:
-    config = {k: to_jsonable(getattr(agent, k)) for k in STATE_CONFIG if hasattr(agent, k)}
-    st.html(eyebrow("CONFIG") + kv_grid(config))
-    st.html(eyebrow("NEEDS APPROVAL") + chips(sorted(agent.needs_approval)))
-    st.html(eyebrow("LOADED SKILLS") + chips(agent.loaded_skills))
-
-    attrs = {k: to_jsonable(v) for k, v in vars(agent).items() if k not in STATE_HIDDEN}
-    short = {k: v for k, v in attrs.items() if not isinstance(v, (dict, list)) and len(json.dumps(v)) <= LONG_ARG}
-    st.html(eyebrow("OTHER") + kv_grid(short))
-    for attr, value in attrs.items():
-        if attr not in short:
-            with st.expander(attr, icon=":material/data_object:"):
-                if isinstance(value, str):
-                    st.code(value, language=None, wrap_lines=True)
-                else:
-                    st.json(value, expanded=1)
 
 
 def render_data() -> None:
@@ -902,18 +672,16 @@ def live_view() -> None:
         sync_history(st.session_state.histories.setdefault(path, []), ctx)
 
     view = views.get(st.session_state.view) or views[agent.budget.path]
-    entries, ctx = st.session_state.histories[view.path], contexts[view.path]
+    entries = st.session_state.histories[view.path]
     running = is_running() if view.run is None else not view.run.done()
     pending = view.run is None and not running and bool(agent.pending_calls)  # only the main agent asks approval
-    by_uid = {e.uid: e for e in entries}
-    selected = by_uid.get(st.session_state.selected.get(view.path)) or (entries[-1] if entries else None)
 
-    render_header(view, entries, ctx, running)
-    timeline_col, inspector_col = st.columns([2, 3], gap="large")
+    render_header(view, running)
+    chat_col, work_col = st.columns(2, gap="large")
 
-    with timeline_col:
-        st.html(eyebrow("TIMELINE" if view.run is None else f"TIMELINE · #{view.id} {view.profile.upper()}"))
-        render_timeline(entries, selected, running, pending, view.agent)
+    with chat_col:
+        st.html(eyebrow("CHAT" if view.run is None else f"CHAT · #{view.id} {view.profile.upper()}"))
+        render_chat(entries, running, pending, view.agent)
         if view.run is not None:
             st.chat_input("Subagents take no messages: pick the main agent to chat", disabled=True)
         elif prompt := st.chat_input("Agent is working…" if running else "Ask about a sub-assembly or variant…", disabled=running):
@@ -923,16 +691,9 @@ def live_view() -> None:
                 start_run(agent.run_turn, prompt)
             st.rerun()
 
-    with inspector_col:
-        turn_tab, request_tab, context_tab, state_tab = st.tabs(["Turn", "Request", "Context", "Agent state"])
-        with turn_tab:
-            render_turn(view.agent, entries, selected, ctx, running, pending)
-        with request_tab:
-            render_request(view.agent)
-        with context_tab:
-            render_context(view.agent)
-        with state_tab:
-            render_state(view.agent)
+    with work_col:
+        st.html(eyebrow("AGENT WORK"))
+        render_trace(entries, running, pending, view.agent)
 
 
 if st.session_state.page == PAGES[1]:
