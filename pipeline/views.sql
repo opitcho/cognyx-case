@@ -2,7 +2,23 @@
 -- whose name starts with v_ (v_issue, v_queue, v_readiness, v_reuse_between), which tables.py writes.
 -- References shown are each part's canonical reference: the spelling the BOM uses most.
 
--- One line of one sub-assembly in one variant.
+-- One insert or delete a person made in the BOM of one variant, in the order they were applied.
+-- level is that of the child: 4 for a component of a sub-assembly, 3 for a sub-assembly of a system.
+-- raw_rows are the BOM rows of a deleted line; an inserted line has none. For a sub-assembly, n_components counts
+-- the components deleted with it or copied, and copied_from_row is the BOM row it was copied from.
+CREATE VIEW v_content_change AS
+SELECT c.claim_id, c.variant_id, c.level,
+       parent.canonical_ref AS parent_ref,
+       child.canonical_ref  AS child_ref,
+       c.change, c.quantity, c.unit, c.raw_rows, c.n_components, c.copied_from_row, c.detail
+FROM content_change c
+JOIN part parent ON parent.part_id = c.parent_part_id
+JOIN part child  ON child.part_id = c.child_part_id
+ORDER BY c.claim_id;
+
+-- One line of one sub-assembly in one variant, after the inserts and deletes a person made.
+-- changed_by_claim is the claim that inserted the line, or the sub-assembly it belongs to; empty on a line as the
+-- BOM lists it. A deleted line is not here: v_content_change has it.
 CREATE VIEW v_content AS
 SELECT o.variant_id,
        sys.canonical_ref  AS system_ref,
@@ -13,7 +29,11 @@ SELECT o.variant_id,
        l.quantity,
        l.unit,
        c.unit_cost_eur,
-       c.status           AS price_status
+       c.status           AS price_status,
+       (SELECT MAX(x.claim_id) FROM content_change x
+         WHERE x.change = 'inserted' AND x.variant_id = o.variant_id
+           AND ((x.level = 4 AND x.parent_part_id = o.part_id AND x.child_part_id = l.child_part_id)
+             OR (x.level = 3 AND x.child_part_id = o.part_id))) AS changed_by_claim
 FROM occurrence o
 JOIN bom_line l ON l.variant_id = o.variant_id AND l.parent_part_id = o.part_id AND l.level = 4
 JOIN part sub  ON sub.part_id = o.part_id
@@ -43,6 +63,11 @@ GROUP BY variant_id, system_ref, subassembly_ref, per_train;
 -- counterpart_variants lists the variants that hold the design named in counterpart_ref.
 -- corrections counts what the claims changed in how its BOM rows, and those of the variants it shares its content
 -- with, are read: the verdict holds only with them. v_evidence lists them, kind 'correction'.
+-- content_changes counts the inserts and deletes a person made in it, or in a variant it shares its content with:
+-- its components, and its own insert. Above 0, the verdict rests on a person's decision. v_evidence lists them,
+-- kind 'content change'.
+-- verdict_bom_only is the verdict without any claim that rests on a note. A person's insert or delete quotes no
+-- note, so it is in both: when the two verdicts differ, a note changed the verdict.
 CREATE VIEW v_verdict AS
 SELECT o.variant_id,
        sys.canonical_ref AS system_ref,
@@ -56,6 +81,7 @@ SELECT o.variant_id,
        other.refs        AS counterpart_ref,
        other.variants    AS counterpart_variants,
        (SELECT COUNT(*) FROM evidence e WHERE e.design_id = o.design_id AND e.kind = 'correction') AS corrections,
+       (SELECT COUNT(*) FROM evidence e WHERE e.design_id = o.design_id AND e.kind = 'content change') AS content_changes,
        o.design_id
 FROM occurrence o
 JOIN verdict v ON v.design_id = o.design_id

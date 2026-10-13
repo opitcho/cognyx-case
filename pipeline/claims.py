@@ -18,6 +18,7 @@ Subjects and objects point at raw data, never at computed parts:
 
 import json
 from dataclasses import dataclass
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 from pipeline.ingest import COLUMNS, Raw
@@ -55,11 +56,17 @@ TYPES: dict[str, Shape] = {
     "confirm": Shape(("claim",), says="a proposed claim should be applied"),
     "retract": Shape(("claim",), says="a claim should no longer be applied"),
     "reviewed": Shape(("note",), says="this note was read and holds nothing more to claim"),
+    "insert_part": Shape(("bom",), ("ref", "bom"), value=True,
+                         says="in this variant, this parent holds this quantity of a child it did not hold"),
+    "delete_part": Shape(("bom",), ("ref",), says="in this variant, this parent no longer holds this child"),
 }
 SYMMETRIC = {"same_as", "not_same_as", "interchangeable_with", "functionally_equivalent_to"}  # order has no meaning
 RELATIONS = {"interchangeable_with", "functionally_equivalent_to", "superseded_by", "obsolete", "required_for"}
 ALWAYS_ASSERTED = {"confirm", "retract", "reviewed"}
 OPPOSITES = {"same_as": "not_same_as", "not_same_as": "same_as"}
+# A person's decision to build something else than the BOM lists. The subject is the parent's BOM row: a
+# sub-assembly row to act on a component, a system row to act on a sub-assembly.
+CONTENT_CHANGES = {"insert_part", "delete_part"}
 
 
 class ClaimRefused(ValueError):
@@ -81,6 +88,16 @@ def pair_key(claim: dict) -> tuple:
 def identity(claim: dict) -> tuple:
     """What makes two claims the same claim: type, what it is about, value and maker."""
     return claim["type"], pair_key(claim), str(claim["value"]), claim["maker"]
+
+
+def written_quantity(value: str) -> tuple[Decimal, str] | None:
+    """`0.9 m` -> (0.9, `m`): a positive number, a space, a unit. None if `value` is not written that way."""
+    amount, _, unit = value.strip().partition(" ")
+    try:
+        quantity = Decimal(amount.replace(",", "."))
+    except InvalidOperation:
+        return None
+    return (quantity, unit.strip()) if quantity.is_finite() and quantity > 0 and unit.strip() else None
 
 
 def rests_on_note(claim: dict) -> bool:
@@ -111,13 +128,13 @@ class ClaimLog:
         """Check `claim`, append it, and return its id. Raises ClaimRefused with the reason if a check fails.
 
         A claim already in the log (same type, subject, object, value and maker) is not written again: its id is
-        returned, so running the rules twice is harmless.
+        returned, so running the rules twice is harmless. `_already` says what "already" means for a person.
         """
         claim = self._checked(claim)
-        for old in self.claims:
-            if identity(old) == identity(claim):
-                self.added = False
-                return old["id"]
+        old = self._already(claim)
+        if old is not None:
+            self.added = False
+            return old
         claim["id"] = len(self.claims) + 1
         line = json.dumps({name: claim[name] for name in FIELDS}, ensure_ascii=False)
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -126,6 +143,25 @@ class ClaimLog:
         self.claims.append(claim)
         self.added = True
         return claim["id"]
+
+    def _already(self, claim: dict) -> int | None:
+        """The id of the claim in the log that makes `claim` a repeat, or None.
+
+        For a rule or the agent, any claim with the same identity, whatever its status: a claim a person
+        retracted is not written again by the next run. For a person, only one that is in force, so that a
+        decision can be made, undone and made again. An insert or a delete must also be the last one in force
+        on its parent: none overrides another, so after "delete A, insert A" the first is still in force, and
+        a second "delete A" has to be written to apply.
+        """
+        same = [old for old in self.claims if identity(old) == identity(claim)]
+        if same and claim["made_by"] == "person":
+            status = statuses(self.claims)
+            same = [old for old in same if status[old["id"]].in_force]
+            if claim["type"] in CONTENT_CHANGES:
+                last = max((c["id"] for c in self.claims if c["type"] in CONTENT_CHANGES
+                            and c["subject"] == claim["subject"] and status[c["id"]].in_force), default=None)
+                same = [old for old in same if old["id"] == last]
+        return same[-1]["id"] if same else None
 
     def _checked(self, claim: dict) -> dict:
         claim = {"object": "", "value": "", "standing": "asserted", "evidence": [], "quote": "", "reason": "",
@@ -140,7 +176,7 @@ class ClaimLog:
         shape = TYPES[kind]
         if claim["standing"] not in STANDINGS:
             raise ClaimRefused(f"standing must be one of {', '.join(STANDINGS)}")
-        if kind in ALWAYS_ASSERTED and claim["standing"] != "asserted":
+        if kind in ALWAYS_ASSERTED | CONTENT_CHANGES and claim["standing"] != "asserted":
             raise ClaimRefused(f"a {kind} claim is always asserted")
         if claim.get("made_by") not in MAKERS or not claim.get("maker"):
             raise ClaimRefused(f"made_by must be one of {', '.join(MAKERS)}, with a maker")
@@ -175,7 +211,32 @@ class ClaimLog:
                 raise ClaimRefused("a quote needs the note it comes from in evidence, as note:<id>")
             if not any(claim["quote"] in note["text"] for note in notes):
                 raise ClaimRefused(f"the quote is not in {', '.join(n['note_id'] for n in notes)} word for word")
+        if kind in CONTENT_CHANGES:
+            self._check_content_change(claim)
         return claim
+
+    def _check_content_change(self, claim: dict) -> None:
+        """The checks of an insert or a delete that the raw files alone can make. Whether it can be applied
+        (the child is there or not, the unit converts) depends on the other claims: the build says."""
+        if claim["made_by"] != "person":
+            raise ClaimRefused("changing what a variant is built from is a design decision: only a person can record it")
+        if claim["quote"]:
+            raise ClaimRefused("leave the quote empty and put the note in evidence: this is the person's decision, "
+                               "not the note's")
+        row_no = int(split(claim["subject"])[1])
+        level = self.raw.bom[row_no - 1]["level"]
+        if level not in ("2", "3"):
+            raise ClaimRefused(f"row {row_no} is a component line; point at the row that lists its parent in the variant")
+        if claim["type"] == "delete_part":
+            return
+        object_kind, rest = split(claim["object"])
+        if level == "3" and object_kind != "ref":
+            raise ClaimRefused("to insert a component, give its reference as ref:...")
+        if level == "2" and (object_kind != "bom" or self.raw.bom[int(rest) - 1]["level"] != "3"):
+            raise ClaimRefused("to insert a sub-assembly, point at the row that lists it in the variant to copy it "
+                               "from, as bom:<row>")
+        if written_quantity(claim["value"]) is None:
+            raise ClaimRefused(f"the value {claim['value']!r} is not a positive quantity and a unit, such as 1 pcs or 0.9 m")
 
     def _target(self, target: str, kinds: tuple[str, ...], role: str) -> str:
         """Check that `target` is of one of `kinds` and points at something that exists. Returns its kind."""

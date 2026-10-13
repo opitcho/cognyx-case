@@ -29,6 +29,8 @@ class Model:
     variants: dict[str, dict] = field(default_factory=dict)
     units: dict[str, tuple[str, Decimal]] = field(default_factory=dict)
     lines: list[dict] = field(default_factory=list)
+    content_changes: list[dict] = field(default_factory=list)   # the inserts and deletes applied to the lines
+    not_applied: dict[int, str] = field(default_factory=dict)   # claim id -> why an insert or delete was not applied
     prices: list[dict] = field(default_factory=list)
     cost: dict[str, Decimal | None] = field(default_factory=dict)  # part id -> unit cost, None if unknown or disputed
     cost_status: dict[str, str] = field(default_factory=dict)      # part id -> agreed, disputed or missing

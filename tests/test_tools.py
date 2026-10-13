@@ -117,3 +117,28 @@ def test_two_notes_that_disagree_are_both_recorded_and_the_later_one_is_applied(
     assert conn.execute("SELECT COUNT(DISTINCT entity_id) FROM resolution WHERE written_value IN ('PB-2281', 'LR-1500')").fetchone()[0] == 1
     statuses = [row[0] for row in conn.execute("SELECT status FROM claim_status ORDER BY claim_id DESC LIMIT 2")]
     assert statuses[0] == "in force" and statuses[1].startswith("overridden by claim")
+
+
+def test_the_agent_cannot_insert_or_delete_a_part_asserted_or_proposed(bench):
+    # Row 536 lists the door drive DD-2037 in V3; MT-745 is its motor. What a variant is built from is a person's decision.
+    before = len(load(bench.log_path))
+    asserted = bench.append_claim("delete_part", "bom:536", "ref:MT-745")
+    proposed = bench.append_claim("insert_part", "bom:536", "ref:MT-701", value="1 pcs", standing="proposed")
+    assert asserted.startswith("refused:") and "only a person can record it" in asserted
+    assert proposed.startswith("refused:")
+    assert len(load(bench.log_path)) == before
+
+
+def test_a_persons_delete_and_insert_are_each_reported_in_words_and_can_be_undone(bench):
+    # Catches "No change to parts, designs, verdicts, ..." after a delete that moves no count and no verdict.
+    deleted = bench.append_person_claim("delete_part", "bom:536", "ref:MT-745", evidence=["bom:628"])
+    assert "Content changed: V3: MT-745 deleted from DD-2037 (was 1 pcs)." in deleted
+    inserted = bench.append_person_claim("insert_part", "bom:536", "ref:MT-701", value="1 pcs")
+    assert "Content changed: V3: MT-701 inserted in DD-2037, 1 pcs." in inserted
+    assert "DD-2037 in V3, reusable to reused" in inserted
+    claim_id = len(load(bench.log_path))
+    again = bench.append_person_claim("insert_part", "bom:536", "ref:MT-701", value="2 pcs")
+    assert f"Not applied: claim {claim_id + 1}, MT-701 is already in DD-2037 in V3; delete it first" in again
+    undone = bench.append_person_claim("retract", f"claim:{claim_id}")
+    assert "No longer applied: V3: MT-701 inserted in DD-2037, 1 pcs." in undone
+    assert "DD-2037 in V3, reused to reusable" in undone

@@ -8,7 +8,7 @@ in a fixed order. Issues are added to the model as they are found.
 from collections import Counter, defaultdict
 from decimal import Decimal
 
-from pipeline.claims import RANK, RELATIONS, split
+from pipeline.claims import RANK, RELATIONS, split, written_quantity
 from pipeline.compare import Relations
 from pipeline.ingest import BOM_FILE, ERP_FILE, NOTE_FILE
 from pipeline.model import Model
@@ -23,6 +23,7 @@ def resolve(m: Model) -> None:
     read_variants(m)
     m.units = units_from_claims(m.by_type["converts_to"])
     fold_bom(m)
+    change_content(m)  # before the prices: a part counts as used, or no longer, by the lines as a person left them
     price_parts(m)
     read_relations(m)
 
@@ -164,6 +165,82 @@ def fold_bom(m: Model) -> None:
             m.issue("two_quantities", f"{where}: written as {written_as}", BOM_FILE, [r for r, _ in line["values"]])
         m.lines.append({"variant": variant, "level": level, "parent": parent, "child": child, "quantity": quantity,
                         "unit": unit, "rows": line["rows"]})
+
+
+def change_content(m: Model) -> None:
+    """The inserts and deletes a person decided, applied to the folded lines in the order they were made.
+
+    Each claim acts on the lines as the claims before it left them. An inserted line has no raw row. A claim
+    that cannot be applied changes nothing and is reported as an issue, with the reason in `m.not_applied`.
+    """
+    def lines(variant, level, parent=None, child=None):
+        return [l for l in m.lines if l["variant"] == variant and l["level"] == level
+                and parent in (None, l["parent"]) and child in (None, l["child"])]
+
+    def amount(quantity, unit, level):
+        return f"{quantity:f} per train" if level == 3 else f"{quantity:f} {unit}"
+
+    for claim in sorted(m.by_type["insert_part"] + m.by_type["delete_part"], key=lambda c: c["id"]):
+        subject_row = m.raw.bom[int(split(claim["subject"])[1]) - 1]
+        variant, parent, level = subject_row["variant_id"], m.part_of[subject_row["child_ref"]], int(subject_row["level"]) + 1
+        insert = claim["type"] == "insert_part"
+        object_kind, object_rest = split(claim["object"])
+        source = m.raw.bom[int(object_rest) - 1] if object_kind == "bom" else None  # the sub-assembly row to copy
+        child = m.part_of[source["child_ref"] if source else object_rest]
+        where = f"{variant}: {m.name(child)} {'inserted in' if insert else 'deleted from'} {m.name(parent)}"
+        there = lines(variant, level, parent, child)
+        components = lines(variant, 4, child) if level == 3 else []
+        change = {"claim_id": claim["id"], "variant": variant, "level": level, "parent": parent, "child": child,
+                  "change": "inserted" if insert else "deleted", "rows": [], "n_components": None, "copied_from_row": None}
+        why = ""
+        if level == 4 and not lines(variant, 3, child=parent):
+            why = f"{m.name(parent)} is no longer in {variant}"
+        elif not insert:
+            if not there:
+                why = f"{m.name(child)} is not in {m.name(parent)} in {variant}"
+            elif level == 4 and len(lines(variant, 4, parent)) == 1:
+                why = f"{m.name(child)} is the only component left in {m.name(parent)}: a sub-assembly cannot be left empty"
+            else:
+                line = there[0]
+                m.lines[:] = [l for l in m.lines if l is not line and not any(l is c for c in components)]
+                was = "no agreed quantity" if line["quantity"] is None else amount(line["quantity"], line["unit"], level)
+                change.update(quantity=line["quantity"], unit=line["unit"], rows=line["rows"])
+                change["detail"] = f"{where} (was {was})"
+                if level == 3:
+                    change["n_components"] = len(components)
+                    change["detail"] = f"{where} (was {was}, {len(components)} components)"
+        else:
+            value = m.to_base(*written_quantity(claim["value"]))
+            same_part = [l for l in m.lines if l["level"] == level and l["child"] == child and l["unit"]]
+            if there:
+                why = f"{m.name(child)} is already in {m.name(parent)} in {variant}; delete it first to change its quantity"
+            elif value is None:
+                why = f"the unit of {claim['value']!r} cannot be converted to a base unit"
+            elif level == 4 and m.parts[child]["kind"] != "component":
+                why = f"{m.name(child)} is not a component"
+            elif level == 4 and same_part and value[1] not in {l["unit"] for l in same_part}:
+                why = f"{m.name(child)} is counted in {same_part[0]['unit']} on its other lines, not in {value[1]}"
+            elif level == 3 and lines(variant, 3, child=child):
+                why = f"{variant} already lists {m.name(child)}"
+            elif level == 3 and not lines(source["variant_id"], 3, child=child):
+                why = f"row {source['row_no']} to copy from is no longer in the BOM of {source['variant_id']}"
+            else:
+                copied = lines(source["variant_id"], 4, child) if source else []
+                m.lines.append({"variant": variant, "level": level, "parent": parent, "child": child,
+                                "quantity": value[0], "unit": value[1], "rows": []})
+                m.lines.extend({**line, "variant": variant, "rows": []} for line in copied)
+                change.update(quantity=value[0], unit=value[1])
+                change["detail"] = f"{where}, {amount(*value, level)}"
+                if source:
+                    change.update(n_components=len(copied), copied_from_row=source["row_no"])
+                    change["detail"] += (f", {len(copied)} components copied from {source['variant_id']} "
+                                         f"(BOM row {source['row_no']})")
+        if why:
+            m.not_applied[claim["id"]] = why
+            m.issue("content_change_not_applied", f"claim {claim['id']} ({claim['type']}) was not applied: {why}",
+                    BOM_FILE, [subject_row["row_no"]])
+        else:
+            m.content_changes.append(change)
 
 
 def price_parts(m: Model) -> None:

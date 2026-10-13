@@ -53,10 +53,15 @@ def test_the_detail_of_a_claim_shows_its_evidence_as_the_raw_rows_and_the_quoted
     log.append({"type": "not_same_as", "subject": "ref:DR-1043", "object": "ref:DR-1042", "evidence": ["note:TN-0116"],
                 "quote": quote, **agent})
     log.append({"type": "value_is", "subject": "cell:bom:53:quantity", "value": "4.3", "evidence": ["bom:52"], **agent})
+    # A person's insert of a sub-assembly: its subject and its object are both BOM rows.
+    log.append({"type": "insert_part", "subject": "bom:1286", "object": "bom:39", "value": "20 pcs",
+                "made_by": "person", "maker": "Oscar"})
     monkeypatch.chdir(tmp_path)
     page = AppTest.from_file(str(APPS / "claim_detail_app.py")).run()
     assert not page.exception
     text = " ".join(str(element.value) for element in [*page.markdown, *page.caption])
+    assert "`insert_part(bom:1286, bom:39) = 20 pcs`" in text
+    assert "`bom:1286`" in text and "`bom:39`" in text and "child_ref: PW-4700" in text  # both rows printed
     assert "confirmed by claim 2" in text                       # the proposal's status, and the claim that confirmed it
     assert "`bom:1091`" in text and "child_ref: AL-6056" in text  # a row pointer shown as the row's values
     assert "written value: '6.4'" in text                       # a cell pointer shown with what the file says

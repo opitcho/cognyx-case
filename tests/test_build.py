@@ -3,8 +3,12 @@
 import sqlite3
 from decimal import Decimal
 
+import pytest
+
+from conftest import bom_row
 from pipeline.build import build, compute
 from pipeline.claims import ClaimLog
+from pipeline.ingest import Raw
 from pipeline.reports import queue
 from pipeline.resolve import group
 from pipeline.tables import write
@@ -178,3 +182,127 @@ def test_an_obsolete_own_reference_is_named_for_that_sub_assembly_only_and_both_
     shown = sqlite3.connect(db).execute(
         "SELECT subassembly_ref, detail, source_row FROM v_evidence WHERE kind = 'claim' AND detail LIKE 'obsolete(%'").fetchall()
     assert shown == [("PT-7731", "obsolete(PT-7731): PT-7731 = ex DR-1042", "TN-0001")]
+
+
+# A person's inserts and deletes. In the tiny set, row 1 is the door system in V1 and row 2 lists DR-1042 under it
+# (JT-218, 2.4 m, and AC-501); row 5 is the door system in V2 and row 6 lists PT-7731 (JT 218, 2400 mm, and AC-501).
+PERSON = {"made_by": "person", "maker": "Oscar"}
+
+
+def delete(row, ref):
+    return {"type": "delete_part", "subject": f"bom:{row}", "object": f"ref:{ref}", **PERSON}
+
+
+def insert(row, child, value):
+    return {"type": "insert_part", "subject": f"bom:{row}", "object": child, "value": value, **PERSON}
+
+
+def content(m, variant):
+    """The components of the sub-assembly of `variant`, with their quantities."""
+    return {m.name(l["child"]): l["quantity"] for l in m.lines if l["variant"] == variant and l["level"] == 4}
+
+
+def test_replacing_a_component_makes_two_designs_one_and_the_cost_follows(tiny, tmp_path):
+    # With no spelling or unit claim the two door leaves differ by their seal. A person puts the V1 seal in V2.
+    m = model(tiny, tmp_path, SEAL_ERP, ACTUATOR_ERP, delete(6, "JT 218"), insert(6, "ref:JT-218", "2.4 m"))
+    assert len(m.designs) == 1
+    assert verdicts(m) == {("V1", "DR-1042"): "reused", ("V2", "PT-7731"): "reused"}
+    assert [c["detail"] for c in m.content_changes] == ["V2: JT 218 deleted from PT-7731 (was no agreed quantity)",
+                                                        "V2: JT-218 inserted in PT-7731, 2.4 m"]
+    db = tmp_path / "pilot.db"
+    write(m, db)
+    cost = dict(sqlite3.connect(db).execute("SELECT variant_id, unit_cost_eur FROM v_subassembly_cost"))
+    assert cost == {"V1": 504.4, "V2": 504.4}  # 2.4 m of seal at 38.50 and one actuator at 412.00
+
+
+def test_a_quantity_a_person_chooses_is_a_delete_and_an_insert(tiny, tmp_path):
+    m = model(tiny, tmp_path, SEAL, MM, delete(2, "AC-501"), insert(2, "ref:AC-501", "2 pcs"))
+    assert content(m, "V1")["AC-501"] == 2 and len(m.designs) == 2
+    m = model(tiny, tmp_path, delete(6, "AC-501"), insert(6, "ref:AC-501", "2 pcs"))  # then the same in V2
+    assert len(m.designs) == 1 and set(verdicts(m).values()) == {"reused"}
+
+
+def test_replacing_a_sub_assembly_copies_the_other_variants_and_the_database_shows_the_claims(tiny, tmp_path):
+    # V2 takes the door leaf of V1 in place of its own. The inserted one has no BOM row: the claim stands for it.
+    m = model(tiny, tmp_path, delete(5, "PT-7731"), insert(5, "bom:2", "3 pcs"))
+    assert verdicts(m) == {("V1", "DR-1042"): "reused", ("V2", "DR-1042"): "reused"}
+    assert content(m, "V2") == content(m, "V1") == {"JT-218": Decimal("2.4"), "AC-501": Decimal(1)}
+    db = tmp_path / "pilot.db"
+    write(m, db)
+    conn = sqlite3.connect(db)
+
+    def rows(query):
+        return conn.execute(query).fetchall()
+
+    inserted = "V2: DR-1042 inserted in DOOR-SYS-01, 3 per train, 2 components copied from V1 (BOM row 2)"
+    assert rows("SELECT * FROM v_content_change") == [
+        (1, "V2", 3, "DOOR-SYS-01", "PT-7731", "deleted", 2.0, "pcs", "6", 2, None,
+         "V2: PT-7731 deleted from DOOR-SYS-01 (was 2 per train, 2 components)"),
+        (2, "V2", 3, "DOOR-SYS-01", "DR-1042", "inserted", 3.0, "pcs", "", 2, 2, inserted)]
+    assert rows("SELECT variant_id, component_ref, changed_by_claim FROM v_content ORDER BY 1, 2") == [
+        ("V1", "AC-501", None), ("V1", "JT-218", None), ("V2", "AC-501", 2), ("V2", "JT-218", 2)]
+    assert rows("SELECT variant_id, subassembly_ref, verdict, content_changes FROM v_verdict ORDER BY 1") == [
+        ("V1", "DR-1042", "reused", 1), ("V2", "DR-1042", "reused", 1)]
+    assert rows("SELECT kind, detail, claim_id, source_row FROM v_evidence WHERE variant_id = 'V2' ORDER BY 1, 2") == [
+        ("bom row", "V1: DR-1042, 2 lines", None, "2"), ("bom row", "V2: DR-1042, 2 lines", None, ""),
+        ("content change", inserted, 2, "")]
+    assert rows("SELECT variant_id, per_train, raw_rows FROM occurrence ORDER BY 1") == [("V1", 2.0, "2"), ("V2", 3.0, "")]
+    described = {name for (name,) in conn.execute("SELECT name FROM about")}
+    assert {"content_change", "v_content_change"} <= described
+
+
+def test_a_component_change_shows_in_the_content_the_evidence_and_the_count(tiny, tmp_path):
+    m = model(tiny, tmp_path, delete(6, "JT 218"), insert(6, "ref:JT-218", "2.4 m"))
+    db = tmp_path / "pilot.db"
+    write(m, db)
+    conn = sqlite3.connect(db)
+    assert conn.execute("SELECT variant_id, component_ref, changed_by_claim FROM v_content ORDER BY 1, 2").fetchall() == [
+        ("V1", "AC-501", None), ("V1", "JT-218", None), ("V2", "AC-501", None), ("V2", "JT-218", 2)]
+    shown = conn.execute("SELECT detail, claim_id, source_row FROM v_evidence WHERE variant_id = 'V1' "
+                         "AND kind = 'content change' ORDER BY claim_id").fetchall()  # V1 shares the content of V2
+    assert shown == [("V2: JT 218 deleted from PT-7731 (was no agreed quantity)", 1, "7"),
+                     ("V2: JT-218 inserted in PT-7731, 2.4 m", 2, "")]
+    assert conn.execute("SELECT DISTINCT content_changes FROM v_verdict").fetchall() == [(2,)]
+
+
+def test_an_inserted_sub_assembly_takes_its_source_as_the_claims_before_it_left_it(tiny, tmp_path):
+    m = model(tiny, tmp_path, insert(2, "ref:AC501", "1 pcs"), delete(5, "PT-7731"), insert(5, "bom:2", "2 pcs"))
+    assert set(content(m, "V2")) == {"JT-218", "AC-501", "AC501"} and len(m.designs) == 1
+
+
+def test_deleting_the_superseded_component_empties_obsolete_parts(tiny, tmp_path):
+    m = model(tiny, tmp_path, SEAL, MM, SUPERSEDED, delete(2, "AC-501"))
+    assert obsolete(m) == {("V1", "DR-1042"): "", ("V2", "PT-7731"): "AC-501, superseded by AC-560"}
+
+
+def test_a_delete_finds_the_line_under_another_spelling_of_the_component(tiny, tmp_path):
+    m = model(tiny, tmp_path, SEAL, MM, delete(2, "JT 218"))  # the BOM of V1 writes JT-218
+    assert list(content(m, "V1")) == ["AC-501"] and not m.not_applied
+
+
+@pytest.mark.parametrize("claims, why", [
+    ([insert(2, "ref:AC-501", "2 pcs")], "AC-501 is already in DR-1042 in V1; delete it first to change its quantity"),
+    ([insert(1, "bom:2", "2 pcs")], "DR-1042 is already in DOOR-SYS-01 in V1"),
+    ([delete(1, "DR-1042"), insert(5, "bom:2", "2 pcs")], "row 2 to copy from is no longer in the BOM of V1"),
+    ([insert(6, "ref:DR-1042", "1 pcs")], "DR-1042 is not a component"),
+    ([insert(2, "ref:AC501", "3 furlongs")], "the unit of '3 furlongs' cannot be converted"),
+    ([insert(6, "ref:JT-218", "3 pcs")], "JT-218 is counted in m on its other lines, not in pcs"),
+    ([delete(6, "JT-218")], "JT-218 is not in PT-7731 in V2"),
+    ([delete(2, "AC-501"), delete(2, "JT-218")], "JT-218 is the only component left in DR-1042"),
+    ([delete(1, "DR-1042"), delete(2, "AC-501")], "DR-1042 is no longer in V1"),
+])
+def test_an_insert_or_delete_that_cannot_be_applied_changes_nothing_and_is_reported(tiny, tmp_path, claims, why):
+    before = model(tiny, tmp_path, *claims[:-1])
+    m = model(tiny, tmp_path, *claims)
+    last = len(claims)
+    assert m.lines == before.lines and len(m.content_changes) == last - 1
+    assert list(m.not_applied) == [last] and why in m.not_applied[last]
+    assert [i["detail"] for i in m.issues if i["type"] == "content_change_not_applied"] == [
+        f"claim {last} ({claims[-1]['type']}) was not applied: {m.not_applied[last]}"]
+
+
+def test_a_sub_assembly_is_not_inserted_in_a_variant_that_lists_it_under_another_system(tiny, tmp_path):
+    # A sub-assembly is identified by variant and part, so a variant holds it once.
+    two_systems = Raw(tiny.bom + [bom_row(9, "V1", 2, "V1", "HVAC-SYS-01", "HVAC")], tiny.erp, tiny.notes)
+    m = model(two_systems, tmp_path, insert(9, "bom:2", "1 pcs"))
+    assert m.not_applied == {1: "V1 already lists DR-1042"} and not m.content_changes

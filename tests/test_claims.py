@@ -121,3 +121,62 @@ def test_a_replay_without_notes_leaves_out_the_claims_that_quote_one():
               claim(3, "retract", "claim:1", made_by="person")]
     assert [c["id"] for c in in_force(claims, without_notes=True)] == [3]  # 1 stays in the replay, and is retracted
     assert [c["id"] for c in in_force(claims[:2], without_notes=True)] == [1]
+
+
+# Inserts and deletes: a person's decision to build something else than the BOM lists. In the tiny set, row 2
+# lists the sub-assembly DR-1042 in V1 (rows 3 and 4 are its components), row 1 the system above it.
+DELETE = {"type": "delete_part", "subject": "bom:2", "object": "ref:AC-501", **PERSON}
+INSERT = {"type": "insert_part", "subject": "bom:2", "object": "ref:AC-501", "value": "2 pcs", **PERSON}
+
+
+@pytest.mark.parametrize("claim, why", [
+    ({**DELETE, **AGENT}, "only a person"),
+    ({**DELETE, **RULE}, "only a person"),
+    ({**DELETE, **AGENT, "standing": "proposed"}, "always asserted"),  # nothing for the agent to confirm later
+    ({**DELETE, "standing": "proposed"}, "always asserted"),
+    ({**DELETE, "evidence": ["note:TN-0001"], "quote": "Actuator AC-501 superseded by AC-560."}, "leave the quote empty"),
+    ({**DELETE, "subject": "bom:3"}, "row 3 is a component line"),
+    ({**INSERT, "object": "bom:6"}, "to insert a component, give its reference"),
+    ({**INSERT, "subject": "bom:1", "object": "ref:PT-7731"}, "to insert a sub-assembly, point at the row"),
+    ({**INSERT, "subject": "bom:1", "object": "bom:7"}, "to insert a sub-assembly, point at the row"),  # a component row
+    ({**INSERT, "value": "two"}, "not a positive quantity and a unit"),
+    ({**INSERT, "value": "2"}, "not a positive quantity and a unit"),
+    ({**INSERT, "value": "0 pcs"}, "not a positive quantity and a unit"),
+    ({**INSERT, "value": ""}, "needs a value"),
+    ({**DELETE, "value": "1 pcs"}, "takes no value"),
+])
+def test_an_insert_or_delete_that_is_not_a_persons_or_is_badly_pointed_is_refused(log, claim, why):
+    # Catches the agent putting a design decision in force, alone or by confirming its own proposal.
+    with pytest.raises(ClaimRefused, match=why):
+        log.append(claim)
+    assert not log.path.exists()
+
+
+def test_an_insert_points_at_a_component_by_reference_and_at_a_sub_assembly_by_the_row_to_copy(log):
+    assert log.append(INSERT) == 1
+    assert log.append({**INSERT, "subject": "bom:5", "object": "bom:2"}) == 2
+    assert log.append({**DELETE, "subject": "bom:5", "object": "ref:PT-7731"}) == 3
+
+
+def test_a_persons_decision_can_be_made_undone_and_made_again(log):
+    # Catches the second decision being dropped because the retracted claim is "already in the log".
+    first = log.append(DELETE)
+    log.append({"type": "retract", "subject": f"claim:{first}", **PERSON})
+    again = log.append(DELETE)
+    assert (first, again, log.added) == (1, 3, True)
+    status = statuses(log.claims)
+    assert str(status[1]) == "retracted by claim 2" and status[3].in_force
+
+
+def test_a_delete_and_insert_can_be_repeated_on_the_same_parent(log):
+    # No insert or delete overrides another, so the first "delete" is still in force when the third claim comes.
+    ids = [log.append(claim) for claim in (DELETE, INSERT, DELETE, INSERT)]
+    assert ids == [1, 2, 3, 4]
+    assert log.append(INSERT) == 4 and log.added is False  # said twice in a row: written once
+
+
+def test_a_rules_claim_a_person_retracted_is_still_not_written_again(log):
+    first = log.append({"type": "same_as", "subject": "ref:JT-218", "object": "ref:JT 218", **RULE})
+    log.append({"type": "retract", "subject": f"claim:{first}", **PERSON})
+    assert log.append({"type": "same_as", "subject": "ref:JT-218", "object": "ref:JT 218", **RULE}) == first
+    assert log.added is False and len(log.claims) == 2

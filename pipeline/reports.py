@@ -195,6 +195,9 @@ def evidence(m: Model) -> list[dict]:
     for line in m.lines:
         if line["level"] == 4:
             content_rows[(line["variant"], line["parent"])] += line["rows"]
+    changed = defaultdict(list)  # (variant, sub-assembly) -> the inserts and deletes of its components, and its own insert
+    for change in m.content_changes:
+        changed[(change["variant"], change["parent"] if change["level"] == 4 else change["child"])].append(change)
     fixes = corrections(m)
     rows = []
     for design in m.designs:
@@ -203,9 +206,13 @@ def evidence(m: Model) -> list[dict]:
             own = relations.dead(occurrence.part)
             if own:
                 rows.append(claim_row(design, own[0], occurrence))
+            listed = occurrence.raw_rows  # empty for a sub-assembly a person inserted: no BOM row lists it
             rows.append(row(design, "bom row", f"{occurrence.variant}: {m.name(occurrence.part)}, {len(design.lines)} lines",
-                            source_file=BOM_FILE, source_row=str(min(occurrence.raw_rows))))
+                            source_file=BOM_FILE if listed else "", source_row=str(min(listed)) if listed else ""))
         for occurrence in design.occurrences:
+            rows += [row(design, "content change", change["detail"], change["claim_id"], BOM_FILE if change["rows"] else "",
+                         str(min(change["rows"])) if change["rows"] else "")
+                     for change in changed[(occurrence.variant, occurrence.part)]]
             raw_rows = sorted(set(occurrence.raw_rows + content_rows[(occurrence.variant, occurrence.part)]))
             rows += [row(design, "correction", f"{occurrence.variant}: {detail}", claim_id, BOM_FILE, str(row_no))
                      for row_no in raw_rows for detail, claim_id in fixes[row_no]]

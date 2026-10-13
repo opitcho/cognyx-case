@@ -92,11 +92,12 @@ SECTIONS = [
     Section(
         "Reuse verdicts",
         "{rows} rows. One row is one sub-assembly in one variant: whether its content is reused, reusable or "
-        "specific ({reused}, {reusable}, {specific}), in which other variants, and how many corrections to the BOM "
-        "rows the verdict rests on. Select a row to see those corrections and what each other variant has in its place.",
+        "specific ({reused}, {reusable}, {specific}), in which other variants, how many corrections to the BOM "
+        "rows the verdict rests on, and how many inserts and deletes a person made. Select a row to see those "
+        "and what each other variant has in its place.",
         "all three files", "v_verdict, v_subassembly_cost, v_evidence, v_reuse_between",
         """SELECT v.variant_id, v.system_ref, v.subassembly_ref, v.description, v.verdict, v.reason, v.corrections,
-                  v.obsolete_parts,
+                  v.content_changes, v.obsolete_parts,
                   v.shared_with, v.counterpart_ref, v.counterpart_variants, c.unit_cost_eur, c.train_cost_eur,
                   c.blocked_by AS cost_blocked_by
            FROM v_verdict v LEFT JOIN v_subassembly_cost c

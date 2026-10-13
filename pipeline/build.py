@@ -74,6 +74,8 @@ class Summary:
     obsolete: dict[tuple[str, str], str]  # (variant, sub-assembly reference) -> obsolete_parts, where it is filled
     issues: dict[str, int]
     open_items: dict[str, int]
+    content_changes: dict[int, str]  # claim id -> what an applied insert or delete did, in words
+    not_applied: dict[int, str]      # claim id -> why an insert or delete was not applied
     seconds: float
 
     def line(self) -> str:
@@ -95,9 +97,14 @@ def build(raw_dir: str | Path = "data/raw", log_path: str | Path = "data/claims.
     model = compute(raw, claims, without_notes)
     # The verdict from the BOM alone: the same replay without any claim that rests on a note.
     plain = model if without_notes else compute(raw, claims, True)
-    bom_only = {(o.variant, min(o.raw_rows)): plain.verdicts[o.design.id].verdict for o in plain.occurrences}
+    # Matched by the BOM row that lists the sub-assembly, or by its reference when a person inserted it: it then
+    # has no row, and a part id is not the same in the two replays.
+    def key(m: Model, o: Occurrence) -> tuple:
+        return o.variant, min(o.raw_rows) if o.raw_rows else m.name(o.part)
+
+    bom_only = {key(plain, o): plain.verdicts[o.design.id].verdict for o in plain.occurrences}
     for occurrence in model.occurrences:
-        occurrence.verdict_bom_only = bom_only.get((occurrence.variant, min(occurrence.raw_rows)), "")
+        occurrence.verdict_bom_only = bom_only.get(key(model, occurrence), "")
     out_db = Path(out_db)
     out_db.parent.mkdir(parents=True, exist_ok=True)
     write(model, out_db)
@@ -106,7 +113,9 @@ def build(raw_dir: str | Path = "data/raw", log_path: str | Path = "data/claims.
         verdicts={(o.variant, model.name(o.part)): model.verdicts[o.design.id].verdict for o in model.occurrences},
         obsolete={(o.variant, model.name(o.part)): o.obsolete_parts for o in model.occurrences if o.obsolete_parts},
         issues=dict(Counter(i["type"] for i in model.issues)),
-        open_items=dict(Counter(i["kind"] for i in model.open_items)), seconds=time.perf_counter() - started)
+        open_items=dict(Counter(i["kind"] for i in model.open_items)),
+        content_changes={c["claim_id"]: c["detail"] for c in model.content_changes},
+        not_applied=dict(model.not_applied), seconds=time.perf_counter() - started)
 
 
 if __name__ == "__main__":

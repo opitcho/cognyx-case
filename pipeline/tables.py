@@ -70,6 +70,12 @@ TABLES = [
           "variant_id, level INTEGER, parent_part_id, child_part_id, quantity REAL, unit, raw_rows",
           lambda m: [(l["variant"], l["level"], l["parent"], l["child"], fl(l["quantity"]), l["unit"], joined(l["rows"]))
                      for l in m.lines]),
+    Table("content_change", "one insert or delete a person made in the BOM of one variant, once applied",
+          "claim_id INTEGER, variant_id, level INTEGER, parent_part_id, child_part_id, change, quantity REAL, unit, "
+          "raw_rows, n_components INTEGER, copied_from_row INTEGER, detail",
+          lambda m: [(c["claim_id"], c["variant"], c["level"], c["parent"], c["child"], c["change"], fl(c["quantity"]),
+                      c["unit"], joined(c["rows"]), c["n_components"], c["copied_from_row"], c["detail"])
+                     for c in m.content_changes]),
     Table("price", "one ERP row, cost per base unit",
           "part_id, supplier_id, supplier_written, cost_per_base_unit_eur REAL, raw_row INTEGER",
           lambda m: [(p["part"], p["supplier"], p["supplier_written"], fl(p["cost"]), p["row"]) for p in m.prices]),
@@ -121,13 +127,14 @@ RAW_ABOUT = {
 }
 
 VIEW_ABOUT = {
-    "v_verdict": "one sub-assembly in one variant: the verdict of its content with the reason, and the obsolete or superseded parts it holds",
-    "v_evidence": "one fact behind a verdict: a BOM row, a correction the rows were read with, a pair or a claim; or one claim that a part of the sub-assembly is obsolete or superseded",
+    "v_verdict": "one sub-assembly in one variant: the verdict of its content with the reason, the obsolete or superseded parts it holds, and how many inserts and deletes a person made in it",
+    "v_evidence": "one fact behind a verdict: a BOM row, a correction the rows were read with, an insert or delete a person made, a pair or a claim; or one claim that a part of the sub-assembly is obsolete or superseded",
+    "v_content_change": "one insert or delete a person made in the BOM of one variant, with references: a component of a sub-assembly, or a sub-assembly of a system",
     "v_pair_diff": "one differing line between two sub-assemblies",
     "v_reuse_map": "one design, with the reference each variant uses for it",
     "v_tender_start": "one sub-assembly of V1: reuse, adapt, replace or keep, with its cost",
     "v_purchasing": "one bought part: its references, suppliers and prices",
-    "v_content": "one line of one sub-assembly in one variant, with the component's unit cost",
+    "v_content": "one line of one sub-assembly in one variant, with the component's unit cost, and the claim that inserted it when a person did",
     "v_subassembly_cost": "one sub-assembly in one variant: its unit cost, empty while any line has no agreed price, and the components that block it",
 }
 

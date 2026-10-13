@@ -106,6 +106,7 @@ class Workbench:
     def append_claim(self, type: str, subject: str, object: str = "", value: str = "", standing: str = "asserted",
                      evidence: list[str] | None = None, quote: str = "", reason: str = "") -> str:
         """Append one claim to the log in your own name. The database is rebuilt and you are told what changed.
+        insert_part and delete_part are not available here: only a person decides them, see append_person_claim.
 
         Args:
             type: The claim type, such as same_as, not_same_as, value_is, superseded_by, confirm, retract, reviewed.
@@ -134,11 +135,18 @@ class Workbench:
 
         Args:
             type: The claim type. To accept a proposed claim use confirm, to reject it use retract or not_same_as.
-            subject: What the claim is about, as a pointer: claim:57, ref:DR-1042, supplier:Faiveley.
-            object: The second thing, for types that take one.
-            value: The value, for value_is and converts_to.
+                To change what a variant is built from use insert_part and delete_part.
+            subject: What the claim is about, as a pointer: claim:57, ref:DR-1042, supplier:Faiveley. For
+                insert_part and delete_part, the BOM row that lists the parent in the variant: bom:536 for a
+                sub-assembly (to act on one of its components), bom:1286 for a system (to act on a sub-assembly).
+            object: The second thing, for types that take one. For insert_part and delete_part, the child: a
+                component or a sub-assembly to delete as ref:MT-745; a component to insert as ref:MT-701; a
+                sub-assembly to insert as the BOM row that lists it in the variant to copy it from, bom:39.
+            value: The value, for value_is and converts_to. For insert_part, the quantity and its unit: 1 pcs,
+                0.9 m; for a sub-assembly, the number per train: 20 pcs.
             evidence: Pointers to the raw rows the claim rests on.
-            quote: The words of a note, copied character for character, when the claim rests on one.
+            quote: The words of a note, copied character for character, when the claim rests on one. Leave it
+                empty for insert_part and delete_part.
             reason: The person's reason, in one sentence.
         """
         claim = dict(type=type, subject=subject, object=object, value=value, standing="asserted",
@@ -210,6 +218,13 @@ def changes(before: Summary, after: Summary) -> str:
     if held:
         shown = "; ".join(f"{ref} in {variant}, {old or 'none'} to {new or 'none'}" for (variant, ref), old, new in held[:8])
         parts.append(f"Obsolete parts changed ({len(held)}): {shown}" + ("; ..." if len(held) > 8 else "") + ".")
+    # A person's insert or delete, said in full: it may move no count and no verdict.
+    parts += [f"Content changed: {detail}." for claim_id, detail in after.content_changes.items()
+              if claim_id not in before.content_changes]
+    parts += [f"No longer applied: {detail}." for claim_id, detail in before.content_changes.items()
+              if claim_id not in after.content_changes]
+    parts += [f"Not applied: claim {claim_id}, {why}." for claim_id, why in after.not_applied.items()
+              if claim_id not in before.not_applied]
     open_before, open_after = sum(before.open_items.values()), sum(after.open_items.values())
     if open_after != open_before:
         parts.append(f"Open items: {open_before} to {open_after}.")
