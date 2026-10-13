@@ -11,8 +11,8 @@ from pathlib import Path
 
 from llm import tool
 
-from pipeline.build import Summary, build
-from pipeline.claims import OPPOSITES, ClaimLog, ClaimRefused, pair_key, rests_on_note, split, statuses
+from pipeline.build import Summary, build, compute
+from pipeline.claims import CONTENT_CHANGES, OPPOSITES, ClaimLog, ClaimRefused, pair_key, rests_on_note, split, statuses
 from pipeline.ingest import read_raw
 from pipeline.refs import RefIndex, normalise
 from pipeline.verdict import VERDICTS
@@ -165,6 +165,13 @@ class Workbench:
             if guard:
                 return f"refused: {guard} {PROPOSE}"
         try:
+            if claim["type"] in CONTENT_CHANGES:
+                # An insert or delete that cannot be applied now is not written: left in the log, it would start
+                # to act the day another claim makes it applicable, such as two spellings becoming one part.
+                candidate = log.preview(claim)
+                why = candidate and compute(self.raw, log.claims + [candidate]).not_applied.get(candidate["id"])
+                if why:
+                    return f"refused: {why}. Nothing was written."
             claim_id = log.append(claim)
         except ClaimRefused as e:
             return f"refused: {e}"

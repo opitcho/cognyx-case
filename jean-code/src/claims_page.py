@@ -152,7 +152,7 @@ def render_claims_page() -> None:
                                   label_visibility="collapsed")
     picked_makers = maker_col.pills("made_by", ["rule", "agent", "person"], selection_mode="multi",
                                     key="claims-makers", label_visibility="collapsed")
-    picked_states = state_col.pills("status", ["in force", "proposed", "confirmed", "retracted", "overridden"],
+    picked_states = state_col.pills("status", ["in force", "proposed", "confirmed", "accepted", "rejected", "retracted", "overridden"],
                                     selection_mode="multi", key="claims-states", label_visibility="collapsed")
     picked_types = st.pills("type", sorted(df["type"].unique()), selection_mode="multi", key="claims-types",
                             label_visibility="collapsed")

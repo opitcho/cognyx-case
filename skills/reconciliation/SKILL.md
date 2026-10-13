@@ -18,7 +18,7 @@ Call `describe_tables` when you need column names. Query the `v_...` names first
 | To find | Query |
 |---|---|
 | What is still open | `v_queue`, `v_readiness`, `v_issue` |
-| Whether a claim is applied: in force, proposed, confirmed, retracted or overridden, and by which claim | `claim_status` joined to `claim` |
+| Whether a claim is applied: in force, proposed, confirmed, accepted, rejected, retracted or overridden, and by which claim | `claim_status` joined to `claim` |
 | The verdict of a sub-assembly and why | `v_verdict`, `v_evidence` |
 | For each sub-assembly of `V1`: reuse, adapt, replace or keep, with its cost | `v_tender_start` |
 | The content of a sub-assembly in a variant | `v_content` |
@@ -87,6 +87,8 @@ Rules for every claim:
 3. Give the evidence: the rows you looked at, as `bom:`, `erp:` or `note:` pointers. A quote needs its note in `evidence`.
 4. Nothing is deleted. To undo a claim, append a `retract`.
 5. Write the `reason` for a person, as described in "The reason of a claim".
+
+Only a claim whose status is exactly `proposed` waits for a decision. A proposed `same_as` or `not_same_as` that nobody confirmed or retracted, but whose two values another claim has since settled, reads `accepted by claim N` or `rejected by claim N`: the question is answered, by that claim. `v_queue` lists what is still waiting.
 
 When two claims in force say opposite things about the same pair (`same_as` against `not_same_as`), or give two values to one cell, one is applied and the other is marked overridden in `claim_status`. If each quotes a note, the later note wins. Otherwise a person's claim wins over yours, and yours over a rule's. That is why you cannot retract a person's claim, and why the tool refuses a claim of your own judgement against one that rests on a note.
 
@@ -188,7 +190,7 @@ Leave `quote` empty: a note that supports the decision goes in `evidence`.
 
 **Before recording**, show the person what changes: the lines, with their BOM rows, and the cost of one unit before and after. When the cost after is empty, say so and name the component that has no agreed price. For another sub-assembly, read its cost in the variant it is copied from.
 
-**A replacement is two claims, and the first is applied as soon as it is written.** Check first that both can be written: the parent's row, the reference or row of the new child, the quantity and its unit. An insert of a child that is already there is not applied, nor is a delete of one that is not; the tool's reply says "Not applied" and why. If the second claim is refused or not applied, tell the person and `retract` the first in their name, so that half of their decision does not stay applied.
+**A replacement is two claims, and the first is applied as soon as it is written.** Check first that both can be written: the parent's row, the reference or row of the new child, the quantity and its unit. An insert of a child that is already there cannot be applied, nor a delete of one that is not: the tool refuses it, says why, and writes nothing. If the second claim is refused, tell the person and `retract` the first in their name, so that half of their decision does not stay applied. A reply to any later claim that says "Not applied: claim N" means that claim made an earlier insert or delete stop applying: tell the person.
 
 A sub-assembly you inserted has no BOM row, so its components cannot be changed this way afterwards.
 
@@ -226,6 +228,7 @@ What they can open is the raw data, so cite that: "BOM row 803", "purchasing row
 | `unexplained` | "no note explains this difference" |
 | `no counterpart` | "nothing equivalent in the other variant" |
 | proposed, in force or confirmed, retracted, overridden | "waiting for your decision", "applied", "withdrawn", "replaced by a later decision" |
+| accepted, rejected (a proposal) | "already settled", with the decision that settled it and its source |
 | `disputed`, `missing` | "two different prices", "no price" |
 | any table, view or column (`v_pair_diff`, `obsolete_parts`, `blocked_by`, `known_cost_eur`) | not named: say what it holds |
 

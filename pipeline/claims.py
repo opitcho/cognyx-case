@@ -144,6 +144,12 @@ class ClaimLog:
         self.added = True
         return claim["id"]
 
+    def preview(self, claim: dict) -> dict | None:
+        """`claim` as `append` would write it, with its id, or None when it is already in the log. Nothing is
+        written. Raises ClaimRefused like `append`."""
+        claim = self._checked(claim)
+        return None if self._already(claim) is not None else {**claim, "id": len(self.claims) + 1}
+
     def _already(self, claim: dict) -> int | None:
         """The id of the claim in the log that makes `claim` a repeat, or None.
 
@@ -275,8 +281,8 @@ def append_claim(log_path: str | Path, raw: Raw, claim: dict) -> int:
 
 @dataclass(frozen=True)
 class Status:
-    """Where a claim stands: `state` is in force, proposed, confirmed, retracted or overridden; `by` is the claim
-    that confirmed, retracted or overrode it."""
+    """Where a claim stands: `state` is in force, proposed, confirmed, retracted, overridden, accepted or
+    rejected; `by` is the claim that confirmed, retracted, overrode or answered it."""
 
     state: str
     by: int | None = None
@@ -302,6 +308,10 @@ def statuses(claims: list[dict]) -> dict[int, Status]:
     the same pair (same_as against not_same_as), or give two values to one cell, one is applied and the others
     are overridden: the later `as_of` date if all have one, otherwise a person's over an agent's over a rule's,
     then the later id.
+
+    Last, a proposed same_as or not_same_as that was never confirmed or retracted, and whose pair other claims
+    in force have answered, is accepted or rejected by the claim that answered it. It is not in force itself:
+    the build applies the claim that answered, as before.
     """
     result: dict[int, Status] = {}
     targeting: dict[int, list[dict]] = {}
@@ -338,6 +348,39 @@ def statuses(claims: list[dict]) -> dict[int, Status]:
         for claim in group:
             if (claim["type"] if what == "pair" else claim["value"]) != winning_side:
                 result[claim["id"]] = Status("overridden", winner["id"])
+
+    # A proposal about a pair that other claims have answered since is no longer waiting. The two values are one
+    # thing when same_as claims in force lead from one to the other, through other spellings if need be, and two
+    # things when a not_same_as claim in force stands between them.
+    links: dict[str, list[tuple[str, int]]] = {}
+    for claim in claims:
+        if claim["type"] == "same_as" and result[claim["id"]].in_force:
+            links.setdefault(claim["subject"], []).append((claim["object"], claim["id"]))
+            links.setdefault(claim["object"], []).append((claim["subject"], claim["id"]))
+    apart = [c for c in claims if c["type"] == "not_same_as" and result[c["id"]].in_force]
+
+    def reached(start: str) -> dict[str, list[int]]:
+        """Every value linked to `start`, with the claims on the shortest way there."""
+        found, todo = {start: []}, [start]
+        for value in todo:
+            for other, claim_id in links.get(value, []):
+                if other not in found:
+                    found[other] = found[value] + [claim_id]
+                    todo.append(other)
+        return found
+
+    for claim in claims:
+        if claim["type"] in OPPOSITES and result[claim["id"]].state == "proposed":
+            near_a, near_b = reached(claim["subject"]), reached(claim["object"])
+            between = [c["id"] for c in apart if (c["subject"] in near_a and c["object"] in near_b)
+                       or (c["subject"] in near_b and c["object"] in near_a)]
+            if between:
+                answer, by = "not_same_as", max(between)
+            elif claim["object"] in near_a:
+                answer, by = "same_as", max(near_a[claim["object"]])
+            else:
+                continue
+            result[claim["id"]] = Status("accepted" if answer == claim["type"] else "rejected", by)
     return result
 
 

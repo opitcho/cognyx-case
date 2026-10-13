@@ -137,8 +137,13 @@ def test_a_persons_delete_and_insert_are_each_reported_in_words_and_can_be_undon
     assert "Content changed: V3: MT-701 inserted in DD-2037, 1 pcs." in inserted
     assert "DD-2037 in V3, reusable to reused" in inserted
     claim_id = len(load(bench.log_path))
+    # One that cannot be applied now is not written: in the log, it would start to act when another claim allows it.
     again = bench.append_person_claim("insert_part", "bom:536", "ref:MT-701", value="2 pcs")
-    assert f"Not applied: claim {claim_id + 1}, MT-701 is already in DD-2037 in V3; delete it first" in again
+    absent = bench.append_person_claim("delete_part", "bom:536", "ref:MT-745")
+    assert again == ("refused: MT-701 is already in DD-2037 in V3; delete it first to change its quantity. "
+                     "Nothing was written.")
+    assert absent == "refused: MT-745 is not in DD-2037 in V3. Nothing was written."
+    assert len(load(bench.log_path)) == claim_id
     undone = bench.append_person_claim("retract", f"claim:{claim_id}")
     assert "No longer applied: V3: MT-701 inserted in DD-2037, 1 pcs." in undone
     assert "DD-2037 in V3, reused to reusable" in undone

@@ -123,6 +123,31 @@ def test_a_replay_without_notes_leaves_out_the_claims_that_quote_one():
     assert [c["id"] for c in in_force(claims[:2], without_notes=True)] == [1]
 
 
+def test_a_proposal_answered_by_another_claim_on_the_same_pair_is_no_longer_waiting():
+    # The generated log does this: a rule proposes GU-077 = GU-707, and the agent, reading a note, asserts the
+    # same thing as a new claim without confirming the proposal. It stayed "proposed" and was reported as waiting.
+    claims = [claim(1, "same_as", "ref:GU-077", "ref:GU-707", standing="proposed"),
+              claim(2, "same_as", "ref:BL-330", "ref:BL-338", standing="proposed"),
+              claim(3, "same_as", "ref:AA-1", "ref:AA-2", standing="proposed"),
+              claim(4, "same_as", "ref:GU-707", "ref:GU-077", made_by="agent"),
+              claim(5, "not_same_as", "ref:BL-338", "ref:BL-330", made_by="agent")]
+    status = statuses(claims)
+    assert [str(status[i]) for i in (1, 2, 3)] == ["accepted by claim 4", "rejected by claim 5", "proposed"]
+    assert [c["id"] for c in in_force(claims)] == [4, 5]  # the build applies the answers, not the proposals
+
+
+def test_a_proposal_is_answered_through_other_spellings_and_waits_again_if_the_answer_is_retracted():
+    claims = [claim(1, "same_as", "ref:GU-077", "ref:GU-707", standing="proposed"),
+              claim(2, "not_same_as", "ref:BK-120", "ref:BK-121", made_by="agent", standing="proposed"),
+              claim(3, "same_as", "ref:GU077", "ref:GU-077"),
+              claim(4, "same_as", "ref:GU-707", "ref:GU077", made_by="agent"),   # names the ERP spelling
+              claim(5, "same_as", "ref:BK-121", "ref:BK-120", made_by="person")]
+    status = statuses(claims)
+    assert str(status[1]) == "accepted by claim 4" and str(status[2]) == "rejected by claim 5"
+    status = statuses(claims + [claim(6, "retract", "claim:4", made_by="person")])
+    assert str(status[1]) == "proposed"
+
+
 # Inserts and deletes: a person's decision to build something else than the BOM lists. In the tiny set, row 2
 # lists the sub-assembly DR-1042 in V1 (rows 3 and 4 are its components), row 1 the system above it.
 DELETE = {"type": "delete_part", "subject": "bom:2", "object": "ref:AC-501", **PERSON}
