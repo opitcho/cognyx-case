@@ -1,0 +1,1509 @@
+variant_id,cars,speed_class_kmh,interior,level,parent_ref,child_ref,description,quantity,unit
+V1,6,160,suburban,2,V1,CARB-SYS-01,Car body,1,pcs
+V1,6,160,suburban,2,V1,RUNG-SYS-01,Running gear,1,pcs
+V1,6,160,suburban,2,V1,POWR-SYS-01,Power system,1,pcs
+V1,6,160,suburban,2,V1,DOOR-SYS-01,Door system,1,pcs
+V1,6,160,suburban,2,V1,HVAC-SYS-01,HVAC,1,pcs
+V1,6,160,suburban,2,V1,INTR-SYS-01,Interior,1,pcs
+V1,6,160,suburban,2,V1,BRAK-SYS-01,Braking,1,pcs
+V1,6,160,suburban,3,CARB-SYS-01,SW-3510,Side wall panel set,12,pcs
+V1,6,160,suburban,3,CARB-SYS-01,RP-3360,Roof panel set,6,pcs
+V1,6,160,suburban,3,CARB-SYS-01,UF-1508,Underframe module,6,pcs
+V1,6,160,suburban,3,CARB-SYS-01,FE-4259,Front end module,2,pcs
+V1,6,160,suburban,3,RUNG-SYS-01,MB-8736,Motor bogie frame,4,pcs
+V1,6,160,suburban,3,RUNG-SYS-01,TF-8641,Trailer bogie frame,6,pcs
+V1,6,160,suburban,3,RUNG-SYS-01,PS-2464,Primary suspension set,24,pcs
+V1,6,160,suburban,3,RUNG-SYS-01,WA-6048,Wheelset assembly,24,pcs
+V1,6,160,suburban,3,POWR-SYS-01,TV-4514,Traction converter,4,pcs
+V1,6,160,suburban,3,POWR-SYS-01,AX-7929,Auxiliary converter,2,pcs
+V1,6,160,suburban,3,POWR-SYS-01,BB-5392,Battery box,2,pcs
+V1,6,160,suburban,3,POWR-SYS-01,PG-4384,Pantograph assembly,2,pcs
+V1,6,160,suburban,3,DOOR-SYS-01,DR-1042,"Door leaf assembly, left",12,pcs
+V1,6,160,suburban,3,DOOR-SYS-01,DR-1043,"Door leaf assembly, right",12,pcs
+V1,6,160,suburban,3,DOOR-SYS-01,DD-2010,Door drive unit,24,pcs
+V1,6,160,suburban,3,DOOR-SYS-01,KP-0457,Door control unit,24,pcs
+V1,6,160,suburban,3,DOOR-SYS-01,ST-4100,Sliding step,24,pcs
+V1,6,160,suburban,3,DOOR-SYS-01,TS-9148,Door threshold,24,pcs
+V1,6,160,suburban,3,DOOR-SYS-01,ER-8092,Emergency release device,24,pcs
+V1,6,160,suburban,3,DOOR-SYS-01,DI-6697,Door indicator light set,24,pcs
+V1,6,160,suburban,3,HVAC-SYS-01,HV-5100,Saloon HVAC unit,12,pcs
+V1,6,160,suburban,3,HVAC-SYS-01,HC-6001,Cab HVAC unit,2,pcs
+V1,6,160,suburban,3,HVAC-SYS-01,AD-7300,Air duct assembly,6,pcs
+V1,6,160,suburban,3,HVAC-SYS-01,RG-0212,HVAC control unit,6,pcs
+V1,6,160,suburban,3,HVAC-SYS-01,HT-5300,Heater unit,24,pcs
+V1,6,160,suburban,3,HVAC-SYS-01,FG-6342,Fresh air intake grille,12,pcs
+V1,6,160,suburban,3,HVAC-SYS-01,CK-2382,Condensate drain kit,12,pcs
+V1,6,160,suburban,3,HVAC-SYS-01,RC-5381,HVAC roof fairing,12,pcs
+V1,6,160,suburban,3,INTR-SYS-01,SF-9020,Seat frame assembly,120,pcs
+V1,6,160,suburban,3,INTR-SYS-01,LR-1500,Luggage rack,48,pcs
+V1,6,160,suburban,3,INTR-SYS-01,HD-3100,Handrail assembly,36,pcs
+V1,6,160,suburban,3,INTR-SYS-01,PW-4700,Glazed partition,12,pcs
+V1,6,160,suburban,3,INTR-SYS-01,FC-6100,Floor covering assembly,6,pcs
+V1,6,160,suburban,3,INTR-SYS-01,CE-1477,Ceiling panel set,6,pcs
+V1,6,160,suburban,3,INTR-SYS-01,LS-7235,Interior lighting strip,36,pcs
+V1,6,160,suburban,3,INTR-SYS-01,PD-2768,Passenger information display,12,pcs
+V1,6,160,suburban,3,BRAK-SYS-01,BC-5573,Brake caliper unit,48,pcs
+V1,6,160,suburban,3,BRAK-SYS-01,BM-9125,Brake control module,6,pcs
+V1,6,160,suburban,3,BRAK-SYS-01,CM-6592,Air compressor unit,2,pcs
+V1,6,160,suburban,3,BRAK-SYS-01,MG-5779,Magnetic track brake,8,pcs
+V1,6,160,suburban,4,SW-3510,WD-2021,Window,5,pcs
+V1,6,160,suburban,4,SW-3510,BL-1287,Bolt M6x20,16,pcs
+V1,6,160,suburban,4,SW-3510,PN-7736,Panel,2,pcs
+V1,6,160,suburban,4,RP-3360,BL-3980,Bolt M10x40,14,pcs
+V1,6,160,suburban,4,RP-3360,JT-4924,Seal EPDM 12,4.3,m
+V1,6,160,suburban,4,RP-3360,BL-1287,Bolt M6x20,22,pcs
+V1,6,160,suburban,4,UF-1508,BE-6841,Beam,16.7,m
+V1,6,160,suburban,4,UF-1508,BK-7403,Bracket,2,pcs
+V1,6,160,suburban,4,UF-1508,BE-8909,Beam,19.7,m
+V1,6,160,suburban,4,FE-4259,BE-8909,Beam,12.5,m
+V1,6,160,suburban,4,FE-4259,BL-1287,Bolt M6x20,15,pcs
+V1,6,160,suburban,4,FE-4259,BL-6349,Bolt M6x20,9,pcs
+V1,6,160,suburban,4,FE-4259,BE-6281,Beam,11,m
+V1,6,160,suburban,4,FE-4259,BL-3980,Bolt M10x40,17,pcs
+V1,6,160,suburban,4,FE-4259,BL-7537,Bolt M8x35,14,pcs
+V1,6,160,suburban,4,MB-8736,SN-5618,Sensor,2,pcs
+V1,6,160,suburban,4,MB-8736,AL-6065,Axle,1,pcs
+V1,6,160,suburban,4,MB-8736,AL-230,Axle,2,pcs
+V1,6,160,suburban,4,MB-8736,BL-4322,Bolt M10x40,12,pcs
+V1,6,160,suburban,4,MB-8736,SP-7354,Spring,2,pcs
+V1,6,160,suburban,4,TF-8641,AL-230,Axle,2,pcs
+V1,6,160,suburban,4,TF-8641,WH-2962,Wheel,4,pcs
+V1,6,160,suburban,4,TF-8641,SN-6930,Sensor,2,pcs
+V1,6,160,suburban,4,TF-8641,WH-3985,Wheel,3,pcs
+V1,6,160,suburban,4,TF-8641,BK-1546,Bracket,6,pcs
+V1,6,160,suburban,4,PS-2464,WH-4087,Wheel,4,pcs
+V1,6,160,suburban,4,PS-2464,SN-8168,Sensor,1,pcs
+V1,6,160,suburban,4,PS-2464,BG-3637,Bearing,3,pcs
+V1,6,160,suburban,4,WA-6048,SN-8049,Sensor,3,pcs
+V1,6,160,suburban,4,WA-6048,WH-9839,Wheel,4,pcs
+V1,6,160,suburban,4,WA-6048,WH-9324,Wheel,4,pcs
+V1,6,160,suburban,4,WA-6048,DP-7346,Damper,3,pcs
+V1,6,160,suburban,4,WA-6048,SN-8306,Sensor,4,pcs
+V1,6,160,suburban,4,WA-6048,WH-3877,Wheel,2,pcs
+V1,6,160,suburban,4,TV-4514,CB-2111,Cable harness,2,pcs
+V1,6,160,suburban,4,TV-4514,IG-1215,IGBT module,3,pcs
+V1,6,160,suburban,4,TV-4514,BK-7375,Bracket,4,pcs
+V1,6,160,suburban,4,AX-7929,FN-8331,Fan,1,pcs
+V1,6,160,suburban,4,AX-7929,CB-2111,Cable harness,2,pcs
+V1,6,160,suburban,4,AX-7929,BL-1778,Bolt M8x35,6,pcs
+V1,6,160,suburban,4,AX-7929,PC-4983,Control board,1,pcs
+V1,6,160,suburban,4,BB-5392,SN-8133,Sensor,1,pcs
+V1,6,160,suburban,4,BB-5392,BL-9688,Bolt M8x35,21,pcs
+V1,6,160,suburban,4,BB-5392,IG-1215,IGBT module,3,pcs
+V1,6,160,suburban,4,BB-5392,CB-9799,Cable harness,2,pcs
+V1,6,160,suburban,4,BB-5392,SN-226,Sensor,4,pcs
+V1,6,160,suburban,4,PG-4384,CT-5595,Contactor,1,pcs
+V1,6,160,suburban,4,PG-4384,CB-737,Cable harness,1,pcs
+V1,6,160,suburban,4,PG-4384,FN-8331,Fan,1,pcs
+V1,6,160,suburban,4,PG-4384,FN-5165,Fan,1,pcs
+V1,6,160,suburban,4,PG-4384,SN-8319,Sensor,4,pcs
+V1,6,160,suburban,4,DR-1042,JT-218,Door seal,2.4,m
+V1,6,160,suburban,4,DR-1042,AC-501,Door actuator,1,pcs
+V1,6,160,suburban,4,DR-1042,GL-410,Glazing panel,1,pcs
+V1,6,160,suburban,4,DR-1042,BK-120,Bracket LH,4,pcs
+V1,6,160,suburban,4,DR-1042,BL-330,Bolt M8x25,16,pcs
+V1,6,160,suburban,4,DR-1042,RL-205,Guide rail,1.3,m
+V1,6,160,suburban,4,DR-1042,SN-610,Sensor,2,pcs
+V1,6,160,suburban,4,DR-1043,JT-218,Door seal,2.4,m
+V1,6,160,suburban,4,DR-1043,AC-477,Door actuator,1,pcs
+V1,6,160,suburban,4,DR-1043,GL-452,Glazing panel,1,pcs
+V1,6,160,suburban,4,DR-1043,BK-121,Bracket RH,4,pcs
+V1,6,160,suburban,4,DR-1043,BL-338,Bolt M8x35,16,pcs
+V1,6,160,suburban,4,DR-1043,RL-205,Guide rail,1.3,m
+V1,6,160,suburban,4,DR-1043,SN-610,Sensor,2,pcs
+V1,6,160,suburban,4,DD-2010,MT-701,Door motor 24V,1,pcs
+V1,6,160,suburban,4,DD-2010,BK-133,Bracket,2,pcs
+V1,6,160,suburban,4,DD-2010,BL-352,Bolt M8x35,8,pcs
+V1,6,160,suburban,4,DD-2010,CB-815,Cable harness,1,pcs
+V1,6,160,suburban,4,DD-2010,SN-627,Sensor,1,pcs
+V1,6,160,suburban,4,DD-2010,RL-260,Guide rail,0.9,m
+V1,6,160,suburban,4,KP-0457,PC-902,Control board,1,pcs
+V1,6,160,suburban,4,KP-0457,SN-573,Door position sensor,2,pcs
+V1,6,160,suburban,4,KP-0457,CB-828,Cable harness,1,pcs
+V1,6,160,suburban,4,KP-0457,RY-440,Relay,3,pcs
+V1,6,160,suburban,4,KP-0457,BK-425,Bracket,2,pcs
+V1,6,160,suburban,4,KP-0457,BL-309,Bolt M6x20,4,pcs
+V1,6,160,suburban,4,ST-4100,AC-534,Actuator,1,pcs
+V1,6,160,suburban,4,ST-4100,PL-661,Tread plate,1,pcs
+V1,6,160,suburban,4,ST-4100,RL-237,Guide rail,1.6,m
+V1,6,160,suburban,4,ST-4100,SN-682,Sensor,2,pcs
+V1,6,160,suburban,4,ST-4100,BK-873,Bracket,4,pcs
+V1,6,160,suburban,4,ST-4100,BL-394,Bolt M8x25,12,pcs
+V1,6,160,suburban,4,TS-9148,LD-6579,LED module,3,pcs
+V1,6,160,suburban,4,TS-9148,PC-1553,Control board,1,pcs
+V1,6,160,suburban,4,TS-9148,GB-1211,Gearbox,1,pcs
+V1,6,160,suburban,4,TS-9148,RY-2620,Relay,3,pcs
+V1,6,160,suburban,4,ER-8092,GL-5454,Glazing panel,1,pcs
+V1,6,160,suburban,4,ER-8092,AC-5665,Actuator,1,pcs
+V1,6,160,suburban,4,ER-8092,LD-6579,LED module,6,pcs
+V1,6,160,suburban,4,ER-8092,PC-6360,Control board,1,pcs
+V1,6,160,suburban,4,ER-8092,CB-2186,Cable harness,1,pcs
+V1,6,160,suburban,4,DI-6697,BK-5662,Bracket,5,pcs
+V1,6,160,suburban,4,DI-6697,GL-5443,Glazing panel,2,pcs
+V1,6,160,suburban,4,DI-6697,CB-2186,Cable harness,1,pcs
+V1,6,160,suburban,4,DI-6697,SN-8150,Sensor,2,pcs
+V1,6,160,suburban,4,DI-6697,GL-291,Glazing panel,2,pcs
+V1,6,160,suburban,4,HV-5100,CP-512,Compressor,1,pcs
+V1,6,160,suburban,4,HV-5100,EV-230,Evaporator,1,pcs
+V1,6,160,suburban,4,HV-5100,CD-340,Condenser,1,pcs
+V1,6,160,suburban,4,HV-5100,FN-720,Fan,2,pcs
+V1,6,160,suburban,4,HV-5100,FL-801,Filter,2,pcs
+V1,6,160,suburban,4,HV-5100,RF-110,Refrigerant,3.5,kg
+V1,6,160,suburban,4,HV-5100,BK-205,Bracket,6,pcs
+V1,6,160,suburban,4,HC-6001,CP-447,Compressor,1,pcs
+V1,6,160,suburban,4,HC-6001,EV-208,Evaporator,1,pcs
+V1,6,160,suburban,4,HC-6001,FN-716,Fan,1,pcs
+V1,6,160,suburban,4,HC-6001,FL-877,Filter,1,pcs
+V1,6,160,suburban,4,HC-6001,RF-110,Refrigerant,1.2,kg
+V1,6,160,suburban,4,HC-6001,TH-402,Thermostat,1,pcs
+V1,6,160,suburban,4,HC-6001,BK-229,Bracket,4,pcs
+V1,6,160,suburban,4,AD-7300,DT-150,Duct,12.5,m
+V1,6,160,suburban,4,AD-7300,IN-620,Insulation,8,kg
+V1,6,160,suburban,4,AD-7300,BK-281,Bracket,20,pcs
+V1,6,160,suburban,4,AD-7300,BL-417,Bolt M8x35,40,pcs
+V1,6,160,suburban,4,AD-7300,VL-906,Damper valve,2,pcs
+V1,6,160,suburban,4,AD-7300,JT-262,Seal EPDM 15,6,m
+V1,6,160,suburban,4,RG-0212,PC-951,Control board,1,pcs
+V1,6,160,suburban,4,RG-0212,TH-436,Thermostat,2,pcs
+V1,6,160,suburban,4,RG-0212,SN-699,Sensor,3,pcs
+V1,6,160,suburban,4,RG-0212,RY-472,Relay,2,pcs
+V1,6,160,suburban,4,RG-0212,CB-866,Cable harness,1,pcs
+V1,6,160,suburban,4,HT-5300,HE-310,Heating element,2,pcs
+V1,6,160,suburban,4,HT-5300,FN-708,Fan,1,pcs
+V1,6,160,suburban,4,HT-5300,TH-415,Thermostat,1,pcs
+V1,6,160,suburban,4,HT-5300,BK-213,Bracket,4,pcs
+V1,6,160,suburban,4,HT-5300,BL-463,Bolt M10x40,8,pcs
+V1,6,160,suburban,4,FG-6342,RY-1385,Relay,2,pcs
+V1,6,160,suburban,4,FG-6342,EV-5767,Evaporator,1,pcs
+V1,6,160,suburban,4,FG-6342,IN-6519,Insulation,5.8,kg
+V1,6,160,suburban,4,FG-6342,PC-2995,Control board,1,pcs
+V1,6,160,suburban,4,FG-6342,SN-1366,Sensor,4,pcs
+V1,6,160,suburban,4,CK-2382,RY-1385,Relay,6,pcs
+V1,6,160,suburban,4,CK-2382,TH-7192,Thermostat,1,pcs
+V1,6,160,suburban,4,CK-2382,TH-2133,Thermostat,2,pcs
+V1,6,160,suburban,4,CK-2382,SN-1366,Sensor,4,pcs
+V1,6,160,suburban,4,CK-2382,DT-4431,Duct,7.1,m
+V1,6,160,suburban,4,RC-5381,CP-9424,Compressor,1,pcs
+V1,6,160,suburban,4,RC-5381,IN-7553,Insulation,5.9,kg
+V1,6,160,suburban,4,RC-5381,SN-5940,Sensor,2,pcs
+V1,6,160,suburban,4,RC-5381,BL-543,Bolt M6x20,13,pcs
+V1,6,160,suburban,4,RC-5381,BL-1870,Bolt M8x35,23,pcs
+V1,6,160,suburban,4,RC-5381,JT-5413,Seal EPDM 15,3.6,m
+V1,6,160,suburban,4,SF-9020,TU-140,Steel tube,4.2,m
+V1,6,160,suburban,4,SF-9020,BK-648,Bracket,4,pcs
+V1,6,160,suburban,4,SF-9020,BL-482,Bolt M10x40,16,pcs
+V1,6,160,suburban,4,SF-9020,CU-310,Cushion 2-seat,2,pcs
+V1,6,160,suburban,4,SF-9020,AR-520,Armrest,2,pcs
+V1,6,160,suburban,4,SF-9020,FB-730,Fabric cover,3.1,m
+V1,6,160,suburban,4,LR-1500,PF-220,Aluminium profile,3,m
+V1,6,160,suburban,4,LR-1500,GL-436,Glazing panel,2,pcs
+V1,6,160,suburban,4,LR-1500,BK-318,Bracket,6,pcs
+V1,6,160,suburban,4,LR-1500,BL-429,Bolt M6x20,12,pcs
+V1,6,160,suburban,4,LR-1500,EC-705,End cap,2,pcs
+V1,6,160,suburban,4,HD-3100,TU-126,Steel tube,2.2,m
+V1,6,160,suburban,4,HD-3100,BK-335,Bracket,4,pcs
+V1,6,160,suburban,4,HD-3100,BL-476,Bolt M6x20,8,pcs
+V1,6,160,suburban,4,HD-3100,EC-761,End cap,2,pcs
+V1,6,160,suburban,4,HD-3100,CV-510,Cover,1,pcs
+V1,6,160,suburban,4,PW-4700,GL-478,Glazing panel,1,pcs
+V1,6,160,suburban,4,PW-4700,PF-253,Aluminium profile,4.8,m
+V1,6,160,suburban,4,PW-4700,JT-281,Seal silicone 10,5.2,m
+V1,6,160,suburban,4,PW-4700,BK-931,Bracket,8,pcs
+V1,6,160,suburban,4,PW-4700,BL-268,Bolt M6x20,16,pcs
+V1,6,160,suburban,4,FC-6100,RV-410,Floor covering,46,m
+V1,6,160,suburban,4,FC-6100,GU-077,Floor adhesive,12,kg
+V1,6,160,suburban,4,FC-6100,PF-209,Aluminium profile,18,m
+V1,6,160,suburban,4,FC-6100,SC-842,Screw,120,pcs
+V1,6,160,suburban,4,CE-1477,GL-6348,Glazing panel,1,pcs
+V1,6,160,suburban,4,CE-1477,SC-1034,Screw,8,pcs
+V1,6,160,suburban,4,CE-1477,TU-3458,Steel tube,4.8,m
+V1,6,160,suburban,4,CE-1477,BK-2948,Bracket,4,pcs
+V1,6,160,suburban,4,LS-7235,FB-8703,Fabric cover,4.7,m
+V1,6,160,suburban,4,LS-7235,EC-3924,End cap,3,pcs
+V1,6,160,suburban,4,LS-7235,HG-1013,Hinge,2,pcs
+V1,6,160,suburban,4,LS-7235,BK-2948,Bracket,6,pcs
+V1,6,160,suburban,4,LS-7235,GR-7984,Grip,4,pcs
+V1,6,160,suburban,4,LS-7235,BL-9507,Bolt M6x20,9,pcs
+V1,6,160,suburban,4,PD-2768,EC-8247,End cap,3,pcs
+V1,6,160,suburban,4,PD-2768,PF-501,Aluminium profile,3.2,m
+V1,6,160,suburban,4,PD-2768,CV-2340,Cover,2,pcs
+V1,6,160,suburban,4,PD-2768,GL-8040,Glazing panel,2,pcs
+V1,6,160,suburban,4,PD-2768,EC-4312,End cap,2,pcs
+V1,6,160,suburban,4,PD-2768,SC-8048,Screw,10,pcs
+V1,6,160,suburban,4,BC-5573,BK-9804,Bracket,4,pcs
+V1,6,160,suburban,4,BC-5573,SN-6050,Sensor,1,pcs
+V1,6,160,suburban,4,BC-5573,VL-4778,Valve,2,pcs
+V1,6,160,suburban,4,BC-5573,BD-3196,Brake disc,2,pcs
+V1,6,160,suburban,4,BM-9125,BK-4370,Bracket,8,pcs
+V1,6,160,suburban,4,BM-9125,SN-9301,Sensor,3,pcs
+V1,6,160,suburban,4,BM-9125,BK-7649,Bracket,7,pcs
+V1,6,160,suburban,4,BM-9125,SN-6050,Sensor,3,pcs
+V1,6,160,suburban,4,CM-6592,BD-7281,Brake disc,3,pcs
+V1,6,160,suburban,4,CM-6592,BP-8435,Brake pad,7,pcs
+V1,6,160,suburban,4,CM-6592,PC-7027,Control board,1,pcs
+V1,6,160,suburban,4,CM-6592,PC-1343,Control board,1,pcs
+V1,6,160,suburban,4,CM-6592,VL-8177,Valve,2,pcs
+V1,6,160,suburban,4,MG-5779,BL-2092,Bolt M8x25,14,pcs
+V1,6,160,suburban,4,MG-5779,CB-6642,Cable harness,1,pcs
+V1,6,160,suburban,4,MG-5779,BP-9582,Brake pad,5,pcs
+V1,6,160,suburban,4,MG-5779,BK-7649,Bracket,7,pcs
+V1,6,160,suburban,4,MG-5779,SN-5847,Sensor,1,pcs
+V2,7,160,suburban,2,V2,CARB-SYS-01,Car body,1,pcs
+V2,7,160,suburban,2,V2,RUNG-SYS-01,Running gear,1,pcs
+V2,7,160,suburban,2,V2,POWR-SYS-01,Power system,1,pcs
+V2,7,160,suburban,2,V2,DOOR-SYS-01,Door system,1,pcs
+V2,7,160,suburban,2,V2,HVAC-SYS-01,HVAC,1,pcs
+V2,7,160,suburban,2,V2,INTR-SYS-01,Interior,1,pcs
+V2,7,160,suburban,2,V2,BRAK-SYS-01,Braking,1,pcs
+V2,7,160,suburban,3,CARB-SYS-01,SW-3510,Side wall panel set,14,pcs
+V2,7,160,suburban,3,CARB-SYS-01,RP-3360,Roof panel set,7,pcs
+V2,7,160,suburban,3,CARB-SYS-01,UF-1508,Underframe module,7,pcs
+V2,7,160,suburban,3,CARB-SYS-01,FE-4259,Front end module,2,pcs
+V2,7,160,suburban,3,RUNG-SYS-01,MB-8736,Motor bogie frame,4,pcs
+V2,7,160,suburban,3,RUNG-SYS-01,TF-8641,Trailer bogie frame,7,pcs
+V2,7,160,suburban,3,RUNG-SYS-01,PS-2464,Primary suspension set,28,pcs
+V2,7,160,suburban,3,RUNG-SYS-01,WA-6048,Wheelset assembly,28,pcs
+V2,7,160,suburban,3,POWR-SYS-01,TV-4514,Traction converter,4,pcs
+V2,7,160,suburban,3,POWR-SYS-01,AX-7929,Auxiliary converter,2,pcs
+V2,7,160,suburban,3,POWR-SYS-01,BB-5392,Battery box,2,pcs
+V2,7,160,suburban,3,POWR-SYS-01,PG-4384,Pantograph assembly,2,pcs
+V2,7,160,suburban,3,DOOR-SYS-01,DR-1042,"Door leaf assembly, left",14,pcs
+V2,7,160,suburban,3,DOOR-SYS-01,DR-1043,"Door leaf assembly, right",14,pcs
+V2,7,160,suburban,3,DOOR-SYS-01,DD-2010,Door drive unit,28,pcs
+V2,7,160,suburban,3,DOOR-SYS-01,DC-3001,Door control unit,28,pcs
+V2,7,160,suburban,3,DOOR-SYS-01,MP-4418,Sliding step,28,pcs
+V2,7,160,suburban,3,DOOR-SYS-01,TS-9148,Door threshold,28,pcs
+V2,7,160,suburban,3,DOOR-SYS-01,ER-8092,Emergency release device,28,pcs
+V2,7,160,suburban,3,DOOR-SYS-01,DI-6697,Door indicator light set,28,pcs
+V2,7,160,suburban,3,HVAC-SYS-01,HV-5100,Saloon HVAC unit,14,pcs
+V2,7,160,suburban,3,HVAC-SYS-01,CL-0931,Cab HVAC unit,2,pcs
+V2,7,160,suburban,3,HVAC-SYS-01,AD-7300,Air duct assembly,7,pcs
+V2,7,160,suburban,3,HVAC-SYS-01,TC-8100,HVAC control unit,7,pcs
+V2,7,160,suburban,3,HVAC-SYS-01,HT-5300,Heater unit,28,pcs
+V2,7,160,suburban,3,HVAC-SYS-01,FG-6342,Fresh air intake grille,14,pcs
+V2,7,160,suburban,3,HVAC-SYS-01,CK-2382,Condensate drain kit,14,pcs
+V2,7,160,suburban,3,HVAC-SYS-01,RC-5381,HVAC roof fairing,14,pcs
+V2,7,160,suburban,3,INTR-SYS-01,SF-9020,Seat frame assembly,140,pcs
+V2,7,160,suburban,3,INTR-SYS-01,LR-1500,Luggage rack,56,pcs
+V2,7,160,suburban,3,INTR-SYS-01,HD-3100,Handrail assembly,42,pcs
+V2,7,160,suburban,3,INTR-SYS-01,PW-4700,Glazed partition,14,pcs
+V2,7,160,suburban,3,INTR-SYS-01,FC-6100,Floor covering assembly,7,pcs
+V2,7,160,suburban,3,INTR-SYS-01,CE-1477,Ceiling panel set,7,pcs
+V2,7,160,suburban,3,INTR-SYS-01,LS-7235,Interior lighting strip,42,pcs
+V2,7,160,suburban,3,INTR-SYS-01,PD-2768,Passenger information display,14,pcs
+V2,7,160,suburban,3,BRAK-SYS-01,BC-5573,Brake caliper unit,56,pcs
+V2,7,160,suburban,3,BRAK-SYS-01,BM-9125,Brake control module,7,pcs
+V2,7,160,suburban,3,BRAK-SYS-01,CM-6592,Air compressor unit,2,pcs
+V2,7,160,suburban,3,BRAK-SYS-01,MG-5779,Magnetic track brake,8,pcs
+V2,7,160,suburban,4,SW-3510,WD-2021,Window,5,pcs
+V2,7,160,suburban,4,SW-3510,BL-1287,Bolt M6x20,16,pcs
+V2,7,160,suburban,4,SW-3510,PN-7736,Panel,2,pcs
+V2,7,160,suburban,4,RP-3360,BL-3980,Bolt M10x40,14,pcs
+V2,7,160,suburban,4,RP-3360,JT-4924,Seal EPDM 12,4.3,m
+V2,7,160,suburban,4,RP-3360,BL-1287,Bolt M6x20,22,pcs
+V2,7,160,suburban,4,UF-1508,BE-6841,Beam,16.7,m
+V2,7,160,suburban,4,UF-1508,BK-7403,Bracket,2,pcs
+V2,7,160,suburban,4,UF-1508,BE-8909,Beam,19.7,m
+V2,7,160,suburban,4,FE-4259,BE-8909,Beam,12.5,m
+V2,7,160,suburban,4,FE-4259,BL-1287,Bolt M6x20,15,pcs
+V2,7,160,suburban,4,FE-4259,BL-6349,Bolt M6x20,9,pcs
+V2,7,160,suburban,4,FE-4259,BE-6281,Beam,11,m
+V2,7,160,suburban,4,FE-4259,BL-3980,Bolt M10x40,17,pcs
+V2,7,160,suburban,4,FE-4259,BL-7537,Bolt M8x35,14,pcs
+V2,7,160,suburban,4,MB-8736,SN-5618,Sensor,2,pcs
+V2,7,160,suburban,4,MB-8736,AL-6065,Axle,1,pcs
+V2,7,160,suburban,4,MB-8736,AL-230,Axle,2,pcs
+V2,7,160,suburban,4,MB-8736,BL-4322,Bolt M10x40,12,pcs
+V2,7,160,suburban,4,MB-8736,SP-7354,Spring,2,pcs
+V2,7,160,suburban,4,TF-8641,AL-230,Axle,2,pcs
+V2,7,160,suburban,4,TF-8641,WH-2962,Wheel,4,pcs
+V2,7,160,suburban,4,TF-8641,SN-6930,Sensor,2,pcs
+V2,7,160,suburban,4,TF-8641,WH-3985,Wheel,3,pcs
+V2,7,160,suburban,4,TF-8641,BK-1546,Bracket,6,pcs
+V2,7,160,suburban,4,PS-2464,WH-4087,Wheel,4,pcs
+V2,7,160,suburban,4,PS-2464,SN-8168,Sensor,1,pcs
+V2,7,160,suburban,4,PS-2464,BG-3637,Bearing,3,pcs
+V2,7,160,suburban,4,WA-6048,SN-8049,Sensor,3,pcs
+V2,7,160,suburban,4,WA-6048,WH-9839,Wheel,4,pcs
+V2,7,160,suburban,4,WA-6048,WH-9324,Wheel,4,pcs
+V2,7,160,suburban,4,WA-6048,DP-7346,Damper,3,pcs
+V2,7,160,suburban,4,WA-6048,SN-8306,Sensor,4,pcs
+V2,7,160,suburban,4,WA-6048,WH-3877,Wheel,2,pcs
+V2,7,160,suburban,4,TV-4514,CB-2111,Cable harness,2,pcs
+V2,7,160,suburban,4,TV-4514,IG-1215,IGBT module,3,pcs
+V2,7,160,suburban,4,TV-4514,BK-7375,Bracket,4,pcs
+V2,7,160,suburban,4,AX-7929,FN-8331,Fan,1,pcs
+V2,7,160,suburban,4,AX-7929,CB-2111,Cable harness,2,pcs
+V2,7,160,suburban,4,AX-7929,BL-1778,Bolt M8x35,6,pcs
+V2,7,160,suburban,4,AX-7929,PC-4983,Control board,1,pcs
+V2,7,160,suburban,4,BB-5392,SN-8133,Sensor,1,pcs
+V2,7,160,suburban,4,BB-5392,BL-9688,Bolt M8x35,21,pcs
+V2,7,160,suburban,4,BB-5392,IG-1215,IGBT module,3,pcs
+V2,7,160,suburban,4,BB-5392,CB-9799,Cable harness,2,pcs
+V2,7,160,suburban,4,BB-5392,SN-226,Sensor,4,pcs
+V2,7,160,suburban,4,PG-4384,CT-5595,Contactor,1,pcs
+V2,7,160,suburban,4,PG-4384,CB-737,Cable harness,1,pcs
+V2,7,160,suburban,4,PG-4384,FN-8331,Fan,1,pcs
+V2,7,160,suburban,4,PG-4384,FN-5165,Fan,1,pcs
+V2,7,160,suburban,4,PG-4384,SN-8319,Sensor,4,pcs
+V2,7,160,suburban,4,DR-1042,JT-218,Door seal,2.4,m
+V2,7,160,suburban,4,DR-1042,AC-501,Door actuator,1,pcs
+V2,7,160,suburban,4,DR-1042,GL-410,Glazing panel,1,pcs
+V2,7,160,suburban,4,DR-1042,BK-120,Bracket LH,4,pcs
+V2,7,160,suburban,4,DR-1042,BL-330,Bolt M8x25,16,pcs
+V2,7,160,suburban,4,DR-1042,RL-205,Guide rail,1.3,m
+V2,7,160,suburban,4,DR-1042,SN-610,Sensor,2,pcs
+V2,7,160,suburban,4,DR-1043,JT-218,Door seal,2.4,m
+V2,7,160,suburban,4,DR-1043,AC-477,Door actuator,1,pcs
+V2,7,160,suburban,4,DR-1043,GL-452,Glazing panel,1,pcs
+V2,7,160,suburban,4,DR-1043,BK-121,Bracket RH,4,pcs
+V2,7,160,suburban,4,DR-1043,BL-338,Bolt M8x35,16,pcs
+V2,7,160,suburban,4,DR-1043,RL-205,Guide rail,1.3,m
+V2,7,160,suburban,4,DR-1043,SN-610,Sensor,2,pcs
+V2,7,160,suburban,4,DD-2010,MT-701,Door motor 24V,1,pcs
+V2,7,160,suburban,4,DD-2010,BK-133,Bracket,2,pcs
+V2,7,160,suburban,4,DD-2010,BL-352,Bolt M8x35,8,pcs
+V2,7,160,suburban,4,DD-2010,CB-815,Cable harness,1,pcs
+V2,7,160,suburban,4,DD-2010,SN-627,Sensor,1,pcs
+V2,7,160,suburban,4,DD-2010,RL-260,Guide rail,0.9,m
+V2,7,160,suburban,4,DC-3001,PC-902,Control board,1,pcs
+V2,7,160,suburban,4,DC-3001,SN-573,Door position sensor,2,pcs
+V2,7,160,suburban,4,DC-3001,CB-828,Cable harness,1,pcs
+V2,7,160,suburban,4,DC-3001,RY-440,Relay,3,pcs
+V2,7,160,suburban,4,DC-3001,BK-425,Bracket,2,pcs
+V2,7,160,suburban,4,DC-3001,BL-309,Bolt M6x20,4,pcs
+V2,7,160,suburban,4,MP-4418,AC-534,Actuator,1,pcs
+V2,7,160,suburban,4,MP-4418,PL-661,Tread plate,1,pcs
+V2,7,160,suburban,4,MP-4418,RL-237,Guide rail,1.6,m
+V2,7,160,suburban,4,MP-4418,SN-682,Sensor,2,pcs
+V2,7,160,suburban,4,MP-4418,BK-873,Bracket,4,pcs
+V2,7,160,suburban,4,MP-4418,BL-394,Bolt M8x25,12,pcs
+V2,7,160,suburban,4,TS-9148,LD-6579,LED module,3,pcs
+V2,7,160,suburban,4,TS-9148,PC-1553,Control board,1,pcs
+V2,7,160,suburban,4,TS-9148,GB-1211,Gearbox,1,pcs
+V2,7,160,suburban,4,TS-9148,RY-2620,Relay,3,pcs
+V2,7,160,suburban,4,ER-8092,GL-5454,Glazing panel,1,pcs
+V2,7,160,suburban,4,ER-8092,AC-5665,Actuator,1,pcs
+V2,7,160,suburban,4,ER-8092,LD-6579,LED module,6,pcs
+V2,7,160,suburban,4,ER-8092,PC-6360,Control board,1,pcs
+V2,7,160,suburban,4,ER-8092,CB-2186,Cable harness,1,pcs
+V2,7,160,suburban,4,DI-6697,BK-5662,Bracket,5,pcs
+V2,7,160,suburban,4,DI-6697,GL-5443,Glazing panel,2,pcs
+V2,7,160,suburban,4,DI-6697,CB-2186,Cable harness,1,pcs
+V2,7,160,suburban,4,DI-6697,SN-8150,Sensor,2,pcs
+V2,7,160,suburban,4,DI-6697,GL-291,Glazing panel,2,pcs
+V2,7,160,suburban,4,HV-5100,CP-512,Compressor,1,pcs
+V2,7,160,suburban,4,HV-5100,EV-230,Evaporator,1,pcs
+V2,7,160,suburban,4,HV-5100,CD-340,Condenser,1,pcs
+V2,7,160,suburban,4,HV-5100,FN-720,Fan,2,pcs
+V2,7,160,suburban,4,HV-5100,FL-801,Filter,2,pcs
+V2,7,160,suburban,4,HV-5100,RF-110,Refrigerant,3.5,kg
+V2,7,160,suburban,4,HV-5100,BK-205,Bracket,6,pcs
+V2,7,160,suburban,4,CL-0931,CP-447,Compressor,1,pcs
+V2,7,160,suburban,4,CL-0931,EV-208,Evaporator,1,pcs
+V2,7,160,suburban,4,CL-0931,FN-716,Fan,1,pcs
+V2,7,160,suburban,4,CL-0931,FL-877,Filter,1,pcs
+V2,7,160,suburban,4,CL-0931,RF-110,Refrigerant,1.2,kg
+V2,7,160,suburban,4,CL-0931,TH-402,Thermostat,1,pcs
+V2,7,160,suburban,4,CL-0931,BK-229,Bracket,4,pcs
+V2,7,160,suburban,4,AD-7300,DT-150,Duct,12.5,m
+V2,7,160,suburban,4,AD-7300,IN-620,Insulation,8,kg
+V2,7,160,suburban,4,AD-7300,BK-281,Bracket,20,pcs
+V2,7,160,suburban,4,AD-7300,BL-417,Bolt M8x35,40,pcs
+V2,7,160,suburban,4,AD-7300,VL-906,Damper valve,2,pcs
+V2,7,160,suburban,4,AD-7300,JT-262,Seal EPDM 15,6,m
+V2,7,160,suburban,4,TC-8100,PC-951,Control board,1,pcs
+V2,7,160,suburban,4,TC-8100,TH-436,Thermostat,2,pcs
+V2,7,160,suburban,4,TC-8100,SN-699,Sensor,3,pcs
+V2,7,160,suburban,4,TC-8100,RY-472,Relay,2,pcs
+V2,7,160,suburban,4,TC-8100,CB-866,Cable harness,1,pcs
+V2,7,160,suburban,4,HT-5300,HE-310,Heating element,2,pcs
+V2,7,160,suburban,4,HT-5300,FN-708,Fan,1,pcs
+V2,7,160,suburban,4,HT-5300,TH-415,Thermostat,1,pcs
+V2,7,160,suburban,4,HT-5300,BK-213,Bracket,4,pcs
+V2,7,160,suburban,4,HT-5300,BL-463,Bolt M10x40,8,pcs
+V2,7,160,suburban,4,FG-6342,RY-1385,Relay,2,pcs
+V2,7,160,suburban,4,FG-6342,EV-5767,Evaporator,1,pcs
+V2,7,160,suburban,4,FG-6342,IN-6519,Insulation,5.8,kg
+V2,7,160,suburban,4,FG-6342,PC-2995,Control board,1,pcs
+V2,7,160,suburban,4,FG-6342,SN-1366,Sensor,4,pcs
+V2,7,160,suburban,4,CK-2382,RY-1385,Relay,6,pcs
+V2,7,160,suburban,4,CK-2382,TH-7192,Thermostat,1,pcs
+V2,7,160,suburban,4,CK-2382,TH-2133,Thermostat,2,pcs
+V2,7,160,suburban,4,CK-2382,SN-1366,Sensor,4,pcs
+V2,7,160,suburban,4,CK-2382,DT-4431,Duct,7.1,m
+V2,7,160,suburban,4,RC-5381,CP-9424,Compressor,1,pcs
+V2,7,160,suburban,4,RC-5381,IN-7553,Insulation,5.9,kg
+V2,7,160,suburban,4,RC-5381,SN-5940,Sensor,2,pcs
+V2,7,160,suburban,4,RC-5381,BL-543,Bolt M6x20,13,pcs
+V2,7,160,suburban,4,RC-5381,BL-1870,Bolt M8x35,23,pcs
+V2,7,160,suburban,4,RC-5381,JT-5413,Seal EPDM 15,3.6,m
+V2,7,160,suburban,4,SF-9020,TU-140,Steel tube,4.2,m
+V2,7,160,suburban,4,SF-9020,BK-648,Bracket,4,pcs
+V2,7,160,suburban,4,SF-9020,BL-482,Bolt M10x40,16,pcs
+V2,7,160,suburban,4,SF-9020,CU-310,Cushion 2-seat,2,pcs
+V2,7,160,suburban,4,SF-9020,AR-520,Armrest,2,pcs
+V2,7,160,suburban,4,SF-9020,FB-730,Fabric cover,3.1,m
+V2,7,160,suburban,4,LR-1500,PF-220,Aluminium profile,3,m
+V2,7,160,suburban,4,LR-1500,GL-436,Glazing panel,2,pcs
+V2,7,160,suburban,4,LR-1500,BK-318,Bracket,6,pcs
+V2,7,160,suburban,4,LR-1500,BL-429,Bolt M6x20,12,pcs
+V2,7,160,suburban,4,LR-1500,EC-705,End cap,2,pcs
+V2,7,160,suburban,4,HD-3100,TU-126,Steel tube,2.2,m
+V2,7,160,suburban,4,HD-3100,BK-335,Bracket,4,pcs
+V2,7,160,suburban,4,HD-3100,BL-476,Bolt M6x20,8,pcs
+V2,7,160,suburban,4,HD-3100,EC-761,End cap,2,pcs
+V2,7,160,suburban,4,HD-3100,CV-510,Cover,1,pcs
+V2,7,160,suburban,4,PW-4700,GL-478,Glazing panel,1,pcs
+V2,7,160,suburban,4,PW-4700,PF-253,Aluminium profile,4.8,m
+V2,7,160,suburban,4,PW-4700,JT-281,Seal silicone 10,5.2,m
+V2,7,160,suburban,4,PW-4700,BK-931,Bracket,8,pcs
+V2,7,160,suburban,4,PW-4700,BL-268,Bolt M6x20,16,pcs
+V2,7,160,suburban,4,FC-6100,RV-410,Floor covering,46,m
+V2,7,160,suburban,4,FC-6100,GU-077,Floor adhesive,12,kg
+V2,7,160,suburban,4,FC-6100,PF-209,Aluminium profile,18,m
+V2,7,160,suburban,4,FC-6100,SC-842,Screw,120,pcs
+V2,7,160,suburban,4,CE-1477,GL-6348,Glazing panel,1,pcs
+V2,7,160,suburban,4,CE-1477,SC-1034,Screw,8,pcs
+V2,7,160,suburban,4,CE-1477,TU-3458,Steel tube,4.8,m
+V2,7,160,suburban,4,CE-1477,BK-2948,Bracket,4,pcs
+V2,7,160,suburban,4,LS-7235,FB-8703,Fabric cover,4.7,m
+V2,7,160,suburban,4,LS-7235,EC-3924,End cap,3,pcs
+V2,7,160,suburban,4,LS-7235,HG-1013,Hinge,2,pcs
+V2,7,160,suburban,4,LS-7235,BK-2948,Bracket,6,pcs
+V2,7,160,suburban,4,LS-7235,GR-7984,Grip,4,pcs
+V2,7,160,suburban,4,LS-7235,BL-9507,Bolt M6x20,9,pcs
+V2,7,160,suburban,4,PD-2768,EC-8247,End cap,3,pcs
+V2,7,160,suburban,4,PD-2768,PF-501,Aluminium profile,3.2,m
+V2,7,160,suburban,4,PD-2768,CV-2340,Cover,2,pcs
+V2,7,160,suburban,4,PD-2768,GL-8040,Glazing panel,2,pcs
+V2,7,160,suburban,4,PD-2768,EC-4312,End cap,2,pcs
+V2,7,160,suburban,4,PD-2768,SC-8048,Screw,10,pcs
+V2,7,160,suburban,4,BC-5573,BK-9804,Bracket,4,pcs
+V2,7,160,suburban,4,BC-5573,SN-6050,Sensor,1,pcs
+V2,7,160,suburban,4,BC-5573,VL-4778,Valve,2,pcs
+V2,7,160,suburban,4,BC-5573,BD-3196,Brake disc,2,pcs
+V2,7,160,suburban,4,BM-9125,BK-4370,Bracket,8,pcs
+V2,7,160,suburban,4,BM-9125,SN-9301,Sensor,3,pcs
+V2,7,160,suburban,4,BM-9125,BK-7649,Bracket,7,pcs
+V2,7,160,suburban,4,BM-9125,SN-6050,Sensor,3,pcs
+V2,7,160,suburban,4,CM-6592,BD-7281,Brake disc,3,pcs
+V2,7,160,suburban,4,CM-6592,BP-8435,Brake pad,7,pcs
+V2,7,160,suburban,4,CM-6592,PC-7027,Control board,1,pcs
+V2,7,160,suburban,4,CM-6592,PC-1343,Control board,1,pcs
+V2,7,160,suburban,4,CM-6592,VL-8177,Valve,2,pcs
+V2,7,160,suburban,4,MG-5779,BL-2092,Bolt M8x25,14,pcs
+V2,7,160,suburban,4,MG-5779,CB-6642,Cable harness,1,pcs
+V2,7,160,suburban,4,MG-5779,BP-9582,Brake pad,5,pcs
+V2,7,160,suburban,4,MG-5779,BK-7649,Bracket,7,pcs
+V2,7,160,suburban,4,MG-5779,SN-5847,Sensor,1,pcs
+V3,8,160,regional,2,V3,CARB-SYS-01,Car body,1,pcs
+V3,8,160,regional,2,V3,RUNG-SYS-01,Running gear,1,pcs
+V3,8,160,regional,2,V3,POWR-SYS-01,Power system,1,pcs
+V3,8,160,regional,2,V3,DOOR-SYS-01,Door system,1,pcs
+V3,8,160,regional,2,V3,HVAC-SYS-01,HVAC,1,pcs
+V3,8,160,regional,2,V3,INTR-SYS-01,Interior,1,pcs
+V3,8,160,regional,2,V3,BRAK-SYS-01,Braking,1,pcs
+V3,8,160,regional,3,CARB-SYS-01,SW-3510,Side wall panel set,16,pcs
+V3,8,160,regional,3,CARB-SYS-01,RP-3360,Roof panel set,8,pcs
+V3,8,160,regional,3,CARB-SYS-01,UF-1508,Underframe module,8,pcs
+V3,8,160,regional,3,CARB-SYS-01,FE-4259,Front end module,2,pcs
+V3,8,160,regional,3,RUNG-SYS-01,MB-8736,Motor bogie frame,4,pcs
+V3,8,160,regional,3,RUNG-SYS-01,TF-8641,Trailer bogie frame,8,pcs
+V3,8,160,regional,3,RUNG-SYS-01,PS-2464,Primary suspension set,32,pcs
+V3,8,160,regional,3,RUNG-SYS-01,WA-6048,Wheelset assembly,32,pcs
+V3,8,160,regional,3,POWR-SYS-01,TV-4514,Traction converter,4,pcs
+V3,8,160,regional,3,POWR-SYS-01,AX-7929,Auxiliary converter,2,pcs
+V3,8,160,regional,3,POWR-SYS-01,BB-5392,Battery box,2,pcs
+V3,8,160,regional,3,POWR-SYS-01,PG-4384,Pantograph assembly,2,pcs
+V3,8,160,regional,3,DOOR-SYS-01,PT-7731,"Door leaf assembly, left",16,pcs
+V3,8,160,regional,3,DOOR-SYS-01,DR-1043,"Door leaf assembly, right",16,pcs
+V3,8,160,regional,3,DOOR-SYS-01,DD-2037,Door drive unit,32,pcs
+V3,8,160,regional,3,DOOR-SYS-01,DC-3001,Door control unit,32,pcs
+V3,8,160,regional,3,DOOR-SYS-01,ST-4100,Sliding step,32,pcs
+V3,8,160,regional,3,DOOR-SYS-01,TS-9148,Door threshold,32,pcs
+V3,8,160,regional,3,DOOR-SYS-01,ER-2285,Emergency release device,32,pcs
+V3,8,160,regional,3,DOOR-SYS-01,DI-1092,Door indicator light set,32,pcs
+V3,8,160,regional,3,HVAC-SYS-01,HV-5100,Saloon HVAC unit,16,pcs
+V3,8,160,regional,3,HVAC-SYS-01,HC-6001,Cab HVAC unit,2,pcs
+V3,8,160,regional,3,HVAC-SYS-01,AD-7300,Air duct assembly,8,pcs
+V3,8,160,regional,3,HVAC-SYS-01,TC-8100,HVAC control unit,8,pcs
+V3,8,160,regional,3,HVAC-SYS-01,HT-5300,Heater unit,32,pcs
+V3,8,160,regional,3,HVAC-SYS-01,FG-6342,Fresh air intake grille,16,pcs
+V3,8,160,regional,3,HVAC-SYS-01,CK-4474,Condensate drain kit,16,pcs
+V3,8,160,regional,3,HVAC-SYS-01,RC-5381,HVAC roof fairing,16,pcs
+V3,8,160,regional,3,INTR-SYS-01,SF-9020,Seat frame assembly,160,pcs
+V3,8,160,regional,3,INTR-SYS-01,LR-1500,Luggage rack,64,pcs
+V3,8,160,regional,3,INTR-SYS-01,HD-3100,Handrail assembly,48,pcs
+V3,8,160,regional,3,INTR-SYS-01,PW-4700,Glazed partition,16,pcs
+V3,8,160,regional,3,INTR-SYS-01,FC-6100,Floor covering assembly,8,pcs
+V3,8,160,regional,3,INTR-SYS-01,CE-1477,Ceiling panel set,8,pcs
+V3,8,160,regional,3,INTR-SYS-01,LS-3731,Interior lighting strip,48,pcs
+V3,8,160,regional,3,INTR-SYS-01,PD-2286,Passenger information display,16,pcs
+V3,8,160,regional,3,BRAK-SYS-01,BC-5573,Brake caliper unit,64,pcs
+V3,8,160,regional,3,BRAK-SYS-01,BM-9125,Brake control module,8,pcs
+V3,8,160,regional,3,BRAK-SYS-01,CM-6592,Air compressor unit,2,pcs
+V3,8,160,regional,3,BRAK-SYS-01,MG-6191,Magnetic track brake,8,pcs
+V3,8,160,regional,4,SW-3510,WD-2021,Window,5,pcs
+V3,8,160,regional,4,SW-3510,BL-1287,Bolt M6x20,16,pcs
+V3,8,160,regional,4,SW-3510,PN-7736,Panel,2,pcs
+V3,8,160,regional,4,RP-3360,BL-3980,Bolt M10x40,14,pcs
+V3,8,160,regional,4,RP-3360,JT-4924,Seal EPDM 12,4.3,m
+V3,8,160,regional,4,RP-3360,BL-1287,Bolt M6x20,22,pcs
+V3,8,160,regional,4,UF-1508,BE-6841,Beam,16.7,m
+V3,8,160,regional,4,UF-1508,BK-7403,Bracket,2,pcs
+V3,8,160,regional,4,UF-1508,BE-8909,Beam,19.7,m
+V3,8,160,regional,4,FE-4259,BE-8909,Beam,12.5,m
+V3,8,160,regional,4,FE-4259,BL-1287,Bolt M6x20,15,pcs
+V3,8,160,regional,4,FE-4259,BL-6349,Bolt M6x20,9,pcs
+V3,8,160,regional,4,FE-4259,BE-6281,Beam,11,m
+V3,8,160,regional,4,FE-4259,BL-3980,Bolt M10x40,17,pcs
+V3,8,160,regional,4,FE-4259,BL-7537,Bolt M8x35,14,pcs
+V3,8,160,regional,4,MB-8736,SN-5618,Sensor,2,pcs
+V3,8,160,regional,4,MB-8736,AL-6065,Axle,1,pcs
+V3,8,160,regional,4,MB-8736,AL-230,Axle,2,pcs
+V3,8,160,regional,4,MB-8736,BL-4322,Bolt M10x40,12,pcs
+V3,8,160,regional,4,MB-8736,SP-7354,Spring,2,pcs
+V3,8,160,regional,4,TF-8641,AL-230,Axle,2,pcs
+V3,8,160,regional,4,TF-8641,WH-2962,Wheel,4,pcs
+V3,8,160,regional,4,TF-8641,SN-6930,Sensor,2,pcs
+V3,8,160,regional,4,TF-8641,WH-3985,Wheel,3,pcs
+V3,8,160,regional,4,TF-8641,BK-1546,Bracket,6,pcs
+V3,8,160,regional,4,PS-2464,WH-4087,Wheel,4,pcs
+V3,8,160,regional,4,PS-2464,SN-8168,Sensor,1,pcs
+V3,8,160,regional,4,PS-2464,BG-3637,Bearing,3,pcs
+V3,8,160,regional,4,WA-6048,SN-8049,Sensor,3,pcs
+V3,8,160,regional,4,WA-6048,WH-9839,Wheel,4,pcs
+V3,8,160,regional,4,WA-6048,WH-9324,Wheel,4,pcs
+V3,8,160,regional,4,WA-6048,DP-7346,Damper,3,pcs
+V3,8,160,regional,4,WA-6048,SN-8306,Sensor,4,pcs
+V3,8,160,regional,4,WA-6048,WH-3877,Wheel,2,pcs
+V3,8,160,regional,4,TV-4514,CB-2111,Cable harness,2,pcs
+V3,8,160,regional,4,TV-4514,IG-1215,IGBT module,3,pcs
+V3,8,160,regional,4,TV-4514,BK-7375,Bracket,4,pcs
+V3,8,160,regional,4,AX-7929,FN-8331,Fan,1,pcs
+V3,8,160,regional,4,AX-7929,CB-2111,Cable harness,2,pcs
+V3,8,160,regional,4,AX-7929,BL-1778,Bolt M8x35,6,pcs
+V3,8,160,regional,4,AX-7929,PC-4983,Control board,1,pcs
+V3,8,160,regional,4,BB-5392,SN-8133,Sensor,1,pcs
+V3,8,160,regional,4,BB-5392,BL-9688,Bolt M8x35,21,pcs
+V3,8,160,regional,4,BB-5392,IG-1215,IGBT module,3,pcs
+V3,8,160,regional,4,BB-5392,CB-9799,Cable harness,2,pcs
+V3,8,160,regional,4,BB-5392,SN-226,Sensor,4,pcs
+V3,8,160,regional,4,PG-4384,CT-5595,Contactor,1,pcs
+V3,8,160,regional,4,PG-4384,CB-737,Cable harness,1,pcs
+V3,8,160,regional,4,PG-4384,FN-8331,Fan,1,pcs
+V3,8,160,regional,4,PG-4384,FN-5165,Fan,1,pcs
+V3,8,160,regional,4,PG-4384,SN-8319,Sensor,4,pcs
+V3,8,160,regional,4,PT-7731,JT-218,Door seal,2.4,m
+V3,8,160,regional,4,PT-7731,AC-501,Door actuator,1,pcs
+V3,8,160,regional,4,PT-7731,GL-410,Glazing panel,1,pcs
+V3,8,160,regional,4,PT-7731,BK-120,Bracket LH,4,pcs
+V3,8,160,regional,4,PT-7731,BL-330,Bolt M8x25,16,pcs
+V3,8,160,regional,4,PT-7731,RL-205,Guide rail,1.3,m
+V3,8,160,regional,4,PT-7731,SN-610,Sensor,2,pcs
+V3,8,160,regional,4,DR-1043,JT-218,Door seal,2.4,m
+V3,8,160,regional,4,DR-1043,AC-477,Door actuator,1,pcs
+V3,8,160,regional,4,DR-1043,GL-452,Glazing panel,1,pcs
+V3,8,160,regional,4,DR-1043,BK-121,Bracket RH,4,pcs
+V3,8,160,regional,4,DR-1043,BL-338,Bolt M8x35,16,pcs
+V3,8,160,regional,4,DR-1043,RL-205,Guide rail,1.3,m
+V3,8,160,regional,4,DR-1043,SN-610,Sensor,2,pcs
+V3,8,160,regional,4,DD-2037,MT-745,Door motor 24V,1,pcs
+V3,8,160,regional,4,DD-2037,BK-133,Bracket,2,pcs
+V3,8,160,regional,4,DD-2037,BL-352,Bolt M8x35,8,pcs
+V3,8,160,regional,4,DD-2037,CB-815,Cable harness,1,pcs
+V3,8,160,regional,4,DD-2037,SN-627,Sensor,1,pcs
+V3,8,160,regional,4,DD-2037,RL-260,Guide rail,0.9,m
+V3,8,160,regional,4,DC-3001,PC-902,Control board,1,pcs
+V3,8,160,regional,4,DC-3001,SN-573,Door position sensor,2,pcs
+V3,8,160,regional,4,DC-3001,CB-828,Cable harness,1,pcs
+V3,8,160,regional,4,DC-3001,RY-440,Relay,3,pcs
+V3,8,160,regional,4,DC-3001,BK-425,Bracket,2,pcs
+V3,8,160,regional,4,DC-3001,BL-309,Bolt M6x20,4,pcs
+V3,8,160,regional,4,ST-4100,AC-534,Actuator,1,pcs
+V3,8,160,regional,4,ST-4100,PL-661,Tread plate,1,pcs
+V3,8,160,regional,4,ST-4100,RL-237,Guide rail,1.6,m
+V3,8,160,regional,4,ST-4100,SN-682,Sensor,2,pcs
+V3,8,160,regional,4,ST-4100,BK-873,Bracket,4,pcs
+V3,8,160,regional,4,ST-4100,BL-394,Bolt M8x25,12,pcs
+V3,8,160,regional,4,TS-9148,LD-6579,LED module,3,pcs
+V3,8,160,regional,4,TS-9148,PC-1553,Control board,1,pcs
+V3,8,160,regional,4,TS-9148,GB-1211,Gearbox,1,pcs
+V3,8,160,regional,4,TS-9148,RY-2620,Relay,3,pcs
+V3,8,160,regional,4,ER-2285,AC-3592,Actuator,1,pcs
+V3,8,160,regional,4,ER-2285,CB-7042,Cable harness,1,pcs
+V3,8,160,regional,4,ER-2285,LD-1453,LED module,8,pcs
+V3,8,160,regional,4,ER-2285,GL-7404,Glazing panel,2,pcs
+V3,8,160,regional,4,ER-2285,PC-6678,Control board,1,pcs
+V3,8,160,regional,4,DI-1092,BK-8215,Bracket,5,pcs
+V3,8,160,regional,4,DI-1092,GL-5149,Glazing panel,2,pcs
+V3,8,160,regional,4,DI-1092,GL-7802,Glazing panel,1,pcs
+V3,8,160,regional,4,DI-1092,CB-7745,Cable harness,1,pcs
+V3,8,160,regional,4,DI-1092,SN-8954,Sensor,4,pcs
+V3,8,160,regional,4,HV-5100,CP-512,Compressor,1,pcs
+V3,8,160,regional,4,HV-5100,EV-230,Evaporator,1,pcs
+V3,8,160,regional,4,HV-5100,CD-340,Condenser,1,pcs
+V3,8,160,regional,4,HV-5100,FN-720,Fan,2,pcs
+V3,8,160,regional,4,HV-5100,FL-801,Filter,2,pcs
+V3,8,160,regional,4,HV-5100,RF-110,Refrigerant,3.5,kg
+V3,8,160,regional,4,HV-5100,BK-205,Bracket,6,pcs
+V3,8,160,regional,4,HC-6001,CP-447,Compressor,1,pcs
+V3,8,160,regional,4,HC-6001,EV-208,Evaporator,1,pcs
+V3,8,160,regional,4,HC-6001,FN-716,Fan,1,pcs
+V3,8,160,regional,4,HC-6001,FL-877,Filter,1,pcs
+V3,8,160,regional,4,HC-6001,RF-110,Refrigerant,1.2,kg
+V3,8,160,regional,4,HC-6001,TH-402,Thermostat,1,pcs
+V3,8,160,regional,4,HC-6001,BK-229,Bracket,4,pcs
+V3,8,160,regional,4,AD-7300,DT-150,Duct,12.5,m
+V3,8,160,regional,4,AD-7300,IN-620,Insulation,8,kg
+V3,8,160,regional,4,AD-7300,BK-281,Bracket,20,pcs
+V3,8,160,regional,4,AD-7300,BL-417,Bolt M8x35,40,pcs
+V3,8,160,regional,4,AD-7300,VL-906,Damper valve,2,pcs
+V3,8,160,regional,4,AD-7300,JT-262,Seal EPDM 15,6,m
+V3,8,160,regional,4,TC-8100,PC-951,Control board,1,pcs
+V3,8,160,regional,4,TC-8100,TH-436,Thermostat,2,pcs
+V3,8,160,regional,4,TC-8100,SN-699,Sensor,3,pcs
+V3,8,160,regional,4,TC-8100,RY-472,Relay,2,pcs
+V3,8,160,regional,4,TC-8100,CB-866,Cable harness,1,pcs
+V3,8,160,regional,4,HT-5300,HE-310,Heating element,2,pcs
+V3,8,160,regional,4,HT-5300,FN-708,Fan,1,pcs
+V3,8,160,regional,4,HT-5300,TH-415,Thermostat,1,pcs
+V3,8,160,regional,4,HT-5300,BK-213,Bracket,4,pcs
+V3,8,160,regional,4,HT-5300,BL-463,Bolt M10x40,8,pcs
+V3,8,160,regional,4,FG-6342,RY-1385,Relay,2,pcs
+V3,8,160,regional,4,FG-6342,EV-5767,Evaporator,1,pcs
+V3,8,160,regional,4,FG-6342,IN-6519,Insulation,5.8,kg
+V3,8,160,regional,4,FG-6342,PC-2995,Control board,1,pcs
+V3,8,160,regional,4,FG-6342,SN-1366,Sensor,4,pcs
+V3,8,160,regional,4,CK-4474,TH-7192,Thermostat,1,pcs
+V3,8,160,regional,4,CK-4474,DT-583,Duct,12.6,m
+V3,8,160,regional,4,CK-4474,RY-2351,Relay,3,pcs
+V3,8,160,regional,4,CK-4474,TH-9538,Thermostat,1,pcs
+V3,8,160,regional,4,CK-4474,SN-1459,Sensor,4,pcs
+V3,8,160,regional,4,RC-5381,CP-9424,Compressor,1,pcs
+V3,8,160,regional,4,RC-5381,IN-7553,Insulation,5.9,kg
+V3,8,160,regional,4,RC-5381,SN-5940,Sensor,2,pcs
+V3,8,160,regional,4,RC-5381,BL-543,Bolt M6x20,13,pcs
+V3,8,160,regional,4,RC-5381,BL-1870,Bolt M8x35,23,pcs
+V3,8,160,regional,4,RC-5381,JT-5413,Seal EPDM 15,3.6,m
+V3,8,160,regional,4,SF-9020,TU-140,Steel tube,4.2,m
+V3,8,160,regional,4,SF-9020,BK-648,Bracket,4,pcs
+V3,8,160,regional,4,SF-9020,BL-482,Bolt M10x40,16,pcs
+V3,8,160,regional,4,SF-9020,CU-310,Cushion 2-seat,2,pcs
+V3,8,160,regional,4,SF-9020,AR-520,Armrest,2,pcs
+V3,8,160,regional,4,SF-9020,FB-730,Fabric cover,3.1,m
+V3,8,160,regional,4,LR-1500,PF-220,Aluminium profile,3,m
+V3,8,160,regional,4,LR-1500,GL-436,Glazing panel,2,pcs
+V3,8,160,regional,4,LR-1500,BK-318,Bracket,6,pcs
+V3,8,160,regional,4,LR-1500,BL-429,Bolt M6x20,12,pcs
+V3,8,160,regional,4,LR-1500,EC-705,End cap,2,pcs
+V3,8,160,regional,4,HD-3100,TU-126,Steel tube,2.2,m
+V3,8,160,regional,4,HD-3100,BK-335,Bracket,4,pcs
+V3,8,160,regional,4,HD-3100,BL-476,Bolt M6x20,8,pcs
+V3,8,160,regional,4,HD-3100,EC-761,End cap,2,pcs
+V3,8,160,regional,4,HD-3100,CV-510,Cover,1,pcs
+V3,8,160,regional,4,PW-4700,GL-478,Glazing panel,1,pcs
+V3,8,160,regional,4,PW-4700,PF-253,Aluminium profile,4.8,m
+V3,8,160,regional,4,PW-4700,JT-281,Seal silicone 10,5.2,m
+V3,8,160,regional,4,PW-4700,BK-931,Bracket,8,pcs
+V3,8,160,regional,4,PW-4700,BL-268,Bolt M6x20,16,pcs
+V3,8,160,regional,4,FC-6100,RV-410,Floor covering,46,m
+V3,8,160,regional,4,FC-6100,GU-077,Floor adhesive,12,kg
+V3,8,160,regional,4,FC-6100,PF-209,Aluminium profile,18,m
+V3,8,160,regional,4,FC-6100,SC-842,Screw,120,pcs
+V3,8,160,regional,4,CE-1477,GL-6348,Glazing panel,1,pcs
+V3,8,160,regional,4,CE-1477,SC-1034,Screw,8,pcs
+V3,8,160,regional,4,CE-1477,TU-3458,Steel tube,4.8,m
+V3,8,160,regional,4,CE-1477,BK-2948,Bracket,4,pcs
+V3,8,160,regional,4,LS-3731,BK-2948,Bracket,6,pcs
+V3,8,160,regional,4,LS-3731,GR-7984,Grip,4,pcs
+V3,8,160,regional,4,LS-3731,FB-5629,Fabric cover,3.8,m
+V3,8,160,regional,4,LS-3731,EC-5717,End cap,2,pcs
+V3,8,160,regional,4,LS-3731,HG-3697,Hinge,4,pcs
+V3,8,160,regional,4,LS-3731,BL-137,Bolt M10x40,23,pcs
+V3,8,160,regional,4,PD-2286,GL-8040,Glazing panel,2,pcs
+V3,8,160,regional,4,PD-2286,CV-7621,Cover,2,pcs
+V3,8,160,regional,4,PD-2286,PF-5646,Aluminium profile,7.5,m
+V3,8,160,regional,4,PD-2286,SC-9860,Screw,24,pcs
+V3,8,160,regional,4,PD-2286,EC-6277,End cap,3,pcs
+V3,8,160,regional,4,PD-2286,EC-1587,End cap,2,pcs
+V3,8,160,regional,4,BC-5573,BK-9804,Bracket,4,pcs
+V3,8,160,regional,4,BC-5573,SN-6050,Sensor,1,pcs
+V3,8,160,regional,4,BC-5573,VL-4778,Valve,2,pcs
+V3,8,160,regional,4,BC-5573,BD-3196,Brake disc,2,pcs
+V3,8,160,regional,4,BM-9125,BK-4370,Bracket,8,pcs
+V3,8,160,regional,4,BM-9125,SN-9301,Sensor,3,pcs
+V3,8,160,regional,4,BM-9125,BK-7649,Bracket,7,pcs
+V3,8,160,regional,4,BM-9125,SN-6050,Sensor,3,pcs
+V3,8,160,regional,4,CM-6592,BD-7281,Brake disc,3,pcs
+V3,8,160,regional,4,CM-6592,BP-8435,Brake pad,7,pcs
+V3,8,160,regional,4,CM-6592,PC-7027,Control board,1,pcs
+V3,8,160,regional,4,CM-6592,PC-1343,Control board,1,pcs
+V3,8,160,regional,4,CM-6592,VL-8177,Valve,2,pcs
+V3,8,160,regional,4,MG-6191,BL-1122,Bolt M8x35,14,pcs
+V3,8,160,regional,4,MG-6191,BK-744,Bracket,6,pcs
+V3,8,160,regional,4,MG-6191,CB-2633,Cable harness,2,pcs
+V3,8,160,regional,4,MG-6191,BP-4354,Brake pad,4,pcs
+V3,8,160,regional,4,MG-6191,SN-4687,Sensor,4,pcs
+V4,8,200,regional,2,V4,CARB-SYS-01,Car body,1,pcs
+V4,8,200,regional,2,V4,RUNG-SYS-01,Running gear,1,pcs
+V4,8,200,regional,2,V4,POWR-SYS-01,Power system,1,pcs
+V4,8,200,regional,2,V4,DOOR-SYS-01,Door system,1,pcs
+V4,8,200,regional,2,V4,HVAC-SYS-01,HVAC,1,pcs
+V4,8,200,regional,2,V4,INTR-SYS-01,Interior,1,pcs
+V4,8,200,regional,2,V4,BRAK-SYS-01,Braking,1,pcs
+V4,8,200,regional,3,CARB-SYS-01,SW-3510,Side wall panel set,16,pcs
+V4,8,200,regional,3,CARB-SYS-01,RP-3360,Roof panel set,8,pcs
+V4,8,200,regional,3,CARB-SYS-01,UF-1508,Underframe module,8,pcs
+V4,8,200,regional,3,CARB-SYS-01,FE-4574,Front end module,2,pcs
+V4,8,200,regional,3,RUNG-SYS-01,MB-8736,Motor bogie frame,4,pcs
+V4,8,200,regional,3,RUNG-SYS-01,TF-8641,Trailer bogie frame,8,pcs
+V4,8,200,regional,3,RUNG-SYS-01,PS-2464,Primary suspension set,32,pcs
+V4,8,200,regional,3,RUNG-SYS-01,WA-2591,Wheelset assembly,32,pcs
+V4,8,200,regional,3,POWR-SYS-01,TV-4514,Traction converter,4,pcs
+V4,8,200,regional,3,POWR-SYS-01,AX-7929,Auxiliary converter,2,pcs
+V4,8,200,regional,3,POWR-SYS-01,BB-5392,Battery box,2,pcs
+V4,8,200,regional,3,POWR-SYS-01,PG-4345,Pantograph assembly,2,pcs
+V4,8,200,regional,3,DOOR-SYS-01,DR-1090,"Door leaf assembly, left",16,pcs
+V4,8,200,regional,3,DOOR-SYS-01,DR-1043,"Door leaf assembly, right",16,pcs
+V4,8,200,regional,3,DOOR-SYS-01,DD-2200,Door drive unit,32,pcs
+V4,8,200,regional,3,DOOR-SYS-01,DC-3001,Door control unit,32,pcs
+V4,8,200,regional,3,DOOR-SYS-01,ST-4165,Sliding step,32,pcs
+V4,8,200,regional,3,DOOR-SYS-01,TS-9148,Door threshold,32,pcs
+V4,8,200,regional,3,DOOR-SYS-01,ER-2285,Emergency release device,32,pcs
+V4,8,200,regional,3,DOOR-SYS-01,DI-1092,Door indicator light set,32,pcs
+V4,8,200,regional,3,HVAC-SYS-01,HV-5682,Saloon HVAC unit,16,pcs
+V4,8,200,regional,3,HVAC-SYS-01,HC-6001,Cab HVAC unit,2,pcs
+V4,8,200,regional,3,HVAC-SYS-01,AD-7385,Air duct assembly,8,pcs
+V4,8,200,regional,3,HVAC-SYS-01,TC-8437,HVAC control unit,8,pcs
+V4,8,200,regional,3,HVAC-SYS-01,HT-5300,Heater unit,32,pcs
+V4,8,200,regional,3,HVAC-SYS-01,FG-6342,Fresh air intake grille,16,pcs
+V4,8,200,regional,3,HVAC-SYS-01,CK-4474,Condensate drain kit,16,pcs
+V4,8,200,regional,3,HVAC-SYS-01,RC-5646,HVAC roof fairing,16,pcs
+V4,8,200,regional,3,INTR-SYS-01,SF-9300,Seat frame assembly,160,pcs
+V4,8,200,regional,3,INTR-SYS-01,PB-2281,Luggage rack,64,pcs
+V4,8,200,regional,3,INTR-SYS-01,HD-3475,Handrail assembly,48,pcs
+V4,8,200,regional,3,INTR-SYS-01,PW-4792,Glazed partition,16,pcs
+V4,8,200,regional,3,INTR-SYS-01,FC-6100,Floor covering assembly,8,pcs
+V4,8,200,regional,3,INTR-SYS-01,CE-1477,Ceiling panel set,8,pcs
+V4,8,200,regional,3,INTR-SYS-01,LS-3731,Interior lighting strip,48,pcs
+V4,8,200,regional,3,INTR-SYS-01,PD-2286,Passenger information display,16,pcs
+V4,8,200,regional,3,BRAK-SYS-01,BC-5573,Brake caliper unit,64,pcs
+V4,8,200,regional,3,BRAK-SYS-01,BM-9125,Brake control module,8,pcs
+V4,8,200,regional,3,BRAK-SYS-01,CM-6592,Air compressor unit,2,pcs
+V4,8,200,regional,3,BRAK-SYS-01,MG-6191,Magnetic track brake,8,pcs
+V4,8,200,regional,4,SW-3510,WD-2021,Window,5,pcs
+V4,8,200,regional,4,SW-3510,BL-1287,Bolt M6x20,16,pcs
+V4,8,200,regional,4,SW-3510,PN-7736,Panel,2,pcs
+V4,8,200,regional,4,RP-3360,BL-3980,Bolt M10x40,14,pcs
+V4,8,200,regional,4,RP-3360,JT-4924,Seal EPDM 12,4.3,m
+V4,8,200,regional,4,RP-3360,BL-1287,Bolt M6x20,22,pcs
+V4,8,200,regional,4,UF-1508,BE-6841,Beam,16.7,m
+V4,8,200,regional,4,UF-1508,BK-7403,Bracket,2,pcs
+V4,8,200,regional,4,UF-1508,BE-8909,Beam,19.7,m
+V4,8,200,regional,4,FE-4574,BL-6349,Bolt M6x20,9,pcs
+V4,8,200,regional,4,FE-4574,BL-6102,Bolt M8x25,17,pcs
+V4,8,200,regional,4,FE-4574,BL-7678,Bolt M8x35,8,pcs
+V4,8,200,regional,4,FE-4574,BE-1748,Beam,19.1,m
+V4,8,200,regional,4,FE-4574,BE-2646,Beam,13.4,m
+V4,8,200,regional,4,FE-4574,BL-1700,Bolt M10x40,17,pcs
+V4,8,200,regional,4,MB-8736,SN-5618,Sensor,2,pcs
+V4,8,200,regional,4,MB-8736,AL-6065,Axle,1,pcs
+V4,8,200,regional,4,MB-8736,AL-230,Axle,2,pcs
+V4,8,200,regional,4,MB-8736,BL-4322,Bolt M10x40,12,pcs
+V4,8,200,regional,4,MB-8736,SP-7354,Spring,2,pcs
+V4,8,200,regional,4,TF-8641,AL-230,Axle,2,pcs
+V4,8,200,regional,4,TF-8641,WH-2962,Wheel,4,pcs
+V4,8,200,regional,4,TF-8641,SN-6930,Sensor,2,pcs
+V4,8,200,regional,4,TF-8641,WH-3985,Wheel,3,pcs
+V4,8,200,regional,4,TF-8641,BK-1546,Bracket,6,pcs
+V4,8,200,regional,4,PS-2464,WH-4087,Wheel,4,pcs
+V4,8,200,regional,4,PS-2464,SN-8168,Sensor,1,pcs
+V4,8,200,regional,4,PS-2464,BG-3637,Bearing,3,pcs
+V4,8,200,regional,4,WA-2591,DP-7346,Damper,3,pcs
+V4,8,200,regional,4,WA-2591,WH-3877,Wheel,2,pcs
+V4,8,200,regional,4,WA-2591,WH-7903,Wheel,4,pcs
+V4,8,200,regional,4,WA-2591,SN-5003,Sensor,2,pcs
+V4,8,200,regional,4,WA-2591,WH-1186,Wheel,3,pcs
+V4,8,200,regional,4,WA-2591,SN-9267,Sensor,1,pcs
+V4,8,200,regional,4,TV-4514,CB-2111,Cable harness,2,pcs
+V4,8,200,regional,4,TV-4514,IG-1215,IGBT module,3,pcs
+V4,8,200,regional,4,TV-4514,BK-7375,Bracket,4,pcs
+V4,8,200,regional,4,AX-7929,FN-8331,Fan,1,pcs
+V4,8,200,regional,4,AX-7929,CB-2111,Cable harness,2,pcs
+V4,8,200,regional,4,AX-7929,BL-1778,Bolt M8x35,6,pcs
+V4,8,200,regional,4,AX-7929,PC-4983,Control board,1,pcs
+V4,8,200,regional,4,BB-5392,SN-8133,Sensor,1,pcs
+V4,8,200,regional,4,BB-5392,BL-9688,Bolt M8x35,21,pcs
+V4,8,200,regional,4,BB-5392,IG-1215,IGBT module,3,pcs
+V4,8,200,regional,4,BB-5392,CB-9799,Cable harness,2,pcs
+V4,8,200,regional,4,BB-5392,SN-226,Sensor,4,pcs
+V4,8,200,regional,4,PG-4345,CT-1537,Contactor,2,pcs
+V4,8,200,regional,4,PG-4345,FN-1967,Fan,2,pcs
+V4,8,200,regional,4,PG-4345,FN-5517,Fan,1,pcs
+V4,8,200,regional,4,PG-4345,SN-6818,Sensor,1,pcs
+V4,8,200,regional,4,PG-4345,CB-7253,Cable harness,2,pcs
+V4,8,200,regional,4,DR-1090,JT-218,Door seal,2.4,m
+V4,8,200,regional,4,DR-1090,AC-501,Door actuator,1,pcs
+V4,8,200,regional,4,DR-1090,GL-410,Glazing panel,1,pcs
+V4,8,200,regional,4,DR-1090,BK-120,Bracket LH,4,pcs
+V4,8,200,regional,4,DR-1090,BL-330,Bolt M8x25,16,pcs
+V4,8,200,regional,4,DR-1090,RL-205,Guide rail,1.3,m
+V4,8,200,regional,4,DR-1090,SN-610,Sensor,2,pcs
+V4,8,200,regional,4,DR-1090,JT-305,Pressure seal,2.4,m
+V4,8,200,regional,4,DR-1043,JT-218,Door seal,2.4,m
+V4,8,200,regional,4,DR-1043,AC-477,Door actuator,1,pcs
+V4,8,200,regional,4,DR-1043,GL-452,Glazing panel,1,pcs
+V4,8,200,regional,4,DR-1043,BK-121,Bracket RH,4,pcs
+V4,8,200,regional,4,DR-1043,BL-338,Bolt M8x35,16,pcs
+V4,8,200,regional,4,DR-1043,RL-205,Guide rail,1.3,m
+V4,8,200,regional,4,DR-1043,SN-610,Sensor,2,pcs
+V4,8,200,regional,4,DD-2200,MT-780,Motor,1,pcs
+V4,8,200,regional,4,DD-2200,BK-158,Bracket,2,pcs
+V4,8,200,regional,4,DD-2200,BL-371,Bolt M8x25,12,pcs
+V4,8,200,regional,4,DD-2200,CB-842,Cable harness,1,pcs
+V4,8,200,regional,4,DD-2200,SN-655,Sensor,2,pcs
+V4,8,200,regional,4,DD-2200,RL-294,Guide rail,1.1,m
+V4,8,200,regional,4,DD-2200,GB-515,Gearbox,1,pcs
+V4,8,200,regional,4,DC-3001,PC-902,Control board,1,pcs
+V4,8,200,regional,4,DC-3001,SN-573,Door position sensor,2,pcs
+V4,8,200,regional,4,DC-3001,CB-828,Cable harness,1,pcs
+V4,8,200,regional,4,DC-3001,RY-440,Relay,3,pcs
+V4,8,200,regional,4,DC-3001,BK-425,Bracket,2,pcs
+V4,8,200,regional,4,DC-3001,BL-309,Bolt M6x20,4,pcs
+V4,8,200,regional,4,ST-4165,AC-534,Actuator,1,pcs
+V4,8,200,regional,4,ST-4165,PL-661,Tread plate,1,pcs
+V4,8,200,regional,4,ST-4165,RL-237,Guide rail,1.6,m
+V4,8,200,regional,4,ST-4165,SN-682,Sensor,2,pcs
+V4,8,200,regional,4,ST-4165,BK-873,Bracket,4,pcs
+V4,8,200,regional,4,ST-4165,BL-394,Bolt M8x25,16,pcs
+V4,8,200,regional,4,TS-9148,LD-6579,LED module,3,pcs
+V4,8,200,regional,4,TS-9148,PC-1553,Control board,1,pcs
+V4,8,200,regional,4,TS-9148,GB-1211,Gearbox,1,pcs
+V4,8,200,regional,4,TS-9148,RY-2620,Relay,3,pcs
+V4,8,200,regional,4,ER-2285,AC-3592,Actuator,1,pcs
+V4,8,200,regional,4,ER-2285,CB-7042,Cable harness,1,pcs
+V4,8,200,regional,4,ER-2285,LD-1453,LED module,8,pcs
+V4,8,200,regional,4,ER-2285,GL-7404,Glazing panel,2,pcs
+V4,8,200,regional,4,ER-2285,PC-6678,Control board,1,pcs
+V4,8,200,regional,4,DI-1092,BK-8215,Bracket,5,pcs
+V4,8,200,regional,4,DI-1092,GL-5149,Glazing panel,2,pcs
+V4,8,200,regional,4,DI-1092,GL-7802,Glazing panel,1,pcs
+V4,8,200,regional,4,DI-1092,CB-7745,Cable harness,1,pcs
+V4,8,200,regional,4,DI-1092,SN-8954,Sensor,4,pcs
+V4,8,200,regional,4,HV-5682,CP-560,Compressor,1,pcs
+V4,8,200,regional,4,HV-5682,EV-275,Evaporator,1,pcs
+V4,8,200,regional,4,HV-5682,CD-391,Condenser,1,pcs
+V4,8,200,regional,4,HV-5682,FN-753,Fan 400 mm,2,pcs
+V4,8,200,regional,4,HV-5682,FL-829,Filter,2,pcs
+V4,8,200,regional,4,HV-5682,RF-110,Refrigerant,4.2,kg
+V4,8,200,regional,4,HV-5682,BK-242,Bracket,6,pcs
+V4,8,200,regional,4,HC-6001,CP-447,Compressor,1,pcs
+V4,8,200,regional,4,HC-6001,EV-208,Evaporator,1,pcs
+V4,8,200,regional,4,HC-6001,FN-716,Fan,1,pcs
+V4,8,200,regional,4,HC-6001,FL-877,Filter,1,pcs
+V4,8,200,regional,4,HC-6001,RF-110,Refrigerant,1.2,kg
+V4,8,200,regional,4,HC-6001,TH-402,Thermostat,1,pcs
+V4,8,200,regional,4,HC-6001,BK-229,Bracket,4,pcs
+V4,8,200,regional,4,AD-7385,DT-150,Duct,12.5,m
+V4,8,200,regional,4,AD-7385,IN-620,Insulation,8,kg
+V4,8,200,regional,4,AD-7385,BK-281,Bracket,20,pcs
+V4,8,200,regional,4,AD-7385,BL-417,Bolt M8x35,40,pcs
+V4,8,200,regional,4,AD-7385,VL-906,Damper valve,2,pcs
+V4,8,200,regional,4,AD-7385,JT-262,Seal EPDM 15,6,m
+V4,8,200,regional,4,AD-7385,VL-905,Pressure protection valve,2,pcs
+V4,8,200,regional,4,TC-8437,PC-984,Control board,1,pcs
+V4,8,200,regional,4,TC-8437,TH-450,Thermostat,2,pcs
+V4,8,200,regional,4,TC-8437,SN-646,Sensor,4,pcs
+V4,8,200,regional,4,TC-8437,RY-415,Relay,2,pcs
+V4,8,200,regional,4,TC-8437,CB-803,Cable harness,1,pcs
+V4,8,200,regional,4,TC-8437,BK-296,Bracket,2,pcs
+V4,8,200,regional,4,HT-5300,HE-310,Heating element,2,pcs
+V4,8,200,regional,4,HT-5300,FN-708,Fan,1,pcs
+V4,8,200,regional,4,HT-5300,TH-415,Thermostat,1,pcs
+V4,8,200,regional,4,HT-5300,BK-213,Bracket,4,pcs
+V4,8,200,regional,4,HT-5300,BL-463,Bolt M10x40,8,pcs
+V4,8,200,regional,4,FG-6342,RY-1385,Relay,2,pcs
+V4,8,200,regional,4,FG-6342,EV-5767,Evaporator,1,pcs
+V4,8,200,regional,4,FG-6342,IN-6519,Insulation,5.8,kg
+V4,8,200,regional,4,FG-6342,PC-2995,Control board,1,pcs
+V4,8,200,regional,4,FG-6342,SN-1366,Sensor,4,pcs
+V4,8,200,regional,4,CK-4474,TH-7192,Thermostat,1,pcs
+V4,8,200,regional,4,CK-4474,DT-583,Duct,12.6,m
+V4,8,200,regional,4,CK-4474,RY-2351,Relay,3,pcs
+V4,8,200,regional,4,CK-4474,TH-9538,Thermostat,1,pcs
+V4,8,200,regional,4,CK-4474,SN-1459,Sensor,4,pcs
+V4,8,200,regional,4,RC-5646,CP-9424,Compressor,1,pcs
+V4,8,200,regional,4,RC-5646,BL-8672,Bolt M10x40,20,pcs
+V4,8,200,regional,4,RC-5646,BL-8922,Bolt M6x20,9,pcs
+V4,8,200,regional,4,RC-5646,SN-3463,Sensor,1,pcs
+V4,8,200,regional,4,RC-5646,JT-8289,Seal EPDM 12,3.2,m
+V4,8,200,regional,4,RC-5646,IN-2896,Insulation,8.6,kg
+V4,8,200,regional,4,SF-9300,TU-167,Steel tube,6.3,m
+V4,8,200,regional,4,SF-9300,BK-192,Bracket,6,pcs
+V4,8,200,regional,4,SF-9300,BL-405,Bolt M6x20,24,pcs
+V4,8,200,regional,4,SF-9300,CU-318,Cushion 3-seat,3,pcs
+V4,8,200,regional,4,SF-9300,AR-558,Armrest,2,pcs
+V4,8,200,regional,4,SF-9300,FB-764,Fabric cover grey,4.6,m
+V4,8,200,regional,4,SF-9300,HR-610,Headrest,3,pcs
+V4,8,200,regional,4,PB-2281,PF-220,Aluminium profile,3,m
+V4,8,200,regional,4,PB-2281,GL-436,Glazing panel,2,pcs
+V4,8,200,regional,4,PB-2281,BK-318,Bracket,6,pcs
+V4,8,200,regional,4,PB-2281,BL-429,Bolt M6x20,12,pcs
+V4,8,200,regional,4,PB-2281,EC-705,End cap,2,pcs
+V4,8,200,regional,4,HD-3475,TU-189,Steel tube,3.4,m
+V4,8,200,regional,4,HD-3475,BK-517,Handrail clamp,6,pcs
+V4,8,200,regional,4,HD-3475,BL-441,Bolt M8x35,12,pcs
+V4,8,200,regional,4,HD-3475,EC-723,End cap,2,pcs
+V4,8,200,regional,4,HD-3475,CV-547,Cover,2,pcs
+V4,8,200,regional,4,HD-3475,GR-612,Grip,2,pcs
+V4,8,200,regional,4,PW-4792,GL-478,Glazing panel,1,pcs
+V4,8,200,regional,4,PW-4792,PF-253,Aluminium profile,4.8,m
+V4,8,200,regional,4,PW-4792,JT-281,Seal silicone 10,5.2,m
+V4,8,200,regional,4,PW-4792,BK-931,Bracket,8,pcs
+V4,8,200,regional,4,PW-4792,BL-268,Bolt M6x20,16,pcs
+V4,8,200,regional,4,PW-4792,BK-367,Reinforcement bracket,4,pcs
+V4,8,200,regional,4,FC-6100,RV-410,Floor covering,46,m
+V4,8,200,regional,4,FC-6100,GU-077,Floor adhesive,12,kg
+V4,8,200,regional,4,FC-6100,PF-209,Aluminium profile,18,m
+V4,8,200,regional,4,FC-6100,SC-842,Screw,120,pcs
+V4,8,200,regional,4,CE-1477,GL-6348,Glazing panel,1,pcs
+V4,8,200,regional,4,CE-1477,SC-1034,Screw,8,pcs
+V4,8,200,regional,4,CE-1477,TU-3458,Steel tube,4.8,m
+V4,8,200,regional,4,CE-1477,BK-2948,Bracket,4,pcs
+V4,8,200,regional,4,LS-3731,BK-2948,Bracket,6,pcs
+V4,8,200,regional,4,LS-3731,GR-7984,Grip,4,pcs
+V4,8,200,regional,4,LS-3731,FB-5629,Fabric cover,3.8,m
+V4,8,200,regional,4,LS-3731,EC-5717,End cap,2,pcs
+V4,8,200,regional,4,LS-3731,HG-3697,Hinge,4,pcs
+V4,8,200,regional,4,LS-3731,BL-137,Bolt M10x40,23,pcs
+V4,8,200,regional,4,PD-2286,GL-8040,Glazing panel,2,pcs
+V4,8,200,regional,4,PD-2286,CV-7621,Cover,2,pcs
+V4,8,200,regional,4,PD-2286,PF-5646,Aluminium profile,7.5,m
+V4,8,200,regional,4,PD-2286,SC-9860,Screw,24,pcs
+V4,8,200,regional,4,PD-2286,EC-6277,End cap,3,pcs
+V4,8,200,regional,4,PD-2286,EC-1587,End cap,2,pcs
+V4,8,200,regional,4,BC-5573,BK-9804,Bracket,4,pcs
+V4,8,200,regional,4,BC-5573,SN-6050,Sensor,1,pcs
+V4,8,200,regional,4,BC-5573,VL-4778,Valve,2,pcs
+V4,8,200,regional,4,BC-5573,BD-3196,Brake disc,2,pcs
+V4,8,200,regional,4,BM-9125,BK-4370,Bracket,8,pcs
+V4,8,200,regional,4,BM-9125,SN-9301,Sensor,3,pcs
+V4,8,200,regional,4,BM-9125,BK-7649,Bracket,7,pcs
+V4,8,200,regional,4,BM-9125,SN-6050,Sensor,3,pcs
+V4,8,200,regional,4,CM-6592,BD-7281,Brake disc,3,pcs
+V4,8,200,regional,4,CM-6592,BP-8435,Brake pad,7,pcs
+V4,8,200,regional,4,CM-6592,PC-7027,Control board,1,pcs
+V4,8,200,regional,4,CM-6592,PC-1343,Control board,1,pcs
+V4,8,200,regional,4,CM-6592,VL-8177,Valve,2,pcs
+V4,8,200,regional,4,MG-6191,BL-1122,Bolt M8x35,14,pcs
+V4,8,200,regional,4,MG-6191,BK-744,Bracket,6,pcs
+V4,8,200,regional,4,MG-6191,CB-2633,Cable harness,2,pcs
+V4,8,200,regional,4,MG-6191,BP-4354,Brake pad,4,pcs
+V4,8,200,regional,4,MG-6191,SN-4687,Sensor,4,pcs
+V5,10,160,regional,2,V5,CARB-SYS-01,Car body,1,pcs
+V5,10,160,regional,2,V5,RUNG-SYS-01,Running gear,1,pcs
+V5,10,160,regional,2,V5,POWR-SYS-01,Power system,1,pcs
+V5,10,160,regional,2,V5,DOOR-SYS-01,Door system,1,pcs
+V5,10,160,regional,2,V5,HVAC-SYS-01,HVAC,1,pcs
+V5,10,160,regional,2,V5,INTR-SYS-01,Interior,1,pcs
+V5,10,160,regional,2,V5,BRAK-SYS-01,Braking,1,pcs
+V5,10,160,regional,3,CARB-SYS-01,SW-3510,Side wall panel set,20,pcs
+V5,10,160,regional,3,CARB-SYS-01,RP-3360,Roof panel set,10,pcs
+V5,10,160,regional,3,CARB-SYS-01,UF-1508,Underframe module,10,pcs
+V5,10,160,regional,3,CARB-SYS-01,FE-4259,Front end module,2,pcs
+V5,10,160,regional,3,RUNG-SYS-01,MB-8736,Motor bogie frame,4,pcs
+V5,10,160,regional,3,RUNG-SYS-01,TF-8641,Trailer bogie frame,10,pcs
+V5,10,160,regional,3,RUNG-SYS-01,PS-2464,Primary suspension set,40,pcs
+V5,10,160,regional,3,RUNG-SYS-01,WA-6048,Wheelset assembly,40,pcs
+V5,10,160,regional,3,POWR-SYS-01,TV-4514,Traction converter,4,pcs
+V5,10,160,regional,3,POWR-SYS-01,AX-7929,Auxiliary converter,2,pcs
+V5,10,160,regional,3,POWR-SYS-01,BB-5392,Battery box,2,pcs
+V5,10,160,regional,3,POWR-SYS-01,PG-4384,Pantograph assembly,2,pcs
+V5,10,160,regional,3,DOOR-SYS-01,DR-1042,"Door leaf assembly, left",20,pcs
+V5,10,160,regional,3,DOOR-SYS-01,DR-1043,"Door leaf assembly, right",20,pcs
+V5,10,160,regional,3,DOOR-SYS-01,DD-2268,Door drive unit,40,pcs
+V5,10,160,regional,3,DOOR-SYS-01,DC-3020,Door control unit,40,pcs
+V5,10,160,regional,3,DOOR-SYS-01,ST-4100,Sliding step,40,pcs
+V5,10,160,regional,3,DOOR-SYS-01,TS-9148,Door threshold,40,pcs
+V5,10,160,regional,3,DOOR-SYS-01,ER-2285,Emergency release device,40,pcs
+V5,10,160,regional,3,DOOR-SYS-01,DI-1092,Door indicator light set,40,pcs
+V5,10,160,regional,3,HVAC-SYS-01,HV-5146,Saloon HVAC unit,20,pcs
+V5,10,160,regional,3,HVAC-SYS-01,HC-6040,Cab HVAC unit,2,pcs
+V5,10,160,regional,3,HVAC-SYS-01,GN-4471,Air duct assembly,10,pcs
+V5,10,160,regional,3,HVAC-SYS-01,TC-8100,HVAC control unit,10,pcs
+V5,10,160,regional,3,HVAC-SYS-01,HT-5300,Heater unit,40,pcs
+V5,10,160,regional,3,HVAC-SYS-01,FG-6342,Fresh air intake grille,20,pcs
+V5,10,160,regional,3,HVAC-SYS-01,CK-4474,Condensate drain kit,20,pcs
+V5,10,160,regional,3,HVAC-SYS-01,RC-5381,HVAC roof fairing,20,pcs
+V5,10,160,regional,3,INTR-SYS-01,SF-9064,Seat frame assembly,200,pcs
+V5,10,160,regional,3,INTR-SYS-01,LR-1500,Luggage rack,80,pcs
+V5,10,160,regional,3,INTR-SYS-01,HD-3475,Handrail assembly,60,pcs
+V5,10,160,regional,3,INTR-SYS-01,PW-4700,Glazed partition,20,pcs
+V5,10,160,regional,3,INTR-SYS-01,FC-6100,Floor covering assembly,10,pcs
+V5,10,160,regional,3,INTR-SYS-01,CE-1477,Ceiling panel set,10,pcs
+V5,10,160,regional,3,INTR-SYS-01,LS-3731,Interior lighting strip,60,pcs
+V5,10,160,regional,3,INTR-SYS-01,PD-2286,Passenger information display,20,pcs
+V5,10,160,regional,3,BRAK-SYS-01,BC-5573,Brake caliper unit,80,pcs
+V5,10,160,regional,3,BRAK-SYS-01,BM-9125,Brake control module,10,pcs
+V5,10,160,regional,3,BRAK-SYS-01,CM-6592,Air compressor unit,2,pcs
+V5,10,160,regional,3,BRAK-SYS-01,MG-6191,Magnetic track brake,8,pcs
+V5,10,160,regional,4,SW-3510,WD-2021,Window,5,pcs
+V5,10,160,regional,4,SW-3510,BL-1287,Bolt M6x20,16,pcs
+V5,10,160,regional,4,SW-3510,PN-7736,Panel,2,pcs
+V5,10,160,regional,4,RP-3360,BL-3980,Bolt M10x40,14,pcs
+V5,10,160,regional,4,RP-3360,JT-4924,Seal EPDM 12,4.3,m
+V5,10,160,regional,4,RP-3360,BL-1287,Bolt M6x20,22,pcs
+V5,10,160,regional,4,UF-1508,BE-6841,Beam,16.7,m
+V5,10,160,regional,4,UF-1508,BK-7403,Bracket,2,pcs
+V5,10,160,regional,4,UF-1508,BE-8909,Beam,19.7,m
+V5,10,160,regional,4,FE-4259,BE-8909,Beam,12.5,m
+V5,10,160,regional,4,FE-4259,BL-1287,Bolt M6x20,15,pcs
+V5,10,160,regional,4,FE-4259,BL-6349,Bolt M6x20,9,pcs
+V5,10,160,regional,4,FE-4259,BE-6281,Beam,11,m
+V5,10,160,regional,4,FE-4259,BL-3980,Bolt M10x40,17,pcs
+V5,10,160,regional,4,FE-4259,BL-7537,Bolt M8x35,14,pcs
+V5,10,160,regional,4,MB-8736,SN-5618,Sensor,2,pcs
+V5,10,160,regional,4,MB-8736,AL-6065,Axle,1,pcs
+V5,10,160,regional,4,MB-8736,AL-230,Axle,2,pcs
+V5,10,160,regional,4,MB-8736,BL-4322,Bolt M10x40,12,pcs
+V5,10,160,regional,4,MB-8736,SP-7354,Spring,2,pcs
+V5,10,160,regional,4,TF-8641,AL-230,Axle,2,pcs
+V5,10,160,regional,4,TF-8641,WH-2962,Wheel,4,pcs
+V5,10,160,regional,4,TF-8641,SN-6930,Sensor,2,pcs
+V5,10,160,regional,4,TF-8641,WH-3985,Wheel,3,pcs
+V5,10,160,regional,4,TF-8641,BK-1546,Bracket,6,pcs
+V5,10,160,regional,4,PS-2464,WH-4087,Wheel,4,pcs
+V5,10,160,regional,4,PS-2464,SN-8168,Sensor,1,pcs
+V5,10,160,regional,4,PS-2464,BG-3637,Bearing,3,pcs
+V5,10,160,regional,4,WA-6048,SN-8049,Sensor,3,pcs
+V5,10,160,regional,4,WA-6048,WH-9839,Wheel,4,pcs
+V5,10,160,regional,4,WA-6048,WH-9324,Wheel,4,pcs
+V5,10,160,regional,4,WA-6048,DP-7346,Damper,3,pcs
+V5,10,160,regional,4,WA-6048,SN-8306,Sensor,4,pcs
+V5,10,160,regional,4,WA-6048,WH-3877,Wheel,2,pcs
+V5,10,160,regional,4,TV-4514,CB-2111,Cable harness,2,pcs
+V5,10,160,regional,4,TV-4514,IG-1215,IGBT module,3,pcs
+V5,10,160,regional,4,TV-4514,BK-7375,Bracket,4,pcs
+V5,10,160,regional,4,AX-7929,FN-8331,Fan,1,pcs
+V5,10,160,regional,4,AX-7929,CB-2111,Cable harness,2,pcs
+V5,10,160,regional,4,AX-7929,BL-1778,Bolt M8x35,6,pcs
+V5,10,160,regional,4,AX-7929,PC-4983,Control board,1,pcs
+V5,10,160,regional,4,BB-5392,SN-8133,Sensor,1,pcs
+V5,10,160,regional,4,BB-5392,BL-9688,Bolt M8x35,21,pcs
+V5,10,160,regional,4,BB-5392,IG-1215,IGBT module,3,pcs
+V5,10,160,regional,4,BB-5392,CB-9799,Cable harness,2,pcs
+V5,10,160,regional,4,BB-5392,SN-226,Sensor,4,pcs
+V5,10,160,regional,4,PG-4384,CT-5595,Contactor,1,pcs
+V5,10,160,regional,4,PG-4384,CB-737,Cable harness,1,pcs
+V5,10,160,regional,4,PG-4384,FN-8331,Fan,1,pcs
+V5,10,160,regional,4,PG-4384,FN-5165,Fan,1,pcs
+V5,10,160,regional,4,PG-4384,SN-8319,Sensor,4,pcs
+V5,10,160,regional,4,DR-1042,JT-218,Door seal,2.4,m
+V5,10,160,regional,4,DR-1042,AC-501,Door actuator,1,pcs
+V5,10,160,regional,4,DR-1042,GL-410,Glazing panel,1,pcs
+V5,10,160,regional,4,DR-1042,BK-120,Bracket LH,4,pcs
+V5,10,160,regional,4,DR-1042,BL-330,Bolt M8x25,16,pcs
+V5,10,160,regional,4,DR-1042,RL-205,Guide rail,1.3,m
+V5,10,160,regional,4,DR-1042,SN-610,Sensor,2,pcs
+V5,10,160,regional,4,DR-1043,JT-218,Door seal,2.4,m
+V5,10,160,regional,4,DR-1043,AC-477,Door actuator,1,pcs
+V5,10,160,regional,4,DR-1043,GL-452,Glazing panel,1,pcs
+V5,10,160,regional,4,DR-1043,BK-121,Bracket RH,4,pcs
+V5,10,160,regional,4,DR-1043,BL-338,Bolt M8x35,16,pcs
+V5,10,160,regional,4,DR-1043,RL-205,Guide rail,1.3,m
+V5,10,160,regional,4,DR-1043,SN-610,Sensor,2,pcs
+V5,10,160,regional,4,DD-2268,MT-780,Motor,1,pcs
+V5,10,160,regional,4,DD-2268,BK-706,Bracket,2,pcs
+V5,10,160,regional,4,DD-2268,BL-371,Bolt M8x25,10,pcs
+V5,10,160,regional,4,DD-2268,CB-842,Cable harness,1,pcs
+V5,10,160,regional,4,DD-2268,SN-655,Sensor,2,pcs
+V5,10,160,regional,4,DD-2268,RL-294,Guide rail,1.1,m
+V5,10,160,regional,4,DD-2268,GB-515,Gearbox,1,pcs
+V5,10,160,regional,4,DC-3020,PC-902,Control board,1,pcs
+V5,10,160,regional,4,DC-3020,SN-598,Door position sensor,2,pcs
+V5,10,160,regional,4,DC-3020,CB-828,Cable harness,1,pcs
+V5,10,160,regional,4,DC-3020,RY-440,Relay,3,pcs
+V5,10,160,regional,4,DC-3020,BK-425,Bracket,2,pcs
+V5,10,160,regional,4,DC-3020,BL-309,Bolt M6x20,4,pcs
+V5,10,160,regional,4,ST-4100,AC-534,Actuator,1,pcs
+V5,10,160,regional,4,ST-4100,PL-661,Tread plate,1,pcs
+V5,10,160,regional,4,ST-4100,RL-237,Guide rail,1.6,m
+V5,10,160,regional,4,ST-4100,SN-682,Sensor,2,pcs
+V5,10,160,regional,4,ST-4100,BK-873,Bracket,4,pcs
+V5,10,160,regional,4,ST-4100,BL-394,Bolt M8x25,12,pcs
+V5,10,160,regional,4,TS-9148,LD-6579,LED module,3,pcs
+V5,10,160,regional,4,TS-9148,PC-1553,Control board,1,pcs
+V5,10,160,regional,4,TS-9148,GB-1211,Gearbox,1,pcs
+V5,10,160,regional,4,TS-9148,RY-2620,Relay,3,pcs
+V5,10,160,regional,4,ER-2285,AC-3592,Actuator,1,pcs
+V5,10,160,regional,4,ER-2285,CB-7042,Cable harness,1,pcs
+V5,10,160,regional,4,ER-2285,LD-1453,LED module,8,pcs
+V5,10,160,regional,4,ER-2285,GL-7404,Glazing panel,2,pcs
+V5,10,160,regional,4,ER-2285,PC-6678,Control board,1,pcs
+V5,10,160,regional,4,DI-1092,BK-8215,Bracket,5,pcs
+V5,10,160,regional,4,DI-1092,GL-5149,Glazing panel,2,pcs
+V5,10,160,regional,4,DI-1092,GL-7802,Glazing panel,1,pcs
+V5,10,160,regional,4,DI-1092,CB-7745,Cable harness,1,pcs
+V5,10,160,regional,4,DI-1092,SN-8954,Sensor,4,pcs
+V5,10,160,regional,4,HV-5146,CP-512,Compressor,1,pcs
+V5,10,160,regional,4,HV-5146,EV-230,Evaporator,1,pcs
+V5,10,160,regional,4,HV-5146,CD-340,Condenser,1,pcs
+V5,10,160,regional,4,HV-5146,FN-720,Fan,2,pcs
+V5,10,160,regional,4,HV-5146,FL-864,Filter,2,pcs
+V5,10,160,regional,4,HV-5146,RF-110,Refrigerant,3.5,kg
+V5,10,160,regional,4,HV-5146,BK-205,Bracket,8,pcs
+V5,10,160,regional,4,HC-6040,CP-447,Compressor,1,pcs
+V5,10,160,regional,4,HC-6040,EV-208,Evaporator,1,pcs
+V5,10,160,regional,4,HC-6040,FN-716,Fan,1,pcs
+V5,10,160,regional,4,HC-6040,FL-877,Filter,2,pcs
+V5,10,160,regional,4,HC-6040,RF-110,Refrigerant,1.2,kg
+V5,10,160,regional,4,HC-6040,TH-402,Thermostat,1,pcs
+V5,10,160,regional,4,HC-6040,BK-254,Bracket,4,pcs
+V5,10,160,regional,4,GN-4471,DT-150,Duct,12.5,m
+V5,10,160,regional,4,GN-4471,IN-620,Insulation,8,kg
+V5,10,160,regional,4,GN-4471,BK-281,Bracket,20,pcs
+V5,10,160,regional,4,GN-4471,BL-417,Bolt M8x35,40,pcs
+V5,10,160,regional,4,GN-4471,VL-906,Damper valve,2,pcs
+V5,10,160,regional,4,GN-4471,JT-262,Seal EPDM 15,6,m
+V5,10,160,regional,4,TC-8100,PC-951,Control board,1,pcs
+V5,10,160,regional,4,TC-8100,TH-436,Thermostat,2,pcs
+V5,10,160,regional,4,TC-8100,SN-699,Sensor,3,pcs
+V5,10,160,regional,4,TC-8100,RY-472,Relay,2,pcs
+V5,10,160,regional,4,TC-8100,CB-866,Cable harness,1,pcs
+V5,10,160,regional,4,HT-5300,HE-310,Heating element,2,pcs
+V5,10,160,regional,4,HT-5300,FN-708,Fan,1,pcs
+V5,10,160,regional,4,HT-5300,TH-415,Thermostat,1,pcs
+V5,10,160,regional,4,HT-5300,BK-213,Bracket,4,pcs
+V5,10,160,regional,4,HT-5300,BL-463,Bolt M10x40,8,pcs
+V5,10,160,regional,4,FG-6342,RY-1385,Relay,2,pcs
+V5,10,160,regional,4,FG-6342,EV-5767,Evaporator,1,pcs
+V5,10,160,regional,4,FG-6342,IN-6519,Insulation,5.8,kg
+V5,10,160,regional,4,FG-6342,PC-2995,Control board,1,pcs
+V5,10,160,regional,4,FG-6342,SN-1366,Sensor,4,pcs
+V5,10,160,regional,4,CK-4474,TH-7192,Thermostat,1,pcs
+V5,10,160,regional,4,CK-4474,DT-583,Duct,12.6,m
+V5,10,160,regional,4,CK-4474,RY-2351,Relay,3,pcs
+V5,10,160,regional,4,CK-4474,TH-9538,Thermostat,1,pcs
+V5,10,160,regional,4,CK-4474,SN-1459,Sensor,4,pcs
+V5,10,160,regional,4,RC-5381,CP-9424,Compressor,1,pcs
+V5,10,160,regional,4,RC-5381,IN-7553,Insulation,5.9,kg
+V5,10,160,regional,4,RC-5381,SN-5940,Sensor,2,pcs
+V5,10,160,regional,4,RC-5381,BL-543,Bolt M6x20,13,pcs
+V5,10,160,regional,4,RC-5381,BL-1870,Bolt M8x35,23,pcs
+V5,10,160,regional,4,RC-5381,JT-5413,Seal EPDM 15,3.6,m
+V5,10,160,regional,4,SF-9064,TU-140,Steel tube,4.2,m
+V5,10,160,regional,4,SF-9064,BK-109,Bracket,4,pcs
+V5,10,160,regional,4,SF-9064,BL-482,Bolt M10x40,12,pcs
+V5,10,160,regional,4,SF-9064,CU-310,Cushion 2-seat,2,pcs
+V5,10,160,regional,4,SF-9064,AR-520,Armrest,2,pcs
+V5,10,160,regional,4,SF-9064,FB-730,Fabric cover,3.1,m
+V5,10,160,regional,4,LR-1500,PF-220,Aluminium profile,3,m
+V5,10,160,regional,4,LR-1500,GL-436,Glazing panel,2,pcs
+V5,10,160,regional,4,LR-1500,BK-318,Bracket,6,pcs
+V5,10,160,regional,4,LR-1500,BL-429,Bolt M6x20,12,pcs
+V5,10,160,regional,4,LR-1500,EC-705,End cap,2,pcs
+V5,10,160,regional,4,HD-3475,TU-189,Steel tube,3.4,m
+V5,10,160,regional,4,HD-3475,BK-517,Handrail clamp,6,pcs
+V5,10,160,regional,4,HD-3475,BL-441,Bolt M8x35,12,pcs
+V5,10,160,regional,4,HD-3475,EC-723,End cap,2,pcs
+V5,10,160,regional,4,HD-3475,CV-547,Cover,2,pcs
+V5,10,160,regional,4,HD-3475,GR-612,Grip,2,pcs
+V5,10,160,regional,4,PW-4700,GL-478,Glazing panel,1,pcs
+V5,10,160,regional,4,PW-4700,PF-253,Aluminium profile,4.8,m
+V5,10,160,regional,4,PW-4700,JT-281,Seal silicone 10,5.2,m
+V5,10,160,regional,4,PW-4700,BK-931,Bracket,8,pcs
+V5,10,160,regional,4,PW-4700,BL-268,Bolt M6x20,16,pcs
+V5,10,160,regional,4,FC-6100,RV-410,Floor covering,46,m
+V5,10,160,regional,4,FC-6100,GU-077,Floor adhesive,12,kg
+V5,10,160,regional,4,FC-6100,PF-209,Aluminium profile,18,m
+V5,10,160,regional,4,FC-6100,SC-842,Screw,120,pcs
+V5,10,160,regional,4,CE-1477,GL-6348,Glazing panel,1,pcs
+V5,10,160,regional,4,CE-1477,SC-1034,Screw,8,pcs
+V5,10,160,regional,4,CE-1477,TU-3458,Steel tube,4.8,m
+V5,10,160,regional,4,CE-1477,BK-2948,Bracket,4,pcs
+V5,10,160,regional,4,LS-3731,BK-2948,Bracket,6,pcs
+V5,10,160,regional,4,LS-3731,GR-7984,Grip,4,pcs
+V5,10,160,regional,4,LS-3731,FB-5629,Fabric cover,3.8,m
+V5,10,160,regional,4,LS-3731,EC-5717,End cap,2,pcs
+V5,10,160,regional,4,LS-3731,HG-3697,Hinge,4,pcs
+V5,10,160,regional,4,LS-3731,BL-137,Bolt M10x40,23,pcs
+V5,10,160,regional,4,PD-2286,GL-8040,Glazing panel,2,pcs
+V5,10,160,regional,4,PD-2286,CV-7621,Cover,2,pcs
+V5,10,160,regional,4,PD-2286,PF-5646,Aluminium profile,7.5,m
+V5,10,160,regional,4,PD-2286,SC-9860,Screw,24,pcs
+V5,10,160,regional,4,PD-2286,EC-6277,End cap,3,pcs
+V5,10,160,regional,4,PD-2286,EC-1587,End cap,2,pcs
+V5,10,160,regional,4,BC-5573,BK-9804,Bracket,4,pcs
+V5,10,160,regional,4,BC-5573,SN-6050,Sensor,1,pcs
+V5,10,160,regional,4,BC-5573,VL-4778,Valve,2,pcs
+V5,10,160,regional,4,BC-5573,BD-3196,Brake disc,2,pcs
+V5,10,160,regional,4,BM-9125,BK-4370,Bracket,8,pcs
+V5,10,160,regional,4,BM-9125,SN-9301,Sensor,3,pcs
+V5,10,160,regional,4,BM-9125,BK-7649,Bracket,7,pcs
+V5,10,160,regional,4,BM-9125,SN-6050,Sensor,3,pcs
+V5,10,160,regional,4,CM-6592,BD-7281,Brake disc,3,pcs
+V5,10,160,regional,4,CM-6592,BP-8435,Brake pad,7,pcs
+V5,10,160,regional,4,CM-6592,PC-7027,Control board,1,pcs
+V5,10,160,regional,4,CM-6592,PC-1343,Control board,1,pcs
+V5,10,160,regional,4,CM-6592,VL-8177,Valve,2,pcs
+V5,10,160,regional,4,MG-6191,BL-1122,Bolt M8x35,14,pcs
+V5,10,160,regional,4,MG-6191,BK-744,Bracket,6,pcs
+V5,10,160,regional,4,MG-6191,CB-2633,Cable harness,2,pcs
+V5,10,160,regional,4,MG-6191,BP-4354,Brake pad,4,pcs
+V5,10,160,regional,4,MG-6191,SN-4687,Sensor,4,pcs
+V6,10,200,intercity,2,V6,CARB-SYS-01,Car body,1,pcs
+V6,10,200,intercity,2,V6,RUNG-SYS-01,Running gear,1,pcs
+V6,10,200,intercity,2,V6,POWR-SYS-01,Power system,1,pcs
+V6,10,200,intercity,2,V6,DOOR-SYS-01,Door system,1,pcs
+V6,10,200,intercity,2,V6,HVAC-SYS-01,HVAC,1,pcs
+V6,10,200,intercity,2,V6,INTR-SYS-01,Interior,1,pcs
+V6,10,200,intercity,2,V6,BRAK-SYS-01,Braking,1,pcs
+V6,10,200,intercity,3,CARB-SYS-01,SW-3510,Side wall panel set,20,pcs
+V6,10,200,intercity,3,CARB-SYS-01,RP-3360,Roof panel set,10,pcs
+V6,10,200,intercity,3,CARB-SYS-01,UF-1508,Underframe module,10,pcs
+V6,10,200,intercity,3,CARB-SYS-01,FE-4574,Front end module,2,pcs
+V6,10,200,intercity,3,RUNG-SYS-01,MB-8736,Motor bogie frame,4,pcs
+V6,10,200,intercity,3,RUNG-SYS-01,TF-8641,Trailer bogie frame,10,pcs
+V6,10,200,intercity,3,RUNG-SYS-01,PS-2464,Primary suspension set,40,pcs
+V6,10,200,intercity,3,RUNG-SYS-01,WA-2591,Wheelset assembly,40,pcs
+V6,10,200,intercity,3,POWR-SYS-01,TV-4514,Traction converter,4,pcs
+V6,10,200,intercity,3,POWR-SYS-01,AX-7929,Auxiliary converter,2,pcs
+V6,10,200,intercity,3,POWR-SYS-01,BB-5392,Battery box,2,pcs
+V6,10,200,intercity,3,POWR-SYS-01,PG-4345,Pantograph assembly,2,pcs
+V6,10,200,intercity,3,DOOR-SYS-01,DR-1090,"Door leaf assembly, left",20,pcs
+V6,10,200,intercity,3,DOOR-SYS-01,DR-1043,"Door leaf assembly, right",20,pcs
+V6,10,200,intercity,3,DOOR-SYS-01,DD-2200,Door drive unit,40,pcs
+V6,10,200,intercity,3,DOOR-SYS-01,DC-3020,Door control unit,40,pcs
+V6,10,200,intercity,3,DOOR-SYS-01,RS-6620,Sliding step,40,pcs
+V6,10,200,intercity,3,DOOR-SYS-01,TS-9148,Door threshold,40,pcs
+V6,10,200,intercity,3,DOOR-SYS-01,ER-321,Emergency release device,40,pcs
+V6,10,200,intercity,3,DOOR-SYS-01,DI-1092,Door indicator light set,40,pcs
+V6,10,200,intercity,3,HVAC-SYS-01,HV-5627,Saloon HVAC unit,20,pcs
+V6,10,200,intercity,3,HVAC-SYS-01,HC-6001,Cab HVAC unit,2,pcs
+V6,10,200,intercity,3,HVAC-SYS-01,AD-7385,Air duct assembly,10,pcs
+V6,10,200,intercity,3,HVAC-SYS-01,TC-8437,HVAC control unit,10,pcs
+V6,10,200,intercity,3,HVAC-SYS-01,HT-5300,Heater unit,40,pcs
+V6,10,200,intercity,3,HVAC-SYS-01,FG-6342,Fresh air intake grille,20,pcs
+V6,10,200,intercity,3,HVAC-SYS-01,CK-4474,Condensate drain kit,20,pcs
+V6,10,200,intercity,3,HVAC-SYS-01,RC-5646,HVAC roof fairing,20,pcs
+V6,10,200,intercity,3,INTR-SYS-01,SF-9358,Seat frame assembly,200,pcs
+V6,10,200,intercity,3,INTR-SYS-01,LR-1578,Luggage rack,80,pcs
+V6,10,200,intercity,3,INTR-SYS-01,HD-3462,Handrail assembly,60,pcs
+V6,10,200,intercity,3,INTR-SYS-01,GP-8805,Glazed partition,20,pcs
+V6,10,200,intercity,3,INTR-SYS-01,FC-6100,Floor covering assembly,10,pcs
+V6,10,200,intercity,3,INTR-SYS-01,CE-1477,Ceiling panel set,10,pcs
+V6,10,200,intercity,3,INTR-SYS-01,LS-3764,Interior lighting strip,60,pcs
+V6,10,200,intercity,3,INTR-SYS-01,PD-9225,Passenger information display,20,pcs
+V6,10,200,intercity,3,BRAK-SYS-01,BC-5573,Brake caliper unit,80,pcs
+V6,10,200,intercity,3,BRAK-SYS-01,BM-9125,Brake control module,10,pcs
+V6,10,200,intercity,3,BRAK-SYS-01,CM-6592,Air compressor unit,2,pcs
+V6,10,200,intercity,3,BRAK-SYS-01,MG-6191,Magnetic track brake,8,pcs
+V6,10,200,intercity,4,SW-3510,WD-2021,Window,5,pcs
+V6,10,200,intercity,4,SW-3510,BL-1287,Bolt M6x20,16,pcs
+V6,10,200,intercity,4,SW-3510,PN-7736,Panel,2,pcs
+V6,10,200,intercity,4,RP-3360,BL-3980,Bolt M10x40,14,pcs
+V6,10,200,intercity,4,RP-3360,JT-4924,Seal EPDM 12,4.3,m
+V6,10,200,intercity,4,RP-3360,BL-1287,Bolt M6x20,22,pcs
+V6,10,200,intercity,4,UF-1508,BE-6841,Beam,16.7,m
+V6,10,200,intercity,4,UF-1508,BK-7403,Bracket,2,pcs
+V6,10,200,intercity,4,UF-1508,BE-8909,Beam,19.7,m
+V6,10,200,intercity,4,FE-4574,BL-6349,Bolt M6x20,9,pcs
+V6,10,200,intercity,4,FE-4574,BL-6102,Bolt M8x25,17,pcs
+V6,10,200,intercity,4,FE-4574,BL-7678,Bolt M8x35,8,pcs
+V6,10,200,intercity,4,FE-4574,BE-1748,Beam,19.1,m
+V6,10,200,intercity,4,FE-4574,BE-2646,Beam,13.4,m
+V6,10,200,intercity,4,FE-4574,BL-1700,Bolt M10x40,17,pcs
+V6,10,200,intercity,4,MB-8736,SN-5618,Sensor,2,pcs
+V6,10,200,intercity,4,MB-8736,AL-6065,Axle,1,pcs
+V6,10,200,intercity,4,MB-8736,AL-230,Axle,2,pcs
+V6,10,200,intercity,4,MB-8736,BL-4322,Bolt M10x40,12,pcs
+V6,10,200,intercity,4,MB-8736,SP-7354,Spring,2,pcs
+V6,10,200,intercity,4,TF-8641,AL-230,Axle,2,pcs
+V6,10,200,intercity,4,TF-8641,WH-2962,Wheel,4,pcs
+V6,10,200,intercity,4,TF-8641,SN-6930,Sensor,2,pcs
+V6,10,200,intercity,4,TF-8641,WH-3985,Wheel,3,pcs
+V6,10,200,intercity,4,TF-8641,BK-1546,Bracket,6,pcs
+V6,10,200,intercity,4,PS-2464,WH-4087,Wheel,4,pcs
+V6,10,200,intercity,4,PS-2464,SN-8168,Sensor,1,pcs
+V6,10,200,intercity,4,PS-2464,BG-3637,Bearing,3,pcs
+V6,10,200,intercity,4,WA-2591,DP-7346,Damper,3,pcs
+V6,10,200,intercity,4,WA-2591,WH-3877,Wheel,2,pcs
+V6,10,200,intercity,4,WA-2591,WH-7903,Wheel,4,pcs
+V6,10,200,intercity,4,WA-2591,SN-5003,Sensor,2,pcs
+V6,10,200,intercity,4,WA-2591,WH-1186,Wheel,3,pcs
+V6,10,200,intercity,4,WA-2591,SN-9267,Sensor,1,pcs
+V6,10,200,intercity,4,TV-4514,CB-2111,Cable harness,2,pcs
+V6,10,200,intercity,4,TV-4514,IG-1215,IGBT module,3,pcs
+V6,10,200,intercity,4,TV-4514,BK-7375,Bracket,4,pcs
+V6,10,200,intercity,4,AX-7929,FN-8331,Fan,1,pcs
+V6,10,200,intercity,4,AX-7929,CB-2111,Cable harness,2,pcs
+V6,10,200,intercity,4,AX-7929,BL-1778,Bolt M8x35,6,pcs
+V6,10,200,intercity,4,AX-7929,PC-4983,Control board,1,pcs
+V6,10,200,intercity,4,BB-5392,SN-8133,Sensor,1,pcs
+V6,10,200,intercity,4,BB-5392,BL-9688,Bolt M8x35,21,pcs
+V6,10,200,intercity,4,BB-5392,IG-1215,IGBT module,3,pcs
+V6,10,200,intercity,4,BB-5392,CB-9799,Cable harness,2,pcs
+V6,10,200,intercity,4,BB-5392,SN-226,Sensor,4,pcs
+V6,10,200,intercity,4,PG-4345,CT-1537,Contactor,2,pcs
+V6,10,200,intercity,4,PG-4345,FN-1967,Fan,2,pcs
+V6,10,200,intercity,4,PG-4345,FN-5517,Fan,1,pcs
+V6,10,200,intercity,4,PG-4345,SN-6818,Sensor,1,pcs
+V6,10,200,intercity,4,PG-4345,CB-7253,Cable harness,2,pcs
+V6,10,200,intercity,4,DR-1090,JT-218,Door seal,2.4,m
+V6,10,200,intercity,4,DR-1090,AC-501,Door actuator,1,pcs
+V6,10,200,intercity,4,DR-1090,GL-410,Glazing panel,1,pcs
+V6,10,200,intercity,4,DR-1090,BK-120,Bracket LH,4,pcs
+V6,10,200,intercity,4,DR-1090,BL-330,Bolt M8x25,16,pcs
+V6,10,200,intercity,4,DR-1090,RL-205,Guide rail,1.3,m
+V6,10,200,intercity,4,DR-1090,SN-610,Sensor,2,pcs
+V6,10,200,intercity,4,DR-1090,JT-305,Pressure seal,2.4,m
+V6,10,200,intercity,4,DR-1043,JT-218,Door seal,2.4,m
+V6,10,200,intercity,4,DR-1043,AC-477,Door actuator,1,pcs
+V6,10,200,intercity,4,DR-1043,GL-452,Glazing panel,1,pcs
+V6,10,200,intercity,4,DR-1043,BK-121,Bracket RH,4,pcs
+V6,10,200,intercity,4,DR-1043,BL-338,Bolt M8x35,16,pcs
+V6,10,200,intercity,4,DR-1043,RL-205,Guide rail,1.3,m
+V6,10,200,intercity,4,DR-1043,SN-610,Sensor,2,pcs
+V6,10,200,intercity,4,DD-2200,MT-780,Motor,1,pcs
+V6,10,200,intercity,4,DD-2200,BK-158,Bracket,2,pcs
+V6,10,200,intercity,4,DD-2200,BL-371,Bolt M8x25,12,pcs
+V6,10,200,intercity,4,DD-2200,CB-842,Cable harness,1,pcs
+V6,10,200,intercity,4,DD-2200,SN-655,Sensor,2,pcs
+V6,10,200,intercity,4,DD-2200,RL-294,Guide rail,1.1,m
+V6,10,200,intercity,4,DD-2200,GB-515,Gearbox,1,pcs
+V6,10,200,intercity,4,DC-3020,PC-902,Control board,1,pcs
+V6,10,200,intercity,4,DC-3020,SN-598,Door position sensor,2,pcs
+V6,10,200,intercity,4,DC-3020,CB-828,Cable harness,1,pcs
+V6,10,200,intercity,4,DC-3020,RY-440,Relay,3,pcs
+V6,10,200,intercity,4,DC-3020,BK-425,Bracket,2,pcs
+V6,10,200,intercity,4,DC-3020,BL-309,Bolt M6x20,4,pcs
+V6,10,200,intercity,4,RS-6620,AC-588,Actuator,1,pcs
+V6,10,200,intercity,4,RS-6620,PL-693,Tread plate,1,pcs
+V6,10,200,intercity,4,RS-6620,RL-271,Guide rail,1.5,m
+V6,10,200,intercity,4,RS-6620,SN-604,Sensor,1,pcs
+V6,10,200,intercity,4,RS-6620,GB-548,Gearbox,1,pcs
+V6,10,200,intercity,4,TS-9148,LD-6579,LED module,3,pcs
+V6,10,200,intercity,4,TS-9148,PC-1553,Control board,1,pcs
+V6,10,200,intercity,4,TS-9148,GB-1211,Gearbox,1,pcs
+V6,10,200,intercity,4,TS-9148,RY-2620,Relay,3,pcs
+V6,10,200,intercity,4,ER-321,LD-4827,LED module,4,pcs
+V6,10,200,intercity,4,ER-321,CB-6937,Cable harness,2,pcs
+V6,10,200,intercity,4,ER-321,PC-6179,Control board,1,pcs
+V6,10,200,intercity,4,ER-321,GL-4179,Glazing panel,2,pcs
+V6,10,200,intercity,4,ER-321,AC-9307,Actuator,2,pcs
+V6,10,200,intercity,4,DI-1092,BK-8215,Bracket,5,pcs
+V6,10,200,intercity,4,DI-1092,GL-5149,Glazing panel,2,pcs
+V6,10,200,intercity,4,DI-1092,GL-7802,Glazing panel,1,pcs
+V6,10,200,intercity,4,DI-1092,CB-7745,Cable harness,1,pcs
+V6,10,200,intercity,4,DI-1092,SN-8954,Sensor,4,pcs
+V6,10,200,intercity,4,HV-5627,CP-560,Compressor,1,pcs
+V6,10,200,intercity,4,HV-5627,EV-275,Evaporator,1,pcs
+V6,10,200,intercity,4,HV-5627,CD-391,Condenser,1,pcs
+V6,10,200,intercity,4,HV-5627,FN-834,Fan 400 mm,2,pcs
+V6,10,200,intercity,4,HV-5627,FL-829,Filter,2,pcs
+V6,10,200,intercity,4,HV-5627,RF-110,Refrigerant,4.2,kg
+V6,10,200,intercity,4,HV-5627,BK-242,Bracket,6,pcs
+V6,10,200,intercity,4,HC-6001,CP-447,Compressor,1,pcs
+V6,10,200,intercity,4,HC-6001,EV-208,Evaporator,1,pcs
+V6,10,200,intercity,4,HC-6001,FN-716,Fan,1,pcs
+V6,10,200,intercity,4,HC-6001,FL-877,Filter,1,pcs
+V6,10,200,intercity,4,HC-6001,RF-110,Refrigerant,1.2,kg
+V6,10,200,intercity,4,HC-6001,TH-402,Thermostat,1,pcs
+V6,10,200,intercity,4,HC-6001,BK-229,Bracket,4,pcs
+V6,10,200,intercity,4,AD-7385,DT-150,Duct,12.5,m
+V6,10,200,intercity,4,AD-7385,IN-620,Insulation,8,kg
+V6,10,200,intercity,4,AD-7385,BK-281,Bracket,20,pcs
+V6,10,200,intercity,4,AD-7385,BL-417,Bolt M8x35,40,pcs
+V6,10,200,intercity,4,AD-7385,VL-906,Damper valve,2,pcs
+V6,10,200,intercity,4,AD-7385,JT-262,Seal EPDM 15,6,m
+V6,10,200,intercity,4,AD-7385,VL-905,Pressure protection valve,2,pcs
+V6,10,200,intercity,4,TC-8437,PC-984,Control board,1,pcs
+V6,10,200,intercity,4,TC-8437,TH-450,Thermostat,2,pcs
+V6,10,200,intercity,4,TC-8437,SN-646,Sensor,4,pcs
+V6,10,200,intercity,4,TC-8437,RY-415,Relay,2,pcs
+V6,10,200,intercity,4,TC-8437,CB-803,Cable harness,1,pcs
+V6,10,200,intercity,4,TC-8437,BK-296,Bracket,2,pcs
+V6,10,200,intercity,4,HT-5300,HE-310,Heating element,2,pcs
+V6,10,200,intercity,4,HT-5300,FN-708,Fan,1,pcs
+V6,10,200,intercity,4,HT-5300,TH-415,Thermostat,1,pcs
+V6,10,200,intercity,4,HT-5300,BK-213,Bracket,4,pcs
+V6,10,200,intercity,4,HT-5300,BL-463,Bolt M10x40,8,pcs
+V6,10,200,intercity,4,FG-6342,RY-1385,Relay,2,pcs
+V6,10,200,intercity,4,FG-6342,EV-5767,Evaporator,1,pcs
+V6,10,200,intercity,4,FG-6342,IN-6519,Insulation,5.8,kg
+V6,10,200,intercity,4,FG-6342,PC-2995,Control board,1,pcs
+V6,10,200,intercity,4,FG-6342,SN-1366,Sensor,4,pcs
+V6,10,200,intercity,4,CK-4474,TH-7192,Thermostat,1,pcs
+V6,10,200,intercity,4,CK-4474,DT-583,Duct,12.6,m
+V6,10,200,intercity,4,CK-4474,RY-2351,Relay,3,pcs
+V6,10,200,intercity,4,CK-4474,TH-9538,Thermostat,1,pcs
+V6,10,200,intercity,4,CK-4474,SN-1459,Sensor,4,pcs
+V6,10,200,intercity,4,RC-5646,CP-9424,Compressor,1,pcs
+V6,10,200,intercity,4,RC-5646,BL-8672,Bolt M10x40,20,pcs
+V6,10,200,intercity,4,RC-5646,BL-8922,Bolt M6x20,9,pcs
+V6,10,200,intercity,4,RC-5646,SN-3463,Sensor,1,pcs
+V6,10,200,intercity,4,RC-5646,JT-8289,Seal EPDM 12,3.2,m
+V6,10,200,intercity,4,RC-5646,IN-2896,Insulation,8.6,kg
+V6,10,200,intercity,4,SF-9358,TU-167,Steel tube,6.3,m
+V6,10,200,intercity,4,SF-9358,BK-192,Bracket,6,pcs
+V6,10,200,intercity,4,SF-9358,BL-405,Bolt M6x20,24,pcs
+V6,10,200,intercity,4,SF-9358,CU-318,Cushion 3-seat,3,pcs
+V6,10,200,intercity,4,SF-9358,AR-558,Armrest,2,pcs
+V6,10,200,intercity,4,SF-9358,FB-791,Fabric cover grey,4.6,m
+V6,10,200,intercity,4,SF-9358,HR-610,Headrest,3,pcs
+V6,10,200,intercity,4,LR-1578,PF-220,Aluminium profile,3,m
+V6,10,200,intercity,4,LR-1578,GL-436,Glazing panel,2,pcs
+V6,10,200,intercity,4,LR-1578,BK-318,Bracket,6,pcs
+V6,10,200,intercity,4,LR-1578,BL-429,Bolt M6x20,12,pcs
+V6,10,200,intercity,4,LR-1578,EC-748,End cap,2,pcs
+V6,10,200,intercity,4,HD-3462,TU-189,Steel tube,3.4,m
+V6,10,200,intercity,4,HD-3462,BK-594,Handrail clamp,6,pcs
+V6,10,200,intercity,4,HD-3462,BL-441,Bolt M8x35,12,pcs
+V6,10,200,intercity,4,HD-3462,EC-723,End cap,2,pcs
+V6,10,200,intercity,4,HD-3462,CV-547,Cover,2,pcs
+V6,10,200,intercity,4,HD-3462,GR-612,Grip,2,pcs
+V6,10,200,intercity,4,GP-8805,GL-493,Glazing panel,1,pcs
+V6,10,200,intercity,4,GP-8805,PF-296,Aluminium profile,5,m
+V6,10,200,intercity,4,GP-8805,JT-236,Seal EPDM 12,4.9,m
+V6,10,200,intercity,4,GP-8805,HG-320,Hinge,2,pcs
+V6,10,200,intercity,4,GP-8805,SC-815,Screw,12,pcs
+V6,10,200,intercity,4,FC-6100,RV-410,Floor covering,46,m
+V6,10,200,intercity,4,FC-6100,GU-077,Floor adhesive,12,kg
+V6,10,200,intercity,4,FC-6100,PF-209,Aluminium profile,18,m
+V6,10,200,intercity,4,FC-6100,SC-842,Screw,120,pcs
+V6,10,200,intercity,4,CE-1477,GL-6348,Glazing panel,1,pcs
+V6,10,200,intercity,4,CE-1477,SC-1034,Screw,8,pcs
+V6,10,200,intercity,4,CE-1477,TU-3458,Steel tube,4.8,m
+V6,10,200,intercity,4,CE-1477,BK-2948,Bracket,4,pcs
+V6,10,200,intercity,4,LS-3764,BK-2948,Bracket,6,pcs
+V6,10,200,intercity,4,LS-3764,GR-7984,Grip,4,pcs
+V6,10,200,intercity,4,LS-3764,HG-309,Hinge,4,pcs
+V6,10,200,intercity,4,LS-3764,BL-9155,Bolt M8x35,6,pcs
+V6,10,200,intercity,4,LS-3764,EC-851,End cap,2,pcs
+V6,10,200,intercity,4,LS-3764,FB-3488,Fabric cover,4.5,m
+V6,10,200,intercity,4,PD-9225,PF-5646,Aluminium profile,7.5,m
+V6,10,200,intercity,4,PD-9225,EC-6277,End cap,3,pcs
+V6,10,200,intercity,4,PD-9225,CV-4564,Cover,2,pcs
+V6,10,200,intercity,4,PD-9225,SC-1896,Screw,16,pcs
+V6,10,200,intercity,4,PD-9225,GL-6578,Glazing panel,1,pcs
+V6,10,200,intercity,4,PD-9225,EC-7062,End cap,2,pcs
+V6,10,200,intercity,4,BC-5573,BK-9804,Bracket,4,pcs
+V6,10,200,intercity,4,BC-5573,SN-6050,Sensor,1,pcs
+V6,10,200,intercity,4,BC-5573,VL-4778,Valve,2,pcs
+V6,10,200,intercity,4,BC-5573,BD-3196,Brake disc,2,pcs
+V6,10,200,intercity,4,BM-9125,BK-4370,Bracket,8,pcs
+V6,10,200,intercity,4,BM-9125,SN-9301,Sensor,3,pcs
+V6,10,200,intercity,4,BM-9125,BK-7649,Bracket,7,pcs
+V6,10,200,intercity,4,BM-9125,SN-6050,Sensor,3,pcs
+V6,10,200,intercity,4,CM-6592,BD-7281,Brake disc,3,pcs
+V6,10,200,intercity,4,CM-6592,BP-8435,Brake pad,7,pcs
+V6,10,200,intercity,4,CM-6592,PC-7027,Control board,1,pcs
+V6,10,200,intercity,4,CM-6592,PC-1343,Control board,1,pcs
+V6,10,200,intercity,4,CM-6592,VL-8177,Valve,2,pcs
+V6,10,200,intercity,4,MG-6191,BL-1122,Bolt M8x35,14,pcs
+V6,10,200,intercity,4,MG-6191,BK-744,Bracket,6,pcs
+V6,10,200,intercity,4,MG-6191,CB-2633,Cable harness,2,pcs
+V6,10,200,intercity,4,MG-6191,BP-4354,Brake pad,4,pcs
+V6,10,200,intercity,4,MG-6191,SN-4687,Sensor,4,pcs

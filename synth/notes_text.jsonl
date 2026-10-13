@@ -1,0 +1,80 @@
+{"note_id": "TN-0109", "text": "Relay checked vs stock list, status NOT obsolete, still OK for new builds. Ignore the old \"obsolete\" flag in the tracker."}
+{"note_id": "TN-0116", "text": "DR-1043 (door leaf assy, RIGHT) is NOT the same as DR-1042 (door leaf assy, LEFT). Do not mix them up, check handing before fitting."}
+{"note_id": "TN-0123", "text": "Rapport d'essai OK pour door leaf assembly LH, DR-1090. Test report signé, essai fonctionnel w/ ouverture/fermeture conforme, pas d'écart relevé."}
+{"note_id": "TN-0125", "text": "NCR closed, no part change. Wheelset assembly WA-6048 checked on site, within tolerance, no rework needed. Released to line 23/08."}
+{"note_id": "TN-0127", "text": "KP-0457 door control unit superseded by DC-3001, same function. Use DC-3001 for all new orders, do not fit KP-0457 anymore."}
+{"note_id": "TN-0132", "text": "PT-7731 left door leaf assy = DR-1042, same part, just renumbered. Old ref still on some BE drawings, check both when picking from stock."}
+{"note_id": "TN-0139", "text": "Contrôle visuel boulons M8x25 en place sur support, serrage OK, pas de trace de corrosion ni de jeu. Réf BL-2092, RAS."}
+{"note_id": "TN-0147", "text": "Contrôle couple de serrage fixations évaporateur EV-230 fait, OK. Valeurs relevées conformes, rien à signaler."}
+{"note_id": "TN-0153", "text": "Torque check done sur actuator AC-588, fixings serrées per BE spec, valeurs OK. Pas d'écart, no rework needed."}
+{"note_id": "TN-0156", "text": "Drawing updated for beam BE-1748 after BE review, rev letter changed on sheet 2. Production to use the new print only, old copies pulled from the station."}
+{"note_id": "TN-0160", "text": "NC clôturée sur front end module, aucun changement de pièce. Contrôle dimensionnel OK après reprise, RAS suite à revue qualité."}
+{"note_id": "TN-0169", "text": "RAPPORT D'ESSAI module face avant FE-4259 joint au dossier, essais OK. PV signé qualité, à archiver."}
+{"note_id": "TN-0176", "text": "Contrôle couple serrage bracket OK, torque check done per BE sheet, vis marquées au feutre. RAS. Ref BK-8215"}
+{"note_id": "TN-0180", "text": "NCR closed, damper valve checked on bench, within tolerance. No part change, valve refitted as removed. Leak was a loose fitting, retorqued w/ no further findings."}
+{"note_id": "TN-0183", "text": "GP-8805 et PW-470 : two different designs de cloison vitrée, same function, same requirement. Either one OK selon dispo, pas la même conception."}
+{"note_id": "TN-0185", "text": "Inspection kit purge condensat CK-4474 : RAS, pas de fuite ni trace d'usure sur les raccords. Contrôle visuel OK, remonté en l'état."}
+{"note_id": "TN-0191", "text": "Support RH BK-121 et support LH BK-120 = même pièce, double réf suite à renumérotation (cf BE). Pas de différence de plan, OK pour monter indifféremment."}
+{"note_id": "TN-0197", "text": "Contrôle couple de serrage done on handrail assembly HD-3475, all fixings OK. Pas de jeu, re-check at next 4-week insp."}
+{"note_id": "TN-0206", "text": "Kit purge condensats CK-4474 monté voiture 2, étanchéité OK. Temps passé équivalent à 2 h/pers, pas d'écart vs gamme."}
+{"note_id": "TN-0210", "text": "Torque check done on cable harness clamps, tous les serrages OK per BE sheet. Pas d'écart, no rework needed. CB-737"}
+{"note_id": "TN-0216", "text": "LUGGAGE RACK: PB-2281 and LR-1500 are NOT the same part, do not mix up. Different rack, check P/N before fitting."}
+{"note_id": "TN-0220", "text": "Contrôle visuel module LED LD-1453 suite à réception : RAS, pas de pixel mort, connecteur OK. Résultat conforme, lot libéré."}
+{"note_id": "TN-0223", "text": "Rapport d'essai axle reçu le 03/05, results OK, pas d'écart. Archivé dans le dossier lot, réf AL-230."}
+{"note_id": "TN-0226", "text": "Soupape de protection VL-905 obligatoire pour option 200 km/h, à prévoir au BOM. Sans elle pas de validation freinage."}
+{"note_id": "TN-0233", "text": "Incoming inspection on screw SC-1896, qty checked per lot, no defects found. Thread and head dimensions OK, lot released to stores."}
+{"note_id": "TN-0239", "text": "Torque check done on interior lighting strip LS-7235 mounting screws, all within spec. No loose fasteners found, checked again after vibration test."}
+{"note_id": "TN-0246", "text": "Contrôle visuel boulon M8x35 BL-338 : RAS, pas de fissure ni corrosion, serrage OK. Qty 12 vérifiées."}
+{"note_id": "TN-0247", "text": "NCR clôturée sur guide rail RL-205, pas de changement de pièce. Contrôle dimensionnel OK, remonté tel quel."}
+{"note_id": "TN-0256", "text": "GU-077 floor adhesive now obsolete, do not use on new designs. Existing stock only for ongoing builds, BE to confirm."}
+{"note_id": "TN-0259", "text": "Contrôle couple de serrage fait sur module de commande de frein, 4 vis M8 OK au clé dynamométrique. Rien à signaler, RAS après marquage vernis."}
+{"note_id": "TN-0264", "text": "RAPPEL : colle plancher GU-707 obsolète, ne plus utiliser sur nouvelles conceptions (cf. note précédente). Stock existant à voir avec BE avant toute reprise."}
+{"note_id": "TN-0273", "text": "Capteur position porte SN-573 remplacé par SN-5598, ne plus utiliser l'ancien. MAJ BE faite suite à NCR."}
+{"note_id": "TN-0277", "text": "Handrail clamp BK-517 superseded by BK-5994, use new ref on all open WOs. Old stock to be scrapped."}
+{"note_id": "TN-0283", "text": "Contrôle couple de serrage fait sur évaporateur, fixations OK selon gamme. Pas d'écart relevé, RAS."}
+{"note_id": "TN-0285", "text": "MAJ plan BE suite à retouche du perçage, cadre de siège SF-9300 inchangé en forme/fonction. Nouvel indice à prendre en compte au prochain lot, cf. fiche de suivi."}
+{"note_id": "TN-0292", "text": "BL-9155 (bolt M8x35) delivery delayed, supplier says +2 wks. Line 3 stock covers until then, no stoppage expected."}
+{"note_id": "TN-0297", "text": "Torque check done on condensate drain kit fittings, all within spec, marked w/ paint pen. No leaks at pressure test."}
+{"note_id": "TN-0305", "text": "RG-0212 (unité de commande HVAC) obsolète, ne plus utiliser sur nouvelles études. Voir avec BE avant toute commande."}
+{"note_id": "TN-0309", "text": "Groupe HVAC cabine CL-0931 = HC-60011, même pièce, ancienne réf renumérotée. Vérifier qu'il n'y a pas de doublon en stock."}
+{"note_id": "TN-0315", "text": "SLIDING STEP MP-4418 = ST-4010, same part, just renumbered. Old ref still on some BE drawings, check both when pulling from stock."}
+{"note_id": "TN-0322", "text": "Retard livraison joint EPDM 15, réf JT-262 : nouvelle date fournisseur à confirmer, risque d'arrêt poste montage si pas reçu avant la semaine 2."}
+{"note_id": "TN-0323", "text": "NCR sur faisceau CB-7042 clôturée, défaut d'étiquetage uniquement. Aucun changement de pièce, faisceau conservé en l'état suite à contrôle visuel OK."}
+{"note_id": "TN-0331", "text": "BK-121 bracket RH ≠ BK-120 bracket LH, ne pas confondre. Check côté w/ avant montage, 2 pièces différentes même si look similar."}
+{"note_id": "TN-0339", "text": "Rappel : collier de main courante BK-517 remplacé par BK-594, ne plus monter l'ancien. Voir note précédente."}
+{"note_id": "TN-0343", "text": "NC clôturée sans remplacement: boulon M8x35 réf BL-1122 contrôlé, couple OK, pièce conforme. RAS, pas de changement de pièce."}
+{"note_id": "TN-0349", "text": "Contrôle couple de serrage effectué sur tube acier, 3 points relevés OK suite à reprise soudure. Valeurs notées sur fiche de suivi, RAS."}
+{"note_id": "TN-0353", "text": "Bracket install sheet rev B superseded by rev C in the BE folder, please use rev C only. No change to the bracket itself, qty 4 per bogie as before."}
+{"note_id": "TN-0361", "text": "Sliding step RS-6620 and ST-4100 are different designs but do the same job, same requirement met. Not the same part, don't mix up the drawings."}
+{"note_id": "TN-0367", "text": "Panneau vitrage GL-452 : retard livraison fournisseur, réception décalée d'une semaine. Prévenir la prod pour replanifier le montage."}
+{"note_id": "TN-0368", "text": "Contrôle couple serrage vis SC-9860 effectué, valeurs OK suite à reprise du poste. Marquage vernis appliqué après contrôle."}
+{"note_id": "TN-0369", "text": "BK-213 brackets late from supplier, delivery pushed to next week. Line 2 stock covers about 3 days, will flag to planning if it slips again."}
+{"note_id": "TN-0373", "text": "NCR closed, no part change. Bolt M8x35 checked on site, torque OK, left as is. BL-352"}
+{"note_id": "TN-0376", "text": "Rapport d'essai disque de frein reçu, valeurs d'épaisseur et de voile OK. PV signé qualité le 23/11, à joindre au dossier lot."}
+{"note_id": "TN-0381", "text": "NCR clôturée sur support BK-1546 : écart dans la tolérance après contrôle, aucun changement de pièce. Pas de reprise nécessaire, bracket conservé en place."}
+{"note_id": "TN-0388", "text": "GN-4471 = AD-7300, même gaine d'air, juste renumérotée. Même pièce, ne pas commander en double."}
+{"note_id": "TN-0393", "text": "JT-305 (joint d'étanchéité) obligatoire pour la version 200 km/h, ne pas monter autre chose. À vérifier au montage."}
+{"note_id": "TN-0394", "text": "Brake caliper unit bench test report filed, results within tolerance. Retest not required, copy attached to the NCR folder."}
+{"note_id": "TN-0396", "text": "TORQUE CHECK done on cable harness clamps, all within spec. No loose fasteners found, re-marked w/ paint pen."}
+{"note_id": "TN-0402", "text": "MAJ plan BE suite à révision indice : cotes du perçage reprises, boulon M6x20 BL-429 inchangé. Pas d'impact sur le montage en cours."}
+{"note_id": "TN-0405", "text": "Test report for valve done, leak test OK at 6 bar, no drop after 10 min. Report filed in the quality folder, VL-4778."}
+{"note_id": "TN-0411", "text": "MAJ plan BE suite à reprise cotes d'usinage sur profilé alu PF-296, indice révisé. Anciens plans à retirer du poste."}
+{"note_id": "TN-0417", "text": "Rapport d'essai carte de commande PC-6678 OK après reprise soudure, test fonctionnel conforme. PV joint au dossier."}
+{"note_id": "TN-0418", "text": "Porte-bagages PB-2281 = LR-1500, same luggage rack, juste renumérotation. Don't order both, vérifier le stock sous les deux réf avant commande."}
+{"note_id": "TN-0424", "text": "NCR clôturée, no part change required. Side wall panel set SW-3510 conforme après contrôle dimensionnel, rework not needed."}
+{"note_id": "TN-0425", "text": "Contrôle couple serrage fait sur boulons M8x35, 6 pts OK au clé dynamométrique étalonnée. Pas d'écart, RAS."}
+{"note_id": "TN-0426", "text": "CU-318 (coussin 3 places) ≠ CU-310 (coussin 2 places), ne pas confondre à la prépa kit. Vérifié qty et réf sur étiquette avant montage."}
+{"note_id": "TN-0428", "text": "Rapport d'essai carte de commande PC-4983 validé, essais fonctionnels OK. PV joint au dossier, pas d'écart relevé."}
+{"note_id": "TN-0434", "text": "Contrôle couple de serrage done on bracket BK-254, all bolts OK per BE torque table. Re-check after 24h, no loosening found."}
+{"note_id": "TN-0441", "text": "Thermostat TH-415 remplacé par TH-450, ne plus utiliser l'ancien. Màj BE faite, vérifier réf sur BOM avant commande."}
+{"note_id": "TN-0449", "text": "INT LIGHTING STRIP inspected, car 2 saloon, no flicker or loose clips. Connector seated OK, visual check passed. LS-3731"}
+{"note_id": "TN-0458", "text": "NCR clôturée, no part change required. HVAC control unit TC-8100 testé OK après reset paramètres, pas de remplacement."}
+{"note_id": "TN-0465", "text": "FB-791 fabric cover grey approved as substitute for FB-76 (same grey cover), can be fitted either way. No rework needed."}
+{"note_id": "TN-0470", "text": "MT-745 interchangeable avec MT-701 (moteur porte 24V), montage OK sans modif. MT-745 accepté en remplacement de MT-701, cf BE."}
+{"note_id": "TN-0471", "text": "AC-477 door actuator now obsolete, do not use on new designs. Existing stock for spares only, BE to confirm."}
+{"note_id": "TN-0477", "text": "MAJ plan BE suite à modif du support, bandeau d'éclairage intérieur LS-7235 : nouvelle vue de coupe ajoutée, pas de changement de fonction. Plan à diffuser en atelier."}
+{"note_id": "TN-0483", "text": "Rapport d'essai validé, all measurements within tolerance. Test report filed in the dossier, pas d'écart relevé."}
+{"note_id": "TN-0489", "text": "Reminder: thermostat TH-415 is superseded by TH-450, use TH-450 on all new orders. Do not draw TH-415 from stock for fitting."}
+{"note_id": "TN-0490", "text": "Evaporator EV-230 delivery delayed by supplier, new date to be confirmed. Rear car install on hold, chase buyer wk 20."}
+{"note_id": "TN-0498", "text": "Ventilateur 400 mm FN-834 approuvé en remplacement du FN-753, interchangeables sans modif. de fixation. Voir avec BE si doute sur connecteur."}
+{"note_id": "TN-0506", "text": "Rappel : housse tissu gris FB-791 interchangeable avec FB-764, montage possible indifféremment sur l'un ou l'autre, cf note précédente."}

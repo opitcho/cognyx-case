@@ -1,0 +1,31 @@
+{
+  "seed": 20261012,
+  "notes_model": "anthropic/claude-sonnet-5.5",
+  "notes_total": 80,
+  "notes_restated": 4,
+  "noise": {
+    "reference_twins": 0.05,
+    "repeated_lines": 0.02,
+    "repeated_lines_other_quantity": 0.33,
+    "mixed_units": 0.1,
+    "language_switch": 0.15,
+    "cost_conflicts": 0.03,
+    "missing_values": 0.03,
+    "note_reference_only_in_text": 0.5,
+    "note_mistyped_reference": 0.25,
+    "v1_weight": 5
+  },
+  "minimum_findings": {
+    "clone": 5,
+    "clone_dead_reference": 2,
+    "near_pair_unexplained": 5,
+    "near_pair_interchangeable": 3,
+    "near_pair_replaced": 2,
+    "near_pair_required_by_option": 3,
+    "functional_pair": 2,
+    "blocked": 3,
+    "lookalike_subassemblies": 5,
+    "lookalike_references": 5
+  },
+  "minimum_verdicts_changed_by_notes": 8
+}

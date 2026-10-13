@@ -1,0 +1,3 @@
+[submodule "jean-code"]
+	path = jean-code
+	url = git@github.com:opitcho/jean-code.git

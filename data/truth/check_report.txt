@@ -1,0 +1,137 @@
+[PASS] 1a BOM columns
+       expected: ['variant_id', 'cars', 'speed_class_kmh', 'interior', 'level', 'parent_ref', 'child_ref', 'description', 'quantity', 'unit']
+       found:    ['variant_id', 'cars', 'speed_class_kmh', 'interior', 'level', 'parent_ref', 'child_ref', 'description', 'quantity', 'unit']
+[PASS] 1b ERP columns
+       expected: ['item_ref', 'description', 'supplier', 'unit_cost_eur', 'price_unit']
+       found:    ['item_ref', 'description', 'supplier', 'unit_cost_eur', 'price_unit']
+[PASS] 1c note fields
+       expected: ['note_id', 'date', 'reference', 'text']
+       found:    [('note_id', 'date', 'reference', 'text')]
+[PASS] 1d BOM quantities are numbers with a decimal point
+       expected: none bad
+       found:    none bad
+[PASS] 1e ERP prices are numbers with a decimal comma, or empty
+       expected: none bad
+       found:    none bad
+[PASS] 2 every parent exists one level up, in every variant
+       expected: 0
+       found:    0
+[PASS] 3 clean erp_items.csv + changes.csv = raw erp_items.csv
+       expected: 0 rows differ
+       found:    0 rows differ
+[PASS] 3 clean plm_bom_export.csv + changes.csv = raw plm_bom_export.csv
+       expected: 0 rows differ
+       found:    0 rows differ
+[PASS] 4a no mistyped reference equals a real reference
+       expected: none
+       found:    none
+[PASS] 4b every mistyped reference is closest to its own part
+       expected: none ambiguous
+       found:    none ambiguous
+[PASS] 5a identical sub-assemblies in the clean BOM = the planted clones
+       expected: [['AD-7300', 'GN-4471'], ['CL-0931', 'HC-6001'], ['DC-3001', 'KP-0457'], ['DR-1042', 'PT-7731'], ['LR-1500', 'PB-2281'], ['MP-4418', 'ST-4100'], ['RG-0212', 'TC-8100']]
+       found:    [['AD-7300', 'GN-4471'], ['CL-0931', 'HC-6001'], ['DC-3001', 'KP-0457'], ['DR-1042', 'PT-7731'], ['LR-1500', 'PB-2281'], ['MP-4418', 'ST-4100'], ['RG-0212', 'TC-8100']]
+[PASS] 5b near pairs (1 to 3 lines apart, 4 shared components) in the clean BOM = the planted ones
+       expected: [['AD-7300', 'AD-7385'], ['CL-0931', 'HC-6040'], ['DC-3001', 'DC-3020'], ['DD-2010', 'DD-2037'], ['DD-2200', 'DD-2268'], ['DR-1042', 'DR-1090'], ['HD-3462', 'HD-3475'], ['HV-5100', 'HV-5146'], ['HV-5627', 'HV-5682'], ['LR-1500', 'LR-1578'], ['MP-4418', 'ST-4165'], ['PW-4700', 'PW-4792'], ['SF-9020', 'SF-9064'], ['SF-9300', 'SF-9358']]
+       found:    [['AD-7300', 'AD-7385'], ['CL-0931', 'HC-6040'], ['DC-3001', 'DC-3020'], ['DD-2010', 'DD-2037'], ['DD-2200', 'DD-2268'], ['DR-1042', 'DR-1090'], ['HD-3462', 'HD-3475'], ['HV-5100', 'HV-5146'], ['HV-5627', 'HV-5682'], ['LR-1500', 'LR-1578'], ['MP-4418', 'ST-4165'], ['PW-4700', 'PW-4792'], ['SF-9020', 'SF-9064'], ['SF-9300', 'SF-9358']]
+[PASS] 6a functional pairs share no component
+       expected: none share
+       found:    none share
+[PASS] 6b look-alike sub-assemblies have the same name and 4 or more differing lines
+       expected: all
+       found:    all
+[PASS] 6c look-alike references are exactly one character apart
+       expected: all
+       found:    all
+[PASS] 6d no other two references are one character apart
+       expected: none
+       found:    none
+[PASS] 7a each kind of finding meets its minimum
+       expected: {'clone': 5, 'clone_dead_reference': 2, 'near_pair_unexplained': 5, 'near_pair_interchangeable': 3, 'near_pair_replaced': 2, 'near_pair_required_by_option': 3, 'functional_pair': 2, 'blocked': 3, 'lookalike_subassemblies': 5, 'lookalike_references': 5}
+       found:    {'clone': 5, 'clone_dead_reference': 2, 'near_pair_unexplained': 6, 'near_pair_interchangeable': 3, 'near_pair_replaced': 2, 'near_pair_required_by_option': 3, 'functional_pair': 2, 'blocked': 3, 'lookalike_subassemblies': 5, 'lookalike_references': 5}
+[PASS] 7b V1 has at least one finding of each kind
+       expected: all kinds
+       found:    all kinds
+[PASS] 7c every V1 component has a price in the raw ERP file
+       expected: none without
+       found:    none without
+[PASS] 8 amount of noise: BOM descriptions in French
+       expected: about 226
+       found:    227
+[PASS] 8 amount of noise: ERP descriptions in English
+       expected: about 45
+       found:    47
+[PASS] 8 amount of noise: cost conflicts
+       expected: about 9
+       found:    9
+[PASS] 8 amount of noise: items with a unit change
+       expected: about 30
+       found:    30
+[PASS] 8 amount of noise: missing supplier or price
+       expected: about 19
+       found:    19
+[PASS] 8 amount of noise: references with a mistyped twin
+       expected: about 19
+       found:    19
+[PASS] 8 amount of noise: repeated BOM lines
+       expected: about 30
+       found:    30
+[PASS] 8 amount of noise: repeated lines with another quantity
+       expected: about 10
+       found:    10
+[PASS] 8 share of BOM changes that fall in V1
+       expected: at least 40%
+       found:    42%
+[PASS] 8 two suppliers appear under three spellings each
+       expected: all 6 spellings used
+       found:    all 6 spellings used
+[PASS] 9a clones not identical in the raw BOM because of a mistyped reference
+       expected: at least 2
+       found:    ['F01', 'F03']
+[PASS] 9b clones not identical in the raw BOM because of a unit
+       expected: at least 2
+       found:    ['F01', 'F02', 'F04']
+[PASS] 10a designs whose verdict differs with and without the notes
+       expected: at least 8
+       found:    9: ['DR-1043', 'DC-3001', 'KP-0457', 'RS-6620', 'RG-0212', 'HT-5300', 'HD-3475', 'GP-8805', 'FC-6100']
+[PASS] 10b blocked designs = designs that are or contain an obsolete or superseded part
+       expected: ['DC-3001', 'DR-1043', 'FC-6100', 'HD-3475', 'HT-5300', 'KP-0457', 'RG-0212']
+       found:    ['DC-3001', 'DR-1043', 'FC-6100', 'HD-3475', 'HT-5300', 'KP-0457', 'RG-0212']
+[PASS] 11a every note contains the references of its facts and no others
+       expected: no problem
+       found:    no problem
+[PASS] 11b every mistyped reference in a note is closest to its own part
+       expected: none ambiguous
+       found:    none ambiguous
+[PASS] 11c notes: total, with a relation, with a mistyped reference, reference only in the text
+       expected: about 80, 30, 7, 14
+       found:    [80, 28, 7, 14]
+[PASS] 12 a second run gives identical files
+       expected: identical
+       found:    identical
+
+37 of 37 checks passed
+
+--- read-through: 10 random notes ---
+{"note_id": "TN-0368", "date": "2023-06-24", "reference": "SC-9860", "text": "Contrôle couple serrage vis SC-9860 effectué, valeurs OK suite à reprise du poste. Marquage vernis appliqué après contrôle."}
+{"note_id": "TN-0381", "date": "2023-11-26", "reference": "", "text": "NCR clôturée sur support BK-1546 : écart dans la tolérance après contrôle, aucun changement de pièce. Pas de reprise nécessaire, bracket conservé en place."}
+{"note_id": "TN-0132", "date": "2019-10-24", "reference": "PT-7731", "text": "PT-7731 left door leaf assy = DR-1042, same part, just renumbered. Old ref still on some BE drawings, check both when picking from stock."}
+{"note_id": "TN-0283", "date": "2022-06-30", "reference": "EV-230", "text": "Contrôle couple de serrage fait sur évaporateur, fixations OK selon gamme. Pas d'écart relevé, RAS."}
+{"note_id": "TN-0426", "date": "2025-04-11", "reference": "", "text": "CU-318 (coussin 3 places) ≠ CU-310 (coussin 2 places), ne pas confondre à la prépa kit. Vérifié qty et réf sur étiquette avant montage."}
+{"note_id": "TN-0418", "date": "2024-06-18", "reference": "", "text": "Porte-bagages PB-2281 = LR-1500, same luggage rack, juste renumérotation. Don't order both, vérifier le stock sous les deux réf avant commande."}
+{"note_id": "TN-0373", "date": "2023-09-04", "reference": "BL-352", "text": "NCR closed, no part change. Bolt M8x35 checked on site, torque OK, left as is. BL-352"}
+{"note_id": "TN-0309", "date": "2022-09-29", "reference": "", "text": "Groupe HVAC cabine CL-0931 = HC-60011, même pièce, ancienne réf renumérotée. Vérifier qu'il n'y a pas de doublon en stock."}
+{"note_id": "TN-0417", "date": "2024-05-19", "reference": "", "text": "Rapport d'essai carte de commande PC-6678 OK après reprise soudure, test fonctionnel conforme. PV joint au dossier."}
+{"note_id": "TN-0349", "date": "2023-04-11", "reference": "TU-140", "text": "Contrôle couple de serrage effectué sur tube acier, 3 points relevés OK suite à reprise soudure. Valeurs notées sur fiche de suivi, RAS."}
+
+--- read-through: 10 random changes ---
+plm_bom_export.csv row 74 description: 'Wheel' -> 'Roue'  [language]
+erp_items.csv row 301 supplier: 'Faiveley' -> 'Wabtec'  [supplier_variant]
+erp_items.csv row 24 price_unit: 'pcs' -> 'EA'  [mixed_unit]
+plm_bom_export.csv row 133 description: 'Sensor' -> 'Capteur'  [language]
+plm_bom_export.csv row 1087 quantity: '11' -> '11000'  [mixed_unit]
+plm_bom_export.csv row 138 (row added): '' -> ''  [repeated_line]
+plm_bom_export.csv row 635 description: 'Door position sensor' -> 'Capteur de position porte'  [language]
+erp_items.csv row 109 price_unit: 'pcs' -> 'U'  [mixed_unit]
+plm_bom_export.csv row 137 description: 'Control board' -> 'Carte de commande'  [language]
+plm_bom_export.csv row 904 (row added): '' -> ''  [repeated_line]

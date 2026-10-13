@@ -1,0 +1,303 @@
+{
+  "_readme": [
+    "Everything planted in the data on purpose, written by hand.",
+    "parts: names for the hand-picked components that need a specific name.",
+    "positions: for each hand-written position, its designs and which variant uses which.",
+    "  A design is a list of [component, quantity], or a copy of another design with changes.",
+    "findings: one entry per thing the demo must find (or must not merge).",
+    "  notes: the relations that a technical note will state for this finding.",
+    "  verdicts: design -> [verdict from the BOM alone, verdict with the notes].",
+    "  noise: noise that must be applied to this finding (twin = mistyped reference, unit = unit conversion)."
+  ],
+
+  "parts": {
+    "JT-218": {"en": "Door seal", "fr": "Joint de porte"},
+    "JT-305": {"en": "Pressure seal", "fr": "Joint d'étanchéité pression"},
+    "AC-501": {"en": "Door actuator", "fr": "Actionneur de porte"},
+    "AC-477": {"en": "Door actuator", "fr": "Actionneur de porte"},
+    "BK-120": {"en": "Bracket LH", "fr": "Support gauche"},
+    "BK-121": {"en": "Bracket RH", "fr": "Support droit"},
+    "BL-330": {"en": "Bolt M8x25", "fr": "Vis M8x25"},
+    "BL-338": {"en": "Bolt M8x35", "fr": "Vis M8x35"},
+    "MT-701": {"en": "Door motor 24V", "fr": "Moteur de porte 24V"},
+    "MT-745": {"en": "Door motor 24V", "fr": "Moteur de porte 24V"},
+    "SN-573": {"en": "Door position sensor", "fr": "Capteur de position porte"},
+    "SN-598": {"en": "Door position sensor", "fr": "Capteur de position porte"},
+    "FN-753": {"en": "Fan 400 mm", "fr": "Ventilateur 400 mm"},
+    "FN-834": {"en": "Fan 400 mm", "fr": "Ventilateur 400 mm"},
+    "VL-905": {"en": "Pressure protection valve", "fr": "Clapet de protection pression"},
+    "VL-906": {"en": "Damper valve", "fr": "Clapet de réglage"},
+    "TH-415": {"en": "Thermostat", "fr": "Thermostat"},
+    "TH-450": {"en": "Thermostat", "fr": "Thermostat"},
+    "CU-310": {"en": "Cushion 2-seat", "fr": "Coussin 2 places"},
+    "CU-318": {"en": "Cushion 3-seat", "fr": "Coussin 3 places"},
+    "FB-764": {"en": "Fabric cover grey", "fr": "Housse textile grise"},
+    "FB-791": {"en": "Fabric cover grey", "fr": "Housse textile grise"},
+    "BK-517": {"en": "Handrail clamp", "fr": "Collier de main courante"},
+    "BK-594": {"en": "Handrail clamp", "fr": "Collier de main courante"},
+    "BK-367": {"en": "Reinforcement bracket", "fr": "Support de renfort"},
+    "GU-077": {"en": "Floor adhesive", "fr": "Colle de sol"}
+  },
+
+  "positions": {
+    "Door leaf assembly, left": {
+      "designs": {
+        "DR-1042": {"components": [["JT-218", 2.4], ["AC-501", 1], ["GL-410", 1], ["BK-120", 4], ["BL-330", 16], ["RL-205", 1.3], ["SN-610", 2]]},
+        "PT-7731": {"copy_of": "DR-1042"},
+        "DR-1090": {"copy_of": "DR-1042", "changes": [{"add": ["JT-305", 2.4]}]}
+      },
+      "use": {"V1": "DR-1042", "V2": "DR-1042", "V3": "PT-7731", "V4": "DR-1090", "V5": "DR-1042", "V6": "DR-1090"}
+    },
+    "Door leaf assembly, right": {
+      "designs": {
+        "DR-1043": {"components": [["JT-218", 2.4], ["AC-477", 1], ["GL-452", 1], ["BK-121", 4], ["BL-338", 16], ["RL-205", 1.3], ["SN-610", 2]]}
+      },
+      "use": {"V1": "DR-1043", "V2": "DR-1043", "V3": "DR-1043", "V4": "DR-1043", "V5": "DR-1043", "V6": "DR-1043"}
+    },
+    "Door drive unit": {
+      "designs": {
+        "DD-2010": {"components": [["MT-701", 1], ["BK-133", 2], ["BL-352", 8], ["CB-815", 1], ["SN-627", 1], ["RL-260", 0.9]]},
+        "DD-2037": {"copy_of": "DD-2010", "changes": [{"swap": "MT-701", "for": "MT-745"}]},
+        "DD-2200": {"components": [["MT-780", 1], ["BK-158", 2], ["BL-371", 12], ["CB-842", 1], ["SN-655", 2], ["RL-294", 1.1], ["GB-515", 1]]},
+        "DD-2268": {"copy_of": "DD-2200", "changes": [{"quantity": ["BL-371", 10]}, {"swap": "BK-158", "for": "BK-706"}]}
+      },
+      "use": {"V1": "DD-2010", "V2": "DD-2010", "V3": "DD-2037", "V4": "DD-2200", "V5": "DD-2268", "V6": "DD-2200"}
+    },
+    "Door control unit": {
+      "designs": {
+        "DC-3001": {"components": [["PC-902", 1], ["SN-573", 2], ["CB-828", 1], ["RY-440", 3], ["BK-425", 2], ["BL-309", 4]]},
+        "KP-0457": {"copy_of": "DC-3001"},
+        "DC-3020": {"copy_of": "DC-3001", "changes": [{"swap": "SN-573", "for": "SN-598"}]}
+      },
+      "use": {"V1": "KP-0457", "V2": "DC-3001", "V3": "DC-3001", "V4": "DC-3001", "V5": "DC-3020", "V6": "DC-3020"}
+    },
+    "Sliding step": {
+      "designs": {
+        "ST-4100": {"supplier": "Faiveley", "components": [["AC-534", 1], ["PL-661", 1], ["RL-237", 1.6], ["SN-682", 2], ["BK-873", 4], ["BL-394", 12]]},
+        "MP-4418": {"copy_of": "ST-4100"},
+        "ST-4165": {"copy_of": "ST-4100", "changes": [{"quantity": ["BL-394", 16]}]},
+        "RS-6620": {"supplier": "Nordbahn Komponenten GmbH", "components": [["AC-588", 1], ["PL-693", 1], ["RL-271", 1.5], ["SN-604", 1], ["GB-548", 1]]}
+      },
+      "use": {"V1": "ST-4100", "V2": "MP-4418", "V3": "ST-4100", "V4": "ST-4165", "V5": "ST-4100", "V6": "RS-6620"}
+    },
+
+    "Saloon HVAC unit": {
+      "designs": {
+        "HV-5100": {"components": [["CP-512", 1], ["EV-230", 1], ["CD-340", 1], ["FN-720", 2], ["FL-801", 2], ["RF-110", 3.5], ["BK-205", 6]]},
+        "HV-5146": {"copy_of": "HV-5100", "changes": [{"swap": "FL-801", "for": "FL-864"}, {"quantity": ["BK-205", 8]}]},
+        "HV-5682": {"components": [["CP-560", 1], ["EV-275", 1], ["CD-391", 1], ["FN-753", 2], ["FL-829", 2], ["RF-110", 4.2], ["BK-242", 6]]},
+        "HV-5627": {"copy_of": "HV-5682", "changes": [{"swap": "FN-753", "for": "FN-834"}]}
+      },
+      "use": {"V1": "HV-5100", "V2": "HV-5100", "V3": "HV-5100", "V4": "HV-5682", "V5": "HV-5146", "V6": "HV-5627"}
+    },
+    "Cab HVAC unit": {
+      "designs": {
+        "HC-6001": {"components": [["CP-447", 1], ["EV-208", 1], ["FN-716", 1], ["FL-877", 1], ["RF-110", 1.2], ["TH-402", 1], ["BK-229", 4]]},
+        "CL-0931": {"copy_of": "HC-6001"},
+        "HC-6040": {"copy_of": "HC-6001", "changes": [{"swap": "BK-229", "for": "BK-254"}, {"quantity": ["FL-877", 2]}]}
+      },
+      "use": {"V1": "HC-6001", "V2": "CL-0931", "V3": "HC-6001", "V4": "HC-6001", "V5": "HC-6040", "V6": "HC-6001"}
+    },
+    "Air duct assembly": {
+      "designs": {
+        "AD-7300": {"components": [["DT-150", 12.5], ["IN-620", 8], ["BK-281", 20], ["BL-417", 40], ["VL-906", 2], ["JT-262", 6]]},
+        "GN-4471": {"copy_of": "AD-7300"},
+        "AD-7385": {"copy_of": "AD-7300", "changes": [{"add": ["VL-905", 2]}]}
+      },
+      "use": {"V1": "AD-7300", "V2": "AD-7300", "V3": "AD-7300", "V4": "AD-7385", "V5": "GN-4471", "V6": "AD-7385"}
+    },
+    "HVAC control unit": {
+      "designs": {
+        "TC-8100": {"components": [["PC-951", 1], ["TH-436", 2], ["SN-699", 3], ["RY-472", 2], ["CB-866", 1]]},
+        "RG-0212": {"copy_of": "TC-8100"},
+        "TC-8437": {"components": [["PC-984", 1], ["TH-450", 2], ["SN-646", 4], ["RY-415", 2], ["CB-803", 1], ["BK-296", 2]]}
+      },
+      "use": {"V1": "RG-0212", "V2": "TC-8100", "V3": "TC-8100", "V4": "TC-8437", "V5": "TC-8100", "V6": "TC-8437"}
+    },
+    "Heater unit": {
+      "designs": {
+        "HT-5300": {"components": [["HE-310", 2], ["FN-708", 1], ["TH-415", 1], ["BK-213", 4], ["BL-463", 8]]}
+      },
+      "use": {"V1": "HT-5300", "V2": "HT-5300", "V3": "HT-5300", "V4": "HT-5300", "V5": "HT-5300", "V6": "HT-5300"}
+    },
+
+    "Seat frame assembly": {
+      "designs": {
+        "SF-9020": {"components": [["TU-140", 4.2], ["BK-648", 4], ["BL-482", 16], ["CU-310", 2], ["AR-520", 2], ["FB-730", 3.1]]},
+        "SF-9064": {"copy_of": "SF-9020", "changes": [{"swap": "BK-648", "for": "BK-109"}, {"quantity": ["BL-482", 12]}]},
+        "SF-9300": {"components": [["TU-167", 6.3], ["BK-192", 6], ["BL-405", 24], ["CU-318", 3], ["AR-558", 2], ["FB-764", 4.6], ["HR-610", 3]]},
+        "SF-9358": {"copy_of": "SF-9300", "changes": [{"swap": "FB-764", "for": "FB-791"}]}
+      },
+      "use": {"V1": "SF-9020", "V2": "SF-9020", "V3": "SF-9020", "V4": "SF-9300", "V5": "SF-9064", "V6": "SF-9358"}
+    },
+    "Luggage rack": {
+      "designs": {
+        "LR-1500": {"components": [["PF-220", 3.0], ["GL-436", 2], ["BK-318", 6], ["BL-429", 12], ["EC-705", 2]]},
+        "PB-2281": {"copy_of": "LR-1500"},
+        "LR-1578": {"copy_of": "LR-1500", "changes": [{"swap": "EC-705", "for": "EC-748"}]}
+      },
+      "use": {"V1": "LR-1500", "V2": "LR-1500", "V3": "LR-1500", "V4": "PB-2281", "V5": "LR-1500", "V6": "LR-1578"}
+    },
+    "Handrail assembly": {
+      "designs": {
+        "HD-3100": {"components": [["TU-126", 2.2], ["BK-335", 4], ["BL-476", 8], ["EC-761", 2], ["CV-510", 1]]},
+        "HD-3475": {"components": [["TU-189", 3.4], ["BK-517", 6], ["BL-441", 12], ["EC-723", 2], ["CV-547", 2], ["GR-612", 2]]},
+        "HD-3462": {"copy_of": "HD-3475", "changes": [{"swap": "BK-517", "for": "BK-594"}]}
+      },
+      "use": {"V1": "HD-3100", "V2": "HD-3100", "V3": "HD-3100", "V4": "HD-3475", "V5": "HD-3475", "V6": "HD-3462"}
+    },
+    "Glazed partition": {
+      "designs": {
+        "PW-4700": {"supplier": "Sofratec", "components": [["GL-478", 1], ["PF-253", 4.8], ["JT-281", 5.2], ["BK-931", 8], ["BL-268", 16]]},
+        "PW-4792": {"copy_of": "PW-4700", "changes": [{"add": ["BK-367", 4]}]},
+        "GP-8805": {"supplier": "Metalis Rail", "components": [["GL-493", 1], ["PF-296", 5.0], ["JT-236", 4.9], ["HG-320", 2], ["SC-815", 12]]}
+      },
+      "use": {"V1": "PW-4700", "V2": "PW-4700", "V3": "PW-4700", "V4": "PW-4792", "V5": "PW-4700", "V6": "GP-8805"}
+    },
+    "Floor covering assembly": {
+      "designs": {
+        "FC-6100": {"components": [["RV-410", 46], ["GU-077", 12], ["PF-209", 18], ["SC-842", 120]]}
+      },
+      "use": {"V1": "FC-6100", "V2": "FC-6100", "V3": "FC-6100", "V4": "FC-6100", "V5": "FC-6100", "V6": "FC-6100"}
+    }
+  },
+
+  "findings": [
+    {"id": "F01", "kind": "clone", "a": "DR-1042", "b": "PT-7731",
+     "notes": [{"relation": "same_as", "refs": ["PT-7731", "DR-1042"]}],
+     "verdicts": {"DR-1042": ["reused", "reused"], "PT-7731": ["reused", "reused"]},
+     "noise": {"twin": ["PT-7731", "RL-205"]},
+     "expect": "Same door leaf under two references. Only identical once the mistyped guide rail reference is cleaned."},
+    {"id": "F02", "kind": "clone", "a": "ST-4100", "b": "MP-4418",
+     "notes": [{"relation": "same_as", "refs": ["MP-4418", "ST-4100"]}],
+     "verdicts": {"ST-4100": ["reused", "reused"], "MP-4418": ["reused", "reused"]},
+     "noise": {"unit": ["MP-4418", "RL-237"]},
+     "expect": "Same sliding step under two references. Only identical once 1600 mm is read as 1.6 m."},
+    {"id": "F03", "kind": "clone", "a": "HC-6001", "b": "CL-0931",
+     "notes": [{"relation": "same_as", "refs": ["CL-0931", "HC-6001"]}],
+     "verdicts": {"HC-6001": ["reused", "reused"], "CL-0931": ["reused", "reused"]},
+     "noise": {"twin": ["CL-0931", "EV-208"]},
+     "expect": "Same cab HVAC unit under two references. Only identical once the mistyped evaporator reference is cleaned."},
+    {"id": "F04", "kind": "clone", "a": "AD-7300", "b": "GN-4471",
+     "notes": [{"relation": "same_as", "refs": ["GN-4471", "AD-7300"]}],
+     "verdicts": {"AD-7300": ["reused", "reused"], "GN-4471": ["reused", "reused"]},
+     "noise": {"unit": ["GN-4471", "DT-150"]},
+     "expect": "Same air duct assembly under two references. Only identical once 12500 mm is read as 12.5 m."},
+    {"id": "F05", "kind": "clone", "a": "LR-1500", "b": "PB-2281",
+     "notes": [{"relation": "not_same_as", "refs": ["PB-2281", "LR-1500"], "date": "2021-03-09", "overridden": true},
+               {"relation": "same_as", "refs": ["PB-2281", "LR-1500"], "date": "2024-06-18"}],
+     "verdicts": {"LR-1500": ["reused", "reused"], "PB-2281": ["reused", "reused"]},
+     "expect": "Same luggage rack under two references. An old note says they differ, a later note says they are the same: the later one wins."},
+
+    {"id": "F06", "kind": "clone_dead_reference", "a": "DC-3001", "b": "KP-0457",
+     "notes": [{"relation": "superseded_by", "refs": ["KP-0457", "DC-3001"]}],
+     "verdicts": {"DC-3001": ["reused", "reused"], "KP-0457": ["reused", "blocked"]},
+     "expect": "Same door control unit under two references. KP-0457 is the dead one: keep DC-3001."},
+    {"id": "F07", "kind": "clone_dead_reference", "a": "TC-8100", "b": "RG-0212",
+     "notes": [{"relation": "obsolete", "refs": ["RG-0212"]}],
+     "verdicts": {"TC-8100": ["reused", "reused"], "RG-0212": ["reused", "blocked"]},
+     "expect": "Same HVAC control unit under two references. RG-0212 is obsolete: keep TC-8100."},
+
+    {"id": "F08", "kind": "near_pair_unexplained", "a": "DD-2200", "b": "DD-2268",
+     "verdicts": {"DD-2200": ["reusable", "reusable"], "DD-2268": ["reusable", "reusable"]},
+     "expect": "Two door drive units differing by a bracket and a bolt count. Nothing explains it: merge candidate."},
+    {"id": "F09", "kind": "near_pair_unexplained", "a": "ST-4100", "b": "ST-4165",
+     "verdicts": {"ST-4165": ["reusable", "reusable"]},
+     "expect": "Sliding step with 16 bolts where the others have 12. Merge candidate."},
+    {"id": "F10", "kind": "near_pair_unexplained", "a": "HV-5100", "b": "HV-5146",
+     "verdicts": {"HV-5146": ["reusable", "reusable"]},
+     "expect": "Saloon HVAC unit with another filter and two more brackets. Merge candidate."},
+    {"id": "F11", "kind": "near_pair_unexplained", "a": "HC-6001", "b": "HC-6040",
+     "verdicts": {"HC-6040": ["reusable", "reusable"]},
+     "expect": "Cab HVAC unit with another bracket and a second filter. Merge candidate."},
+    {"id": "F12", "kind": "near_pair_unexplained", "a": "SF-9020", "b": "SF-9064",
+     "verdicts": {"SF-9064": ["reusable", "reusable"]},
+     "expect": "Seat frame with another bracket and fewer bolts. Merge candidate."},
+    {"id": "F13", "kind": "near_pair_unexplained", "a": "LR-1500", "b": "LR-1578",
+     "verdicts": {"LR-1578": ["reusable", "reusable"]},
+     "noise": {"no_price": "EC-748"},
+     "expect": "Luggage rack with another end cap. Merge candidate, but the end cap has no price so the gap cannot be computed."},
+
+    {"id": "F14", "kind": "near_pair_interchangeable", "a": "DD-2010", "b": "DD-2037",
+     "notes": [{"relation": "interchangeable_with", "refs": ["MT-745", "MT-701"]}],
+     "verdicts": {"DD-2037": ["reusable", "reusable"]},
+     "expect": "Door drive units differing only by the motor, and a note says the two motors are interchangeable: identical in practice."},
+    {"id": "F15", "kind": "near_pair_interchangeable", "a": "HV-5682", "b": "HV-5627",
+     "notes": [{"relation": "interchangeable_with", "refs": ["FN-834", "FN-753"]}],
+     "verdicts": {"HV-5682": ["reusable", "reusable"], "HV-5627": ["reusable", "reusable"]},
+     "expect": "Saloon HVAC units differing only by the fan, and a note says the two fans are interchangeable."},
+    {"id": "F16", "kind": "near_pair_interchangeable", "a": "SF-9300", "b": "SF-9358",
+     "notes": [{"relation": "interchangeable_with", "refs": ["FB-791", "FB-764"]}],
+     "verdicts": {"SF-9300": ["reusable", "reusable"], "SF-9358": ["reusable", "reusable"]},
+     "expect": "Seat frames differing only by the fabric cover, and a note approves one as a substitute for the other."},
+
+    {"id": "F17", "kind": "near_pair_replaced", "a": "DC-3001", "b": "DC-3020",
+     "notes": [{"relation": "superseded_by", "refs": ["SN-573", "SN-598"]}],
+     "verdicts": {"DC-3001": ["reusable", "blocked"], "KP-0457": ["reusable", "blocked"], "DC-3020": ["reusable", "reusable"]},
+     "expect": "Door control units differing only by the sensor, and a note says SN-573 was superseded by SN-598: keep DC-3020."},
+    {"id": "F18", "kind": "near_pair_replaced", "a": "HD-3475", "b": "HD-3462",
+     "notes": [{"relation": "superseded_by", "refs": ["BK-517", "BK-594"]}],
+     "verdicts": {"HD-3475": ["reusable", "blocked"], "HD-3462": ["reusable", "reusable"]},
+     "expect": "Handrail assemblies differing only by the clamp, and a note says BK-517 was superseded by BK-594: keep HD-3462."},
+
+    {"id": "F19", "kind": "near_pair_required_by_option", "a": "DR-1042", "b": "DR-1090",
+     "notes": [{"relation": "required_for", "refs": ["JT-305"], "option": "200 km/h"}],
+     "verdicts": {"DR-1090": ["reusable", "specific"]},
+     "expect": "The 200 km/h door leaf has one more seal, and a note says it is required at 200 km/h: justified, not a merge candidate."},
+    {"id": "F20", "kind": "near_pair_required_by_option", "a": "AD-7300", "b": "AD-7385",
+     "notes": [{"relation": "required_for", "refs": ["VL-905"], "option": "200 km/h"}],
+     "verdicts": {"AD-7385": ["reusable", "specific"]},
+     "expect": "The 200 km/h air duct has a pressure protection valve, and a note says it is required at 200 km/h: justified."},
+    {"id": "F21", "kind": "near_pair_required_by_option", "a": "PW-4700", "b": "PW-4792",
+     "verdicts": {"PW-4792": ["reusable", "reusable"]},
+     "expect": "The 200 km/h glazed partition has reinforcement brackets. The reason is the speed class but no note says so: stays a merge candidate for a person to decide."},
+
+    {"id": "F22", "kind": "functional_pair", "a": "ST-4100", "b": "RS-6620",
+     "notes": [{"relation": "functionally_equivalent_to", "refs": ["RS-6620", "ST-4100"]}],
+     "verdicts": {"RS-6620": ["specific", "reusable"]},
+     "expect": "Two sliding steps from two suppliers with no part in common. Only the note says they do the same job."},
+    {"id": "F23", "kind": "functional_pair", "a": "PW-4700", "b": "GP-8805",
+     "notes": [{"relation": "functionally_equivalent_to", "refs": ["GP-8805", "PW-4700"]}],
+     "verdicts": {"GP-8805": ["specific", "reusable"]},
+     "expect": "Two glazed partitions from two suppliers with no part in common. Only the note says they do the same job."},
+
+    {"id": "F24", "kind": "blocked", "a": "DR-1043", "part": "AC-477",
+     "notes": [{"relation": "obsolete", "refs": ["AC-477"]}],
+     "verdicts": {"DR-1043": ["reused", "blocked"]},
+     "expect": "The right door leaf is in all six variants but contains an obsolete actuator with no replacement named."},
+    {"id": "F25", "kind": "blocked", "a": "HT-5300", "part": "TH-415",
+     "notes": [{"relation": "superseded_by", "refs": ["TH-415", "TH-450"]}],
+     "verdicts": {"HT-5300": ["reused", "blocked"]},
+     "expect": "The heater unit is in all six variants but its thermostat was superseded by TH-450, which the newer HVAC control unit TC-8437 already uses."},
+    {"id": "F26", "kind": "blocked", "a": "FC-6100", "part": "GU-077",
+     "notes": [{"relation": "obsolete", "refs": ["GU-077"]}],
+     "verdicts": {"FC-6100": ["reused", "blocked"]},
+     "expect": "The floor covering assembly is in all six variants but uses an obsolete adhesive."},
+
+    {"id": "F27", "kind": "lookalike_subassemblies", "a": "DD-2010", "b": "DD-2200",
+     "expect": "Two door drive units with the same name and different content. Must not be merged."},
+    {"id": "F28", "kind": "lookalike_subassemblies", "a": "HV-5100", "b": "HV-5682",
+     "expect": "Two saloon HVAC units with the same name and different content. Must not be merged."},
+    {"id": "F29", "kind": "lookalike_subassemblies", "a": "SF-9020", "b": "SF-9300",
+     "expect": "Two seat frames with the same name, a 2-seat and a 3-seat. Must not be merged."},
+    {"id": "F30", "kind": "lookalike_subassemblies", "a": "HD-3100", "b": "HD-3475",
+     "expect": "Two handrail assemblies with the same name and different content. Must not be merged."},
+    {"id": "F31", "kind": "lookalike_subassemblies", "a": "TC-8100", "b": "TC-8437",
+     "expect": "Two HVAC control units with the same name and different content. Must not be merged."},
+
+    {"id": "F32", "kind": "lookalike_references", "a": "DR-1042", "b": "DR-1043",
+     "notes": [{"relation": "not_same_as", "refs": ["DR-1043", "DR-1042"]}],
+     "expect": "Left and right door leaves, one character apart. Not a typo."},
+    {"id": "F33", "kind": "lookalike_references", "a": "BK-120", "b": "BK-121",
+     "notes": [{"relation": "same_as", "refs": ["BK-121", "BK-120"], "date": "2020-11-23", "overridden": true},
+               {"relation": "not_same_as", "refs": ["BK-121", "BK-120"], "date": "2023-02-14"}],
+     "expect": "Left and right brackets, one character apart. An old note says they are the same, a later note says they are not: the later one wins."},
+    {"id": "F34", "kind": "lookalike_references", "a": "CU-310", "b": "CU-318",
+     "notes": [{"relation": "not_same_as", "refs": ["CU-318", "CU-310"]}],
+     "expect": "2-seat and 3-seat cushions, one character apart. Not a typo."},
+    {"id": "F35", "kind": "lookalike_references", "a": "VL-905", "b": "VL-906",
+     "expect": "Two different valves, one character apart, with no note to tell them apart."},
+    {"id": "F36", "kind": "lookalike_references", "a": "BL-330", "b": "BL-338",
+     "expect": "Two bolt lengths, one character apart, with no note to tell them apart."}
+  ]
+}

@@ -1,0 +1,24 @@
+[project]
+name = "cognyx-case"
+version = "0.1.0"
+description = "Demo: reconciling a train family's BOM, ERP items and technical notes through an append-only claim log."
+requires-python = ">=3.12"
+# pipeline/ needs only the standard library. The rest is what the jean-code submodule (the agent and the app) needs.
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "ddgs>=9.16.0",
+    "griffelib>=2.3.0",
+    "httpx>=0.28.1",
+    "pandas>=2.2.0",
+    "pydantic>=2.13.5",
+    "pypdf>=6.19.0",
+    "pyyaml>=6.0.3",
+    "streamlit>=1.63.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=9.1.1"]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "jean-code/src"]
+testpaths = ["tests"]

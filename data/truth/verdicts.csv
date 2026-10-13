@@ -1,0 +1,82 @@
+subassembly,variants,verdict_bom_only,verdict_with_notes,finding_ids
+SW-3510,V1 V2 V3 V4 V5 V6,reused,reused,
+RP-3360,V1 V2 V3 V4 V5 V6,reused,reused,
+UF-1508,V1 V2 V3 V4 V5 V6,reused,reused,
+FE-4259,V1 V2 V3 V5,reused,reused,
+FE-4574,V4 V6,reused,reused,
+MB-8736,V1 V2 V3 V4 V5 V6,reused,reused,
+TF-8641,V1 V2 V3 V4 V5 V6,reused,reused,
+PS-2464,V1 V2 V3 V4 V5 V6,reused,reused,
+WA-6048,V1 V2 V3 V5,reused,reused,
+WA-2591,V4 V6,reused,reused,
+TV-4514,V1 V2 V3 V4 V5 V6,reused,reused,
+AX-7929,V1 V2 V3 V4 V5 V6,reused,reused,
+BB-5392,V1 V2 V3 V4 V5 V6,reused,reused,
+PG-4384,V1 V2 V3 V5,reused,reused,
+PG-4345,V4 V6,reused,reused,
+DR-1042,V1 V2 V5,reused,reused,F01
+PT-7731,V3,reused,reused,F01
+DR-1090,V4 V6,reused,reused,F19
+DR-1043,V1 V2 V3 V4 V5 V6,reused,blocked,F24
+DD-2010,V1 V2,reused,reused,
+DD-2037,V3,reusable,reusable,F14
+DD-2200,V4 V6,reused,reused,F08
+DD-2268,V5,reusable,reusable,F08
+DC-3001,V2 V3 V4,reused,blocked,F06 F17
+KP-0457,V1,reused,blocked,F06 F17
+DC-3020,V5 V6,reused,reused,F17
+ST-4100,V1 V3 V5,reused,reused,F02
+MP-4418,V2,reused,reused,F02
+ST-4165,V4,reusable,reusable,F09
+RS-6620,V6,specific,reusable,F22
+TS-9148,V1 V2 V3 V4 V5 V6,reused,reused,
+ER-8092,V1 V2,reused,reused,
+ER-2285,V3 V4 V5,reused,reused,
+ER-321,V6,specific,specific,
+DI-6697,V1 V2,reused,reused,
+DI-1092,V3 V4 V5 V6,reused,reused,
+HV-5100,V1 V2 V3,reused,reused,
+HV-5146,V5,reusable,reusable,F10
+HV-5682,V4,reusable,reusable,F15
+HV-5627,V6,reusable,reusable,F15
+HC-6001,V1 V3 V4 V6,reused,reused,F03
+CL-0931,V2,reused,reused,F03
+HC-6040,V5,reusable,reusable,F11
+AD-7300,V1 V2 V3,reused,reused,F04
+GN-4471,V5,reused,reused,F04
+AD-7385,V4 V6,reused,reused,F20
+TC-8100,V2 V3 V5,reused,reused,F07
+RG-0212,V1,reused,blocked,F07
+TC-8437,V4 V6,reused,reused,
+HT-5300,V1 V2 V3 V4 V5 V6,reused,blocked,F25
+FG-6342,V1 V2 V3 V4 V5 V6,reused,reused,
+CK-2382,V1 V2,reused,reused,
+CK-4474,V3 V4 V5 V6,reused,reused,
+RC-5381,V1 V2 V3 V5,reused,reused,
+RC-5646,V4 V6,reused,reused,
+SF-9020,V1 V2 V3,reused,reused,
+SF-9064,V5,reusable,reusable,F12
+SF-9300,V4,reusable,reusable,F16
+SF-9358,V6,reusable,reusable,F16
+LR-1500,V1 V2 V3 V5,reused,reused,F05
+PB-2281,V4,reused,reused,F05
+LR-1578,V6,reusable,reusable,F13
+HD-3100,V1 V2 V3,reused,reused,
+HD-3475,V4 V5,reused,blocked,F18
+HD-3462,V6,reusable,reusable,F18
+PW-4700,V1 V2 V3 V5,reused,reused,
+PW-4792,V4,reusable,reusable,F21
+GP-8805,V6,specific,reusable,F23
+FC-6100,V1 V2 V3 V4 V5 V6,reused,blocked,F26
+CE-1477,V1 V2 V3 V4 V5 V6,reused,reused,
+LS-7235,V1 V2,reused,reused,
+LS-3731,V3 V4 V5,reused,reused,
+LS-3764,V6,specific,specific,
+PD-2768,V1 V2,reused,reused,
+PD-2286,V3 V4 V5,reused,reused,
+PD-9225,V6,specific,specific,
+BC-5573,V1 V2 V3 V4 V5 V6,reused,reused,
+BM-9125,V1 V2 V3 V4 V5 V6,reused,reused,
+CM-6592,V1 V2 V3 V4 V5 V6,reused,reused,
+MG-5779,V1 V2,reused,reused,
+MG-6191,V3 V4 V5 V6,reused,reused,

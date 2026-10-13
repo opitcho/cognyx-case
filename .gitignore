@@ -1,0 +1,6 @@
+data/example_sources/
+.experiments/
+.env
+__pycache__/
+out/
+.venv/

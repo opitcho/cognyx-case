@@ -1,0 +1,538 @@
+file,row_id,raw_row,field,clean_value,written_value,kind
+plm_bom_export.csv,602,619,child_ref,RL-205,RL-025,reference_twin
+erp_items.csv,225+1,236,,,,reference_twin
+erp_items.csv,225+1,236,item_ref,RL205,RL025,reference_twin
+plm_bom_export.csv,402,417,child_ref,EV-208,EV-28,reference_twin
+erp_items.csv,135+1,141,,,,reference_twin
+erp_items.csv,135+1,141,item_ref,EV208,EV28,reference_twin
+plm_bom_export.csv,706,723,child_ref,PF-253,PF-2533,reference_twin
+erp_items.csv,217+1,227,,,,reference_twin
+erp_items.csv,217+1,227,item_ref,PF253,PF2533,reference_twin
+plm_bom_export.csv,1273,1299,child_ref,PG-4345,PG-43445,reference_twin
+plm_bom_export.csv,1348,1374,parent_ref,PG-4345,PG-43445,reference_twin
+plm_bom_export.csv,1349,1375,parent_ref,PG-4345,PG-43445,reference_twin
+plm_bom_export.csv,1350,1376,parent_ref,PG-4345,PG-43445,reference_twin
+plm_bom_export.csv,1351,1377,parent_ref,PG-4345,PG-43445,reference_twin
+plm_bom_export.csv,1352,1378,parent_ref,PG-4345,PG-43445,reference_twin
+plm_bom_export.csv,226,238,child_ref,EC-8247,EC-2847,reference_twin
+erp_items.csv,133+1,138,,,,reference_twin
+erp_items.csv,133+1,138,item_ref,EC8247,EC2847,reference_twin
+plm_bom_export.csv,25,25,child_ref,TS-9148,TS-9418,reference_twin
+plm_bom_export.csv,131,136,parent_ref,TS-9148,TS-9418,reference_twin
+plm_bom_export.csv,132,137,parent_ref,TS-9148,TS-9418,reference_twin
+plm_bom_export.csv,133,139,parent_ref,TS-9148,TS-9418,reference_twin
+plm_bom_export.csv,134,140,parent_ref,TS-9148,TS-9418,reference_twin
+plm_bom_export.csv,1067,1091,child_ref,AL-6065,AL-6056,reference_twin
+erp_items.csv,9+1,10,,,,reference_twin
+erp_items.csv,9+1,10,item_ref,AL6065,AL6056,reference_twin
+plm_bom_export.csv,634,651,child_ref,CB-7042,CB-70442,reference_twin
+erp_items.csv,94+1,98,,,,reference_twin
+erp_items.csv,94+1,98,item_ref,CB7042,CB70442,reference_twin
+plm_bom_export.csv,916,938,child_ref,TH-450,TH-50,reference_twin
+erp_items.csv,278+1,292,,,,reference_twin
+erp_items.csv,278+1,292,item_ref,TH450,TH50,reference_twin
+plm_bom_export.csv,88,93,child_ref,PC-4983,PC 4983,reference_twin
+erp_items.csv,207+1,216,,,,reference_twin
+erp_items.csv,207+1,216,item_ref,PC4983,PC 4983,reference_twin
+plm_bom_export.csv,309,323,child_ref,BE-6281,BE-628,reference_twin
+erp_items.csv,16+1,18,,,,reference_twin
+erp_items.csv,16+1,18,item_ref,BE6281,BE628,reference_twin
+plm_bom_export.csv,731,748,child_ref,SN-6050,SN-60550,reference_twin
+plm_bom_export.csv,737,754,child_ref,SN-6050,SN-60550,reference_twin
+erp_items.csv,255+1,268,,,,reference_twin
+erp_items.csv,255+1,268,item_ref,SN6050,SN60550,reference_twin
+plm_bom_export.csv,40,40,child_ref,FC-6100,FC-6I00,reference_twin
+plm_bom_export.csv,212,223,parent_ref,FC-6100,FC-6I00,reference_twin
+plm_bom_export.csv,213,224,parent_ref,FC-6100,FC-6I00,reference_twin
+plm_bom_export.csv,214,225,parent_ref,FC-6100,FC-6I00,reference_twin
+plm_bom_export.csv,215,226,parent_ref,FC-6100,FC-6I00,reference_twin
+plm_bom_export.csv,595,612,child_ref,FN-5165,FN 5165,reference_twin
+erp_items.csv,150+1,157,,,,reference_twin
+erp_items.csv,150+1,157,item_ref,FN5165,FN 5165,reference_twin
+plm_bom_export.csv,1072,1096,child_ref,WH-2962,WH-2926,reference_twin
+erp_items.csv,292+1,307,,,,reference_twin
+erp_items.csv,292+1,307,item_ref,WH2962,WH2926,reference_twin
+plm_bom_export.csv,371,386,child_ref,RY-440,RY 440,reference_twin
+erp_items.csv,235+1,247,,,,reference_twin
+erp_items.csv,235+1,247,item_ref,RY440,RY 440,reference_twin
+plm_bom_export.csv,203,214,child_ref,BK-335,BK-3335,reference_twin
+erp_items.csv,36+1,39,,,,reference_twin
+erp_items.csv,36+1,39,item_ref,BK335,BK3335,reference_twin
+plm_bom_export.csv,1277,1303,child_ref,DC-3020,DC-30220,reference_twin
+plm_bom_export.csv,1375,1401,parent_ref,DC-3020,DC-30220,reference_twin
+plm_bom_export.csv,1376,1402,parent_ref,DC-3020,DC-30220,reference_twin
+plm_bom_export.csv,1377,1403,parent_ref,DC-3020,DC-30220,reference_twin
+plm_bom_export.csv,1378,1404,parent_ref,DC-3020,DC-30220,reference_twin
+plm_bom_export.csv,1379,1405,parent_ref,DC-3020,DC-30220,reference_twin
+plm_bom_export.csv,1380,1406,parent_ref,DC-3020,DC-30220,reference_twin
+plm_bom_export.csv,419,434,child_ref,HE-310,HE-31,reference_twin
+erp_items.csv,179+1,187,,,,reference_twin
+erp_items.csv,179+1,187,item_ref,HE310,HE31,reference_twin
+plm_bom_export.csv,52+1,53,,,,repeated_line
+plm_bom_export.csv,52+1,53,quantity,4.3,6.4,repeated_line
+plm_bom_export.csv,576+1,593,,,,repeated_line
+plm_bom_export.csv,576+1,593,quantity,4,6,repeated_line
+plm_bom_export.csv,78+1,82,,,,repeated_line
+plm_bom_export.csv,78+1,82,quantity,4,6,repeated_line
+plm_bom_export.csv,824+1,843,,,,repeated_line
+plm_bom_export.csv,824+1,843,quantity,2,3,repeated_line
+plm_bom_export.csv,995+1,1018,,,,repeated_line
+plm_bom_export.csv,995+1,1018,quantity,7,10.5,repeated_line
+plm_bom_export.csv,188+1,198,,,,repeated_line
+plm_bom_export.csv,188+1,198,quantity,13,19.5,repeated_line
+plm_bom_export.csv,237+1,251,,,,repeated_line
+plm_bom_export.csv,237+1,251,quantity,3,4.5,repeated_line
+plm_bom_export.csv,79+1,84,,,,repeated_line
+plm_bom_export.csv,79+1,84,quantity,3,6,repeated_line
+plm_bom_export.csv,1397+1,1424,,,,repeated_line
+plm_bom_export.csv,1397+1,1424,quantity,1,1.5,repeated_line
+plm_bom_export.csv,57+1,59,,,,repeated_line
+plm_bom_export.csv,57+1,59,quantity,12.5,25,repeated_line
+plm_bom_export.csv,482+1,498,,,,repeated_line
+plm_bom_export.csv,216+1,228,,,,repeated_line
+plm_bom_export.csv,1001+1,1025,,,,repeated_line
+plm_bom_export.csv,1429+1,1458,,,,repeated_line
+plm_bom_export.csv,818+1,836,,,,repeated_line
+plm_bom_export.csv,63+1,66,,,,repeated_line
+plm_bom_export.csv,189+1,200,,,,repeated_line
+plm_bom_export.csv,134+1,141,,,,repeated_line
+plm_bom_export.csv,132+1,138,,,,repeated_line
+plm_bom_export.csv,828+1,848,,,,repeated_line
+plm_bom_export.csv,1487+1,1517,,,,repeated_line
+plm_bom_export.csv,1424+1,1452,,,,repeated_line
+plm_bom_export.csv,882+1,904,,,,repeated_line
+plm_bom_export.csv,1208+1,1233,,,,repeated_line
+plm_bom_export.csv,1242+1,1268,,,,repeated_line
+plm_bom_export.csv,232+1,245,,,,repeated_line
+plm_bom_export.csv,855+1,876,,,,repeated_line
+plm_bom_export.csv,158+1,166,,,,repeated_line
+plm_bom_export.csv,336+1,351,,,,repeated_line
+plm_bom_export.csv,176+1,185,,,,repeated_line
+plm_bom_export.csv,376,391,quantity,1.6,1600,mixed_unit
+plm_bom_export.csv,376,391,unit,m,mm,mixed_unit
+plm_bom_export.csv,1163,1187,quantity,12.5,12500,mixed_unit
+plm_bom_export.csv,1163,1187,unit,m,mm,mixed_unit
+erp_items.csv,142,148,unit_cost_eur,"38,77","0,03877",mixed_unit
+erp_items.csv,142,148,price_unit,m,mm,mixed_unit
+plm_bom_export.csv,1484,1513,quantity,4.5,4500,mixed_unit
+plm_bom_export.csv,1484,1513,unit,m,mm,mixed_unit
+erp_items.csv,139,145,unit_cost_eur,"30,32","0,03032",mixed_unit
+erp_items.csv,139,145,price_unit,m,mm,mixed_unit
+plm_bom_export.csv,1385,1411,unit,pcs,U,mixed_unit
+plm_bom_export.csv,1166,1190,unit,pcs,ea,mixed_unit
+erp_items.csv,278,291,price_unit,pcs,PCE,mixed_unit
+plm_bom_export.csv,211,222,unit,pcs,U,mixed_unit
+plm_bom_export.csv,431,446,unit,pcs,U,mixed_unit
+plm_bom_export.csv,113,118,unit,pcs,U,mixed_unit
+erp_items.csv,79,82,price_unit,pcs,U,mixed_unit
+plm_bom_export.csv,870,891,unit,pcs,U,mixed_unit
+plm_bom_export.csv,1091,1115,unit,pcs,U,mixed_unit
+erp_items.csv,166,173,price_unit,pcs,PCE,mixed_unit
+plm_bom_export.csv,1429,1457,unit,pcs,PCE,mixed_unit
+plm_bom_export.csv,1429+1,1458,unit,pcs,U,mixed_unit
+plm_bom_export.csv,1490,1520,unit,pcs,U,mixed_unit
+erp_items.csv,124,128,price_unit,pcs,EA,mixed_unit
+plm_bom_export.csv,1370,1396,unit,pcs,PCE,mixed_unit
+plm_bom_export.csv,1306,1332,quantity,4.3,4300,mixed_unit
+plm_bom_export.csv,1306,1332,unit,m,mm,mixed_unit
+plm_bom_export.csv,1217,1242,quantity,46,46000,mixed_unit
+plm_bom_export.csv,1217,1242,unit,m,mm,mixed_unit
+plm_bom_export.csv,71,74,unit,pcs,PCE,mixed_unit
+erp_items.csv,294,309,price_unit,pcs,PCE,mixed_unit
+plm_bom_export.csv,1488,1518,unit,pcs,PCE,mixed_unit
+plm_bom_export.csv,109,114,unit,pcs,PCE,mixed_unit
+erp_items.csv,22,24,price_unit,pcs,EA,mixed_unit
+plm_bom_export.csv,1063,1087,quantity,11,11000,mixed_unit
+plm_bom_export.csv,1063,1087,unit,m,mm,mixed_unit
+plm_bom_export.csv,246,260,unit,pcs,U,mixed_unit
+plm_bom_export.csv,937,959,unit,pcs,ea,mixed_unit
+erp_items.csv,287,301,price_unit,pcs,PCE,mixed_unit
+erp_items.csv,211,220,price_unit,pcs,U,mixed_unit
+erp_items.csv,88,91,price_unit,pcs,U,mixed_unit
+erp_items.csv,105,109,price_unit,pcs,U,mixed_unit
+plm_bom_export.csv,64,67,description,Axle,Essieu,language
+plm_bom_export.csv,635,652,description,LED module,Module LED,language
+plm_bom_export.csv,1416,1443,description,Bracket,Support,language
+plm_bom_export.csv,1275,1301,description,"Door leaf assembly, right",Vantail de porte droit,language
+plm_bom_export.csv,132+1,138,description,Control board,Carte de commande,language
+plm_bom_export.csv,265,279,description,Traction converter,Convertisseur de traction,language
+plm_bom_export.csv,89,94,description,Sensor,Capteur,language
+plm_bom_export.csv,26,26,description,Emergency release device,Dispositif de déverrouillage de secours,language
+plm_bom_export.csv,945,967,description,Cushion 3-seat,Coussin 3 places,language
+plm_bom_export.csv,164,172,description,Seal EPDM 15,Joint EPDM 15,language
+plm_bom_export.csv,69,72,description,Wheel,Roue,language
+plm_bom_export.csv,93,98,description,Sensor,Capteur,language
+plm_bom_export.csv,1364,1390,description,Bracket RH,Support droit,language
+plm_bom_export.csv,165,173,description,Control board,Carte de commande,language
+plm_bom_export.csv,104,109,description,Guide rail,Rail de guidage,language
+plm_bom_export.csv,332,346,description,IGBT module,Module IGBT,language
+plm_bom_export.csv,1081,1105,description,Wheel,Roue,language
+plm_bom_export.csv,85,90,description,Fan,Ventilateur,language
+plm_bom_export.csv,1156,1180,description,Compressor,Compresseur,language
+plm_bom_export.csv,446,461,description,Aluminium profile,Profilé aluminium,language
+plm_bom_export.csv,12,12,description,Motor bogie frame,Châssis de bogie moteur,language
+plm_bom_export.csv,191,202,description,Steel tube,Tube acier,language
+plm_bom_export.csv,65,68,description,Axle,Essieu,language
+plm_bom_export.csv,1065,1089,description,Bolt M8x35,Vis M8x35,language
+plm_bom_export.csv,206,217,description,Cover,Cache,language
+plm_bom_export.csv,995+1,1018,description,Brake pad,Garniture de frein,language
+plm_bom_export.csv,51,51,description,Bolt M10x40,Vis M10x40,language
+plm_bom_export.csv,1022,1046,description,Pantograph assembly,Ensemble pantographe,language
+plm_bom_export.csv,37,37,description,Luggage rack,Porte-bagages,language
+plm_bom_export.csv,142,149,description,Cable harness,Faisceau de câbles,language
+plm_bom_export.csv,313,327,description,Axle,Essieu,language
+plm_bom_export.csv,98,103,description,Sensor,Capteur,language
+plm_bom_export.csv,151,158,description,Bracket,Support,language
+plm_bom_export.csv,245,259,description,Bolt M8x25,Vis M8x25,language
+plm_bom_export.csv,79,83,description,Damper,Amortisseur,language
+plm_bom_export.csv,730,747,description,Bracket,Support,language
+plm_bom_export.csv,150,157,description,Refrigerant,Fluide frigorigène,language
+plm_bom_export.csv,763,780,description,Traction converter,Convertisseur de traction,language
+plm_bom_export.csv,768,785,description,"Door leaf assembly, right",Vantail de porte droit,language
+plm_bom_export.csv,143,150,description,Sensor,Capteur,language
+plm_bom_export.csv,806,823,description,Bolt M8x35,Vis M8x35,language
+plm_bom_export.csv,63,65,description,Sensor,Capteur,language
+plm_bom_export.csv,890,912,description,Glazing panel,Vitrage,language
+plm_bom_export.csv,623,640,description,Actuator,Actionneur,language
+plm_bom_export.csv,568,584,description,Sensor,Capteur,language
+plm_bom_export.csv,694,711,description,Fabric cover,Housse textile,language
+plm_bom_export.csv,213,224,description,Floor adhesive,Colle de sol,language
+plm_bom_export.csv,478,493,description,Glazing panel,Vitrage,language
+plm_bom_export.csv,156,163,description,Refrigerant,Fluide frigorigène,language
+plm_bom_export.csv,94,99,description,Contactor,Contacteur,language
+plm_bom_export.csv,1343,1369,description,Sensor,Capteur,language
+plm_bom_export.csv,1131,1155,description,Guide rail,Rail de guidage,language
+plm_bom_export.csv,101,106,description,Glazing panel,Vitrage,language
+plm_bom_export.csv,402,417,description,Evaporator,Évaporateur,language
+plm_bom_export.csv,214,225,description,Aluminium profile,Profilé aluminium,language
+plm_bom_export.csv,604,621,description,Door seal,Joint de porte,language
+plm_bom_export.csv,903,925,description,Fan,Ventilateur,language
+plm_bom_export.csv,366,381,description,Sensor,Capteur,language
+plm_bom_export.csv,1238,1263,description,Sensor,Capteur,language
+plm_bom_export.csv,145,152,description,Compressor,Compresseur,language
+plm_bom_export.csv,1002,1026,description,Brake pad,Garniture de frein,language
+plm_bom_export.csv,326,340,description,Wheel,Roue,language
+plm_bom_export.csv,1112,1136,description,Bracket RH,Support droit,language
+plm_bom_export.csv,1380,1406,description,Bolt M6x20,Vis M6x20,language
+plm_bom_export.csv,1307,1333,description,Bolt M6x20,Vis M6x20,language
+plm_bom_export.csv,122,127,description,Relay,Relais,language
+plm_bom_export.csv,634,651,description,Cable harness,Faisceau de câbles,language
+plm_bom_export.csv,31,31,description,HVAC control unit,Unité de régulation climatisation,language
+plm_bom_export.csv,229,241,description,Glazing panel,Vitrage,language
+plm_bom_export.csv,786,803,description,Glazed partition,Cloison vitrée,language
+plm_bom_export.csv,1331,1357,description,Wheel,Roue,language
+plm_bom_export.csv,621,638,description,Bracket,Support,language
+plm_bom_export.csv,71,74,description,Wheel,Roue,language
+plm_bom_export.csv,188,197,description,Bolt M6x20,Vis M6x20,language
+plm_bom_export.csv,32,32,description,Heater unit,Aérotherme,language
+plm_bom_export.csv,888,910,description,Control board,Carte de commande,language
+plm_bom_export.csv,1358,1384,description,Guide rail,Rail de guidage,language
+plm_bom_export.csv,1362,1388,description,Door actuator,Actionneur de porte,language
+plm_bom_export.csv,1251,1277,description,Bracket,Support,language
+plm_bom_export.csv,414,429,description,Control board,Carte de commande,language
+plm_bom_export.csv,1508,1538,description,Sensor,Capteur,language
+plm_bom_export.csv,246,260,description,Cable harness,Faisceau de câbles,language
+plm_bom_export.csv,1135,1159,description,LED module,Module LED,language
+plm_bom_export.csv,110,115,description,Bolt M8x35,Vis M8x35,language
+plm_bom_export.csv,125,130,description,Actuator,Actionneur,language
+plm_bom_export.csv,1434,1463,description,Insulation,Isolant,language
+plm_bom_export.csv,223,235,description,Bracket,Support,language
+plm_bom_export.csv,317,331,description,Axle,Essieu,language
+plm_bom_export.csv,1372,1398,description,Sensor,Capteur,language
+plm_bom_export.csv,1239,1264,description,Valve,Vanne,language
+plm_bom_export.csv,112,117,description,Sensor,Capteur,language
+plm_bom_export.csv,58,60,description,Bolt M6x20,Vis M6x20,language
+plm_bom_export.csv,1399,1426,description,Sensor,Capteur,language
+plm_bom_export.csv,63+1,66,description,Sensor,Capteur,language
+plm_bom_export.csv,121,126,description,Cable harness,Faisceau de câbles,language
+plm_bom_export.csv,1191,1215,description,Sensor,Capteur,language
+plm_bom_export.csv,197,208,description,Aluminium profile,Profilé aluminium,language
+plm_bom_export.csv,1438,1467,description,Duct,Gaine,language
+plm_bom_export.csv,262,276,description,Trailer bogie frame,Châssis de bogie porteur,language
+plm_bom_export.csv,67,70,description,Spring,Ressort,language
+plm_bom_export.csv,1306,1332,description,Seal EPDM 12,Joint EPDM 12,language
+plm_bom_export.csv,1136,1160,description,Control board,Carte de commande,language
+plm_bom_export.csv,966,988,description,Floor covering,Revêtement de sol,language
+plm_bom_export.csv,331,345,description,Cable harness,Faisceau de câbles,language
+plm_bom_export.csv,1507,1537,description,Brake pad,Garniture de frein,language
+plm_bom_export.csv,618,635,description,Door position sensor,Capteur de position porte,language
+plm_bom_export.csv,1197,1221,description,Bolt M10x40,Vis M10x40,language
+plm_bom_export.csv,882+1,904,description,Gearbox,Réducteur,language
+plm_bom_export.csv,35,35,description,HVAC roof fairing,Carénage de toiture climatisation,language
+plm_bom_export.csv,561,577,description,Sensor,Capteur,language
+plm_bom_export.csv,393,408,description,Glazing panel,Vitrage,language
+plm_bom_export.csv,1407,1434,description,Compressor,Compresseur,language
+plm_bom_export.csv,78,81,description,Wheel,Roue,language
+plm_bom_export.csv,215,226,description,Screw,Vis à tête fraisée,language
+plm_bom_export.csv,929,951,description,Control board,Carte de commande,language
+plm_bom_export.csv,79+1,84,description,Damper,Amortisseur,language
+plm_bom_export.csv,1159,1183,description,Filter,Filtre,language
+plm_bom_export.csv,1272,1298,description,Battery box,Coffre batterie,language
+plm_bom_export.csv,80,85,description,Sensor,Capteur,language
+plm_bom_export.csv,1000,1023,description,Bracket,Support,language
+plm_bom_export.csv,461,476,description,Floor covering,Revêtement de sol,language
+plm_bom_export.csv,216,227,description,Glazing panel,Vitrage,language
+plm_bom_export.csv,371,386,description,Relay,Relais,language
+plm_bom_export.csv,196,207,description,Fabric cover,Housse textile,language
+plm_bom_export.csv,476,491,description,Aluminium profile,Profilé aluminium,language
+plm_bom_export.csv,1189,1213,description,Compressor,Compresseur,language
+plm_bom_export.csv,97,102,description,Fan,Ventilateur,language
+plm_bom_export.csv,731,748,description,Sensor,Capteur,language
+plm_bom_export.csv,1060,1084,description,Beam,Longeron,language
+plm_bom_export.csv,90,95,description,Bolt M8x35,Vis M8x35,language
+plm_bom_export.csv,954,976,description,Steel tube,Tube acier,language
+plm_bom_export.csv,95,100,description,Cable harness,Faisceau de câbles,language
+plm_bom_export.csv,211,222,description,Bolt M6x20,Vis M6x20,language
+plm_bom_export.csv,149,156,description,Filter,Filtre,language
+plm_bom_export.csv,1424+1,1452,description,Relay,Relais,language
+plm_bom_export.csv,1082,1106,description,Damper,Amortisseur,language
+plm_bom_export.csv,73,76,description,Wheel,Roue,language
+plm_bom_export.csv,128,133,description,Sensor,Capteur,language
+plm_bom_export.csv,497,513,description,Bracket,Support,language
+plm_bom_export.csv,1102,1126,description,Door seal,Joint de porte,language
+plm_bom_export.csv,66,69,description,Bolt M10x40,Vis M10x40,language
+plm_bom_export.csv,200,211,description,Bolt M6x20,Vis M6x20,language
+plm_bom_export.csv,556,572,description,Bolt M6x20,Vis M6x20,language
+plm_bom_export.csv,827,846,description,Wheel,Roue,language
+plm_bom_export.csv,866,887,description,Guide rail,Rail de guidage,language
+plm_bom_export.csv,1376,1402,description,Door position sensor,Capteur de position porte,language
+plm_bom_export.csv,845,865,description,Cable harness,Faisceau de câbles,language
+plm_bom_export.csv,440,455,description,Steel tube,Tube acier,language
+plm_bom_export.csv,427,442,description,Control board,Carte de commande,language
+plm_bom_export.csv,1494,1524,description,Brake disc,Disque de frein,language
+plm_bom_export.csv,139,146,description,Cable harness,Faisceau de câbles,language
+plm_bom_export.csv,194,205,description,Cushion 2-seat,Coussin 2 places,language
+plm_bom_export.csv,24,24,description,Sliding step,Marche mobile,language
+plm_bom_export.csv,1242+1,1268,description,Sensor,Capteur,language
+plm_bom_export.csv,1015,1039,description,Motor bogie frame,Châssis de bogie moteur,language
+plm_bom_export.csv,127,132,description,Guide rail,Rail de guidage,language
+plm_bom_export.csv,153,160,description,Evaporator,Évaporateur,language
+plm_bom_export.csv,780,797,description,Fresh air intake grille,Grille de prise d'air neuf,language
+plm_bom_export.csv,22,22,description,Door drive unit,Mécanisme d'entraînement de porte,language
+plm_bom_export.csv,207,218,description,Glazing panel,Vitrage,language
+plm_bom_export.csv,1074,1098,description,Wheel,Roue,language
+plm_bom_export.csv,1203,1227,description,Bracket,Support,language
+plm_bom_export.csv,183,192,description,Sensor,Capteur,language
+plm_bom_export.csv,134,140,description,Relay,Relais,language
+plm_bom_export.csv,969,991,description,Screw,Vis à tête fraisée,language
+plm_bom_export.csv,40,40,description,Floor covering assembly,Ensemble revêtement de sol,language
+plm_bom_export.csv,132,137,description,Control board,Carte de commande,language
+plm_bom_export.csv,238,252,description,Bracket,Support,language
+plm_bom_export.csv,78+1,82,description,Wheel,Roue,language
+plm_bom_export.csv,148,155,description,Fan,Ventilateur,language
+plm_bom_export.csv,1266,1292,description,Motor bogie frame,Châssis de bogie moteur,language
+plm_bom_export.csv,735,752,description,Sensor,Capteur,language
+plm_bom_export.csv,1209,1234,description,End cap,Embout,language
+plm_bom_export.csv,120,125,description,Door position sensor,Capteur de position porte,language
+plm_bom_export.csv,901,923,description,Compressor,Compresseur,language
+plm_bom_export.csv,1263,1289,description,Roof panel set,Ensemble panneaux de toiture,language
+plm_bom_export.csv,42,42,description,Interior lighting strip,Rampe d'éclairage intérieur,language
+plm_bom_export.csv,217,229,description,Screw,Vis à tête fraisée,language
+plm_bom_export.csv,116,121,description,Cable harness,Faisceau de câbles,language
+plm_bom_export.csv,192,203,description,Bracket,Support,language
+plm_bom_export.csv,909,931,description,Insulation,Isolant,language
+plm_bom_export.csv,290,304,description,Ceiling panel set,Ensemble panneaux de plafond,language
+plm_bom_export.csv,844,864,description,Sensor,Capteur,language
+plm_bom_export.csv,563,579,description,Axle,Essieu,language
+plm_bom_export.csv,1332,1358,description,Wheel,Roue,language
+plm_bom_export.csv,257,271,description,Side wall panel set,Ensemble panneaux de face latérale,language
+plm_bom_export.csv,552,568,description,Beam,Longeron,language
+plm_bom_export.csv,39,39,description,Glazed partition,Cloison vitrée,language
+plm_bom_export.csv,9,9,description,Roof panel set,Ensemble panneaux de toiture,language
+plm_bom_export.csv,167,175,description,Sensor,Capteur,language
+plm_bom_export.csv,800,817,description,Bolt M6x20,Vis M6x20,language
+plm_bom_export.csv,1143,1167,description,Control board,Carte de commande,language
+plm_bom_export.csv,939,961,description,Sensor,Capteur,language
+plm_bom_export.csv,703,720,description,End cap,Embout,language
+plm_bom_export.csv,8,8,description,Side wall panel set,Ensemble panneaux de face latérale,language
+plm_bom_export.csv,248,262,description,Bracket,Support,language
+plm_bom_export.csv,14,14,description,Primary suspension set,Ensemble suspension primaire,language
+plm_bom_export.csv,76,79,description,Sensor,Capteur,language
+plm_bom_export.csv,466,481,description,Screw,Vis à tête fraisée,language
+plm_bom_export.csv,227,239,description,Aluminium profile,Profilé aluminium,language
+plm_bom_export.csv,816,833,description,Wheel,Roue,language
+plm_bom_export.csv,1324,1350,description,Sensor,Capteur,language
+plm_bom_export.csv,83,88,description,IGBT module,Module IGBT,language
+plm_bom_export.csv,60,62,description,Beam,Longeron,language
+plm_bom_export.csv,99,104,description,Door seal,Joint de porte,language
+plm_bom_export.csv,236,249,description,Bracket,Support,language
+plm_bom_export.csv,168,176,description,Relay,Relais,language
+plm_bom_export.csv,1034,1058,description,HVAC control unit,Unité de régulation climatisation,language
+plm_bom_export.csv,663,680,description,Control board,Carte de commande,language
+plm_bom_export.csv,221,233,description,End cap,Embout,language
+plm_bom_export.csv,152,159,description,Compressor,Compresseur,language
+plm_bom_export.csv,737,754,description,Sensor,Capteur,language
+plm_bom_export.csv,1205,1229,description,End cap,Embout,language
+plm_bom_export.csv,616,633,description,Guide rail,Rail de guidage,language
+plm_bom_export.csv,118,123,description,Guide rail,Rail de guidage,language
+plm_bom_export.csv,1208+1,1233,description,Bolt M8x35,Vis M8x35,language
+plm_bom_export.csv,1395,1421,description,Bracket,Support,language
+plm_bom_export.csv,138,145,description,Control board,Carte de commande,language
+plm_bom_export.csv,481,496,description,Bracket,Support,language
+plm_bom_export.csv,1025,1049,description,Door drive unit,Mécanisme d'entraînement de porte,language
+plm_bom_export.csv,59,61,description,Bolt M6x20,Vis M6x20,language
+plm_bom_export.csv,232,244,description,Bracket,Support,language
+plm_bom_export.csv,608,625,description,Bolt M8x35,Vis M8x35,language
+plm_bom_export.csv,1113,1137,description,Bolt M8x35,Vis M8x35,language
+plm_bom_export.csv,119,124,description,Control board,Carte de commande,language
+plm_bom_export.csv,1142,1166,description,Glazing panel,Vitrage,language
+plm_bom_export.csv,759,776,description,Motor bogie frame,Châssis de bogie moteur,language
+erp_items.csv,229,240,description,RAIL DE GUIDAGE,GUIDE RAIL,language
+erp_items.csv,213,222,description,CARTE DE COMMANDE,CONTROL BOARD,language
+erp_items.csv,294,309,description,ROUE,WHEEL,language
+erp_items.csv,145,151,description,FILTRE,FILTER,language
+erp_items.csv,5,5,description,ACTIONNEUR,ACTUATOR,language
+erp_items.csv,117,121,description,CACHE,COVER,language
+erp_items.csv,48,51,description,SUPPORT,BRACKET,language
+erp_items.csv,164,171,description,VITRAGE,GLAZING PANEL,language
+erp_items.csv,103,107,description,FAISCEAU DE CÂBLES,CABLE HARNESS,language
+erp_items.csv,113,117,description,COUSSIN 3 PLACES,CUSHION 3-SEAT,language
+erp_items.csv,209,218,description,CARTE DE COMMANDE,CONTROL BOARD,language
+erp_items.csv,125,129,description,EMBOUT,END CAP,language
+erp_items.csv,218,228,description,PROFILÉ ALUMINIUM,ALUMINIUM PROFILE,language
+erp_items.csv,180,188,description,CHARNIÈRE,HINGE,language
+erp_items.csv,148,154,description,FILTRE,FILTER,language
+erp_items.csv,20,22,description,SUPPORT,BRACKET,language
+erp_items.csv,181,189,description,CHARNIÈRE,HINGE,language
+erp_items.csv,102,106,description,FAISCEAU DE CÂBLES,CABLE HARNESS,language
+erp_items.csv,188,196,description,ISOLANT,INSULATION,language
+erp_items.csv,240,252,description,VIS À TÊTE FRAISÉE,SCREW,language
+erp_items.csv,107,111,description,COMPRESSEUR,COMPRESSOR,language
+erp_items.csv,42,45,description,COLLIER DE MAIN COURANTE,HANDRAIL CLAMP,language
+erp_items.csv,147,153,description,FILTRE,FILTER,language
+erp_items.csv,75,78,description,VIS M10X40,BOLT M10X40,language
+erp_items.csv,246,258,description,CAPTEUR,SENSOR,language
+erp_items.csv,216,225,description,PROFILÉ ALUMINIUM,ALUMINIUM PROFILE,language
+erp_items.csv,92,95,description,FAISCEAU DE CÂBLES,CABLE HARNESS,language
+erp_items.csv,88,91,description,GARNITURE DE FREIN,BRAKE PAD,language
+erp_items.csv,111,115,description,CONTACTEUR,CONTACTOR,language
+erp_items.csv,292+1,307,description,ROUE,WHEEL,language
+erp_items.csv,143,149,description,HOUSSE TEXTILE GRISE,FABRIC COVER GREY,language
+erp_items.csv,140,146,description,HOUSSE TEXTILE,FABRIC COVER,language
+erp_items.csv,199,207,description,MODULE LED,LED MODULE,language
+erp_items.csv,291,305,description,ROUE,WHEEL,language
+erp_items.csv,63,66,description,VIS M8X35,BOLT M8X35,language
+erp_items.csv,236,248,description,RELAIS,RELAY,language
+erp_items.csv,123,127,description,EMBOUT,END CAP,language
+erp_items.csv,38,41,description,SUPPORT,BRACKET,language
+erp_items.csv,57,60,description,VIS M8X35,BOLT M8X35,language
+erp_items.csv,202,210,description,MOTEUR DE PORTE 24V,DOOR MOTOR 24V,language
+erp_items.csv,72,75,description,VIS M8X35,BOLT M8X35,language
+erp_items.csv,79,82,description,VIS M8X35,BOLT M8X35,language
+erp_items.csv,106,110,description,COMPRESSEUR,COMPRESSOR,language
+erp_items.csv,24,26,description,SUPPORT,BRACKET,language
+erp_items.csv,71,74,description,VIS M10X40,BOLT M10X40,language
+erp_items.csv,18,20,description,LONGERON,BEAM,language
+erp_items.csv,283,297,description,TUBE ACIER,STEEL TUBE,language
+erp_items.csv,225+1,236,unit_cost_eur,"87,53","82,30",cost_conflict
+erp_items.csv,150+1,157,unit_cost_eur,"591,17","667,97",cost_conflict
+erp_items.csv,94+1,98,unit_cost_eur,"257,64","281,37",cost_conflict
+erp_items.csv,292+1,307,unit_cost_eur,"929,80","974,46",cost_conflict
+erp_items.csv,36+1,39,unit_cost_eur,"13,00","14,80",cost_conflict
+erp_items.csv,278+1,292,unit_cost_eur,"78,88","84,66",cost_conflict
+erp_items.csv,9+1,10,unit_cost_eur,"2842,07","2985,81",cost_conflict
+erp_items.csv,235+1,247,unit_cost_eur,"38,21","40,52",cost_conflict
+erp_items.csv,217+1,227,unit_cost_eur,"31,14","29,89",cost_conflict
+erp_items.csv,1,1,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,4,4,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,5,5,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,11,12,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,13,14,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,16,17,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,22,24,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,23,25,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,30,32,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,37,40,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,38,41,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,43,46,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,48,51,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,51,54,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,56,59,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,62,65,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,63,66,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,64,67,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,66,69,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,67,70,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,79,82,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,86,89,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,87,90,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,90,93,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,91,94,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,94,97,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,94+1,98,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,97,101,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,98,102,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,100,104,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,101,105,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,102,106,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,104,108,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,113,117,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,121,125,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,124,128,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,125,129,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,128,132,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,141,147,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,143,149,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,148,154,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,157,164,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,159,166,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,161,168,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,169,176,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,171,178,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,172,179,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,193,201,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,195,203,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,196,204,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,197,205,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,198,206,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,199,207,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,203,211,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,205,213,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,206,214,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,209,218,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,211,220,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,215,224,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,217,226,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,220,230,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,221,231,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,223,233,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,225,235,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,226,237,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,229,240,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,230,241,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,239,251,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,243,255,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,244,256,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,250,262,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,251,263,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,255,267,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,255+1,268,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,256,269,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,257,270,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,259,272,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,261,274,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,270,283,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,274,287,supplier,Faiveley,FAIVELEY TRANSPORT SAS,supplier_variant
+erp_items.csv,276,289,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,285,299,supplier,Sofratec,SOFRATEC INDUSTRIES SA,supplier_variant
+erp_items.csv,287,301,supplier,Faiveley,Wabtec,supplier_variant
+erp_items.csv,290,304,supplier,Sofratec,Sofra-Tec,supplier_variant
+erp_items.csv,131,135,unit_cost_eur,"6,61",,missing_value
+erp_items.csv,153,160,supplier,Faiveley,,missing_value
+erp_items.csv,94+1,98,unit_cost_eur,"257,64",,missing_value
+erp_items.csv,199,207,unit_cost_eur,"68,77",,missing_value
+erp_items.csv,213,222,supplier,Faiveley,,missing_value
+erp_items.csv,197,205,unit_cost_eur,"9,45",,missing_value
+erp_items.csv,151,158,unit_cost_eur,"397,78",,missing_value
+erp_items.csv,133,137,supplier,Atelier Vosges Sièges,,missing_value
+erp_items.csv,141,147,supplier,Sofratec,N/A,missing_value
+erp_items.csv,54,57,supplier,Sofratec,,missing_value
+erp_items.csv,4,4,supplier,Faiveley,N/A,missing_value
+erp_items.csv,101,105,supplier,Sofratec,N/A,missing_value
+erp_items.csv,210,219,unit_cost_eur,"834,78",,missing_value
+erp_items.csv,92,95,supplier,Brenox,UNKNOWN,missing_value
+erp_items.csv,117,121,unit_cost_eur,"51,12",,missing_value
+erp_items.csv,243,255,supplier,Faiveley,N/A,missing_value
+erp_items.csv,13,14,supplier,Faiveley,UNKNOWN,missing_value
+erp_items.csv,196,204,supplier,Faiveley,,missing_value
+erp_items.csv,104,108,supplier,Faiveley,,missing_value

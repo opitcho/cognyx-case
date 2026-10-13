@@ -1,0 +1,299 @@
+item_ref;description;supplier;unit_cost_eur;price_unit
+AC3592;ACTIONNEUR;Faiveley;381,39;pcs
+AC477;ACTIONNEUR DE PORTE;Nordbahn Komponenten GmbH;585,36;pcs
+AC501;ACTIONNEUR DE PORTE;Nordbahn Komponenten GmbH;329,47;pcs
+AC534;ACTIONNEUR;Faiveley;624,58;pcs
+AC5665;ACTIONNEUR;Faiveley;678,24;pcs
+AC588;ACTIONNEUR;Nordbahn Komponenten GmbH;514,93;pcs
+AC9307;ACTIONNEUR;Nordbahn Komponenten GmbH;728,86;pcs
+AL230;ESSIEU;Brenox;1603,68;pcs
+AL6065;ESSIEU;Metalis Rail;2842,07;pcs
+AR520;ACCOUDOIR;Metalis Rail;25,39;pcs
+AR558;ACCOUDOIR;Sofratec;28,32;pcs
+BD3196;DISQUE DE FREIN;Faiveley;514,70;pcs
+BD7281;DISQUE DE FREIN;Faiveley;787,40;pcs
+BE1748;LONGERON;Metalis Rail;65,18;m
+BE2646;LONGERON;Metalis Rail;61,21;m
+BE6281;LONGERON;Sofratec;93,75;m
+BE6841;LONGERON;Metalis Rail;63,88;m
+BE8909;LONGERON;Metalis Rail;87,50;m
+BG3637;ROULEMENT;Metalis Rail;290,20;pcs
+BK109;SUPPORT;Sofratec;19,51;pcs
+BK120;SUPPORT GAUCHE;Faiveley;7,24;pcs
+BK121;SUPPORT DROIT;Sofratec;10,91;pcs
+BK133;SUPPORT;Faiveley;4,82;pcs
+BK1546;SUPPORT;Metalis Rail;28,15;pcs
+BK158;SUPPORT;Nordbahn Komponenten GmbH;14,55;pcs
+BK192;SUPPORT;Atelier Vosges Sièges;12,36;pcs
+BK205;SUPPORT;Faiveley;17,75;pcs
+BK213;SUPPORT;Klimarail;12,57;pcs
+BK229;SUPPORT;Nordbahn Komponenten GmbH;9,12;pcs
+BK242;SUPPORT;Faiveley;25,09;pcs
+BK254;SUPPORT;Klimarail;26,76;pcs
+BK281;SUPPORT;Nordbahn Komponenten GmbH;7,68;pcs
+BK2948;SUPPORT;Atelier Vosges Sièges;13,49;pcs
+BK296;SUPPORT;Klimarail;23,19;pcs
+BK318;SUPPORT;Metalis Rail;7,63;pcs
+BK335;SUPPORT;Metalis Rail;13,00;pcs
+BK367;SUPPORT DE RENFORT;Sofratec;29,22;pcs
+BK425;SUPPORT;Faiveley;14,51;pcs
+BK4370;SUPPORT;Brenox;25,32;pcs
+BK517;COLLIER DE MAIN COURANTE;Atelier Vosges Sièges;5,48;pcs
+BK5662;SUPPORT;Sofratec;21,43;pcs
+BK594;COLLIER DE MAIN COURANTE;Sofratec;24,72;pcs
+BK648;SUPPORT;Sofratec;14,75;pcs
+BK706;SUPPORT;Nordbahn Komponenten GmbH;22,94;pcs
+BK7375;SUPPORT;Elektra Traction;25,88;pcs
+BK7403;SUPPORT;Sofratec;6,92;pcs
+BK744;SUPPORT;Brenox;10,25;pcs
+BK7649;SUPPORT;Faiveley;22,43;pcs
+BK8215;SUPPORT;Nordbahn Komponenten GmbH;28,44;pcs
+BK873;SUPPORT;Faiveley;18,94;pcs
+BK931;SUPPORT;Sofratec;9,50;pcs
+BK9804;SUPPORT;Brenox;9,51;pcs
+BL1122;VIS M8X35;Brenox;1,26;pcs
+BL1287;VIS M6X20;Sofratec;0,57;pcs
+BL137;VIS M10X40;Atelier Vosges Sièges;1,76;pcs
+BL1700;VIS M10X40;Sofratec;1,44;pcs
+BL1778;VIS M8X35;Elektra Traction;2,00;pcs
+BL1870;VIS M8X35;Klimarail;1,43;pcs
+BL2092;VIS M8X25;Brenox;2,22;pcs
+BL268;VIS M6X20;Sofratec;1,71;pcs
+BL309;VIS M6X20;Faiveley;0,40;pcs
+BL330;VIS M8X25;Sofratec;0,74;pcs
+BL338;VIS M8X35;Faiveley;1,23;pcs
+BL352;VIS M8X35;Sofratec;1,04;pcs
+BL371;VIS M8X25;Faiveley;2,24;pcs
+BL394;VIS M8X25;Faiveley;2,47;pcs
+BL3980;VIS M10X40;Sofratec;1,93;pcs
+BL405;VIS M6X20;Atelier Vosges Sièges;1,72;pcs
+BL417;VIS M8X35;Klimarail;0,85;pcs
+BL429;VIS M6X20;Atelier Vosges Sièges;0,71;pcs
+BL4322;VIS M10X40;Metalis Rail;1,58;pcs
+BL441;VIS M8X35;Atelier Vosges Sièges;2,06;pcs
+BL463;VIS M10X40;Klimarail;2,43;pcs
+BL476;VIS M6X20;Atelier Vosges Sièges;0,83;pcs
+BL482;VIS M10X40;Atelier Vosges Sièges;1,89;pcs
+BL543;VIS M6X20;Nordbahn Komponenten GmbH;1,96;pcs
+BL6102;VIS M8X25;Metalis Rail;2,35;pcs
+BL6349;VIS M6X20;Metalis Rail;2,47;pcs
+BL7537;VIS M8X35;Sofratec;1,24;pcs
+BL7678;VIS M8X35;Metalis Rail;1,87;pcs
+BL8672;VIS M10X40;Klimarail;0,88;pcs
+BL8922;VIS M6X20;Klimarail;0,21;pcs
+BL9155;VIS M8X35;Metalis Rail;1,14;pcs
+BL9507;VIS M6X20;Atelier Vosges Sièges;2,05;pcs
+BL9688;VIS M8X35;Elektra Traction;0,74;pcs
+BP4354;GARNITURE DE FREIN;Faiveley;48,81;pcs
+BP8435;GARNITURE DE FREIN;Faiveley;52,60;pcs
+BP9582;GARNITURE DE FREIN;Faiveley;70,40;pcs
+CB2111;FAISCEAU DE CÂBLES;Elektra Traction;120,00;pcs
+CB2186;FAISCEAU DE CÂBLES;Sofratec;188,28;pcs
+CB2633;FAISCEAU DE CÂBLES;Faiveley;187,96;pcs
+CB6642;FAISCEAU DE CÂBLES;Brenox;48,40;pcs
+CB6937;FAISCEAU DE CÂBLES;Nordbahn Komponenten GmbH;144,91;pcs
+CB7042;FAISCEAU DE CÂBLES;Faiveley;257,64;pcs
+CB7253;FAISCEAU DE CÂBLES;Elektra Traction;128,11;pcs
+CB737;FAISCEAU DE CÂBLES;Elektra Traction;158,44;pcs
+CB7745;FAISCEAU DE CÂBLES;Sofratec;246,45;pcs
+CB803;FAISCEAU DE CÂBLES;Faiveley;242,44;pcs
+CB815;FAISCEAU DE CÂBLES;Nordbahn Komponenten GmbH;179,74;pcs
+CB828;FAISCEAU DE CÂBLES;Sofratec;251,19;pcs
+CB842;FAISCEAU DE CÂBLES;Sofratec;121,37;pcs
+CB866;FAISCEAU DE CÂBLES;Faiveley;72,85;pcs
+CB9799;FAISCEAU DE CÂBLES;Elektra Traction;244,74;pcs
+CD340;CONDENSEUR;Faiveley;661,59;pcs
+CD391;CONDENSEUR;Klimarail;866,84;pcs
+CP447;COMPRESSEUR;Klimarail;3226,25;pcs
+CP512;COMPRESSEUR;Faiveley;3798,60;pcs
+CP560;COMPRESSEUR;Nordbahn Komponenten GmbH;3938,05;pcs
+CP9424;COMPRESSEUR;Klimarail;2999,13;pcs
+CT1537;CONTACTEUR;Elektra Traction;288,99;pcs
+CT5595;CONTACTEUR;Elektra Traction;336,33;pcs
+CU310;COUSSIN 2 PLACES;Atelier Vosges Sièges;95,20;pcs
+CU318;COUSSIN 3 PLACES;Sofratec;58,36;pcs
+CV2340;CACHE;Atelier Vosges Sièges;53,21;pcs
+CV4564;CACHE;Metalis Rail;26,32;pcs
+CV510;CACHE;Atelier Vosges Sièges;45,27;pcs
+CV547;CACHE;Sofratec;51,12;pcs
+CV7621;CACHE;Metalis Rail;10,30;pcs
+DP7346;AMORTISSEUR;Metalis Rail;371,98;pcs
+DT150;GAINE;Nordbahn Komponenten GmbH;18,18;m
+DT4431;GAINE;Faiveley;13,73;m
+DT583;GAINE;Klimarail;31,33;m
+EC1587;EMBOUT;Metalis Rail;6,91;pcs
+EC3924;EMBOUT;Sofratec;11,21;pcs
+EC4312;EMBOUT;Sofratec;8,92;pcs
+EC5717;EMBOUT;Atelier Vosges Sièges;11,50;pcs
+EC6277;EMBOUT;Metalis Rail;11,61;pcs
+EC705;EMBOUT;Sofratec;7,17;pcs
+EC7062;EMBOUT;Sofratec;10,73;pcs
+EC723;EMBOUT;Atelier Vosges Sièges;6,86;pcs
+EC748;EMBOUT;Metalis Rail;6,61;pcs
+EC761;EMBOUT;Atelier Vosges Sièges;11,36;pcs
+EC8247;EMBOUT;Atelier Vosges Sièges;7,21;pcs
+EC851;EMBOUT;Atelier Vosges Sièges;10,95;pcs
+EV208;ÉVAPORATEUR;Klimarail;976,78;pcs
+EV230;ÉVAPORATEUR;Klimarail;1488,91;pcs
+EV275;ÉVAPORATEUR;Nordbahn Komponenten GmbH;1631,90;pcs
+EV5767;ÉVAPORATEUR;Nordbahn Komponenten GmbH;890,54;pcs
+FB3488;HOUSSE TEXTILE;Atelier Vosges Sièges;30,32;m
+FB5629;HOUSSE TEXTILE;Atelier Vosges Sièges;17,71;m
+FB730;HOUSSE TEXTILE;Sofratec;26,04;m
+FB764;HOUSSE TEXTILE GRISE;Atelier Vosges Sièges;38,77;m
+FB791;HOUSSE TEXTILE GRISE;Sofratec;20,00;m
+FB8703;HOUSSE TEXTILE;Atelier Vosges Sièges;34,43;m
+FL801;FILTRE;Nordbahn Komponenten GmbH;46,83;pcs
+FL829;FILTRE;Nordbahn Komponenten GmbH;23,59;pcs
+FL864;FILTRE;Klimarail;47,40;pcs
+FL877;FILTRE;Faiveley;67,73;pcs
+FN1967;VENTILATEUR;Elektra Traction;625,94;pcs
+FN5165;VENTILATEUR;Elektra Traction;591,17;pcs
+FN5517;VENTILATEUR;Elektra Traction;397,78;pcs
+FN708;VENTILATEUR;Nordbahn Komponenten GmbH;594,77;pcs
+FN716;VENTILATEUR;Faiveley;305,62;pcs
+FN720;VENTILATEUR;Klimarail;629,37;pcs
+FN753;VENTILATEUR 400 MM;Nordbahn Komponenten GmbH;219,05;pcs
+FN8331;VENTILATEUR;Elektra Traction;236,43;pcs
+FN834;VENTILATEUR 400 MM;Faiveley;371,03;pcs
+GB1211;RÉDUCTEUR;Nordbahn Komponenten GmbH;482,65;pcs
+GB515;RÉDUCTEUR;Faiveley;529,53;pcs
+GB548;RÉDUCTEUR;Nordbahn Komponenten GmbH;1022,88;pcs
+GL291;VITRAGE;Sofratec;291,40;pcs
+GL410;VITRAGE;Nordbahn Komponenten GmbH;439,94;pcs
+GL4179;VITRAGE;Faiveley;555,27;pcs
+GL436;VITRAGE;Atelier Vosges Sièges;554,95;pcs
+GL452;VITRAGE;Nordbahn Komponenten GmbH;353,19;pcs
+GL478;VITRAGE;Sofratec;469,11;pcs
+GL493;VITRAGE;Metalis Rail;443,54;pcs
+GL5149;VITRAGE;Nordbahn Komponenten GmbH;161,43;pcs
+GL5443;VITRAGE;Sofratec;308,02;pcs
+GL5454;VITRAGE;Nordbahn Komponenten GmbH;448,38;pcs
+GL6348;VITRAGE;Sofratec;131,07;pcs
+GL6578;VITRAGE;Sofratec;588,59;pcs
+GL7404;VITRAGE;Faiveley;236,56;pcs
+GL7802;VITRAGE;Nordbahn Komponenten GmbH;536,90;pcs
+GL8040;VITRAGE;Metalis Rail;500,86;pcs
+GR612;POIGNÉE;Metalis Rail;23,70;pcs
+GR7984;POIGNÉE;Metalis Rail;26,60;pcs
+GU077;COLLE DE SOL;Sofratec;21,14;kg
+HE310;RÉSISTANCE CHAUFFANTE;Nordbahn Komponenten GmbH;92,59;pcs
+HG1013;CHARNIÈRE;Sofratec;17,23;pcs
+HG309;CHARNIÈRE;Metalis Rail;39,28;pcs
+HG320;CHARNIÈRE;Metalis Rail;19,83;pcs
+HG3697;CHARNIÈRE;Atelier Vosges Sièges;54,35;pcs
+HR610;APPUI-TÊTE;Atelier Vosges Sièges;41,82;pcs
+IG1215;MODULE IGBT;Elektra Traction;1468,45;pcs
+IN2896;ISOLANT;Klimarail;15,25;kg
+IN620;ISOLANT;Faiveley;18,54;kg
+IN6519;ISOLANT;Nordbahn Komponenten GmbH;17,82;kg
+IN7553;ISOLANT;Nordbahn Komponenten GmbH;6,58;kg
+JT218;JOINT DE PORTE;Faiveley;32,01;m
+JT236;JOINT EPDM 12;Metalis Rail;26,24;m
+JT262;JOINT EPDM 15;Nordbahn Komponenten GmbH;38,34;m
+JT281;JOINT SILICONE 10;Sofratec;15,60;m
+JT305;JOINT D'ÉTANCHÉITÉ PRESSION;Faiveley;16,23;m
+JT4924;JOINT EPDM 12;Sofratec;15,09;m
+JT5413;JOINT EPDM 15;Faiveley;32,34;m
+JT8289;JOINT EPDM 12;Faiveley;9,45;m
+LD1453;MODULE LED;Faiveley;56,34;pcs
+LD4827;MODULE LED;Faiveley;68,77;pcs
+LD6579;MODULE LED;Nordbahn Komponenten GmbH;21,60;pcs
+MT701;MOTEUR DE PORTE 24V;Nordbahn Komponenten GmbH;419,72;pcs
+MT745;MOTEUR DE PORTE 24V;Nordbahn Komponenten GmbH;879,16;pcs
+MT780;MOTEUR;Faiveley;1210,58;pcs
+PC1343;CARTE DE COMMANDE;Faiveley;617,92;pcs
+PC1553;CARTE DE COMMANDE;Sofratec;604,85;pcs
+PC2995;CARTE DE COMMANDE;Faiveley;591,75;pcs
+PC4983;CARTE DE COMMANDE;Elektra Traction;718,05;pcs
+PC6179;CARTE DE COMMANDE;Nordbahn Komponenten GmbH;621,49;pcs
+PC6360;CARTE DE COMMANDE;Faiveley;361,38;pcs
+PC6678;CARTE DE COMMANDE;Nordbahn Komponenten GmbH;834,78;pcs
+PC7027;CARTE DE COMMANDE;Faiveley;574,97;pcs
+PC902;CARTE DE COMMANDE;Sofratec;473,55;pcs
+PC951;CARTE DE COMMANDE;Faiveley;205,80;pcs
+PC984;CARTE DE COMMANDE;Klimarail;605,16;pcs
+PF209;PROFILÉ ALUMINIUM;Sofratec;21,55;m
+PF220;PROFILÉ ALUMINIUM;Metalis Rail;16,59;m
+PF253;PROFILÉ ALUMINIUM;Sofratec;31,14;m
+PF296;PROFILÉ ALUMINIUM;Metalis Rail;21,37;m
+PF501;PROFILÉ ALUMINIUM;Metalis Rail;36,11;m
+PF5646;PROFILÉ ALUMINIUM;Sofratec;36,53;m
+PL661;PLAQUE DE MARCHE;Faiveley;213,49;pcs
+PL693;PLAQUE DE MARCHE;Nordbahn Komponenten GmbH;118,69;pcs
+PN7736;PANNEAU;Sofratec;347,67;pcs
+RF110;FLUIDE FRIGORIGÈNE;Klimarail;25,75;kg
+RL205;RAIL DE GUIDAGE;Sofratec;87,53;m
+RL237;RAIL DE GUIDAGE;Faiveley;75,62;m
+RL260;RAIL DE GUIDAGE;Faiveley;76,00;m
+RL271;RAIL DE GUIDAGE;Nordbahn Komponenten GmbH;61,13;m
+RL294;RAIL DE GUIDAGE;Sofratec;51,51;m
+RV410;REVÊTEMENT DE SOL;Sofratec;48,65;m
+RY1385;RELAIS;Faiveley;37,55;pcs
+RY2351;RELAIS;Klimarail;17,13;pcs
+RY2620;RELAIS;Nordbahn Komponenten GmbH;38,94;pcs
+RY415;RELAIS;Klimarail;25,57;pcs
+RY440;RELAIS;Nordbahn Komponenten GmbH;38,21;pcs
+RY472;RELAIS;Nordbahn Komponenten GmbH;9,45;pcs
+SC1034;VIS À TÊTE FRAISÉE;Metalis Rail;0,41;pcs
+SC1896;VIS À TÊTE FRAISÉE;Atelier Vosges Sièges;0,23;pcs
+SC8048;VIS À TÊTE FRAISÉE;Sofratec;0,14;pcs
+SC815;VIS À TÊTE FRAISÉE;Metalis Rail;0,38;pcs
+SC842;VIS À TÊTE FRAISÉE;Atelier Vosges Sièges;1,03;pcs
+SC9860;VIS À TÊTE FRAISÉE;Atelier Vosges Sièges;0,80;pcs
+SN1366;CAPTEUR;Faiveley;45,38;pcs
+SN1459;CAPTEUR;Faiveley;51,87;pcs
+SN226;CAPTEUR;Elektra Traction;53,45;pcs
+SN3463;CAPTEUR;Nordbahn Komponenten GmbH;84,92;pcs
+SN4687;CAPTEUR;Brenox;70,95;pcs
+SN5003;CAPTEUR;Metalis Rail;136,94;pcs
+SN5618;CAPTEUR;Brenox;96,65;pcs
+SN573;CAPTEUR DE POSITION PORTE;Faiveley;176,16;pcs
+SN5847;CAPTEUR;Faiveley;148,54;pcs
+SN5940;CAPTEUR;Nordbahn Komponenten GmbH;95,79;pcs
+SN598;CAPTEUR DE POSITION PORTE;Nordbahn Komponenten GmbH;103,10;pcs
+SN604;CAPTEUR;Nordbahn Komponenten GmbH;87,40;pcs
+SN6050;CAPTEUR;Faiveley;140,62;pcs
+SN610;CAPTEUR;Sofratec;143,47;pcs
+SN627;CAPTEUR;Sofratec;150,48;pcs
+SN646;CAPTEUR;Nordbahn Komponenten GmbH;76,25;pcs
+SN655;CAPTEUR;Sofratec;35,02;pcs
+SN6818;CAPTEUR;Elektra Traction;107,84;pcs
+SN682;CAPTEUR;Faiveley;119,13;pcs
+SN6930;CAPTEUR;Brenox;142,05;pcs
+SN699;CAPTEUR;Klimarail;73,83;pcs
+SN8049;CAPTEUR;Metalis Rail;124,79;pcs
+SN8133;CAPTEUR;Elektra Traction;158,50;pcs
+SN8150;CAPTEUR;Nordbahn Komponenten GmbH;125,31;pcs
+SN8168;CAPTEUR;Metalis Rail;61,73;pcs
+SN8306;CAPTEUR;Brenox;71,93;pcs
+SN8319;CAPTEUR;Elektra Traction;102,22;pcs
+SN8954;CAPTEUR;Faiveley;61,39;pcs
+SN9267;CAPTEUR;Metalis Rail;162,11;pcs
+SN9301;CAPTEUR;Faiveley;149,21;pcs
+SP7354;RESSORT;Brenox;308,56;pcs
+TH2133;THERMOSTAT;Faiveley;44,70;pcs
+TH402;THERMOSTAT;Nordbahn Komponenten GmbH;129,54;pcs
+TH415;THERMOSTAT;Faiveley;59,43;pcs
+TH436;THERMOSTAT;Nordbahn Komponenten GmbH;68,61;pcs
+TH450;THERMOSTAT;Klimarail;78,88;pcs
+TH7192;THERMOSTAT;Nordbahn Komponenten GmbH;46,14;pcs
+TH9538;THERMOSTAT;Nordbahn Komponenten GmbH;64,07;pcs
+TU126;TUBE ACIER;Metalis Rail;6,04;m
+TU140;TUBE ACIER;Atelier Vosges Sièges;14,20;m
+TU167;TUBE ACIER;Sofratec;15,46;m
+TU189;TUBE ACIER;Metalis Rail;21,84;m
+TU3458;TUBE ACIER;Sofratec;15,96;m
+VL4778;VANNE;Brenox;183,10;pcs
+VL8177;VANNE;Faiveley;313,74;pcs
+VL905;CLAPET DE PROTECTION PRESSION;Klimarail;313,95;pcs
+VL906;CLAPET DE RÉGLAGE;Nordbahn Komponenten GmbH;296,70;pcs
+WD2021;BAIE VITRÉE;Sofratec;510,00;pcs
+WH1186;ROUE;Brenox;1153,92;pcs
+WH2962;ROUE;Metalis Rail;929,80;pcs
+WH3877;ROUE;Brenox;1777,99;pcs
+WH3985;ROUE;Brenox;1278,78;pcs
+WH4087;ROUE;Metalis Rail;1192,79;pcs
+WH7903;ROUE;Metalis Rail;1214,26;pcs
+WH9324;ROUE;Brenox;1749,02;pcs
+WH9839;ROUE;Metalis Rail;1052,44;pcs
