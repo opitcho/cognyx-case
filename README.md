@@ -1,15 +1,5 @@
 # Building trains more efficiently with AI at Alstom
 
-**Alstom loses about 3 points of gross margin to project execution and industrial inefficiencies: 13.3% booked in FY 2025/26, against 16.0–16.5% without them.**
-
-![Alstom slide: Rolling Stock execution and industrial inefficiencies impacting margins for too long](docs/images/alstom-margin-slide.png)
-
-*Source: Alstom investor presentation, slide 51.*
-
-The slide names three causes: poor end-to-end coordination across supply chain and logistics, late engineering changes that slow the ramp-up to serial production, and frequent production rescheduling.
-
-This repo explores how AI can help recover that margin.
-
 ## The demo
 
 Three noisy files describe a family of six train variants, `V1` to `V6`: an engineering BOM, a purchasing item list and free-text technical notes. Rules reconcile what can be settled mechanically, and an agent settles the rest by reading the notes, asking a person when the data does not decide.
