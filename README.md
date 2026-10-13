@@ -24,7 +24,7 @@ Every decision is recorded as a claim in `data/claims.jsonl`: what is stated, wh
 ### Run it
 
 ```
-git clone --recurse-submodules git@github.com:opitcho/cognyx-case.git
+git clone git@github.com:opitcho/cognyx-case.git
 cd cognyx-case
 uv sync
 uv run python -m pipeline.rules     # the rules append their claims to data/claims.jsonl
@@ -58,7 +58,7 @@ uv run python -m pipeline.build --without-notes   # rebuild without any claim th
 | `reconcile/` | The agent and its tools |
 | `skills/` | The instructions the agent is given |
 | `synth/` | The generator of the train family |
-| `jean-code/` | Submodule: the agent framework and the Streamlit app |
+| `jean-code/` | The agent framework and the Streamlit app. Its own tests: `uv run pytest jean-code/tests` |
 | `tests/` | `uv run pytest` |
 | `docs/` | Notes on the data and the background research |
 

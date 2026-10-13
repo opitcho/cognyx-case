@@ -3,7 +3,7 @@ name = "cognyx-case"
 version = "0.1.0"
 description = "Demo: reconciling a train family's BOM, ERP items and technical notes through an append-only claim log."
 requires-python = ">=3.12"
-# pipeline/ needs only the standard library. The rest is what the jean-code submodule (the agent and the app) needs.
+# pipeline/ needs only the standard library. The rest is what jean-code/ (the agent and the app) needs.
 dependencies = [
     "beautifulsoup4>=4.15.0",
     "ddgs>=9.16.0",

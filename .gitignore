@@ -26,3 +26,8 @@ data/example_sources/
 .vscode/
 .idea/
 .DS_Store
+
+# jean-code: run logs, the agent's scratch folder, and the client logo (kept local)
+jean-code/logs/
+jean-code/workspace/
+jean-code/assets/alstom-logo.svg
