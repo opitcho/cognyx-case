@@ -41,6 +41,14 @@ uv run --env-file .env python -m reconcile.batch --max-cost 2    # the agent set
 
 The app has four pages: Agent (the chat), Raw data (the three files), Reconciled data (the database the agent queries) and Claims (the claim log).
 
+### Go back to the demo's starting point
+
+The demo starts from the rules' claims and the agent's, with no person's claim (`data/claims.demo_start.jsonl`). This puts the log back to that point and rebuilds the database. The log as it was is copied to `out/` first.
+
+```
+uv run python -m pipeline.reset
+```
+
 ### See what each step did
 
 ```
