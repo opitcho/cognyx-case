@@ -1,0 +1,14 @@
+[theme]
+base = "light"
+primaryColor = "#2B4CEE"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F3F5FD"
+textColor = "#1E3246"
+borderColor = "#D9DBE8"
+baseRadius = "12px"
+buttonRadius = "full"
+font = "'Noto Sans':https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+
+[client]
+toolbarMode = "viewer"
