@@ -1,6 +1,28 @@
-data/example_sources/
-.experiments/
+# Secrets
 .env
-__pycache__/
-out/
+
+# Python
 .venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Computed from data/raw/ and data/claims.jsonl, rebuilt by pipeline.build
+out/
+
+# Public datasets downloaded for illustration (300 MB), see data/example_sources/README.md
+data/example_sources/
+
+# Local probes and their output
+.experiments/
+
+# Claude Code: worktrees and per-machine settings
+.claude/worktrees/
+.claude/settings.local.json
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store

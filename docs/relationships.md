@@ -2,7 +2,7 @@
 
 Every relationship the pipeline records or computes, with what it links, what it means, how many there are and one real example.
 
-Counts and examples come from `out/pilot.db` as built from `data/raw/` and the 578 lines of `data/claims.jsonl`. The queries and their raw output are in `.experiments/46_relationship_examples.py` and `.experiments/output/46_relationship_examples.txt`.
+Counts and examples come from `out/pilot.db` as built from `data/raw/` and the 578 lines of `data/claims.jsonl`.
 
 The last section lists the internal names that appear in the agent's answers today and a plain wording for each.
 

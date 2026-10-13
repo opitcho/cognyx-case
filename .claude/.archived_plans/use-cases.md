@@ -1,6 +1,6 @@
 # Use cases for the Alstom pilot
 
-Short version of `reports/Alstom tender reuse use cases.md`, which holds the full evidence and source grading.
+Short version of `docs/research/alstom-tender-reuse/README.md`, which holds the full evidence and source grading.
 
 ## The goal in one line
 
